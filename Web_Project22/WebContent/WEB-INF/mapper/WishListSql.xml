@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wishlist">
+
+<insert id="wishadd" parameterType="kr.co.korea.beans.WishlistBean">
+	
+	insert into wishlist(wID,w_pID,w_mIDx)
+	values (wishlist_seq.nextval,#{w_pID},#{w_mIDx})
+	
+</insert>
+
+<select id="wishcheck" parameterType="kr.co.korea.beans.WishlistBean" resultType="Integer">
+
+	select count(wID) 
+	from wishlist 
+	where w_pID=#{w_pID} and w_mIDx=#{w_mIDx}
+
+</select>
+
+<delete id="wishcancle" parameterType="kr.co.korea.beans.WishlistBean">
+	
+	delete from wishlist
+	where  w_pID=#{w_pID} and w_mIDx=#{w_mIDx}
+
+</delete>
+
+
+
+</mapper>

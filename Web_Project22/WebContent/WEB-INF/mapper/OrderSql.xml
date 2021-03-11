@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+
+<insert id="orderinsert" parameterType="kr.co.korea.beans.OrderBean">
+
+	<selectKey keyProperty="o_ID" order="BEFORE" resultType="Integer">
+	select ORDERS_SEQ.nextval from dual
+	</selectKey>
+	
+	insert into ORDERS(o_ID,o_mIDx,o_NAME,o_PHONE,o_post,o_ADDRESS,o_ADDRESS2,o_PAYMENT,o_money,o_title)
+	values(#{o_ID},#{o_mIDx},#{o_NAME},#{o_PHONE},#{o_post},#{o_ADDRESS},#{o_ADDRESS2},#{o_PAYMENT},#{o_money},#{o_title})
+
+</insert>
+
+<insert id="orderproductinsert" parameterType="kr.co.korea.beans.OrderProductBean">
+	<selectKey keyProperty="op_IDx" order="BEFORE" resultType="Integer">
+	select ORDERS_product_seq.nextval from dual
+	</selectKey>
+	
+	insert into ORDERS_product(op_IDx,op_pID,op_amount,op_oid)
+	values(#{op_IDx},
+	(select c_p_id from cart where cid=#{o_c_id}),
+	(select camount from cart where cid=#{o_c_id}),
+	#{op_oid})
+	
+</insert>
+
+
+<select id="getmaninfo" resultType="kr.co.korea.beans.OrderBean" parameterType="Integer">
+<!-- orderresult,read에서 사용 -->
+	select orders.o_ID as o_ID,
+		   orders.o_INVOICE as o_INVOICE,
+		   orders.o_PAYMENT as o_PAYMENT,
+		   orders.o_money as o_money,
+		   orders.o_NAME as o_NAME,
+		   orders.o_PHONE as o_PHONE,
+		   orders.o_post as o_post,
+		   orders.o_ADDRESS as o_ADDRESS,
+		   orders.o_ADDRESS2 as o_ADDRESS2,
+		   orders.o_title as o_title,
+		   mem.mname as o_mname,
+		   mem.memail as o_memail,
+		   mem.mphone as o_mphone
+	from orders orders,member mem
+	where orders.o_midx = mem.midx and orders.o_id = #{o_ID}
+
+</select>
+
+<select id="getorderproudct" parameterType="Integer" resultType="kr.co.korea.beans.OrderProductBean">
+<!-- orderresult,read에서 사용 -->
+	select orderpro.op_amount as op_amount, 
+		   pro.pNAME as op_pNAME,
+		   pro.pIMAGE1 as op_pIMAGE1,
+		   pro.pID as op_pID,
+		   pro.pPRICE as op_pPRICE,
+		   orders.o_money as op_o_money,
+		   orders.o_INVOICE as op_o_INVOICE
+	from product pro, ORDERS_product orderpro, ORDERS orders 
+	where orderpro.op_pID = pro.pID and orderpro.op_oid = orders.o_ID and orderpro.op_oid=#{op_oid}
+</select>
+
+
+
+<select id="getorderlist" parameterType="kr.co.korea.beans.OrderProductBean" resultType="kr.co.korea.beans.OrderProductBean">
+
+select distinct to_char(orders.o_DATE, 'YYYY-MM-DD') as op_date,
+	   orders.o_ID as op_oid,
+	   orderpro.op_pID as op_pID,
+	   pro.pIMAGE1 as op_pIMAGE1,
+	   pro.pNAME as op_pNAME,
+	   pro.pPRICE as op_pPRICE,
+	   orderpro.op_amount as op_amount,
+	   orders.o_money as op_o_money
+from product pro, ORDERS_product orderpro, ORDERS orders <include refid="user"></include>
+
+
+</select>
+
+<sql id="user">
+	<if test="o_mlevel==0">
+		where orderpro.op_pID = pro.pID and orderpro.op_oid = orders.o_ID and orders.o_mIDx=#{o_mIDx} order by op_oid desc
+	</if>
+	<if test="o_mlevel!=0">
+		where orderpro.op_pID = pro.pID and orderpro.op_oid = orders.o_ID and #{o_mIDx}=#{o_mIDx} order by op_oid desc
+	</if>
+</sql>
+
+<!-- invoice는 ajax로 -->
+<select id="getinvoiceinfo" parameterType="Integer" resultType="Integer">
+	select o_INVOICE
+	from orders
+	where o_id=#{o_id}
+</select>
+
+<update id="invoiceadd" parameterType="kr.co.korea.beans.OrderBean">
+
+update orders
+set o_INVOICE = #{o_INVOICE}
+where o_id=#{o_ID}
+
+</update>
+
+<!-- 관리자가 봐야할 리스트 -->
+
+</mapper>

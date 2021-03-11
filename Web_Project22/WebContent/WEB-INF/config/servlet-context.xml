@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"   
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			 xmlns:beans="http://www.springframework.org/schema/beans" 
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
+			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			 					 http://www.springframework.org/schema/beans
+			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
+			 					 http://www.springframework.org/schema/context
+			 					 http://www.springframework.org/schema/context/spring-context.xsd">
+<annotation-driven/>
+ 
+<context:component-scan base-package="kr.co.korea.controller"/>
+<context:component-scan base-package="kr.co.korea.beans"/>
+<context:component-scan base-package="kr.co.korea.dao"/>
+<context:component-scan base-package="kr.co.korea.service"/>
+
+
+<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:property name="prefix" value="/WEB-INF/view/"></beans:property>	
+	<beans:property name="suffix" value=".jsp"></beans:property>
+</beans:bean>
+
+<resources location="/resources/" mapping="/**"></resources>
+
+<beans:bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" 
+id="messageSource">
+	<beans:property name="basenames">
+		<beans:list>
+			<beans:value>/WEB-INF/properties/db</beans:value>
+		</beans:list>
+	</beans:property>
+</beans:bean>
+
+<beans:bean class="org.springframework.context.support.MessageSourceAccessor" 
+id="sourceAccessor">
+	<beans:constructor-arg ref="messageSource"/>
+</beans:bean>
+
+<beans:bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" 
+id="multipartResolver">
+</beans:bean>
+
+
+<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<beans:property  name="locations">
+	<beans:list>
+		<beans:value>/WEB-INF/properties/db.properties</beans:value>
+		<beans:value>/WEB-INF/properties/option.properties</beans:value>
+	</beans:list>
+	</beans:property>
+</beans:bean>
+
+<beans:bean class="org.apache.commons.dbcp2.BasicDataSource" id="basic_data_source">
+	<beans:property name="driverClassName" value="${db.classname}" />
+	<beans:property name="url" value="${db.url}" />
+	<beans:property name="username" value="${db.username}" />
+	<beans:property name="password" value="${db.password}" />
+</beans:bean>
+
+<beans:bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
+	<beans:property name="dataSource" ref="basic_data_source"/>
+	<beans:property name="mapperLocations" value="/WEB-INF/mapper/*.xml" />
+</beans:bean>
+
+<!-- SqlSessionTemplate 는 sql과 관련되는 클래스임 -->
+<beans:bean class="org.mybatis.spring.SqlSessionTemplate" >
+	<beans:constructor-arg index="0" ref="sqlSession"></beans:constructor-arg>
+</beans:bean>
+<!-- 인터셉터 -->
+<interceptors>
+	<interceptor>
+		<mapping path="/**"/>
+		<beans:bean class="kr.co.korea.interceptor.TopMenuInterceptor"></beans:bean>
+	</interceptor>
+	<interceptor>
+		<mapping path="/**"/>
+		<beans:bean class="kr.co.korea.interceptor.QanMenuTopInterceptor"></beans:bean>
+	</interceptor>
+
+	<interceptor>
+    	<mapping path="/board/modify"/>
+    	<mapping path="/board/delete"/>
+    	<beans:bean class="kr.co.korea.interceptor.CheckWriterInterceptor"/>
+    </interceptor>
+    
+    <interceptor>
+    	<mapping path="/user/modify"/>
+    	<mapping path="/user/logout"/>
+    	<mapping path="/board/*"/>
+    	<exclude-mapping path="/board/main"/>
+    	<beans:bean class="kr.co.korea.interceptor.CheckLoginInterceptor"/>
+    </interceptor>
+	
+</interceptors>
+
+ 
+
+</beans:beans>
+ 
+
+
+
+
+
+
+
+
+
+
+
