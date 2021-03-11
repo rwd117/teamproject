@@ -361,21 +361,20 @@ function replyupdateok(re_ID){
 								<td class="left" id="title">
 										${obj.r_TITLE }</td>
 										
-								<td id="writer">
+							<td id="writer">
 								<c:choose>
-								<c:when test="${(obj.r_mIDx eq loginUserBean.midx) or loginUserBean.mlevel >0 } ">
-								<c:if test="${obj.r_mIDx eq loginUserBean.midx }">
-									<input type="button" value="수정하기" />
-									<input type="button" value="삭제하기" />
-									<br/>
-								</c:if>
-								<c:if test="${ loginUserBean.mlevel >0  }">
-									<input type="button" value="수정하기" />
-									<input type="button" value="삭제하기" />
-									<br/>
-								</c:if>
-								</c:when>
-								
+									<c:when test="${(obj.r_mIDx) eq (loginUserBean.midx) }">
+											<a href="${conPath}review/reviewmodify?r_ID=${obj.r_ID}&pID=${pID}">수정하기</a>
+											<a href="${conPath}review/reviewdelete?r_ID=${obj.r_ID}&pID=${pID}">삭제하기</a>
+										<br/>
+									</c:when>
+									<c:when test="${loginUserBean.mlevel >0}">
+											<a href="${conPath}review/reviewdelete?r_ID=${obj.r_ID}&pID=${pID}">삭제하기</a>
+											<br/>
+									</c:when>
+									<c:otherwise>
+										???
+									</c:otherwise>
 								</c:choose>
 									작성자 :${obj.r_mname}
 								<td id="date">
@@ -390,6 +389,9 @@ function replyupdateok(re_ID){
 										</c:when>
 										<c:when test="${obj.r_FILE1 !=null and obj.r_FILE2 eq null }">
 										<img src="${conPath}upload/${obj.r_FILE1}" width="50px" height="50px">
+										</c:when>
+										<c:when test="${obj.r_FILE1 eq null and obj.r_FILE2 != null }">
+										<img src="${conPath}upload/${obj.r_FILE2}" width="50px" height="50px">
 										</c:when>
 										<c:otherwise>
 										

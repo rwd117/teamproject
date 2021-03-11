@@ -19,18 +19,22 @@ where mem.midx=#{o_mIDx}
 </insert>
 
 <sql id="file">
-	<if test="FileCount==0">
+	<if test="FileCheck==0">
 		insert into REVIEW(r_ID,r_oID,r_mIDx,r_pID,r_TITLE,r_CONTENT)
 	values(REVIEW_SEQ.nextval,#{r_oID},#{r_mIDx},#{r_pID},#{r_TITLE},#{r_CONTENT})
 	</if>
 	
-	<if test="FileCount==1">
+	<if test="FileCheck==1">
 			insert into REVIEW(r_ID,r_oID,r_mIDx,r_pID,r_TITLE,r_CONTENT,r_FILE1)
 	values(REVIEW_SEQ.nextval,#{r_oID},#{r_mIDx},#{r_pID},#{r_TITLE},#{r_CONTENT},#{r_FILE1})
 	</if>
 	
-	<if test="FileCount==2">
-			insert into REVIEW(r_ID,r_oID,r_mIDx,r_pID,r_TITLE,r_CONTENT,r_FILE1,r_FILE2)
+	<if test="FileCheck==2">
+	insert into REVIEW(r_ID,r_oID,r_mIDx,r_pID,r_TITLE,r_CONTENT,r_FILE2)
+	values(REVIEW_SEQ.nextval,#{r_oID},#{r_mIDx},#{r_pID},#{r_TITLE},#{r_CONTENT},#{r_FILE2})
+	</if>
+	<if test="FileCheck==3">
+	insert into REVIEW(r_ID,r_oID,r_mIDx,r_pID,r_TITLE,r_CONTENT,r_FILE1,r_FILE2)
 	values(REVIEW_SEQ.nextval,#{r_oID},#{r_mIDx},#{r_pID},#{r_TITLE},#{r_CONTENT},#{r_FILE1},#{r_FILE2})
 	</if>
 </sql>
@@ -52,8 +56,48 @@ where rev.r_mIDx=mem.midx and r_pID=#{r_pID}
 
 </select>
 
+<select id="reviewgetinfo" parameterType="Integer" resultType="kr.co.korea.beans.ReviewBean">
+
+select rev.r_ID as r_ID,
+	   rev.r_TITLE as r_TITLE,
+	   rev.r_CONTENT as r_CONTENT,
+	   rev.r_FILE1 as r_FILE1,
+	   rev.r_FILE2 as r_FILE2,
+	   rev.r_mIDx as r_mIDx,
+	   mem.mname as r_mname,
+	   mem.memail as r_memail
+from review rev, member mem
+where rev.r_mIDx=mem.midx and r_ID=#{r_ID}
+
+</select>
+
+<update id="reviewupdate" parameterType="kr.co.korea.beans.ReviewBean">
+	
+update review
+set <include refid="updatecheck"></include>
+where r_ID=#{r_ID}
+</update>
+
+<sql id="updatecheck">
+	<if test="FileCheck == 0">
+	r_TITLE=#{r_TITLE},r_CONTENT=#{r_CONTENT}
+	</if>
+	<if test="FileCheck == 1">
+	r_TITLE=#{r_TITLE},r_CONTENT=#{r_CONTENT},r_FILE1=#{r_FILE1}
+	</if>
+	<if test="FileCheck == 2">
+	r_TITLE=#{r_TITLE},r_CONTENT=#{r_CONTENT},r_FILE2=#{r_FILE2}
+	</if>
+	<if test="FileCheck == 3">
+	r_TITLE=#{r_TITLE},r_CONTENT=#{r_CONTENT},r_FILE1=#{r_FILE1},r_FILE2=#{r_FILE2}
+	</if>
+</sql>
 
 
 
+<delete id="reviewdelete">
+delete from review
+where r_ID=#{r_ID} and r_mIDx=#{r_mIDx}
+</delete>
 
 </mapper>

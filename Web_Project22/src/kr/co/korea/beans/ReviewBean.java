@@ -1,5 +1,7 @@
 package kr.co.korea.beans;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewBean {
 	
 	private int r_ID;
@@ -8,6 +10,8 @@ public class ReviewBean {
 	private int r_pID;
 	private String r_TITLE;
 	private String r_CONTENT;
+	private MultipartFile upload1;
+	private MultipartFile upload2;
 	private String r_FILE1;
 	private String r_FILE2;
 	private String r_DATE;
@@ -17,10 +21,22 @@ public class ReviewBean {
 	private String r_mname;
 	private String r_memail;
 	
-	private int FileCount;
+	private int FileCheck;//파일 체크용
 
 	
-	
+
+	public MultipartFile getUpload1() {
+		return upload1;
+	}
+	public void setUpload1(MultipartFile upload1) {
+		this.upload1 = upload1;
+	}
+	public MultipartFile getUpload2() {
+		return upload2;
+	}
+	public void setUpload2(MultipartFile upload2) {
+		this.upload2 = upload2;
+	}
 	public int getR_pID() {
 		return r_pID;
 	}
@@ -45,11 +61,11 @@ public class ReviewBean {
 	public void setR_memail(String r_memail) {
 		this.r_memail = r_memail;
 	}
-	public int getFileCount() {
-		return FileCount;
+	public int getFileCheck() {
+		return FileCheck;
 	}
-	public void setFileCount(int fileCount) {
-		FileCount = fileCount;
+	public void setFileCheck(int FileCheck) {
+		this.FileCheck = FileCheck;
 	}
 	public int getR_ID() {
 		return r_ID;

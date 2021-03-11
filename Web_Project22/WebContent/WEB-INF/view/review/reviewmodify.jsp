@@ -20,9 +20,18 @@
 <script>
 
 function check(){
+	  var fileInput = document.getElementById("imgfile");
+      var files = fileInput.files;
+      var file;
 		
       var TITLE=$('#r_TITLE').val();
       var content= $('#r_CONTENT').val();
+      
+      
+      if(files.length > 2){
+      	alert("파일 개수는 최대 2개 입니다.");
+      	return false;
+      }
       
       if(TITLE == null || TITLE.trim() == ""|| content == null  || content.trim() == ""){
     	 if(TITLE == null || TITLE.trim() == ""){
@@ -38,6 +47,7 @@ function check(){
 	
 }
 
+
 </script>
 
 <c:import url="/WEB-INF/view/include/top_menu.jsp"/>
@@ -45,67 +55,65 @@ function check(){
         <!-- 중간에 컨텐츠부분 -->
         <div id="contents2">
             <div id="contents3">
-                <input type="button" value="ReView">
+            <input type="button" value="ReView">
         </div>
             <div id="contents4">
-            <form action="${conPath }review/reviewriteok" method="post" enctype="multipart/form-data" onsubmit="return check();">
-        <table border="1" class="table">
+            <form action="${conPath }review/reviemodifyok" method="post" enctype="multipart/form-data" onsubmit="return check();">
+       		 <table border="1" class="table">
             <tr>
-                <th>제목</th>
-                <td colspan="1">
-			<input type="text" name="r_TITLE" id="r_TITLE"></td>
-			
+             <th>제목</th>
+             <td colspan="1">
+			<input type="text" name="r_TITLE" id="r_TITLE" value="${reviewbean.r_TITLE }"></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td><input type="text" value="${meminfo.r_mname }" readonly></td>
+                <td><input type="text" value="${reviewbean.r_mname }" readonly></td>
                 
             </tr>
             <tr>
                 <th>이메일</th>
-                <td><input id="customerEmailLocal" type="text" value="${meminfo.r_memail }" readonly >
+                <td><input id="customerEmailLocal" type="text" value="${reviewbean.r_memail }" readonly >
                
                 </td>
             </tr>
             <tr class="tr20">
                 
-                <td colspan="2"><textarea name="r_CONTENT" id="r_CONTENT"></textarea></td>
+                <td colspan="2"><textarea name="r_CONTENT" id="r_CONTENT">${reviewbean.r_CONTENT}</textarea></td>
             <tr>
                 <th>첫번째 이미지</th>
-                <td colspan="1"><input type="file" id="imgfile" accept="image/*" name="upload1"></td>	
+                <td colspan="1">
+                	<input type="file" id="imgfile" accept="image/*" name="upload1"></td>
             </tr>
             <tr>
             	<th>두번째 이미지</th>
                 <td colspan="1">
-                	<input type="file" id="imgfile2" accept="image/*" name="upload2"></td>
+                	<input type="file" id="imgfile" accept="image/*" name="upload2"></td>
+            </tr>
+            <tr class="tr21">
+            	<td>
+                <c:if test="${not empty reviewbean.r_FILE1}">
+               등록된 첫번째 이미지 :
+                	<img src="${conPath}upload/${reviewbean.r_FILE1}" width="100px" height="100px">
+                </c:if>
+                <c:if test="${not empty reviewbean.r_FILE2}">
+               등록된 두번째 이미지 :	
+                	<img src="${conPath}upload/${reviewbean.r_FILE2}" width="100px" height="100px">
+                </c:if>
+                </td>	
             </tr>
             <tr>
                 <th>비밀글설정</th>
                 <td colspan="1"><input type="checkbox" value="1" name="r_secret">비밀글 </td>	
             </tr>
-            <tr class="tr21">
-                <th class="tha">개인정보 수집 및 이용동의</th>
-                <td colspan="1"><textarea >■ 개인정보의 수집·이용 목적
-				서비스 제공 및 계약의 이행, 구매 및 대금결제, 물품배송 또는 청구지 발송, 회원관리 등을 위한 목적
-				■ 수집하려는 개인정보의 항목
-				이름, 주소, 연락처, 이메일 등
-				■ 개인정보의 보유 및 이용 기간
-				회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외없이 해당정보를 파기합니다. 
-                </textarea><br/>
-                <br/>
-                    개인정보 수집 및 이용에 동의하십니까?<input type="checkbox">동의함<input type="checkbox">동의안함 
-                </td>	
-            </tr>
+            
         </table>
         <div class="section3">
-        	<input type="hidden" name="r_oID" value="${ o_ID}">
-        	<input type="hidden" name="r_mIDx" value="${o_mIDx }">
-        	<input type="hidden" name="r_pID" value="${pID }">
-             <input type="submit" value="등록" >
+        	 <input type="hidden" name="pID" value="${pID}">
+        	  <input type="hidden" name="r_ID" value="${reviewbean.r_ID}">
+             <input type="submit" value="수정 완료">
              <input type="reset" value="취소" onclick="${conPath }review/qna">
-             <input type="button" value="목록" onclick="${conPath }review/qna">
             </div>
-            </form>     
+       </form>     
        </div>
        </div>
    <c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>    

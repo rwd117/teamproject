@@ -25,4 +25,17 @@ public class ReviewDao {
 	public List<ReviewBean> reviewList(int r_pID){
 		return sqltemp.selectList("review.reviewlist",r_pID);
 	}
+	
+	public ReviewBean reviewgetinfo(int r_ID) {
+		return sqltemp.selectOne("review.reviewgetinfo",r_ID);
+	}
+	
+	public void reviewupdate(ReviewBean reviewbean) {
+		sqltemp.update("review.reviewupdate",reviewbean);
+	}
+	
+	public void reviewdelete(ReviewBean reviewbean) {
+		sqltemp.delete("review.reviewdelete",reviewbean);
+	}
+	
 }
