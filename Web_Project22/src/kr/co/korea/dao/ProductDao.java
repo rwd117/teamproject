@@ -20,7 +20,7 @@ public class ProductDao {
 		return productbean.getpID();
 	}
 	
-	public List<ProductBean> getproductInfo(ProductBean productbean) {
+	public List<ProductBean> getproductInfolist(ProductBean productbean) {
 		return sqltemp.selectList("product.getproductInfolist",productbean);
 	}
 	

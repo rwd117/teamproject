@@ -2,7 +2,7 @@ package kr.co.korea.beans;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ProductBean extends Criteria{
+public class ProductBean {
 	
 	private int pID;
 	private int p_top_idx;
@@ -24,6 +24,28 @@ public class ProductBean extends Criteria{
 	
 	private int imagecount;
 	
+	private int pro_rowStart;
+	private int pro_rowEnd;
+	private String pro_keyword;
+	
+	public String getPro_keyword() {
+		return pro_keyword;
+	}
+	public void setPro_keyword(String pro_keyword) {
+		this.pro_keyword = pro_keyword;
+	}
+	public int getPro_rowStart() {
+		return pro_rowStart;
+	}
+	public void setPro_rowStart(int pro_rowStart) {
+		this.pro_rowStart = pro_rowStart;
+	}
+	public int getPro_rowEnd() {
+		return pro_rowEnd;
+	}
+	public void setPro_rowEnd(int pro_rowEnd) {
+		this.pro_rowEnd = pro_rowEnd;
+	}
 	public int getImagecount() {
 		return imagecount;
 	}

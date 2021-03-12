@@ -20,6 +20,7 @@ import kr.co.korea.beans.ProductPageMaker;
 import kr.co.korea.beans.ProductBean;
 import kr.co.korea.beans.ReviewBean;
 import kr.co.korea.beans.ReviewPageMaker;
+import kr.co.korea.beans.SearchCriteria;
 import kr.co.korea.beans.UserBean;
 import kr.co.korea.service.ProductService;
 import kr.co.korea.service.ReviewService;
@@ -38,21 +39,20 @@ public class ProductController {
 	@Lazy
 	private UserBean loginUserBean;
 	
-	
 	@GetMapping("/productContent")
-	public String productContent(int pID,Model model) {
+	public String productContent(int pID,Model model,SearchCriteria scri) {
 		
 		ProductBean productbean = productService.getproductInfo(pID);
 		
 		ReviewBean reviewbean = new ReviewBean();
 		reviewbean.setR_pID(pID);
-		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean);
+		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean,scri);
 		
 		
 		ReviewPageMaker pagemaker = new ReviewPageMaker();
-		pagemaker.setCri(reviewbean);
+		pagemaker.setCri(scri);
+		pagemaker.setReview(reviewbean);
 		pagemaker.setTotalCount(reviewservice.reviewcount(pID));
-		
 		
 		model.addAttribute("pID",pID);
 		model.addAttribute("reviewlist",reviewlist);
@@ -63,37 +63,41 @@ public class ProductController {
 	}
 	
 	@GetMapping("/productList")
-	public String productList(int top_idx,
-							  @RequestParam(value="sub_idx", defaultValue= "0")int sub_idx,
+	public String productList(@RequestParam(value="top_idx",required = false ,defaultValue="0")int top_idx,
+							  @RequestParam(value="sub_idx",required = false, defaultValue= "0")int sub_idx,
+							  SearchCriteria scri,
 							  ProductBean productbean,
 							  Model model) {
+		
 		
 		productbean.setP_sub_idx(sub_idx);
 		productbean.setP_top_idx(top_idx);
 		
-		List<ProductBean> productlist = productService.getproductInfo(productbean);
+		List<ProductBean> productlist = productService.getproductInfolist(scri,productbean);
 		
 		model.addAttribute("productlist",productlist);
 		
-		
 		ProductPageMaker pagemaker = new ProductPageMaker();
-		pagemaker.setCri(productbean);
+		pagemaker.setCri(scri);
+		pagemaker.setProduct(productbean);
 		pagemaker.setTotalCount(productService.productcount(productbean));
+		
 		
 		model.addAttribute("pagemaker",pagemaker);
 		return "/product/productList";
 	}
 
 	@GetMapping("/mainproduct")
-	public String mainproduct(int top_idx,
+	public String mainproduct(@RequestParam(value="top_idx", defaultValue="0")int top_idx,
 							  @RequestParam(value="sub_idx", defaultValue= "0")int sub_idx,
+							  SearchCriteria scri,
 							  ProductBean productbean,
 							  Model model) {
 		
 		productbean.setP_sub_idx(sub_idx);
 		productbean.setP_top_idx(top_idx);
 		
-		List<ProductBean> productlist = productService.getproductInfo(productbean);
+		List<ProductBean> productlist = productService.getproductInfolist(scri,productbean);
 		
 		model.addAttribute("productlist",productlist);
 		

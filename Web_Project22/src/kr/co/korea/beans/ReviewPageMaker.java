@@ -4,7 +4,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class ReviewPageMaker {
-	private ReviewBean cri;
+	private SearchCriteria cri;
+	private ReviewBean review;
 	private int totalCount; // 총 게시글 수
 	private int startPage; // 화면에 보이는 첫번째 번호
 	private int endPage; // 화면에 보이는 마지막 번호
@@ -12,11 +13,19 @@ public class ReviewPageMaker {
 	private boolean next; // 다음 버튼 만들어야 하는가?
 	private int displayPageNum = 5; // 페이지 번호 총 개수
 
-	public ReviewBean getCri() {
+	public ReviewBean getReview() {
+		return review;
+	}
+
+	public void setReview(ReviewBean review) {
+		this.review = review;
+	}
+
+	public SearchCriteria getCri() {
 		return cri;
 	}
 
-	public void setCri(ReviewBean Cri) {
+	public void setCri(SearchCriteria Cri) {
 		this.cri = Cri;
 	}
 
@@ -100,7 +109,7 @@ public class ReviewPageMaker {
 	public String makeQuery(int page) {
 		UriComponents uriComponents = UriComponentsBuilder
 						.newInstance()
-						.queryParam("pID", cri.getR_pID())
+						.queryParam("pID", review.getR_pID())
 						.queryParam("page", page)
 						.queryParam("perPageNum", cri.getPerPageNum())
 						.build();

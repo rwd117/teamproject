@@ -7,19 +7,30 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class ProductPageMaker {
-	private ProductBean cri;
+	private SearchCriteria cri;
+	private ProductBean product;
 	private int totalCount; // 총 게시글 수
 	private int startPage; // 화면에 보이는 첫번째 번호
 	private int endPage; // 화면에 보이는 마지막 번호
 	private boolean prev; // 이전 버튼 만들어야 하는가?
 	private boolean next; // 다음 버튼 만들어야 하는가?
 	private int displayPageNum = 5; // 페이지 번호 총 개수
+	
+	
+	
+	public ProductBean getProduct() {
+		return product;
+	}
 
-	public ProductBean getCri() {
+	public void setProduct(ProductBean product) {
+		this.product = product;
+	}
+
+	public SearchCriteria getCri() {
 		return cri;
 	}
 
-	public void setCri(ProductBean Cri) {
+	public void setCri(SearchCriteria Cri) {
 		this.cri = Cri;
 	}
 
@@ -103,20 +114,20 @@ public class ProductPageMaker {
 	public String makeQuery(int page) {
 		UriComponents uriComponents = null;
 
-		if (cri.getP_sub_idx() > 0) {
+		if (product.getP_sub_idx() > 0) {
 
 			uriComponents = UriComponentsBuilder
 							.newInstance()
-							.queryParam("top_idx", cri.getP_top_idx())
-							.queryParam("sub_idx", cri.getP_sub_idx())
+							.queryParam("top_idx", product.getP_top_idx())
+							.queryParam("sub_idx", product.getP_sub_idx())
 							.queryParam("page", page)
 							.queryParam("perPageNum", cri.getPerPageNum())
 							.build();
-		} else if (cri.getP_sub_idx() == 0) {
+		} else if (product.getP_sub_idx() == 0) {
 
 			uriComponents = UriComponentsBuilder
 						.newInstance()
-						.queryParam("top_idx", cri.getP_top_idx())
+						.queryParam("top_idx", product.getP_top_idx())
 						.queryParam("page", page)
 						.queryParam("perPageNum", cri.getPerPageNum())
 						.build();
@@ -125,32 +136,30 @@ public class ProductPageMaker {
 		return uriComponents.toUriString();
 	}
 
-//	public String makeSearch(int page) {
-//		UriComponents uriComponents = null;
-//		
-//		if (productbean.getP_sub_idx() != 0) {
-//
-//			uriComponents = UriComponentsBuilder.newInstance()
-//					.queryParam("top_idx", productbean.getP_top_idx())
-//					.queryParam("sub_idx", productbean.getP_sub_idx())
-//					.queryParam("page", page)
-//					.queryParam("perPageNum", cri.getPerPageNum())
-////    		            .queryParam("searchType", ((SearchCriteria)cri).getSearchType())
-////    		            .queryParam("keyword", encoding(((SearchCriteria)cri).getKeyword()))
-//					.build();
-//		} else if (productbean.getP_sub_idx() == 0) {
-//
-//			uriComponents = UriComponentsBuilder.newInstance()
-//					.queryParam("top_idx", productbean.getP_top_idx())
-//					.queryParam("page", page)
-//					.queryParam("perPageNum", cri.getPerPageNum())
-////		            .queryParam("searchType", ((SearchCriteria)cri).getSearchType())
-////		            .queryParam("keyword", encoding(((SearchCriteria)cri).getKeyword()))
-//					.build();
-//		}
-//
-//		return uriComponents.toUriString();
-//	}
+	public String makeSearch(int page) {
+		UriComponents uriComponents = null;
+		
+		if (product.getP_sub_idx() != 0) {
+
+			uriComponents = UriComponentsBuilder.newInstance()
+					.queryParam("top_idx", product.getP_top_idx())
+					.queryParam("sub_idx", product.getP_sub_idx())
+					.queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+    		        .queryParam("keyword", encoding(cri.getKeyword()))
+					.build();
+		} else if (product.getP_sub_idx() == 0) {
+
+			uriComponents = UriComponentsBuilder.newInstance()
+					.queryParam("top_idx", product.getP_top_idx())
+					.queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+		            .queryParam("keyword", encoding(cri.getKeyword()))
+					.build();
+		}
+
+		return uriComponents.toUriString();
+	}
 
 	private String encoding(String keyword) {
 		if (keyword == null || keyword.trim().length() == 0) {

@@ -33,7 +33,6 @@ triggerDefault = true; }
 		window.external.AddFavorite(bookmarkURL, bookmarkTitle); } 
 	else { 
 			alert((navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.'); } return triggerDefault; }); });
-
 </script>
 
 
@@ -49,9 +48,9 @@ triggerDefault = true; }
 			</button>
 			<!-- 검색창  -->
 			<li class="sideMenu3">
-				<input type="text" title="검색">
-				<button class="btn2" type="submit" value="검색">
-				<img src="img/search.png" alt="menu-icon">
+				<input type="text" name="keyword" id="keyword" title="검색">
+				<button class="btn2" id="SearchBtn" value="검색">
+					<img src="img/search.png" alt="menu-icon">
 				</button>
 			</li>
 
@@ -133,8 +132,16 @@ triggerDefault = true; }
 			</c:forEach>
 		</ul>
 	</nav>
+<script type="text/javascript">
+$(function() {
+	$('#SearchBtn').click(function() {
+		var url = ${conPath};
+		url +='product'+'/'+'productList';
+		url +="?keyword=" + $("#keyword").val();
+		location.href = url;
+	});
+});
 
-
-
+</script>
 </body>
 </html>

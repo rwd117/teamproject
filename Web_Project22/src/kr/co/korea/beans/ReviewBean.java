@@ -2,7 +2,7 @@ package kr.co.korea.beans;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ReviewBean extends Criteria{
+public class ReviewBean{
 	
 	private int r_ID;
 	private int r_oID;
@@ -23,7 +23,23 @@ public class ReviewBean extends Criteria{
 	
 	private int FileCheck;//파일 체크용
 	
+	private int re_rowStart;
+	private int re_rowEnd;
+	
+	
 
+	public int getRe_rowStart() {
+		return re_rowStart;
+	}
+	public void setRe_rowStart(int re_rowStart) {
+		this.re_rowStart = re_rowStart;
+	}
+	public int getRe_rowEnd() {
+		return re_rowEnd;
+	}
+	public void setRe_rowEnd(int re_rowEnd) {
+		this.re_rowEnd = re_rowEnd;
+	}
 	public MultipartFile getUpload1() {
 		return upload1;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.korea.beans.ReplyBean;
 import kr.co.korea.beans.ReviewBean;
+import kr.co.korea.beans.SearchCriteria;
 import kr.co.korea.service.ReplyService;
 import kr.co.korea.service.ReviewService;
 
@@ -51,10 +52,10 @@ public class ReplyRestController {
 	}
 
 	@PostMapping("/replylist/{pID}") //
-	public List<Map<Integer, Object>> replylist(@PathVariable int pID) {
+	public List<Map<Integer, Object>> replylist(@PathVariable int pID,SearchCriteria scri) {
 		ReviewBean reviewbean = new ReviewBean();
 		reviewbean.setR_pID(pID);
-		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean);
+		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean,scri);
 
 		List<Map<Integer, Object>> list = new ArrayList<Map<Integer, Object>>();
 

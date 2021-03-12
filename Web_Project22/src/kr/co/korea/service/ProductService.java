@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.korea.beans.ProductBean;
+import kr.co.korea.beans.SearchCriteria;
 import kr.co.korea.dao.ProductDao;
 
 @Service
@@ -120,9 +121,13 @@ public class ProductService {
 	}
 	
 
-	public List<ProductBean> getproductInfo(ProductBean productbean) {
+	public List<ProductBean> getproductInfolist(SearchCriteria scri,ProductBean productbean) {
 		
-		return productdao.getproductInfo(productbean);
+		productbean.setPro_rowStart(scri.getRowStart());
+		productbean.setPro_rowEnd(scri.getRowEnd());
+		productbean.setPro_keyword(scri.getKeyword());
+		
+		return productdao.getproductInfolist(productbean);
 	}
 
 	public ProductBean getproductInfo(int pID) {

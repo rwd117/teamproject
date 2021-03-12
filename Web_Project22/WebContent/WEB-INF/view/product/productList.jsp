@@ -81,17 +81,17 @@ $(document).ready(function(){
 						<c:if test="${pagemaker.prev }">
 							<li>
 								<a class="btn btn-outline-primary"
-								href='${conPath}product/productList${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+								href='${conPath}product/productList${pagemaker.makeSearch(pagemaker.startPage - 1)}'>이전</a>
 							</li>
 						</c:if>
 						<c:forEach begin="${pagemaker.startPage }"
 							end="${pagemaker.endPage }" var="pageNum">
 							<li><a class="btn btn-outline-primary"
-								href="${conPath}product/productList${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+								href="${conPath}product/productList${pagemaker.makeSearch(pageNum)}">${pageNum }</a></li>
 						</c:forEach>
 						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
 							<li><a class="btn btn-outline-primary"
-								href='${conPath}product/productList${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+								href='${conPath}product/productList${pagemaker.makeSearch(pagemaker.endPage + 1)}'>다음</a>
 							</li>
 						</c:if>
 				</ul>

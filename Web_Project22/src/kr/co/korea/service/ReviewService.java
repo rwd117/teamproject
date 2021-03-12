@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.korea.beans.ReviewBean;
+import kr.co.korea.beans.SearchCriteria;
 import kr.co.korea.dao.ReviewDao;
 
 @Service
@@ -117,7 +118,10 @@ public class ReviewService {
 		return multilist;
 	}
 
-	public List<ReviewBean> reviewList(ReviewBean reviewbean) {
+	public List<ReviewBean> reviewList(ReviewBean reviewbean,SearchCriteria scri) {
+		reviewbean.setRe_rowStart(scri.getRowStart());
+		reviewbean.setRe_rowEnd(scri.getRowEnd());
+		
 		return reviewdao.reviewList(reviewbean);
 	}
 
