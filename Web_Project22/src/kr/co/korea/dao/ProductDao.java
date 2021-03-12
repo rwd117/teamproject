@@ -36,4 +36,8 @@ public class ProductDao {
 		sqltemp.delete("product.productdelete",pID);
 	}
 	
+	public int productcount(ProductBean productbean) {
+		return sqltemp.selectOne("product.productcount",productbean);
+	}
+	
 }

@@ -5,10 +5,10 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.omg.CORBA.BAD_INV_ORDER;
+import org.mybatis.logging.Logger;
+import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.jdbc.core.metadata.DerbyTableMetaDataProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +27,9 @@ import kr.co.korea.service.BoardService;
 @RequestMapping("/board")
 public class BoardController {
 	
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class); 
+	
 	@Autowired
 	private BoardService boardService;
 	
@@ -36,6 +39,7 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("page", page);
 		//DB에서 게시판의이름을 가져옴

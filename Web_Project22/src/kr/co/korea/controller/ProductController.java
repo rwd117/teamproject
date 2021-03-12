@@ -1,8 +1,5 @@
 package kr.co.korea.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,12 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.korea.beans.ProductPageMaker;
 import kr.co.korea.beans.ProductBean;
 import kr.co.korea.beans.ReviewBean;
+import kr.co.korea.beans.ReviewPageMaker;
 import kr.co.korea.beans.UserBean;
 import kr.co.korea.service.ProductService;
 import kr.co.korea.service.ReviewService;
@@ -46,13 +44,60 @@ public class ProductController {
 		
 		ProductBean productbean = productService.getproductInfo(pID);
 		
-		List<ReviewBean> reviewlist = reviewservice.reviewList(pID);
+		ReviewBean reviewbean = new ReviewBean();
+		reviewbean.setR_pID(pID);
+		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean);
+		
+		
+		ReviewPageMaker pagemaker = new ReviewPageMaker();
+		pagemaker.setCri(reviewbean);
+		pagemaker.setTotalCount(reviewservice.reviewcount(pID));
+		
 		
 		model.addAttribute("pID",pID);
 		model.addAttribute("reviewlist",reviewlist);
 		model.addAttribute("productbean",productbean);
+		model.addAttribute("pagemaker",pagemaker);
 		
 		return "/product/productContent";
+	}
+	
+	@GetMapping("/productList")
+	public String productList(int top_idx,
+							  @RequestParam(value="sub_idx", defaultValue= "0")int sub_idx,
+							  ProductBean productbean,
+							  Model model) {
+		
+		productbean.setP_sub_idx(sub_idx);
+		productbean.setP_top_idx(top_idx);
+		
+		List<ProductBean> productlist = productService.getproductInfo(productbean);
+		
+		model.addAttribute("productlist",productlist);
+		
+		
+		ProductPageMaker pagemaker = new ProductPageMaker();
+		pagemaker.setCri(productbean);
+		pagemaker.setTotalCount(productService.productcount(productbean));
+		
+		model.addAttribute("pagemaker",pagemaker);
+		return "/product/productList";
+	}
+
+	@GetMapping("/mainproduct")
+	public String mainproduct(int top_idx,
+							  @RequestParam(value="sub_idx", defaultValue= "0")int sub_idx,
+							  ProductBean productbean,
+							  Model model) {
+		
+		productbean.setP_sub_idx(sub_idx);
+		productbean.setP_top_idx(top_idx);
+		
+		List<ProductBean> productlist = productService.getproductInfo(productbean);
+		
+		model.addAttribute("productlist",productlist);
+		
+		return "/product/mainproduct";
 	}
 	
 	@GetMapping("/productInsert")
@@ -64,41 +109,14 @@ public class ProductController {
 	@PostMapping("/productInsertGo")
 	public String productInsertGo(@ModelAttribute("productbean")ProductBean productbean,
 									MultipartHttpServletRequest multirequest,
-									 @RequestParam("image[]") List<MultipartFile> multifilelist,
 									 RedirectAttributes rttr) {
 		
 		
-		productService.insertproduct(multirequest,multifilelist,productbean);
+		productService.insertproduct(multirequest,productbean);
 		
 		rttr.addAttribute("pID", productbean.getpID());
 		
 		return "redirect:/product/productContent";
-	}
-	
-	
-	
-	@GetMapping("/productList")
-	public String productList(int top_idx,
-							  @RequestParam(value="sub_idx", defaultValue= "0")int sub_idx,
-							  Model model) {
-		
-		List<ProductBean> productlist = productService.getproductInfo(top_idx,sub_idx);
-		
-		model.addAttribute("productlist",productlist);
-		
-		return "/product/productList";
-	}
-
-	@GetMapping("/mainproduct")
-	public String mainproduct(int top_idx,
-							  @RequestParam(value="sub_idx", defaultValue= "0")int sub_idx,
-							  Model model) {
-		
-		List<ProductBean> productlist = productService.getproductInfo(top_idx,sub_idx);
-		
-		model.addAttribute("productlist",productlist);
-		
-		return "/product/mainproduct";
 	}
 	
 	

@@ -2,7 +2,7 @@ package kr.co.korea.beans;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ProductBean {
+public class ProductBean extends Criteria{
 	
 	private int pID;
 	private int p_top_idx;

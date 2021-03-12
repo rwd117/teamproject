@@ -416,24 +416,25 @@ function replyupdateok(re_ID){
 
 
 				<div class="paging">
-					<c:if test="${startPage > BLOCKSIZE }">
-						<a href="${conPath }/productContent.do?pageNum=${startPage-1}">
-							〈 &nbsp; </a>
-					</c:if>
-					<c:forEach var="i" begin="${startPage }" end="${endPage }">
-						<c:if test="${i eq pageNum }">
-							<b> &nbsp; ${i }</b>
+				<ul class="pagination">
+						<c:if test="${pagemaker.prev }">
+							<li>
+								<a class="btn btn-outline-primary"
+								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							</li>
 						</c:if>
-						<c:if test="${i != pageNum }">
-							<a href="${conPath }/productContent.do?pageNum=${i }">&nbsp;
-								${i }</a>
+						<c:forEach begin="${pagemaker.startPage }"
+							end="${pagemaker.endPage }" var="pageNum">
+							<li><a class="btn btn-outline-primary"
+								href="${conPath}product/productContent${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+						</c:forEach>
+						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
+							<li><a class="btn btn-outline-primary"
+								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							</li>
 						</c:if>
-					</c:forEach>
-					<c:if test="${endPage < pageCnt }">
-						<a href="${conPath }/productContent.do?pageNum=${endPage+1}">
-							&nbsp; 〉 </a>
-					</c:if>
-				</div>
+				</ul>
+			</div>
 
 			</div>
 		</div>

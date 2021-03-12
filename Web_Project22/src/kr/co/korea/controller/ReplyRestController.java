@@ -52,8 +52,9 @@ public class ReplyRestController {
 
 	@PostMapping("/replylist/{pID}") //
 	public List<Map<Integer, Object>> replylist(@PathVariable int pID) {
-
-		List<ReviewBean> reviewlist = reviewservice.reviewList(pID);
+		ReviewBean reviewbean = new ReviewBean();
+		reviewbean.setR_pID(pID);
+		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean);
 
 		List<Map<Integer, Object>> list = new ArrayList<Map<Integer, Object>>();
 

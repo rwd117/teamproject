@@ -19,33 +19,29 @@
 		values(#{pID},(select top_idx from topmenu where top_name=#{top_name}),(select sub_idx from submenu where sub_name=#{sub_name}),
 		#{pNAME},#{pPRICE},#{pSTOCK},#{pIMAGE1},#{pCONTENT},#{pdiscount})
 		</if>
-		<if test="imagecount==2">
+		<if test="imagecount==3">
 			insert into product(pID,p_top_idx,p_sub_idx,pNAME,pPRICE,pSTOCK,pIMAGE1,pCONTENT,pdiscount,pIMAGE2)
 		values(#{pID},	(select top_idx from topmenu where top_name=#{top_name}),(select sub_idx from submenu where sub_name=#{sub_name}),
 		#{pNAME},#{pPRICE},#{pSTOCK},#{pIMAGE1},#{pCONTENT},#{pdiscount},#{pIMAGE2})
 		</if>
 	</if>
 </sql>
+	
 	<select id="getproductInfolist" 
 		parameterType="kr.co.korea.beans.ProductBean"
 		resultType="kr.co.korea.beans.ProductBean">
 
-		select pID,
-		pNAME,
-		pPRICE,
-		pIMAGE1,
-		pCONTENT,
-		to_char(pDATE, 'YYYY-MM-DD')as pDATE,
-		phit
-		from product
-		where p_top_idx=(select top_idx from topmenu where top_idx=#{p_top_idx})
+		select pID,pNAME,pPRICE,pIMAGE1,pCONTENT,to_char(pDATE, 'YYYY-MM-DD')as pDATE,phit
+		from (select ROW_NUMBER() over(order by pid desc) as RNUM, tb.*
+		         from product tb ) tb
+		where (RNUM between #{rowStart} and #{rowEnd}) and (p_top_idx=(select top_idx from topmenu where top_idx=#{p_top_idx}))
 		<include refid="submenu"></include>
 	</select>
 
 	<sql id="submenu">
 		<if test="p_sub_idx!=0">
-			and p_sub_idx=(select sub_idx from submenu where
-			sub_idx=#{p_sub_idx})
+			and (p_sub_idx=(select sub_idx from submenu where
+			sub_idx=#{p_sub_idx}))
 		</if>
 	</sql>
 
@@ -67,6 +63,13 @@
 				where pid = #{pid}
 
 	</select>
+	
+	<select id="productcount" parameterType="kr.co.korea.beans.ProductBean" resultType="Integer">
+		select count(pID)
+		from product
+		where p_top_idx=(select top_idx from topmenu where top_idx=#{p_top_idx})<include refid="submenu"></include>
+	</select>
+	
 	
 	<update id="productupdate" parameterType="kr.co.korea.beans.ProductBean">
 		

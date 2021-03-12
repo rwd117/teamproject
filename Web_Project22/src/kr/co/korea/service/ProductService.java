@@ -20,29 +20,56 @@ public class ProductService {
 	private ProductDao productdao;
 	
 
-	public void insertproduct(MultipartHttpServletRequest multirequest, List<MultipartFile> multifilelist,ProductBean productbean) {
-		
+	public void insertproduct(MultipartHttpServletRequest multirequest, ProductBean productbean) {
+
+		List<MultipartFile> multifilelist = new ArrayList<MultipartFile>();
 		List<String> imagenames = new ArrayList<String>();
 		
-		productbean.setImagecount(imagenames.size());
-		if(multifilelist.size()>0) {
+		int imagecheck = 0;
+		
+		if ((!productbean.getUpload_file().isEmpty()) && (productbean.getUpload_file2().isEmpty())) {//1만 사진 입력
+			MultipartFile upload1 = productbean.getUpload_file();
+			multifilelist.add(upload1);
+			imagecheck =1;
+		} else if ((productbean.getUpload_file().isEmpty()) && (!productbean.getUpload_file2().isEmpty())) {//2만 사진 입력
+			MultipartFile upload2 = productbean.getUpload_file2();
+			multifilelist.add(upload2);
+			imagecheck=2;
+		} else 	if ((!productbean.getUpload_file().isEmpty()) && (!productbean.getUpload_file2().isEmpty())) {//1,2 사진 입력
+			MultipartFile upload1 = productbean.getUpload_file();
+			MultipartFile upload2 = productbean.getUpload_file2();
+			multifilelist.add(upload1);
+			multifilelist.add(upload2);
+			imagecheck=3;
+		} 
+		
+		if (multifilelist.size() > 0) {
 			imagenames = fileupload(multirequest,multifilelist);
-			if(imagenames.size()==1) {
+			if (imagecheck == 1) {
 				String filename1 = imagenames.get(0);
 				productbean.setpIMAGE1(filename1);
-				productbean.setImagecount(imagenames.size());
-				
-			}else if(imagenames.size()==2) {
+
+			} else if (imagecheck == 2) {
 				String filename1 = imagenames.get(0);
-				String filename2= imagenames.get(1);
+				productbean.setpIMAGE2(filename1);
+
+			}else if(imagecheck == 3) {
+				String filename1 = imagenames.get(0);
+				String filename2 = imagenames.get(1);
 				productbean.setpIMAGE1(filename1);
 				productbean.setpIMAGE2(filename2);
-				productbean.setImagecount(imagenames.size());
 			}
 		}
 		
+		productbean.setImagecount(imagecheck);
+		
+		
 		productdao.insertproduct(productbean);
 
+	}
+	
+	public void productupdate(ProductBean productbean) {
+		productdao.productupdate(productbean);
 	}
 	
 	private List<String> fileupload(MultipartHttpServletRequest multirequest, List<MultipartFile> multifilelist) {
@@ -93,24 +120,21 @@ public class ProductService {
 	}
 	
 
-	public List<ProductBean> getproductInfo(int top_idx,int sub_idx) {
-		ProductBean productbean = new ProductBean();
-		productbean.setP_sub_idx(sub_idx);
-		productbean.setP_top_idx(top_idx);
+	public List<ProductBean> getproductInfo(ProductBean productbean) {
 		
 		return productdao.getproductInfo(productbean);
 	}
 
-	public ProductBean getproductInfo (int pID) {
+	public ProductBean getproductInfo(int pID) {
 		return productdao.getproductInfo(pID);
-	}
-	
-	public void productupdate(ProductBean productbean) {
-		productdao.productupdate(productbean);
 	}
 	
 	public void productdelete(int pID) {
 		productdao.productdelete(pID);;
+	}
+	
+	public int productcount(ProductBean productbean) {
+		return productdao.productcount(productbean);
 	}
 
 }

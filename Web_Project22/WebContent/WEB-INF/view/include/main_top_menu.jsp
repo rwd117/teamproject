@@ -14,6 +14,28 @@
 <script src="../js/4.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#favorite').on('click', function(e) 
+{ var bookmarkURL = window.location.href; 
+var bookmarkTitle = document.title; 
+var triggerDefault = false; 
+if (window.sidebar && window.sidebar.addPanel) { 
+	window.sidebar.addPanel(bookmarkTitle, bookmarkURL, ''); 
+	} else if ((window.sidebar && (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)) || (window.opera && window.print)) {
+var $this = $(this); 
+$this.attr('href', bookmarkURL); 
+$this.attr('title', bookmarkTitle); 
+$this.attr('rel', 'sidebar'); 
+$this.off(e); 
+triggerDefault = true; } 
+	else if (window.external && ('AddFavorite' in window.external)) { 
+		window.external.AddFavorite(bookmarkURL, bookmarkTitle); } 
+	else { 
+			alert((navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.'); } return triggerDefault; }); });
+
+</script>
+
 
 	<div class="inner">
 
@@ -45,7 +67,7 @@
 					<c:forEach var="obj" items="${qnaTopList}">
         	 		<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          			</c:forEach>
-					<li><a href="#">★ FAVORITE</a></li>
+					<li><a href="#" id="favorite">★ FAVORITE</a></li>
 					<li><a href="#">▼ DESKTOP ICON</a></li>
 					</c:when>
 					<c:otherwise>
@@ -58,7 +80,7 @@
 					<c:forEach var="obj" items="${qnaTopList}">
         	 		<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          			</c:forEach>
-					<li><a href="#">★ FAVORITE</a></li>
+					<li><a href="#" id="favorite">★ FAVORITE</a></li>
 					<li><a href="#">▼ DESKTOP ICON</a></li>
 					</c:when>
 					<c:when test="${loginUserBean.mlevel > 0}">

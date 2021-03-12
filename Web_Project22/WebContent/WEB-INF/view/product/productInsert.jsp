@@ -224,14 +224,14 @@ function changeSecondSelect(){
 						</td>
 					</tr>
 					<tr>
-						<td class="title">
-							대표 이미지(1개 필수//1개이상 가능)
-						</td>
-						<td>
-							<input type="file" class="content" id="upload_file" name="image[]"  maxlength="4" multiple="multiple" required="required">
-							<span id="upload_fileMsg"> &nbsp; &nbsp; </span>
-						</td>
-					</tr>
+                			<td>첫번째 이미지(필수)</td>
+                			<td colspan="1"><input type="file" id="imgfile" accept="image/*" name="upload_file"></td>	
+          		  	</tr>
+         			<tr>
+            				<td>두번째 이미지</td>
+                			<td colspan="1">
+                			<input type="file" id="imgfile2" accept="image/*" name="upload_file2"></td>
+            		</tr>
 					
 					<tr>
 						<td class="title">

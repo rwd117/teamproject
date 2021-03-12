@@ -117,8 +117,8 @@ public class ReviewService {
 		return multilist;
 	}
 
-	public List<ReviewBean> reviewList(int r_pID) {
-		return reviewdao.reviewList(r_pID);
+	public List<ReviewBean> reviewList(ReviewBean reviewbean) {
+		return reviewdao.reviewList(reviewbean);
 	}
 
 	public ReviewBean reviewgetinfo(int r_ID) {
@@ -171,10 +171,12 @@ public class ReviewService {
 		reviewdao.reviewupdate(reviewbean);
 	
 	}
-	
 
 	public void reviewdelete(ReviewBean reviewbean) {
 		reviewdao.reviewdelete(reviewbean);
 	}
 
+	public int reviewcount(int r_pID) {
+		return reviewdao.reviewcount(r_pID);
+	}
 }
