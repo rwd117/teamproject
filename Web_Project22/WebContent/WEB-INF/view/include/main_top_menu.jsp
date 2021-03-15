@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <c:set var="conPath" value="${pageContext.request.contextPath }/"/>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
  <link href="../css/main.css" rel="stylesheet">
     <script src="../js/jquery-3.5.1.min.js"></script>
@@ -24,22 +25,22 @@
 	<div class="inner">
 
 		<div class="inner1">
-			<!-- ·Î°íºÎºÐ -->
-			<!-- <h1><img src="img/½Î´Ù±¸.png" alt="logo"></h1> -->
+			<!-- ë¡œê³ ë¶€ë¶„ -->
+			<!-- <h1><img src="img/ì‹¸ë‹¤êµ¬.png" alt="logo"></h1> -->
 			<a href="main"><h1>SSA DA GU</h1></a>
-			<!-- ¿ÞÂÊ»çÀÌµå¸Þ´º¹öÆ°       -->
+			<!-- ì™¼ìª½ì‚¬ì´ë“œë©”ë‰´ë²„íŠ¼       -->
 			<button class="btn1">
 				<img src="img/menu11.png" alt="menu-icon">
 			</button>
-			<!-- °Ë»öÃ¢  -->
+			<!-- ê²€ìƒ‰ì°½  -->
 			<li class="sideMenu3">
-				<input type="text" name="keyword" id="keyword" title="°Ë»ö">
-				<button class="btn2" id="Search" value="°Ë»ö">
+				<input type="text" name="keyword" id="keyword" title="ê²€ìƒ‰">
+				<button class="btn2" id="Search" value="ê²€ìƒ‰">
 					<img src="img/search.png" alt="menu-icon">
 				</button>
 			</li>
 
-			<!-- <·Î±×ÀÎºÎºÐ> -->
+			<!-- <ë¡œê·¸ì¸ë¶€ë¶„> -->
 			<div class="menu2">
 			
 				<ul>
@@ -51,24 +52,24 @@
 					<c:forEach var="obj" items="${qnaTopList}">
         	 		<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          			</c:forEach>
-					<li><a href="#" id="favorite">¡Ú FAVORITE</a></li>
-					<li><a href="#">¡å DESKTOP ICON</a></li>
+					<li><a href="#" id="favorite">â˜… FAVORITE</a></li>
+					<li><a href="#">â–¼ DESKTOP ICON</a></li>
 					</c:when>
 					<c:otherwise>
 					<c:choose>
 					<c:when test="${loginUserBean.mlevel == 0 }">
-					<li><a>${loginUserBean.mid}´Ô ¹Ý°©½À´Ï´Ù</a></li>
+					<li><a>${loginUserBean.mid}ë‹˜ ë°˜ê°‘ìŠµë‹ˆë‹¤</a></li>
 					<li><a href="${conPath }user/logout">LOGOUT</a></li>
 					<li><a href="${conPath }user/mypage">MYPAGE</a></li>
 					<li><a href="${conPath }qtable/notice">NOTICE</a></li>
 					<c:forEach var="obj" items="${qnaTopList}">
         	 		<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          			</c:forEach>
-					<li><a href="#" id="favorite">¡Ú FAVORITE</a></li>
-					<li><a href="#">¡å DESKTOP ICON</a></li>
+					<li><a href="#" id="favorite">â˜… FAVORITE</a></li>
+					<li><a href="#">â–¼ DESKTOP ICON</a></li>
 					</c:when>
 					<c:when test="${loginUserBean.mlevel > 0}">
-						<li><a>${loginUserBean.mid}´Ô ¹Ý°©½À´Ï´Ù</a></li>
+						<li><a>${loginUserBean.mid}ë‹˜ ë°˜ê°‘ìŠµë‹ˆë‹¤</a></li>
 						<li><a href="${conPath }user/logout">LOGOUT</a></li>
 						<li><a href="${conPath }review/edit">REVIEW</a></li>
 						<li><a href="${conPath }qtable/notice">NOTICE</a></li>
@@ -87,7 +88,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- <Çì´õ¸ÞÀÎ¸Þ´º> -->
+	<!-- <í—¤ë”ë©”ì¸ë©”ë‰´> -->
 
 	<nav id="nav1">
 		<ul id="nav2">

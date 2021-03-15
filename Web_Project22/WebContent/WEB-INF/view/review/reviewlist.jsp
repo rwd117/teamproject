@@ -5,13 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var='conPath' value="${pageContext.request.contextPath }/"/>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/orderlist.css">
-    <!-- <link href="css/5.css" rel="stylesheet"> -->
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/slidescript.js"></script>
@@ -19,7 +18,6 @@
 <script src="../js/4.js"></script>
 <script src="../js/7.js"></script>
 </head>
-<body>
 	<c:import url="/WEB-INF/view/include/top_menu.jsp"/>
 <body>
     <div id="ordersList_wrap">
@@ -85,9 +83,5 @@
 		</div>
 	</div>
     <c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>
-</body>
-</html>
-</body>
-</html>
 </body>
 </html>
