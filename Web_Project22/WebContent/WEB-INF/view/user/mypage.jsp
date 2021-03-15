@@ -39,15 +39,13 @@
                    <li><a href="${conpath }modify">정보수정</a></li>
                    <li><a href="${conpath }../wishlist/wish">위시리스트</a></li> 
                    <li>
-                   	<form action="${conPath}orders/orderlist" method="get" >
-						<input type="submit" class="btn" id="lastbtn" value="List">
-					</form>	</li>
+						<a href="${conpath }../orders/orderlist">주문내역</a>
             </ul>  
             </div>
             <div class="mypg">
                 <ul>
-                	<c:if test="${loginUserBean.mlevel > 0 }">
-                    <li> <a href="#">리뷰관리</a></li>
+                	<c:if test="${loginUserBean.mlevel == 0 }">
+                    <li> <a href="${conpath }../review/reviewlist">리뷰관리</a></li>
                     <li> <a href="#">문의관리 </a></li>
                     </c:if>
                     

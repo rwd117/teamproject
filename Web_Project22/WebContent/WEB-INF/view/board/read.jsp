@@ -42,7 +42,7 @@
         
             <tr>
                 <th>글번호</th>
-                <td colspan="3">${readContentBean.content_idx }</td>  
+                <td colspan="3">${content_idx }</td>  
             </tr>
             <tr>
                 <th>제목</th>
@@ -65,12 +65,7 @@
             <tr class="tr20">
                 
                 <td colspan="4">${readContentBean.content_text }</td>
-            <tr>
-            <c:if test="${readContentBean.content_file !=null}">
-                <th>첨부파일</th>
-                <td colspan="3"><img src="${conPath }upload/${readContentBean.content_file  }" width="20%"/>	</td>	
-            </c:if>
-            </tr>
+          
  
 		
             
@@ -84,9 +79,8 @@
            
              <c:choose>
 			<c:when test="${loginUserBean.mlevel > 0}">
-			<a href="${conPath }board/modify?board_info_idx=${board_info_idx}&content_idx=${content_idx}&page=${page}"><img src="../img/btn_modify.gif" alt="수정"></a>
 			<a href="${conPath }board/delete?board_info_idx=${board_info_idx}&content_idx=${content_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
-			<a href="${conPath }board/reply?q_idx=${readQtableBean.q_idx}"><img src="../img/btn_reply.gif" alt="답변"></a>
+			<a href="${conPath }board/reply?board_info_idx=${board_info_idx}&content_idx=${content_idx}&page=${page}"><img src="../img/btn_reply.gif" alt="답변"></a>
 			
 			</c:when>
 			

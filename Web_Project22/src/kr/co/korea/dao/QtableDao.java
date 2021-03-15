@@ -22,19 +22,23 @@ public class QtableDao {
 public List<QtableBean> getNoticeList() {	
 	return sqltemp.selectList("qtable.getNoticeList");
 }
+public QtableBean getNoticeInfo(int q_idx) {
+	return sqltemp.selectOne("qtable.getNoticeInfo", q_idx);
+}
+
+
+public QtableBean getEditNoticeInfo(int q_idx) {
+	return sqltemp.selectOne("qtable.getEditNoticeInfo", q_idx);
+	
+}
 
 public void editNoticeInfo(QtableBean qtableBean) {
 	sqltemp.update("qtable.editNoticeInfo", qtableBean);
 	
-}
-public QtableBean getEditNoticeInfo(int q_idx) {
-	return sqltemp.selectOne("qtable.getEditNoticeInfo", q_idx);
 }
 
 
 public void deleteNoticeInfo(int q_idx) {
 	sqltemp.delete("qtable.deleteNoticeInfo", q_idx);
 }
-public QtableBean getNoticeInfo(int q_idx) {
- return sqltemp.selectOne("qtable.getNoticeInfo", q_idx);
-}}
+}

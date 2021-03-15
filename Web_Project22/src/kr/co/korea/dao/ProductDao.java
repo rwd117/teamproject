@@ -40,4 +40,8 @@ public class ProductDao {
 		return sqltemp.selectOne("product.productcount",productbean);
 	}
 	
+	public void producthitadd(int pID) {
+		sqltemp.update("product.producthitadd",pID);
+	}
+	
 }

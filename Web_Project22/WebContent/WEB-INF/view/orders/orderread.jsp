@@ -83,7 +83,7 @@ function paintInvoice(a){
 		}
 		
 	}
-	
+	console.log("¿©±â¿ä");
 
 	$("#invoiceinfodiv").html(paint);
 	

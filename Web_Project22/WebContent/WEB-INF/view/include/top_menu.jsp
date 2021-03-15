@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:set var="conPath" value="${pageContext.request.contextPath }/" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var='conPath' value="${pageContext.request.contextPath }/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +14,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>«¡∑Œ¡ß∆Æ</title>
+<title>ÌîÑÎ°úÏ†ùÌä∏</title>
 <link href="../css/top_main.css" rel="stylesheet">
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/slidescript.js"></script>
+<script src="../js/2.js"></script>
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
+<script src="../js/8.js"></script>
 
 </head>
 
 <body>
-	<!-- <ΩΩ∂Û¿ÃµÂ, ∑Œ±◊¿Œ,∏ﬁ¥∫πŸ «Ï¥ı∫Œ∫–> -->
+	<!-- <Ïä¨ÎùºÏù¥Îìú, Î°úÍ∑∏Ïù∏,Î©îÎâ¥Î∞î Ìó§ÎçîÎ∂ÄÎ∂Ñ> -->
 	<div id="contents1">
 		<div class="topAreaout">
 			<div class="topArea">
 				<div class="menu1">
 					<ul>
-						<li><a href="#">°⁄ FAVORITE</a></li>
-						<li><a href="#">°Â DESKTOP ICON</a></li>
+						<li><a href="#">‚òÖ FAVORITE</a></li>
+						<li><a href="#">‚ñº DESKTOP ICON</a></li>
 
 					</ul>
 				</div>
@@ -56,7 +59,7 @@
         	 							<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          							</c:forEach>
 										<li><a href="${conPath }user/mypage">MYPAGE</a></li>
-										<li><a>${loginUserBean.mid}¥‘ π›∞©Ω¿¥œ¥Ÿ</a></li>
+										<li><a>${loginUserBean.mid}Îãò Î∞òÍ∞ëÏäµÎãàÎã§</a></li>
 									</c:when>
 									<c:when test="${loginUserBean.mlevel > 0}">
 										<li><a href="${conPath }user/logout">LOGOUT</a></li>
@@ -66,9 +69,9 @@
         	 							<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          							</c:forEach>
 										<li><a href="${conPath}product/productInsert">PRODUCT</a></li>
-										<li><a href="${conPath}orders/orderlist">ORDER</a></li>
+										<li><a href="${conPath }orders/orderlist">ORDER</a></li>
 										<li><a href="${conPath}members/memberlist">MEMBER</a></li>
-										<li><a>${loginUserBean.mid}¥‘ π›∞©Ω¿¥œ¥Ÿ</a></li>
+										<li><a>${loginUserBean.mid}Îãò Î∞òÍ∞ëÏäµÎãàÎã§</a></li>
 
 									</c:when>
 								</c:choose>
@@ -101,17 +104,18 @@
 		<div class="inner">
 
 			<div class="inner1">
-				<!-- øﬁ¬ ªÁ¿ÃµÂ∏ﬁ¥∫πˆ∆∞       -->
+				<!-- ÏôºÏ™ΩÏÇ¨Ïù¥ÎìúÎ©îÎâ¥Î≤ÑÌäº       -->
 				<button class="btn1">
 					<img src="../img/menu11.png" alt="menu-icon">
 				</button>
-				<!-- ∞Àªˆ√¢  -->
-				<li class="sideMenu3"><input type="text" title="∞Àªˆ">
-					<button class="btn2" type="submit" value="∞Àªˆ">
+				<!-- Í≤ÄÏÉâÏ∞Ω  -->
+				<li class="sideMenu3">
+					<input type="text" name="keyword" id="keyword" title="Í≤ÄÏÉâ">
+					<button class="btn2" value="Í≤ÄÏÉâ" id="Search">
 						<img src="../img/search.png" alt="menu-icon">
 					</button></li>
 
-				<!-- <∑Œ±◊¿Œ∫Œ∫–> -->
+				<!-- <Î°úÍ∑∏Ïù∏Î∂ÄÎ∂Ñ> -->
 				<div class="menu3">
 					<ul>
 							<c:forEach items="${topmenulist}" var="obj">
@@ -125,8 +129,8 @@
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li class="mainMenu1"><a
-							href="${conPath }product/productList?top_idx=${obj.top_idx}">${obj.top_name}</a></li>
+						<li class="mainMenu1">
+						<a href="${conPath }product/productList?top_idx=${obj.top_idx}">${obj.top_name}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -137,5 +141,17 @@
 
 	</header>
 	</div>
+	
+	<script type="text/javascript">
+$(function() {
+	$('#Search').click(function() {
+		var url = "${conPath}";
+		url +='product'+'/'+'productList';
+		url +="?keyword=" + $("#keyword").val();
+		location.href = url;
+	});
+});
+</script>
+	
 </body>
 </html>

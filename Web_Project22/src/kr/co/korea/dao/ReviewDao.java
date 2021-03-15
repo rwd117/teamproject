@@ -38,8 +38,8 @@ public class ReviewDao {
 		sqltemp.delete("review.reviewdelete",reviewbean);
 	}
 	
-	public int reviewcount(int r_pID) {
-		return sqltemp.selectOne("review.reviewcount",r_pID);
+	public int reviewcount(ReviewBean reviewbean) {
+		return sqltemp.selectOne("review.reviewcount",reviewbean);
 	}
 	
 }

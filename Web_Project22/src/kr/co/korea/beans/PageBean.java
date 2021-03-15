@@ -8,7 +8,7 @@ public class PageBean {
 	private int pageCnt; 
 	private int currentPage;
 	
-	//contentCnt(전체수)=502, conentPageCnt(페이지당글수)=10 
+	//contentCnt(전체수)=502, conentPageCnt(페이지당글수)=10 =pagesize=10 
 	public PageBean(int contentCnt, int currentPage, int conentPageCnt, int paginationCnt ) {
 		this.currentPage=currentPage;
 		pageCnt=contentCnt/conentPageCnt;   //50  페이지수

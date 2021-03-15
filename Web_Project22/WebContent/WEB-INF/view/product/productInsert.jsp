@@ -173,6 +173,11 @@ function changeSecondSelect(){
 
 	<div id="productInsert_wrap">
 		<div id="productInsert">
+		<form name="readform" method="post">
+		<input type="hidden" id="page" name="page" value="${scri.page}">
+		<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+		<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+		</form>
 			<form action="${conPath }product/productInsertGo" method="post" enctype="multipart/form-data">
 				<table>
 					<tr id=sido>

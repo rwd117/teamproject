@@ -23,10 +23,18 @@
 <update id="modifyUserInfo" parameterType="kr.co.korea.beans.UserBean" >
 <![CDATA[
 	update MEMBER
-	set mpw=#{mpw},memail=#{memail},maddress=#{maddress},maddress2=#{maddress2},mphone=#{mphone},mpost=#{mpost}
+	set mpw=#{mpw}, mname=#{mname}, memail=#{memail}, mphone=#{mphone}, maddress=#{maddress}, maddress2=#{maddress2}, mbirth=#{mbirth}
 	where midx=#{midx}
 ]]>
 </update>
+<!-- 회원탈퇴 -->
+<delete id="memberDelete" parameterType="kr.co.korea.beans.UserBean" >
+<![CDATA[
+	DELETE FROM MEMBER
+	where midx=#{midx}
+	AND mpw=#{mpw}
+]]>
+</delete>
 <!-- 중복아이디 버튼 id조회 -->
 <select id="checkUserIdExist" parameterType="String" resultType="String">
 <![CDATA[
@@ -41,7 +49,15 @@
 	select mname,mid,mpw,memail,maddress,maddress2,mbirth,mphone,mpost from member where midx=#{midx}
 
 </select>
-
+<!-- 아이디찾기 -->
+<select id="find_id" parameterType="String" resultType="String">
+<![CDATA[
+  select midx,mid
+  from MEMBER
+  where mname=#{mname}
+  AND memail=#{memail}
+]]>
+</select>
 
 </mapper>
 

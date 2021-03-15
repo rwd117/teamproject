@@ -1,40 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <c:set var="conPath" value="${pageContext.request.contextPath }/" />
+ <c:set var="conPath" value="${pageContext.request.contextPath }/"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<script src="../js/jquery-3.5.1.min.js"></script>
-<script src="../js/jquery-ui.min.js"></script>
-<script src="../js/slidescript.js"></script>
-<script src="../js/1.js"></script>
-<script src="../js/4.js"></script>
+ <link href="../css/main.css" rel="stylesheet">
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/slidescript.js"></script>
+    <script src="../js/1.js"></script>
+    <script src="../js/2.js"></script>
+    <script src="../js/4.js"></script>
+    <script src="../js/8.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-$(document).ready(function() { 
-	$('#favorite').on('click', function(e) 
-{ var bookmarkURL = window.location.href; 
-var bookmarkTitle = document.title; 
-var triggerDefault = false; 
-if (window.sidebar && window.sidebar.addPanel) { 
-	window.sidebar.addPanel(bookmarkTitle, bookmarkURL, ''); 
-	} else if ((window.sidebar && (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)) || (window.opera && window.print)) {
-var $this = $(this); 
-$this.attr('href', bookmarkURL); 
-$this.attr('title', bookmarkTitle); 
-$this.attr('rel', 'sidebar'); 
-$this.off(e); 
-triggerDefault = true; } 
-	else if (window.external && ('AddFavorite' in window.external)) { 
-		window.external.AddFavorite(bookmarkURL, bookmarkTitle); } 
-	else { 
-			alert((navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.'); } return triggerDefault; }); });
-</script>
 
+</script>
 
 	<div class="inner">
 
@@ -49,7 +34,7 @@ triggerDefault = true; }
 			<!-- 검색창  -->
 			<li class="sideMenu3">
 				<input type="text" name="keyword" id="keyword" title="검색">
-				<button class="btn2" id="SearchBtn" value="검색">
+				<button class="btn2" id="Search" value="검색">
 					<img src="img/search.png" alt="menu-icon">
 				</button>
 			</li>
@@ -134,14 +119,14 @@ triggerDefault = true; }
 	</nav>
 <script type="text/javascript">
 $(function() {
-	$('#SearchBtn').click(function() {
-		var url = ${conPath};
+	$('#Search').click(function() {
+		var url = "${conPath}";
 		url +='product'+'/'+'productList';
 		url +="?keyword=" + $("#keyword").val();
 		location.href = url;
 	});
 });
-
 </script>
+
 </body>
 </html>

@@ -19,7 +19,6 @@ public class ProductService {
 
 	@Autowired
 	private ProductDao productdao;
-	
 
 	public void insertproduct(MultipartHttpServletRequest multirequest, ProductBean productbean) {
 
@@ -119,7 +118,6 @@ public class ProductService {
 		
 		return multilist;
 	}
-	
 
 	public List<ProductBean> getproductInfolist(SearchCriteria scri,ProductBean productbean) {
 		
@@ -141,5 +139,9 @@ public class ProductService {
 	public int productcount(ProductBean productbean) {
 		return productdao.productcount(productbean);
 	}
-
+	
+	public void producthitadd(int pID) {
+		productdao.producthitadd(pID);
+	}
+	
 }

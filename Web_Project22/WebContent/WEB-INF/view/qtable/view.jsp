@@ -31,7 +31,7 @@
             <table border="1" class="table">
          <c:if test="${readQtableBean.q_file !=null}">
                 <th>IMAGE</th>
-                <td colspan="3"><img src="${conPath }upload/${readQtableBean.q_file  }" width="100%"/>	</td>	
+                <td colspan="3"><img src="${conPath }upload/${readQtableBean.q_file  }" width="20%"/>	</td>	
             </c:if>
     
                 
@@ -64,13 +64,7 @@
             <tr class="tr20">
                 
                 <td colspan="4">${readQtableBean.q_content}</td>
-            <tr>
-            <c:if test="${readQtableBean.q_file !=null}">
-                <th>첨부파일</th>
-                <td colspan="3"><img src="${conPath }upload/${readQtableBean.q_file  }" width="100%"/>	</td>	
-            </c:if>
-            </tr>
- 
+            
 		
             
         </table>

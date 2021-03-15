@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/kr/co/korea/beans/ContentBean.java=UTF-8
+encoding//src/kr/co/korea/controller/BoardController.java=UTF-8
+encoding//src/kr/co/korea/controller/CartRestController.java=UTF-8
+encoding//src/kr/co/korea/controller/HomeController.java=UTF-8
 encoding//src/kr/co/korea/dao/UserDao.java=UTF-8
+encoding//src/kr/co/korea/service/BoardService.java=UTF-8

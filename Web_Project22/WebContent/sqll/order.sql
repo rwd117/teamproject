@@ -18,7 +18,7 @@ CREATE TABLE ORDERS(
     o_INVOICE NUMBER default 0,
     o_money number not null
 );
-
+select * from ORDERS;
 CREATE SEQUENCE ORDERS_SEQ start with 1
 increment by 1 NOCYCLE NOCACHE;
 

@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <c:set var="conPath" value="${pageContext.request.contextPath }/" />
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
 </head>
 <body>
 <head>
@@ -17,8 +19,10 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/slidescript.js"></script>
+    <script src="js/1.js"></script>
     <script src="js/2.js"></script>
-    <script src="js/3.js"></script>
+    <script src="js/4.js"></script>
+    <script src="js/8.js"></script>
     <script >
         function showPopup() { 
         	window.open("${conPath}popup/popup1", "veiwimg", "width=1050, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); 
@@ -29,24 +33,24 @@
     
     <body>
     	
-        <!-- <Ïä¨ÎùºÏù¥Îìú, Î°úÍ∑∏Ïù∏,Î©îÎâ¥Î∞î Ìó§ÎçîÎ∂ÄÎ∂Ñ> -->
+        <!-- <ΩΩ∂Û¿ÃµÂ, ∑Œ±◊¿Œ,∏ﬁ¥∫πŸ «Ï¥ı∫Œ∫–> -->
         <div id="contents1">   
-            <!-- ÏÉÅÎã®Î∞∞ÎÑà -->
+            <!-- ªÛ¥‹πË≥  -->
             <div class="slideShow">
-                <!-- Ïä¨ÎùºÏù¥Îìú -->
+                <!-- ΩΩ∂Û¿ÃµÂ -->
                 <div class="slideArea">
                     <a href="#" class="slide"><img src="img/bn4.jpg" alt=""></a>
                     <a href="#" class="slide"><img src="img/bn5.jpg" alt=""></a>
                     <a href="#" class="slide"><img src="img/bn7.jpg" alt=""></a>
                     <a href="#" class="slide"><img src="img/bn8.jpg" alt=""></a>
                 </div>
-                <!-- Ï¢åÏö∞Î≤ÑÌäº -->
+                <!-- ¡¬øÏπˆ∆∞ -->
                 <div class="slideNav">
-                    <a href="#" class="prev">Ïù¥Ï†Ñ</a>
-                    <a href="#" class="next">Îã§Ïùå</a>
+                    <a href="#" class="prev">¿Ã¿¸</a>
+                    <a href="#" class="next">¥Ÿ¿Ω</a>
                 </div>
                 <div class="slideIndicator">
-                    <!-- a Ìè¨Ìï®ÏòàÏ†ï -->
+                    <!-- a ∆˜«‘øπ¡§ -->
                 </div>
             </div>
             
@@ -57,7 +61,7 @@
             </header>
             
         </div>
-        <!-- Ï§ëÍ∞ÑÏóê Ïª®ÌÖêÏ∏†Î∂ÄÎ∂Ñ -->
+        <!-- ¡ﬂ∞£ø° ƒ¡≈Ÿ√˜∫Œ∫– -->
         <div id="contents2">
             <div id="top">
                 <div class="left">
@@ -67,8 +71,8 @@
                         <li><img src="img/333.jpg" class="img3" onclick="showPopup();"></li>
                     </ul>
     
-                    <p class="nex"><img src="img/btn_next.png" alt="Ïù¥Ï†ÑÏúºÎ°ú"></p>
-                    <p class="pre"><img src="img/btn_prev.png" alt="Îã§ÏùåÏúºÎ°ú"></p>
+                    <p class="nex"><img src="img/btn_next.png" alt="¿Ã¿¸¿∏∑Œ"></p>
+                    <p class="pre"><img src="img/btn_prev.png" alt="¥Ÿ¿Ω¿∏∑Œ"></p>
                 </div>
                 <div class="right">
                     <a href="#"><img src="img/444.jpg" class="img4" onclick="showPopup();"></a>
@@ -78,7 +82,7 @@
                 </div>
             </div>
     
-            <!-- Ï§ëÏïôÎ∞ïÏä§  -->
+            <!-- ¡ﬂæ”π⁄Ω∫  -->
             <div id="section">
                 <div id="best">           
                     <ul>
@@ -95,8 +99,8 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><button class="popup1" onclick="showPopup()" ><img id="span_gif" src="img/v.gif"></button></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                     </div>
                     <div class="box">
                         <a href="#"><img src="webp/2.webp" id="image"></a>
@@ -107,8 +111,8 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><img id="span_gif" src="img/v.gif"></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                     </div>
                     <div class="box">
                         <a href="#"><img src="webp/3.webp" id="image"></a>
@@ -119,8 +123,8 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><img id="span_gif" src="img/v.gif"></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                     </div>
                     <div class="box">
                         <a href="#"><img src="webp/4.webp" id="image"></a>
@@ -131,8 +135,8 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><img id="span_gif" src="img/v.gif"></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                     </div>
                     <div class="box">
                         <a href="#"><img src="webp/5.webp" id="image"></a>
@@ -143,8 +147,8 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><img id="span_gif" src="img/v.gif"></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                     </div>
                     <div class="box">
                         <a href="#"><img src="webp/6.webp" id="image"></a>
@@ -155,8 +159,8 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><img id="span_gif" src="img/v.gif"></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                     </div>
                 </div>
                 <div class="right">
@@ -168,12 +172,12 @@
                                 <a href="#"><img id="span_icon" src="img/c.png"></a>
                                 <a href="#"><img id="span_gif" src="img/v.gif"></a>
                             </span>
-                        <a href="#"><h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3></a>
-                        <a href="#"><p>Ôø¶39000</p></a>
+                        <a href="#"><h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3></a>
+                        <a href="#"><p>£‹39000</p></a>
                 </div>
             </div>
     
-            <!-- Í∞ÄÎ°úÎ°úÍ∏¥Î∞ïÏä§ -->
+            <!-- ∞°∑Œ∑Œ±‰π⁄Ω∫ -->
             <div>
                 <article class="side3">
                     <a href="#">
@@ -181,7 +185,7 @@
                     </a>
                 </article>
             </div>
-            <!-- /* Î∞ïÏä§ 4Í∞ú Î∂ÄÎ∂Ñ  -->
+            <!-- /* π⁄Ω∫ 4∞≥ ∫Œ∫–  -->
     
             <div class="section1">
                 <div class="container">
@@ -196,8 +200,8 @@
                            </span>
                            </p>
                             <a href="#">
-                               <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                               <p>Ôø¶39000</p>
+                               <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                               <p>£‹39000</p>
                            </a>
                    </div>
                    <div class="quick">
@@ -211,8 +215,8 @@
                        </span>
                        </p>
                         <a href="#">
-                           <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                           <p>Ôø¶39000</p>
+                           <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                           <p>£‹39000</p>
                        </a>
                </div>
                <div class="quick">
@@ -226,8 +230,8 @@
                    </span>
                    </p>
                     <a href="#">
-                       <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                       <p>Ôø¶39000</p>
+                       <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                       <p>£‹39000</p>
                    </a>
            </div>
            <div class="quick">
@@ -241,8 +245,8 @@
                </span>
                </p>
                 <a href="#">
-                   <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                   <p>Ôø¶39000</p>
+                   <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                   <p>£‹39000</p>
                </a>
        </div>
                 </div>
@@ -258,8 +262,8 @@
                            </span>
                            </p>
                             <a href="#">
-                               <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                               <p>Ôø¶39000</p>
+                               <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                               <p>£‹39000</p>
                            </a>
                    </div>
                    <div class="quick">
@@ -273,8 +277,8 @@
                        </span>
                        </p>
                         <a href="#">
-                           <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                           <p>Ôø¶39000</p>
+                           <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                           <p>£‹39000</p>
                        </a>
                </div>
                <div class="quick">
@@ -288,8 +292,8 @@
                    </span>
                    </p>
                     <a href="#">
-                       <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                       <p>Ôø¶39000</p>
+                       <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                       <p>£‹39000</p>
                    </a>
            </div>
            <div class="quick">
@@ -303,8 +307,8 @@
                </span>
                </p>
                 <a href="#">
-                   <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                   <p>Ôø¶39000</p>
+                   <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                   <p>£‹39000</p>
                </a>
        </div>
                 </div>
@@ -320,8 +324,8 @@
                            </span>
                            </p>
                             <a href="#">
-                               <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                               <p>Ôø¶39000</p>
+                               <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                               <p>£‹39000</p>
                            </a>
                    </div>
                    <div class="quick">
@@ -335,8 +339,8 @@
                        </span>
                        </p>
                         <a href="#">
-                           <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                           <p>Ôø¶39000</p>
+                           <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                           <p>£‹39000</p>
                        </a>
                </div>
                <div class="quick">
@@ -350,8 +354,8 @@
                    </span>
                    </p>
                     <a href="#">
-                       <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                       <p>Ôø¶39000</p>
+                       <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                       <p>£‹39000</p>
                    </a>
            </div>
            <div class="quick">
@@ -365,87 +369,16 @@
                </span>
                </p>
                 <a href="#">
-                   <h3>Îü¨Î∏åÎ†àÌÑ∞ÎßÅÎãàÌä∏</h3>
-                   <p>Ôø¶39000</p>
+                   <h3>∑Ø∫Í∑π≈Õ∏µ¥œ∆Æ</h3>
+                   <p>£‹39000</p>
                </a>
        </div>
                 </div>
             </div>       
         </div>
        
+      <c:import url="/WEB-INF/view/include/bottom_menu2.jsp"/>
     
-    
-        <!-- Ìë∏ÌÑ∞ -->
-        <div id="footer">
-            <div class="left">
-                <ul>
-                    <li><a href="#">Î≤ïÏ†ÅÍ≥†ÏßÄ</a></li>
-                    <li><a href="#">Ïù¥Î©îÏùºÎ¨¥Îã®ÏàòÏßëÍ±∞Î∂Ä</a></li>
-                    <li><a href="#">Ïù¥Ïö©ÏïΩÍ¥Ä</a></li>
-                    <li><a href="#">Í∞úÏù∏Ï†ïÎ≥¥Ï∑®Í∏âÎ∞©Ïπ®</a></li>
-                    <li><a href="#">Í≥†Í∞ùÏÑºÌÑ∞</a></li>
-                    <li><a href="#">ÏûÖÏ∞∞Í≥µÍ≥†</a></li>
-                </ul>
-            </div>
-            <div class="right">
-                <select>
-                    <option>Î∞îÎ°úÍ∞ÄÍ∏∞</option>
-                    <option>aaaa</option>
-                    <option>bbbb</option>
-                    <option>cccc</option>
-                    <option>dddd</option>
-                    <option>eeee</option>
-                </select>
-            </div>
-        </div>
-    
-    
-        <!-- /* ÏôºÏ™ΩÏÇ¨Ïù¥ÎìúÎ∞î */ -->
-        <aside id="aside">
-		<nav id="aside nav">
-			<ul>
-			<c:forEach items="${topmenulist}" var="obj">
-				<c:choose>
-					<c:when test="${obj.top_idx < 4 }">
-						<li class="sideMenu1"><a
-							href="${conPath }product/productList?top_idx=${obj.top_idx}">${obj.top_name}</a></li>
-					</c:when>
-					<c:when test="${(3<obj.top_idx) && (obj.top_idx <8) }">
-						<li class="sideMenu1"><a
-							href="${conPath }product/productList?top_idx=${obj.top_idx}">${obj.top_name}</a>
-							<c:forEach var="obj2" items="${ submenulist}">
-								<c:if test="${obj.top_idx eq obj2.sub_top_idx }">
-									<ul class="subMenu1">
-										<li><a
-											href="${conPath}product/productList?top_idx=${obj.top_idx}&sub_idx=${obj2.sub_idx}">${obj2.sub_name }</a></li>
-									</ul>
-								</c:if>
-							</c:forEach></li>
-					</c:when>
-					<c:otherwise>
-						<li class="sideMenu1"><a
-							href="${conPath }product/productList?top_idx=${obj.top_idx}">${obj.top_name}</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-				</ul>
-		</nav>
-	</aside>
-        <!-- /* Ïò§Î•∏Ï™ΩÏÇ¨Ïù¥ÎìúÎ∞î */ -->
-        <right-sidebar>
-            <div class="right">
-                <ul class="subMenu2">
-                    <li><a href="${conPath }cart/cart"><img src="img/ico_cart_b.png"> CART</a></li>
-                <li><a href="${conPath }orders/order"><img src="img/ico_order_b.png"> ORDER</a></li>
-                <li><a href="${conPath }wishlist/wish"><img src="img/my_icon2.png"> WISHLIST</a></li>	
-                <li><a href="${conPath }qtable/notice"><img src="img/rsi_22.png"> EVENT</a></li>
-                <li><a href="${conPath }board/main"><img src="img/lsi_theday_off.png"> Q&A</a></li>
-                <li><a href="${conPath }review/qna"><img src="img/lsi_best50_off.png"> REVIEW</a></li>
-                </ul>
-                <button class="up1"><img src="img/up1.png"></button>
-                <a href="#"><button class="up" ><img src="img/up.png" ></button></a>
-            </div>
-        </right-sidebar>
     </body>
     
     </html>

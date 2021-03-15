@@ -77,6 +77,7 @@ function cartlist(){
 				viewsumprice = moneyunit(sumprice)+'원';
 			}
 			
+			
 			cartitem +='<tr class="tr12" id="cID'+this.cID+'">';
 			cartitem +='<td scope="row">';
 			cartitem +='<input type="checkbox" name="checkitem" value="'+this.cID+'" onclick="check(2);"></td>';
@@ -110,7 +111,11 @@ function cartlist(){
 	 }
 	 	$("#cartlistdiv").html(cartitem);
 		$(".section3").html(payinfo);
-
+		$(".tabBtn").html(numberinfo)
+		
+		
+		
+		
 		}, error : function(result){
 		
 		console.log("에러");
@@ -411,7 +416,7 @@ function ordercheck(kind){
 			<ul class="section1">
 				<div class="tabArea">
 					<ul class="tabList">
-						<li><a href="#" class="tabBtn">국내배송상품 (1)</a>
+						<li><a href="#" class="tabBtn">국내배송상품()</a>
 							<div class="tabCon notice">
 								<table class="table table-striped">
 

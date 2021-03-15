@@ -63,14 +63,16 @@ public class QtableController {
 		return "/qtable/view";
 	}
 	@GetMapping("/edit")
-	public String edit(@ModelAttribute("modifyQtableBean")QtableBean qtableBean) {
-		qtableService.getEditNoticeInfo(qtableBean);
+	public String edit(@ModelAttribute("modifyQtableBean")QtableBean qtableBean,int q_idx,Model model) {
+		
+	QtableBean editQtableBean=qtableService.getEditNoticeInfo(q_idx);
+	model.addAttribute("editQtableBean",editQtableBean);
 		return "/qtable/edit";
 	}
 	@PostMapping("/edit_pro")
-	public String edit_pro(@ModelAttribute("modifyQtableBean")QtableBean qtableBean,int q_idx) {	
+	public String edit_pro(@ModelAttribute("modifyQtableBean")QtableBean qtableBean) {	
 		qtableService.editNoticeInfo(qtableBean);
-		qtableBean.setQ_idx(qtabBean.getQ_idx());
+		
 		return "/qtable/editok";
 	}
 	

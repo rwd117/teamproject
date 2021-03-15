@@ -52,8 +52,9 @@
                         <thead>
                             <tr>
                                 <th scope="cols">번호</th>
-                                <th scope="cols">이미지</th>
+                                
                                 <th scope="cols">제목</th>
+                                <th scope="cols">이미지</th>
                                 <th scope="cols">작성자</th>
                                 <th scope="cols">등록일</th>
                                 <th scope="cols">조회수</th>
@@ -61,15 +62,33 @@
                             
                         </thead>
                         <tbody>
-                        <c:forEach var="obj"  items="${contentList}" >
-                            <tr>
-                                <td scope="row">${obj.content_idx}</td>
-                                 <td>${obj.content_file}</td>
-                                <td><a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>                             
+                        <c:forEach var="obj"  items="${contentList}" begin="0">
+                            <c:if test="${obj.content_level < 4}">
+			<tr>
+				<th  scope="row">${obj.content_idx }</th>
+				<c:choose>
+					<c:when test="${obj.content_level eq 0}">
+						<td><a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+					</c:when>
+					<c:when test="${list.content_level eq 1}">
+						<td>&nbsp;&nbsp;ㄴ<a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+					</c:when>
+					<c:when test="${obj.content_level eq 2}">
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ<a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+					</c:when>
+					<c:when test="${obj.content_level eq 3}">
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						ㄴ<a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+					</c:when>
+				</c:choose>                           
+                            
+                                 <td><img src="${conPath}upload/${obj.content_file}" width="100px" height="100px" alt="상품사진"></td>
+                                                             
                                 <td>${obj.content_write_name}</td>
                                 <td>${obj.content_date}</td>
 						  		<td></td>
                             </tr>
+                            </c:if>
                             </c:forEach>
                         </tbody>
                     </table>

@@ -1,13 +1,16 @@
 package kr.co.korea.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,19 +37,18 @@ public class UserController {
 	public String join(@ModelAttribute("joinUserBean") UserBean userBean) {
 		return "/user/join";
 	}
-	
+
 	@PostMapping("/join_pro")
-	public String join_pro(@Valid @ModelAttribute("joinUserBean") UserBean userBean, BindingResult result) {
+	public String join_pro(@ModelAttribute("joinUserBean") UserBean userBean, BindingResult result) {
 		userService.addUserInfo(userBean);// DB
 		return "/user/join_success";
 	}
 
-	
 	@GetMapping("/login")
 	public String login(@ModelAttribute("afterUserBean") UserBean userBean,
 			@RequestParam(value = "logcheck", defaultValue = "false") boolean logcheck, Model model) {
 		model.addAttribute("logcheck", logcheck);
-		System.out.println("loginÏùò logcheck=" + logcheck);
+		System.out.println("login¿« logcheck=" + logcheck);
 		return "/user/login";
 	}
 
@@ -54,8 +56,6 @@ public class UserController {
 	public String mypage(UserBean userBean) {
 		return "/user/mypage";
 	}
-
-	
 
 	@PostMapping("/login_pro")
 	public String login_pro(UserBean userBean) {
@@ -70,30 +70,57 @@ public class UserController {
 		}
 	}
 
-	// Ï†ïÎ≥¥ÏàòÏ†ï
+	// ¡§∫∏ºˆ¡§
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifyUserBean") UserBean userBean) {
-		// dbÏóêÏÑú idxÏóê Ìï¥ÎãπÌïòÎäî id,nameÏùÑ Í∞ÄÏ†∏Ïò§Í∏∞
+		// dbø°º≠ idxø° «ÿ¥Á«œ¥¬ id,name¿ª ∞°¡Æø¿±‚
 		userService.getUserInfo(userBean);
-		
+
 		return "/user/modify";
 	}
 
 	@PostMapping("/modify_pro")
-	public String modify_pro(@Valid @ModelAttribute("modifyUserBean") UserBean userBean, BindingResult result) {
-
+	public String modify_pro(@ModelAttribute("modifyUserBean") UserBean userBean, BindingResult result) {
+		userBean.setMidx(loginUserBean.getMidx());
+		userService.getPwInfo(userBean);
 		if (result.hasErrors()) {
-			return "/user/modify";
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError e : list) {
+				System.out.println(e.getDefaultMessage());
+				System.out.println("--");
+			}
+			return "/user/modify_fail";
 		}
 
 		// (update DB)
-		// userService.modifyUserInfo(userBean);
+		userService.modifyUserInfo(userBean);
 		return "/user/modify_success";
 	}
 
 	@GetMapping("/logout")
 	public String logout() {
 		loginUserBean.setUserLogin(false);
-		return "/user/logout"; // Î©îÏù∏ÏúºÎ°ú Í∞ÑÎã§
+		return "/user/logout"; // ∏ﬁ¿Œ¿∏∑Œ ∞£¥Ÿ
 	}
+
+	@GetMapping("/find_id")
+	public String find_id(@ModelAttribute("findidUserBean") UserBean userBean) {
+		return "/user/find_id";
+	}
+
+	@PostMapping("/find_id_pro")
+	public String find_id_pro(@ModelAttribute("findidUserBean") UserBean userBean, BindingResult result) {
+		userService.find_id(userBean);
+		if (result.hasErrors()) {
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError e : list) {
+				System.out.println(e.getDefaultMessage());
+				System.out.println("--");
+			}
+			return "/user/modify_fail";
+		}
+		System.out.println(userBean.getMid());
+		return "/user/modify_success";
+	}
+
 }

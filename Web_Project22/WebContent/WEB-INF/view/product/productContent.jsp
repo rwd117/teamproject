@@ -12,6 +12,7 @@
 </head>
 <body>
 <head>
+
 <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Product Content</title>
@@ -20,13 +21,7 @@
 <script src="../js/4.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-$(document).ready(function(){<!-- 로드되면 기본적으로 list를 불러옴!-->
-		replylist();
-});
-
-
-
+	<script type="text/javascript">
 function addCart(){
 	var addCarturl = "${conPath}cart/cart";
 	var c_m_IDx = ${loginUserBean.midx};
@@ -50,7 +45,7 @@ function addCart(){
 			console.log("지금 오류나는 거임? 설마?");
 		}
 	});
-};
+}
 
 function check(value){
 	var rootpath=${conPath},
@@ -77,8 +72,59 @@ function check(value){
 		}
 		
 	}
-};
+};</script>
+	<script type="text/javascript">
+function WISH(){
+	var WISHurl = "${conPath}wishlist/wish";
+	var c_m_IDx = ${loginUserBean.midx};
+	var c_p_ID = ${productbean.pID};
+	var wAmount= $('#cAmount').val();
+	console.log(WISHurl+'/'+c_m_IDx+'/'+c_p_ID+'/'+wAmount);
+	
+	
+	//유저 고유번호,게시물 고유번호, 수량
+	$.ajax({
+		url : WISHurl+'/'+c_m_IDx+'/'+c_p_ID+'/'+wAmount,
+		type : 'POST',
+		dataType: 'json',
+		success : function(result){
+			
+			check1(result.result);
+			
+						
+		},error : function(result){
+			
+			console.log("지금 오류나는 거임? 설마?");
+		}
+	});
+}
 
+function check1(value){
+	var rootpath=${conPath},
+		subpath="wishlist/wish?",
+		midx="midx="+${loginUserBean.midx};
+		console.log(value);
+	if(value==="wishadd"){
+	
+		if(confirm("WISHLIST로 가시겠습니까?") == true){
+ 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+	}else {
+		
+		if(confirm("이미 WISHLIST에 있는 상품입니다.  WISHLIST로 가시겠습니까?") == true){
+	 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+		
+	}
+};
 function replybutton(a){
 	var re_rid = a;//게시물 번호
 	var re_mIDx = ${loginUserBean.midx} ;
@@ -235,16 +281,23 @@ function replyupdateok(re_ID){
 </script>
 
 
-	<c:if test="${not empty cartMsg }">
+
+
+
+	<c:if test="${not empty CartMsg }">
 		<script>
-		alert('${cartMsg }');
+		alert('${CartMsg }');
 	</script>
 	</c:if>
-	<c:if test="${not empty wishListMsg }">
+	<c:if test="${not empty WISHMsg }">
 		<script>
-		alert('${wishListMsg }');
+		alert('${WISHMsg }');
 	</script>
+	
+	
 	</c:if>
+	
+	
 	<c:import url="/WEB-INF/view/include/top_menu.jsp" />
 	<div id="productContent_wrap">
 		<div id="top">
@@ -262,9 +315,12 @@ function replyupdateok(re_ID){
 				</div>
 
 				<div id="productPrice">
-					<form action="${conPath }/cartInsert.do" method="get">
-						<input type="hidden" id="pId" name="pId" value="${dto.pId }">
-						<input type="hidden" id="mId" name="mId" value="${member.mId }">
+						<form name="readform" method="post">
+						<input type="hidden" id="pID" name="pID" value="${pID}">
+						<input type="hidden" id="page" name="page" value="${scri.page}">
+						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+						</form>
 						<!-- 세션 값 받아옴 -->
 
 
@@ -290,6 +346,7 @@ function replyupdateok(re_ID){
 										<option value='3'>3</option>
 										<option value='4'>4</option>
 										<option value='5'>5</option>
+										<option value='직접입력'>직접입력</option>
 								</select> 개</td>
 							</tr>
 							<tr>
@@ -301,14 +358,14 @@ function replyupdateok(re_ID){
 													onClick="addCart();">
 												<input type="button" value="go to Cart" class="btn"
 													onclick="location.href='${conPath }cart/cart?midx=${loginUserBean.midx}'">
-												<input type="button" class="heartbtn"
-													onclick="location.href='${conPath}/wishListInsert.do?pId=${dto.pId}&mId=${member.mId}'">
+													
+												
+												<input type="button" class="heartbtn"  onclick="WISH();">
+													
 											</c:if>
 											<c:if test="${loginUserBean.mlevel > 0 }">
-												<input type="button" value="상품 정보 수정" class="guestBtn"
-													onclick="location.href='${conPath}product/productModify?pID=${pID}'">
-												<input type="button" value="상품 삭제" class="guestBtn"
-													onclick="location.href='${conPath}product/productDelete?pID=${pID}'">
+												<input type="button" value="상품 정보 수정" class="guestBtn" id="modifybtn">
+												<input type="button" value="상품 삭제" class="guestBtn" id="deletebtn">
 											</c:if>
 										</c:when>
 										<c:otherwise>
@@ -321,7 +378,6 @@ function replyupdateok(re_ID){
 									</c:choose></td>
 							</tr>
 						</table>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -450,7 +506,25 @@ function replyupdateok(re_ID){
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
-  $( function() {
+  $(function() {
+	  $('#modifybtn').click(function(){
+		var modifyurl = "${conPath}product/productModify?pID=${pID}"+
+						"&page=${scri.page}"+
+						"&perPageNum=${scri.perPageNum}"+
+						"&keyword=${scri.keyword}";		  
+		location.href = modifyurl;
+	  });
+	  
+	  $('#deletebtn').click(function(){
+		 var deleteurl = "${conPath}product/productDelete?pID=${pID}"+
+						  "&page=${scri.page}"+
+						  "&perPageNum=${scri.perPageNum}"+
+						  "&keyword=${scri.keyword}";	
+		 location.href = deleteurl;  
+	  });
+	  
+	  
+	  
     $( "#accordion" ).accordion({
       	collapsible: true
     });  

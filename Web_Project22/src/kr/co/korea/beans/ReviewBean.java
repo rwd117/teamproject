@@ -26,8 +26,22 @@ public class ReviewBean{
 	private int re_rowStart;
 	private int re_rowEnd;
 	
+	private String pro_image1;
+	private String pro_name;
 	
 
+	public String getPro_image1() {
+		return pro_image1;
+	}
+	public void setPro_image1(String pro_image1) {
+		this.pro_image1 = pro_image1;
+	}
+	public String getPro_name() {
+		return pro_name;
+	}
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
+	}
 	public int getRe_rowStart() {
 		return re_rowStart;
 	}

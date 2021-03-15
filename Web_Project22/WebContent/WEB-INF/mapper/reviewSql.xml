@@ -39,10 +39,10 @@ where mem.midx=#{o_mIDx}
 	</if>
 </sql>
 
-<select id="reviewcount" parameterType="Integer" resultType="Integer">
+<select id="reviewcount" parameterType="kr.co.korea.beans.ReviewBean" resultType="Integer">
 select count(r_ID)
 from review
-where r_pID=#{r_pID}
+where 1=1 <include refid="idvarcheck"></include>
 </select>
 
 
@@ -53,6 +53,7 @@ select rev.r_ID as r_ID,
 	   rev.r_CONTENT as r_CONTENT,
 	   rev.r_FILE1 as r_FILE1,
 	   rev.r_FILE2 as r_FILE2,
+	   rev.r_pID as r_pID,
 	   to_char(rev.r_DATE,'YYYY-MM-DD') as r_DATE,
 	   rev.r_mIDx as r_mIDx,
 	   mem.mname as r_mname,
@@ -62,9 +63,22 @@ from (select ROW_NUMBER() over(order by rev.r_ID desc) as RNUM, rev.*
       (select ROW_NUMBER() over(order by mem.midx desc) as mNUM, mem.*
       from member mem )mem
 where (RNUM between #{re_rowStart} and #{re_rowEnd}) and (mNUM between #{re_rowStart} and #{re_rowEnd}) and (rev.r_mIDx=mem.midx)
-	  and (r_pID=#{r_pID})
+	  <include refid="idvarcheck"></include>
 
 </select>
+
+<sql id="idvarcheck">
+
+	<if test="r_mIDx==0">
+		and (r_pID=#{r_pID}) order by r_id desc
+	</if>
+	<if test="r_pID==0">
+		and (r_mIDx=#{r_mIDx})
+	</if>
+</sql>
+
+
+
 
 <select id="reviewgetinfo" parameterType="Integer" resultType="kr.co.korea.beans.ReviewBean">
 

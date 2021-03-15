@@ -54,6 +54,7 @@ public class QtableService {
 		
 		return file_name;
 	}
+	//리스트 통째로
 	public List<QtableBean> getNoticeList(){
 		return qtableDao.getNoticeList();
 	}
@@ -63,22 +64,19 @@ public class QtableService {
 	}
 	
 	
-	public void editNoticeInfo(QtableBean qtableBean) {
+	public QtableBean getEditNoticeInfo(int q_idx) {
 		
-		qtableDao.editNoticeInfo(qtableBean);//DB에 insert동작
+		return qtableDao.getEditNoticeInfo(q_idx);//DB에 insert동작
 		
 	}
 	
-	public void getEditNoticeInfo(QtableBean qtableBean) {
-		QtableBean serviceEditBean= qtableDao.getEditNoticeInfo(qtableBean.getQ_idx());
-		qtableBean.setQ_idx(serviceEditBean.getQ_idx());
-		qtableBean.setQ_content(serviceEditBean.getQ_content());
-		qtableBean.setQ_name(serviceEditBean.getQ_name());
-		qtableBean.setQ_date(serviceEditBean.getQ_date());
-		qtableBean.setQ_hit(serviceEditBean.getQ_hit());
-		qtableBean.setQ_file(serviceEditBean.getQ_file());
-		qtableBean.setQ_pwd(serviceEditBean.getQ_pwd());
-		qtableBean.setQ_title(serviceEditBean.getQ_title());
+	public void editNoticeInfo(QtableBean qtableBean) {
+		MultipartFile upload_file =qtableBean.getUpload_file();
+		if(upload_file.getSize()>0) {
+			String file_name=saveUploadFile(upload_file);
+			qtableBean.setQ_file(file_name);
+		}
+		qtableDao.editNoticeInfo(qtableBean);
 		
 	}
 	

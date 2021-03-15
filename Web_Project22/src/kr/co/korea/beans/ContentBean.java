@@ -1,24 +1,79 @@
 package kr.co.korea.beans;
 
-import javax.validation.constraints.NotBlank;
+
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class ContentBean {
 
 	private int content_idx;
-	@NotBlank
 	private String content_subject;
-	
-	@NotBlank
 	private String content_text;
-	private MultipartFile upload_file;   //멀티타트파일 자체를 전달
-	private String content_file;         //파일명자체
+	private MultipartFile upload_file;   //硫��떚���듃�뙆�씪 �옄泥대�� �쟾�떖
+	private String content_file;         //�뙆�씪紐낆옄泥�
 	private int content_writer_idx;
 	private int content_board_idx;
 	private String content_date;
-	private String content_write_name;  //로그인한 사람의 이름
+	private String content_write_name;  //濡쒓렇�씤�븳 �궗�엺�쓽 �씠由�
+	private MultipartFile upload_file2;
+	private String pIMAGE1;
+	private String pIMAGE2;
+	public MultipartFile getUpload_file2() {
+		return upload_file2;
+	}
+	public void setUpload_file2(MultipartFile upload_file2) {
+		this.upload_file2 = upload_file2;
+	}
+	public String getpIMAGE1() {
+		return pIMAGE1;
+	}
+	public void setpIMAGE1(String pIMAGE1) {
+		this.pIMAGE1 = pIMAGE1;
+	}
+	public String getpIMAGE2() {
+		return pIMAGE2;
+	}
+	public void setpIMAGE2(String pIMAGE2) {
+		this.pIMAGE2 = pIMAGE2;
+	}
+	private String content_pwd;
+	private int content_hit;
+	private int content_bno;
+	private int content_step;
+	private int content_level;
 	
+
+	public int getContent_level() {
+		return content_level;
+	}
+	public void setContent_level(int content_level) {
+		this.content_level = content_level;
+	}
+	public String getContent_pwd() {
+		return content_pwd;
+	}
+	public void setContent_pwd(String content_pwd) {
+		this.content_pwd = content_pwd;
+	}
+	public int getContent_hit() {
+		return content_hit;
+	}
+	public void setContent_hit(int content_hit) {
+		this.content_hit = content_hit;
+	}
+
+	public int getContent_bno() {
+		return content_bno;
+	}
+	public void setContent_bno(int content_bno) {
+		this.content_bno = content_bno;
+	}
+	public int getContent_step() {
+		return content_step;
+	}
+	public void setContent_step(int content_step) {
+		this.content_step = content_step;
+	}
 	
 	public int getContent_idx() {
 		return content_idx;
@@ -73,6 +128,10 @@ public class ContentBean {
 	}
 	public void setContent_write_name(String content_write_name) {
 		this.content_write_name = content_write_name;
+	}
+	public void setImagecount(int imagecheck) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

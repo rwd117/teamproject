@@ -39,48 +39,47 @@ window.onload = function(){
         </div>
             <div id="contents4">
            
-			<form:form action="${conPate }edit_pro?q_idx=${modifyQtableBean.q_idx}" method="post" modelAttribute="modifyQtableBean" >			
+			<form:form action="${conPate }edit_pro?q_idx=${modifyQtableBean.q_idx}" method="post" modelAttribute="modifyQtableBean" enctype="multipart/form-data">			
        <table border="1" class="table">
        
 	  
                     <th>IMAGE</th>
-                    <td>${modifyQtableBean.q_file }</td>
-                   
+                    <td><img src="${conPath }upload/${editQtableBean.q_file  }" width="20%"/></td>
                 </table>
+                
         <table border="1" class="table">
         
 
         <tr>
                 <th>글번호</th>
-                <td colspan="3">${modifyQtableBean.q_idx }</td>  
+                <td colspan="3">${editQtableBean.q_idx }</td>  
             </tr>
             <tr>
                 <th>제목</th>
-                <td colspan="1"><input type="text" name="q_title" value="${modifyQtableBean.q_title }"></td>   
+                <td colspan="1"><input type="text" name="q_title" value="${editQtableBean.q_title }"></td>   
             </tr>
             <tr>
                 <th>작성자</th>
-               <td><input type="text" name="q_name" value="${modifyQtableBean.q_name }"></td>
+               <td><input type="text" name="q_name" value="${editQtableBean.q_name }"></td>
                 
             </tr>
    
             <tr>
             	<th>등록일</th>
-                <td>${modifyQtableBean.q_date }</td>  
+                <td>${editQtableBean.q_date }</td>  
             </tr>
             <tr>
                 <th>조회수</th>
-                <td>${modifyQtableBean.q_hit } </td> 
+                <td>${editQtableBean.q_hit } </td> 
             </tr>
             <tr class="tr20">              
-                <td colspan="2"><textarea name="q_content" value="${modifyQtableBean.q_content } " id="editor">${modifyQtableBean.q_content }</textarea></td>
+                <td colspan="2"><textarea name="q_content" value="${editQtableBean.q_content } " id="editor">${editQtableBean.q_content }</textarea></td>
             <tr>
                 <th>첨부파일</th>
                 <td colspan="1">               
-               <c:if test="${modifyQtableBean.q_file != null }">
-				<img src="${conPate }upload/${modifyQtableBean.q_file}" width="100%"/>
+               
+				<form:input type='file' path='upload_file' class="form-control" accept="image/*"/>
 				
-				</c:if>
 				</td>	
             </tr>
             <tr>
@@ -92,7 +91,7 @@ window.onload = function(){
         <div class="section3">
              <c:if test="${loginUserBean.mlevel > 0}">
              <input type="submit" value="등록" >
-			 <a href="${conPath }qtable/delete?q_idx=${modifyQtableBean.q_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
+			 <a href="${conPath }qtable/delete?q_idx=${editQtableBean.q_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
 			</c:if>
 			<a href="${conPath }qtable/notice"><img src="../img/btn_list.gif" alt="목록"></a>
             </div>

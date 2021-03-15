@@ -23,9 +23,9 @@ create table MEMBER(
     mamount number(10) default 0
 );
 
-insert into member values(MEMBER_seq.nextval,'ê´€ë¦¬ì','admin','admin','111@gmail.com','ì„œìš¸ ê°•ë‚¨êµ¬','ì–´ë””ì–´ë””','2021-02-22',sysdate,'111-1111-1111','06035',2,0);
-insert into member values(MEMBER_seq.nextval,'ddd','ddd','ddd','111@gmail.com','ì„œìš¸ ê°•ë‚¨êµ¬','ì–´ë””ì–´ë””','2021-02-22',sysdate,'111-1111-1111','06035',0,0);
-insert into member values(MEMBER_seq.nextval,'aaa','aaa','aaa','111@gmail.com','ì„œìš¸ ê°•ë‚¨êµ¬','ì–´ë””ì–´ë””','2021-02-22',sysdate,'111-1111-1111','06035',1,0);
+insert into member values(MEMBER_seq.nextval,'admin','admin','admin','111@gmail.com','¼­¿ï','½ÅÃµµ¿','2021-02-22',sysdate,'111-1111-1111','06035',2,0);
+insert into member values(MEMBER_seq.nextval,'ddd','ddd','ddd','111@gmail.com','´ë±¸','½ÅÃµµ¿','2021-02-22',sysdate,'111-1111-1111','06035',0,0);
+insert into member values(MEMBER_seq.nextval,'aaa','aaa','aaa','111@gmail.com','´ë±¸','½ÅÃµµ¿','2021-02-22',sysdate,'111-1111-1111','06035',1,0);
 
 
 select * from member;

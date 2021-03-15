@@ -22,6 +22,16 @@ public class UserBean {
 	@Size(min=2, max=10)
 	@Pattern(regexp = "[a-zA-Z0-9]*")
 	private String mpw2;
+	@Pattern(regexp = "[a-zA-Z0-9]*")
+	
+	private String mpw3;
+	public String getMpw3() {
+		return mpw3;
+	}
+	public void setMpw3(String mpw3) {
+		this.mpw3 = mpw3;
+	}//비밀번호 확인용
+
 	@Email
 	private String memail;
 

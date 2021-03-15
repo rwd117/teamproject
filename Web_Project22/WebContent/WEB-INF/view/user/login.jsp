@@ -4,6 +4,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var='conPath' value="${pageContext.request.contextPath }/" />
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">

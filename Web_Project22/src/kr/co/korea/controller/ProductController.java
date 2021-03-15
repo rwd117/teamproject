@@ -40,7 +40,9 @@ public class ProductController {
 	private UserBean loginUserBean;
 	
 	@GetMapping("/productContent")
-	public String productContent(int pID,Model model,SearchCriteria scri) {
+	public String productContent(int pID,Model model,@ModelAttribute("scri")SearchCriteria scri) {
+		
+		productService.producthitadd(pID);
 		
 		ProductBean productbean = productService.getproductInfo(pID);
 		
@@ -48,16 +50,16 @@ public class ProductController {
 		reviewbean.setR_pID(pID);
 		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean,scri);
 		
-		
 		ReviewPageMaker pagemaker = new ReviewPageMaker();
 		pagemaker.setCri(scri);
 		pagemaker.setReview(reviewbean);
-		pagemaker.setTotalCount(reviewservice.reviewcount(pID));
+		pagemaker.setTotalCount(reviewservice.reviewcount(reviewbean));
 		
 		model.addAttribute("pID",pID);
 		model.addAttribute("reviewlist",reviewlist);
 		model.addAttribute("productbean",productbean);
 		model.addAttribute("pagemaker",pagemaker);
+		model.addAttribute("scri",scri);
 		
 		return "/product/productContent";
 	}
@@ -65,7 +67,7 @@ public class ProductController {
 	@GetMapping("/productList")
 	public String productList(@RequestParam(value="top_idx",required = false ,defaultValue="0")int top_idx,
 							  @RequestParam(value="sub_idx",required = false, defaultValue= "0")int sub_idx,
-							  SearchCriteria scri,
+							  @ModelAttribute("scri")SearchCriteria scri,
 							  ProductBean productbean,
 							  Model model) {
 		
@@ -82,7 +84,7 @@ public class ProductController {
 		pagemaker.setProduct(productbean);
 		pagemaker.setTotalCount(productService.productcount(productbean));
 		
-		
+		model.addAttribute("scri",scri);
 		model.addAttribute("pagemaker",pagemaker);
 		return "/product/productList";
 	}
@@ -105,8 +107,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/productInsert")
-	public String productInsert(@ModelAttribute("productbean")ProductBean productbean) {
-		
+	public String productInsert(@ModelAttribute("productbean")ProductBean productbean,
+								@ModelAttribute("scri")SearchCriteria scri,
+								Model model) {
+		model.addAttribute("scri",scri);
 		return "/product/productInsert";
 	}
 	
@@ -125,10 +129,13 @@ public class ProductController {
 	
 	
 	@GetMapping("/productModify")
-	public String productModify(int pID,Model model) {
+	public String productModify(int pID,Model model,@ModelAttribute("scri")SearchCriteria scri) {
+		
 		ProductBean productbean = productService.getproductInfo(pID);
+		
 		model.addAttribute("pID",pID);
 		model.addAttribute("productbean",productbean);
+		model.addAttribute("scri",scri);
 		return "/product/productModify";
 	}
 	
@@ -143,10 +150,12 @@ public class ProductController {
 	}
 	
 	@GetMapping("/productDelete")
-	public String productDelete(int pID,Model model) {
+	public String productDelete(int pID,Model model,@ModelAttribute("scri")SearchCriteria scri) {
 		ProductBean productbean = productService.getproductInfo(pID);
+		
 		model.addAttribute("pID",pID);
 		model.addAttribute("productbean",productbean);
+		model.addAttribute("scri",scri);
 		return "/product/productDelete";
 	}
 	

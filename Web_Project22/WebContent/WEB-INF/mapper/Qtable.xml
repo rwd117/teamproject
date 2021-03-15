@@ -30,7 +30,7 @@ values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_file}, #{q_name}, sysdat
 ]]>
 </select>
 
-<select id="getEditNoticeInfo" parameterType="java.lang.Integer" resultType="kr.co.korea.beans.QtableBean">
+<select id="getEditNoticeInfo" parameterType="kr.co.korea.beans.QtableBean" resultType="kr.co.korea.beans.QtableBean">
 <![CDATA[
 	select  q_idx,q_title,q_name,
 	to_char(q_date,'YYYY-MM-DD')as 
@@ -39,7 +39,7 @@ values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_file}, #{q_name}, sysdat
 </select>
 
 
-<update id="editNoticeInfo" parameterType="java.lang.Integer" >
+<update id="editNoticeInfo" parameterType="kr.co.korea.beans.QtableBean" >
 <![CDATA[
 	update q_table
 	set q_title=#{q_title} ,q_name=#{q_name},
@@ -55,8 +55,6 @@ where q_idx=#{q_idx}
 ]]>
 
 </delete>
-
-
 
 </mapper>
 

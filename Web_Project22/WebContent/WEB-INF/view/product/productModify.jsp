@@ -29,6 +29,12 @@ window.onload = function(){
 <c:import url="/WEB-INF/view/include/top_menu.jsp"/>
 
 	<div id="productInsert_wrap">
+		<form name="readform" method="post">
+		<input type="hidden" id="pID" name="pID" value="${pID}">
+		<input type="hidden" id="page" name="page" value="${scri.page}">
+		<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+		<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+		</form>
 		<div id="productInsert">
 			<form action="${conPath}product/productModifyok" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="pID" value="${pID}">

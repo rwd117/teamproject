@@ -29,15 +29,18 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String main(HttpServletRequest request) {
-		System.out.println(request.getServletContext().getRealPath("/"));
-		return "redirect:/main";
-	}
+
+	System.out.println(request.getServletContext().getRealPath("/"));
+
+	return "redirect:/main";
+
+}
 	
 	@GetMapping("main")
 	public String home(Model model) {
 		ArrayList<List<ContentBean>> list=new ArrayList<List<ContentBean>>();
 		for(int i=1;i<=4;i++) {
-			List<ContentBean> temp=mainService.getMainList(i);  //1,2,3,4게시판
+			List<ContentBean> temp=mainService.getMainList(i);  //1,2,3,4寃뚯떆�뙋
 			list.add(temp);
 		}
 		model.addAttribute("list", list);

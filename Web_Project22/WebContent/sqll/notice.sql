@@ -9,7 +9,9 @@ create table q_table(      /* 게시글 테이블 */
 	q_name varchar2(20),
 	q_date date DEFAULT sysdate
 );
-
+update q_table
+	set q_title=8 ,q_name=8,
+	q_content=8,q_file=8.txt where q_idx=9; 
 
 create sequence q_table_seq
 start with 0
@@ -24,3 +26,8 @@ select * from member;
 select * from q_table;
 
  alter table q_table add ( q_pwd varchar(50));
+ 
+ 
+ 
+
+ 

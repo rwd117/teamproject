@@ -88,8 +88,8 @@ window.onload = function(){
         </table>
         <div class="section3">
                <form:button><img src="../img/btn_register.gif" alt="등록"></form:button>
-                 <a href="${conPath }board/delete?board_info_idx=${board_info_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
-            <a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="../img/btn_list.gif" alt="목록"></a>
+                 <a href="${conPath }board/delete?board_info_idx=${ board_info_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
+            <a href="${conPath }board/main?board_info_idx=${ board_info_idx}"><img src="../img/btn_list.gif" alt="목록"></a>
             </div>
             </form:form>     
        </div>

@@ -21,7 +21,7 @@
 <script src="../js/6.js"></script>
 <script language="javascript">
     function moveClose() {
-      opener.location.href="${conPath}product/productContent";
+      opener.location.href="${conPath}product/productContent?pID=${pID}";
       self.close();
     }
     </script>
@@ -32,7 +32,7 @@
         <div id="top">
             <div class="left">
                 <ul>
-                    <li><img src="../img/111.jpg" class="img1"></li>
+                    <li><img src="${conPath }upload/${pIMAGE1 }" class="img1"></li>
                     <li><img src="../img/222.jpg" class="img2"></li>
                     <li><img src="../img/333.jpg" class="img3"></li>
                 </ul>
@@ -43,9 +43,9 @@
         </div>
             <div class="right">
                 <ul>
-                    <li><a href="#">러브레터링니트</a></li>
-                    <li><a href="#">상품명</a></li>
-                    <li><a href="#">판매가</a></li>
+                    <li><a href="#">${pNAME }</a></li>
+                    <li><a href="#">${pNAME }</a></li>
+                    <li><a href="#">${pPRICE }</a></li>
                     <li><a href="#">적립금</a></li>
                     <li><a href="#">쿠폰적용가</a></li>
                     <li><a href="#">색상</a></li>
@@ -55,7 +55,7 @@
                     <input type="button" value="BUY IT NOW">
                     <input type="button" value="CART">
                     <input type="button" value="WISH">
-                    <input type="button" value="상세보기" onclick="moveClose();" />
+                    <input type="button" value="상세보기" onclick="moveClose();'" >
                 </ul>
                 </div>
             </div>

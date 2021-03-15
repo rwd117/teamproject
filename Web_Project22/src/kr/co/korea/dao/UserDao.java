@@ -23,17 +23,26 @@ public class UserDao {
 		return sqltemp.selectOne("user.getUserInfo",midx);
 	}
 	
+	
 	public UserBean getLoginUserInfo(UserBean userBean) {
 		return sqltemp.selectOne("user.getLoginInfo", userBean);
 	}
 	
-	//�젙蹂댁닔�젙
+	//정보수정
 	public void modifyUserInfo(UserBean userBean) {
 		sqltemp.update("user.modifyUserInfo", userBean);
 	}
-	//以묐났�븘�씠�뵒 泥댄겕
+	//회원탈퇴
+		public void memberDelete(UserBean userBean) {
+			sqltemp.delete("user.memberDelete", userBean);
+		}
+	//중복아이디 체크
 	public String checkUserIdExist(String mID) {
 		return sqltemp.selectOne("user.checkUserIdExist",mID);
+	}
+	//아이디찾기
+	public String find_id(UserBean userBean) {
+		return sqltemp.selectOne("user.find_id",userBean);
 	}
 
 }

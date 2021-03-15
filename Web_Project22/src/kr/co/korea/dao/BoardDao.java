@@ -40,5 +40,16 @@ public class BoardDao {
 	public int getContentCnt(int content_board_idx) {
 		return sqltemp.selectOne("board.getContentCnt", content_board_idx);
 	}
-	
+	public void qna_reply_insert(ContentBean contentBean) {
+	  sqltemp.update("board.qna_reply_insert", contentBean);
+	}
+	public void qna_reply_up(ContentBean contentBean) {
+		  sqltemp.update("board.qna_reply_up", contentBean);
+		}
+	public ContentBean qnareplymax(ContentBean contentBean) {
+		return sqltemp.selectOne("board.qnareplymax", contentBean);
+	}
+	public void qna_reply_delete(int content_bno) {
+		sqltemp.delete("board.qna_reply_delete", content_bno);
+	}
 }

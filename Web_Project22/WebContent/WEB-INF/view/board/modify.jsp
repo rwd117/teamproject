@@ -39,17 +39,17 @@ window.onload = function(){
 	<div id="contents4">
 
 		<form:form action="${conPath }board/modify_pro" method="post" modelAttribute="modifyContentBean" enctype=" multipart/form-data">
-
+<form:hidden path="content_idx"/>
+							<form:hidden path="content_board_idx"/>
 			<input type="hidden" name="page" value="${page }" />
 			<table border="1" class="table">
 				<th>IMAGE</th>
 				<td><c:if test="${modifyContentBean.content_file != null }">
 						<img src="${conPath }upload/${modifyContentBean.content_file}"
-							width="100%" />
+							width="20%" />
 						<input type="hidden" value="${content_file}" />
 						<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->
 					</c:if>
-					<input type="file" value="${upload_file }" class="form-control" accept="image/*"/>
 					</td>
 			</table>
 			<table border="1" class="table">
@@ -81,12 +81,8 @@ window.onload = function(){
 					<td colspan="2"><form:textarea path="content_text" style="resize:none" id="editor"></form:textarea></td>
 				<tr>
 					<th>첨부파일</th>
-					<td colspan="1"><c:if test="${modifyContentBean.content_file != null }">
-								<img src="${conPath }upload/${modifyContentBean.content_file}" width="100%"/>
-								<input type="hidden" value="${modifyContentBean.content_file}" />
-								<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->  
-							</c:if>
-						<input type="file" value="${upload_file }" class="form-control" accept="image/*"/>
+					<td colspan="1">
+						<input type="file" value="${upload_file}" class="form-control" accept="image/*"/>
 					</td>
 				</tr>
 				<tr>
@@ -97,7 +93,7 @@ window.onload = function(){
 			</table>
 			<div class="section3">
 				<c:if test="${modifyContentBean.content_writer_idx == loginUserBean.midx}">
-					<input type="submit"><img src="../img/btn_modify.gif" alt="수정">
+					<form:button><img src="../img/btn_modify.gif" alt="수정"></form:button>
 					<a href="${conPath }board/delete?board_info_idx=${board_info_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
 				</c:if>
 				<a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="../img/btn_list.gif" alt="목록"></a>

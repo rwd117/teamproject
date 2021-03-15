@@ -28,11 +28,11 @@ $(function(){
         $('right-sidebar').toggleClass('open');
         if($('right-sidebar').hasClass('open')){
             $('right-sidebar').stop().animate({right:0},500,'easeInQuad');
-            $('.up1').find('img').attr({'src':'../img/up1.png'});
+            $('.up1').find('img').attr({'src':'img/up1.png'});
         }
         else{
             $('right-sidebar').stop().animate({right:'-100px'},500);
-            $('.up1').find('img').attr({'src':'../img/up1.png'});
+            $('.up1').find('img').attr({'src':'img/up1.png'});
 }
         
     });

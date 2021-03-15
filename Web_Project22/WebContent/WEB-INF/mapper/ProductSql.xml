@@ -111,5 +111,13 @@ where pID=#{pID}
 		<include refid="check"></include>
 	
 	</update>
+	
+	<update id="producthitadd" parameterType="Integer">
+		<![CDATA[
+		update product
+		set phit=phit+1
+		where pID=#{pID}
+		]]>
+	</update>
 
 </mapper>

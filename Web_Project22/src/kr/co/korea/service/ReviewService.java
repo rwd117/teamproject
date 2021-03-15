@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.korea.beans.ProductBean;
 import kr.co.korea.beans.ReviewBean;
 import kr.co.korea.beans.SearchCriteria;
+import kr.co.korea.dao.ProductDao;
 import kr.co.korea.dao.ReviewDao;
 
 @Service
@@ -19,6 +21,9 @@ public class ReviewService {
 
 	@Autowired
 	private ReviewDao reviewdao;
+	
+	@Autowired
+	private ProductDao productdao;
 
 	public ReviewBean reviewmeminfo(int o_mIDx) {
 		return reviewdao.reviewmeminfo(o_mIDx);
@@ -122,6 +127,19 @@ public class ReviewService {
 		reviewbean.setRe_rowStart(scri.getRowStart());
 		reviewbean.setRe_rowEnd(scri.getRowEnd());
 		
+		if(reviewbean.getR_mIDx() != 0) {
+			
+			List<ReviewBean> reviewlist = reviewdao.reviewList(reviewbean);
+			for(ReviewBean i : reviewlist) {
+				int pID = i.getR_pID();
+				ProductBean productbean = productdao.getproductInfo(pID);
+				i.setPro_image1(productbean.getpIMAGE1());
+				i.setPro_name(productbean.getpNAME());
+				
+			}
+			return reviewlist;
+		}
+		
 		return reviewdao.reviewList(reviewbean);
 	}
 
@@ -180,7 +198,7 @@ public class ReviewService {
 		reviewdao.reviewdelete(reviewbean);
 	}
 
-	public int reviewcount(int r_pID) {
-		return reviewdao.reviewcount(r_pID);
+	public int reviewcount(ReviewBean reviewbean) {
+		return reviewdao.reviewcount(reviewbean);
 	}
 }
