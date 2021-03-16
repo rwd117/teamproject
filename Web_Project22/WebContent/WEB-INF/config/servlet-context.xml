@@ -69,7 +69,9 @@ id="multipartResolver">
 <beans:bean class="org.mybatis.spring.SqlSessionTemplate" >
 	<beans:constructor-arg index="0" ref="sqlSession"></beans:constructor-arg>
 </beans:bean>
+
 <!-- 인터셉터 -->
+
 <interceptors>
 	<interceptor>
 		<mapping path="/**"/>

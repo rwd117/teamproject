@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,9 +22,8 @@ import kr.co.korea.service.UserService;
 
 @Controller
 @RequestMapping("/user")
-
 public class UserController {
-
+	
 	@Autowired
 	@Lazy
 	private UserService userService;
@@ -32,7 +31,12 @@ public class UserController {
 	@Resource(name = "loginUserBean")
 	@Lazy
 	private UserBean loginUserBean;
-
+	
+	@Autowired
+	@Lazy
+	private BCryptPasswordEncoder pwdEncoder;
+	
+	
 	@GetMapping("/join")
 	public String join(@ModelAttribute("joinUserBean") UserBean userBean) {
 		return "/user/join";
@@ -40,6 +44,11 @@ public class UserController {
 
 	@PostMapping("/join_pro")
 	public String join_pro(@ModelAttribute("joinUserBean") UserBean userBean, BindingResult result) {
+		String pwd = userBean.getMpw();
+		String enpwd = pwdEncoder.encode(pwd);
+		
+		userBean.setMpw(enpwd);
+		
 		userService.addUserInfo(userBean);// DB
 		return "/user/join_success";
 	}
@@ -47,8 +56,8 @@ public class UserController {
 	@GetMapping("/login")
 	public String login(@ModelAttribute("afterUserBean") UserBean userBean,
 			@RequestParam(value = "logcheck", defaultValue = "false") boolean logcheck, Model model) {
+		
 		model.addAttribute("logcheck", logcheck);
-		System.out.println("loginÀÇ logcheck=" + logcheck);
 		return "/user/login";
 	}
 
@@ -59,21 +68,29 @@ public class UserController {
 
 	@PostMapping("/login_pro")
 	public String login_pro(UserBean userBean) {
-
-		userService.getLoginUserInfo(userBean);
-		if (loginUserBean.isUserLogin() == true) {
-			System.out.println(loginUserBean.isUserLogin());
+		
+		userService.getLoginUserInfo(userBean);//serviceì—ì„œ í•´ì•¼í•¨.
+		
+		String id = userBean.getMid();
+		UserBean login = userService.tempid(id);
+		boolean pwdMatch = false;
+		
+		if(userBean != null) {
+			pwdMatch = pwdEncoder.matches(userBean.getMpw(),login.getMpw());
+		}
+				
+		if (loginUserBean.isUserLogin() == true && pwdMatch == true) {
+			
 			return "/user/login_success";
 		} else {
-			System.out.println(loginUserBean.isUserLogin());
 			return "/user/login_fail";
 		}
 	}
 
-	// Á¤º¸¼öÁ¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifyUserBean") UserBean userBean) {
-		// db¿¡¼­ idx¿¡ ÇØ´çÇÏ´Â id,nameÀ» °¡Á®¿À±â
+		// dbï¿½ï¿½ï¿½ï¿½ idxï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ id,nameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		userService.getUserInfo(userBean);
 
 		return "/user/modify";
@@ -100,7 +117,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout() {
 		loginUserBean.setUserLogin(false);
-		return "/user/logout"; // ¸ŞÀÎÀ¸·Î °£´Ù
+		return "/user/logout"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
 	@GetMapping("/find_id")

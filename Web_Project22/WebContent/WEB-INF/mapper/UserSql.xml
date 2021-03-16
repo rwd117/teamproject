@@ -15,7 +15,7 @@
 <![CDATA[
 	select midx, mname,mid,mlevel
 	from MEMBER 
-	where mid=#{mid} and mpw=#{mpw}
+	where mid=#{mid}
 ]]>
 </select>
 
@@ -57,6 +57,13 @@
   where mname=#{mname}
   AND memail=#{memail}
 ]]>
+</select>
+
+<!-- 임시 -->
+<select id="tempid" parameterType="String" resultType="kr.co.korea.beans.UserBean">
+select *
+from member
+where mid=#{mid}
 </select>
 
 </mapper>

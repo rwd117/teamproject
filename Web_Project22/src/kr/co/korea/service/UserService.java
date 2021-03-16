@@ -26,7 +26,7 @@ public class UserService {
 		UserBean serviceBean = userDao.getUserInfo(loginUserBean.getMidx());
 		userBean.setMname(serviceBean.getMname());
 		userBean.setMid(serviceBean.getMid());
-		userBean.setMpw(serviceBean.getMpw()); //Ãß°¡
+		userBean.setMpw(serviceBean.getMpw()); //ï¿½ß°ï¿½
 		userBean.setMemail(serviceBean.getMemail());
 		userBean.setMaddress(serviceBean.getMaddress());
 		userBean.setMaddress2(serviceBean.getMaddress2());
@@ -38,7 +38,7 @@ public class UserService {
 	
 	public UserBean idxgetUserIno(int midx){
 		return userDao.getUserInfo(midx);
-	}//ÁÖ¹®¿¡¼­ ¾²ÀÏ À¯Àú Á¤º¸
+	}//ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	
 	public void getLoginUserInfo(UserBean userBean) {
@@ -52,23 +52,28 @@ public class UserService {
 			loginUserBean.setMlevel(serviceBean.getMlevel());
 		}
 	}
-	//Á¤º¸¼öÁ¤
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void modifyUserInfo(UserBean userBean) {
 			userDao.modifyUserInfo(userBean);
 		}
 		
-	//È¸¿øÅ»Åð
+	//È¸ï¿½ï¿½Å»ï¿½ï¿½
 		public void memberDelete(UserBean userBean) {
 			userDao.memberDelete(userBean);
 		}
-	//ºñ¹Ð¹øÈ£Á¤º¸
+	//ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ï¿½ï¿½
 		public void getPwInfo(UserBean userBean){
 			UserBean serviceBean = userDao.getUserInfo(loginUserBean.getMidx());
 			userBean.setMpw(serviceBean.getMpw());
 			
 		}
-	//¾ÆÀÌµðÃ£±â
+	//ï¿½ï¿½ï¿½Ìµï¿½Ã£ï¿½ï¿½
 		public void find_id(UserBean userBean){
 			userDao.find_id(userBean);
 		}
+
+		public UserBean tempid(String mid) {
+			return userDao.tempid(mid);
+		}
+
 }

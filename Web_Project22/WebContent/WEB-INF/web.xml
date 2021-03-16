@@ -16,7 +16,9 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-        	<param-value>/WEB-INF/config/servlet-context.xml</param-value>
+        	<param-value>
+        		/WEB-INF/config/servlet-context.xml
+        	</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 			<!-- 멀티파티 크기 지정 -->
@@ -30,7 +32,10 @@
 	<!-- 3) 프로젝트 수행시 사용할 Bean들을 정의해두는 파일은 root-context.xml로 지정-->
 	<context-param>
     	<param-name>contextConfigLocation</param-name>
-    	<param-value>/WEB-INF/config/root-context.xml</param-value>
+    	<param-value>
+    	/WEB-INF/config/root-context.xml
+    	/WEB-INF/config/security-context.xml
+    	</param-value>
 	</context-param>
 
 	<!-- 4) listener클래스는 2),3) 동작이 자동으로 로딩된다 -->
@@ -74,6 +79,7 @@
 		<filter-name>springMultipartFiler</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 	
   </web-app>
 

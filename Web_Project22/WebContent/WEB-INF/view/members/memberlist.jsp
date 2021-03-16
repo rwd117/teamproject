@@ -20,6 +20,8 @@ $(document).ready(function(){
 </head>
 <body>
 <c:import url="/WEB-INF/view/include/top_menu.jsp"/>
+
+
 	<div id="memberList_wrap">
 		<div id="memberList">
 			<div class="subject">
@@ -55,6 +57,7 @@ $(document).ready(function(){
 						*
 					</td>
 				</tr>
+
 				<c:if test="${memberList.size() eq 0 }">
 				<tr>
 					<td colspan="8">
@@ -62,6 +65,7 @@ $(document).ready(function(){
 					</td>
 				</tr>
 				</c:if>
+
 				<c:if test="${memberList.size() != 0 }">
 					<c:forEach items="${memberList }" var="dto">
 						<tr>
@@ -93,6 +97,9 @@ $(document).ready(function(){
 					</c:forEach>
 				</c:if>
 			</table>
+			
+			
+			
 			<div class="paging">
 					<c:if test="${startPage > BLOCKSIZE }">
 						<a href="${conPath }/memberList.do?pageNum=${startPage-1}"> 〈  &nbsp; </a>

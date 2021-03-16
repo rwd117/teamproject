@@ -44,5 +44,9 @@ public class UserDao {
 	public String find_id(UserBean userBean) {
 		return sqltemp.selectOne("user.find_id",userBean);
 	}
+	
+	public UserBean tempid(String mid) {
+		return sqltemp.selectOne("user.tempid",mid);
+	}
 
 }
