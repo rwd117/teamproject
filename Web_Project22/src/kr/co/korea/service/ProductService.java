@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -127,7 +129,13 @@ public class ProductService {
 		
 		return productdao.getproductInfolist(productbean);
 	}
-
+	
+	@Transactional(isolation = Isolation.READ_COMMITTED)
+	public ProductBean productread(int pID) {
+		productdao.producthitadd(pID);
+		return productdao.getproductInfo(pID);
+	}
+	
 	public ProductBean getproductInfo(int pID) {
 		return productdao.getproductInfo(pID);
 	}
@@ -138,10 +146,6 @@ public class ProductService {
 	
 	public int productcount(ProductBean productbean) {
 		return productdao.productcount(productbean);
-	}
-	
-	public void producthitadd(int pID) {
-		productdao.producthitadd(pID);
 	}
 	
 }

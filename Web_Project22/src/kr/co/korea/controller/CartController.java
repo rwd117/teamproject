@@ -1,13 +1,7 @@
 package kr.co.korea.controller;
 
-
-
-
-
-import java.awt.List;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -43,52 +37,42 @@ public class CartController {
 	@Lazy
 	private WishService wishService;
 	
+	
 	@Autowired
 	@Lazy
 	UserService userservice;
 	
-	@GetMapping("/cart")
-	public String cart(Model model) {
-		
 
+	@GetMapping("/cart")
+	public String cartwrite(CartBean cartBean) {
+		return "/cart/cart";
+	}
+	@PostMapping("/cartwrite")
+	public String cartwrite(CartBean cartBean,
+		@RequestParam(value="cha[]") List<String> Checklist,
+		Model model) {
+		
+		for(int i=0;i<Checklist.size();i++) {
+			System.out.println("ìœ„ì‹œë¦¬ìŠ¤íŠ¸ : "+Checklist.get(i));
+		}
+		int wid=0;
+		int midx = loginUserBean.getMidx();
+		for(String i : Checklist) {
+			wid = Integer.parseInt(i);
+			WishBean wish = wishService.wishinfobyid(wid);
+			CartBean cart = new CartBean();
+			cart.setC_m_IDx(midx);
+			cart.setC_p_ID(wish.getW_pID());
+			cart.setcAmount(1);
+			cartservice.cartinsert(cart);
+			wishService.wishdelete(wid);
+		}
+		
 		return "/cart/cart";
 	}
 	
-	@PostMapping("/cartwrite")
-	public String cartwrite(CartBean cartBean,
-			@RequestParam(value="cha[]") java.util.List<String> Checklist,
-			@RequestParam(value="allsumprice") int sumprice,
-			@RequestParam(value="postcost") int postcost,
-			@RequestParam(value="allsum") int allsum,
-			Model model) {
-		
-			java.util.List<WishBean> wishlist =new ArrayList<WishBean>();
 	
-			int Wishid=0;
-			for(String i : Checklist) {
-			Wishid = Integer.parseInt(i);
-			wishlist.add(wishService.idxwishgetinfo(Wishid));
-	}
-	 	UserBean userbean = new UserBean();
-	 	userservice.getUserInfo(userbean);
-	 	
-	 	Map<String,Object> pricemap = new LinkedHashMap<String,Object>();
-		pricemap.put("sumprice",sumprice);
-		pricemap.put("postcost",postcost);
-		pricemap.put("allsum",allsum);
-		//°áÁ¦ ±Ý¾× ÀüºÎ °¡Á®¿Í¼­ map¿¡ ´ã±â
-	
-		model.addAttribute("Checklist",Checklist);
-		model.addAttribute("userbean",userbean);
-		model.addAttribute("wishlist",wishlist);
-		model.addAttribute("pricemap",pricemap);
-		
-		
-		return "rediect:/cart/cart";
-	}
-		
-	}
-	
+}
 
 	
 	

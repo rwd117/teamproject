@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>프로젝트</title>
 <link href="../css/top_main.css" rel="stylesheet">
@@ -109,9 +109,8 @@
 					<img src="../img/menu11.png" alt="menu-icon">
 				</button>
 				<!-- 검색창  -->
-				<li class="sideMenu3">
-					<input type="text" name="keyword" id="keyword" value="${scri.keyword}" title="검색" autocomplete="off">
-					<button class="btn2" value="검색" id="Search">
+				<li class="sideMenu3"><input type="text" title="검색">
+					<button class="btn2" type="submit" value="검색">
 						<img src="../img/search.png" alt="menu-icon">
 					</button></li>
 
@@ -138,20 +137,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</header>
 
-	
-	<script type="text/javascript">
-$(function() {
-	$('#Search').click(function() {
-		var url = "${conPath}";
-		url +='product'+'/'+'productList';
-		url +="?keyword=" + $("#keyword").val();
-		location.href = url;
-	});
-});
-</script>
-	
+	</header>
+	</div>
 </body>
 </html>

@@ -13,18 +13,33 @@
 
 <select id="wishcheck" parameterType="kr.co.korea.beans.WishBean" resultType="Integer">
 <![CDATA[
-   select count(wID) 
+   select count(*) 
    from WISH 
    where w_pID=#{w_pID} and w_mIDx=#{w_mIDx}
 ]]>
 </select>
-
-<delete id="wishcancle" parameterType="kr.co.korea.beans.WishBean">
+<update id="wishamountchange" parameterType="kr.co.korea.beans.CartBean">
+		update WISH
+		set wAmount=#{wAmount}
+		where w_pID=#{w_pID} and w_mIDx=#{w_mIDx} 
+	</update>
+<delete id="wishdelete" parameterType="Integer">
    <![CDATA[
    delete from WISH
-   where  w_pID=#{w_pID} and w_mIDx=#{w_mIDx}
+   where  wID=#{wID}
 ]]>
 </delete>
+<update id="wishamountadd" parameterType="kr.co.korea.beans.WishBean">
+		<![CDATA[
+		update WISH
+		set wAmount=wAmount+1 
+		where w_mIDx=#{w_mIDx} and w_pID=#{w_pID}
+		]]>
+		
+	</update>
+
+
+
 <select id="wishgetinfo" resultType="kr.co.korea.beans.WishBean" parameterType="Integer">
       <![CDATA[
       select wis.wID as wID,
@@ -48,10 +63,16 @@
        		   pro.pprice as w_pPRICE,
        		   pro.pdiscount as w_pdiscount,
        		   pro.pSTOCK as w_pSTOCK
-		from wishlist wis, product pro
+		from wish wis, product pro
 		where wis.w_pID=pro.pid and wis.wID=#{wID}
 		order by wis.wID asc
 		]]>
 	</select>
+
+<select id="wishinfobyid" parameterType="Integer" resultType="kr.co.korea.beans.WishBean">
+select w_midx,w_pid
+from wish
+where wid=#{wid}
+</select>
 
 </mapper>

@@ -49,7 +49,14 @@ public class UserBean {
 	private int mamount;
 	private boolean userLogin;
 	private boolean userIdExist;
+	private int mdrop;
 	
+	public int getMdrop() {
+		return mdrop;
+	}
+	public void setMdrop(int mdrop) {
+		this.mdrop = mdrop;
+	}
 	public UserBean() {
 		this.userLogin=false;
 		this.userIdExist=false;

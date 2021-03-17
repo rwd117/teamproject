@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -82,31 +83,35 @@ $.ajax({
 		wishitem +='<td><img src="'+rootpath+'upload/'+this.w_pIMAGE1+'"width="100px" height="100px" alt="상품사진1"></td>';
 		wishitem +='<td>'+this.w_pNAME+'</td>';
 		wishitem +='<td scope="row">';
-		wishitem +='<input type="hidden" class="jsprice" value="'+price+'">';
+		wishitem +='<input type="hidden" class="jsprice" value="'+price+'">';		
 		wishitem +='<span>'+viewprice+'</span>';
 		wishitem +='</td>';
+		wishitem +='<td>';
+		wishitem +='<input type="number" class="jsamount" value="'+this.wAmount+'"min="1" max="'+this.w_pSTOCK+'"step="1" onchange="wishamountchange('+this.wID+')">';
+		wishitem +='</td>';	
 		wishitem +='<td>';
 		wishitem +='<input type="hidden" class="jspoint" value="'+point+'">';
 		wishitem +='<span>'+viewpoint+'</span>';
 		wishitem +='</td>';		
 		wishitem +='<td>[기본배송]<br/></td>';
 		wishitem +='<td>';
-		wishitem +='<span class="jssumprice">'+viewsumprice+'</span>';
 		wishitem +='<input type="hidden" class"jssumvar" value="'+sumprice+'">';
+		wishitem +='<span class="jssumprice">'+viewsumprice+'</span>';		
 		wishitem +='</td>';			
 		wishitem +='<td>';
 		wishitem +='<input type="button" value="주문하기"><br/>';
 		wishitem +='<input type="button" value="삭제하기" onclick="deletecheck('+this.wID+')">';
 		wishitem +='</td>';
 		wishitem +='</tr>';
+		
 	});
 	
 	payinfo = value_check();
 			 
  }
- 	$("#tr13").html(wishitem);
-
-	
+ 	$("#wishlistdiv").html(wishitem);
+ 	$(".section3").html(payinfo);
+ 
 	}, error : function(result){
 	
 	console.log("에러");
@@ -117,108 +122,21 @@ $.ajax({
 }
 
 
-function cartlist(){
-	var cartlisturl = "${conPath}cart/cartlist";
-	var midx=${loginUserBean.midx};
-	
-	$.ajax({
-		url : cartlisturl+'/'+midx,
-		type : 'POST',
-		dataType : 'json',
-		success : function(result){
-	 		var rootpath = ${conPath}; 
-	 		var cartitem = "";
-	 		var payinfo ="";
-	 		var cost = 0;<!--원래 가격!-->
-	 		var price =0;<!--할인 된 가격!-->
-	 		var point=0;<!--적립금!-->
-	 		var sumprice=0;<!--해당 상품의 price * amount 값!-->
-	 		
-	 		<!--String 사용자에게 보여질 값!-->
-	 		var viewprice="";
-	 		var viewsumprice="";
-	 		var viewpoint="";
-	 		
-	 		if(result.length < 1){
-		 		cartitem = "WISHLIST가 비었습니다.";
-	 		}else{
-		 
-			$(result).each(function(){
-			this.cAmount=1
-			if(this.c_pdiscount==0){<!-- 할인된 값,수량 및 포인트 사전에 정의!-->
-				price = this.c_pPRICE;
-				point = (price*(1/100))*this.cAmount;
-				sumprice = price*this.cAmount;
-				
-				viewprice = moneyunit(price)+'원'; 
-				viewpoint = moneyunit(point)+'point';
-				viewsumprice = moneyunit(sumprice)+'원';
-				
-			}else{
-				price = this.c_pPRICE*(1-(this.c_pdiscount/100));
-				point = (price*(1/100))*this.cAmount;
-				sumprice = price*this.cAmount;
-				
-				viewprice = moneyunit(price)+'원';
-				viewpoint = point = moneyunit(point)+'point';
-				viewsumprice = moneyunit(sumprice)+'원';
-			}
-			
-			cartitem +='<tr class="tr12" id="cID'+this.cID+'">';
-			cartitem +='<td scope="row">';
-			cartitem +='<input type="checkbox" name="checkitem" value="'+this.cID+'" onclick="check(2);"></td>';
-			cartitem +='<td><img src="'+rootpath+'upload/'+this.c_pIMAGE1+'"width="100px" height="100px" alt="상품사진1"></td>';
-			cartitem +='<td>'+this.c_pNAME+'</td>';
-			cartitem +='<td scope="row">';
-			cartitem +='<input type="hidden" class="jsprice" value="'+price+'">';
-			cartitem +='<span>'+viewprice+'</span>';
-			cartitem +='</td>';
-			cartitem +='<td>';
-			cartitem +='<input type="hidden" class="jspoint" value="'+point+'">';
-			cartitem +='<span>'+viewpoint+'</span>';
-			cartitem +='</td>';
-			cartitem +='<td>[기본배송]<br/></td>';					
-			cartitem +='<td>';
-			cartitem +='<input type="hidden" class"jssumvar" value="'+sumprice+'">';
-			cartitem +='<span class="jssumprice">'+viewsumprice+'</span>';
-			cartitem +='</td>';
-			cartitem +='<td>';
-			cartitem +='<input type="button" value="주문하기"><br/>';
-			cartitem +='<input type="button" value="삭제하기" onclick="deletecheck('+this.wID+')">';
-			cartitem +='</td>';
-			cartitem +='</tr>';
-		});
-		
-		payinfo = value_check();
-				 
-	 }
-	 	$("#cartlistdiv").html(cartitem);
-		$(".section3").html(payinfo);
+function wishamountchange(wID){<!--수량 변경시 ajax로 그 수량들을 보냄.!-->
 
-		}, error : function(result){
-		
-		console.log("에러");
-	}
-	
-});
-
-}
-
-function cartamountchange(cID){<!--수량 변경시 ajax로 그 수량들을 보냄.!-->
-
-	var cartamounturl = "${conPath}cart/cartchange";
-	var cidvar = cID;
-	var c_m_IDx = ${loginUserBean.midx};
-	var amountvar = $('#cID'+cidvar+' .jsamount').val();
+	var wishamounturl = "${conPath}wishlist/wishchange";
+	var widvar = wID;
+	var w_mIDx = ${loginUserBean.midx};
+	var amountvar = $('#wID'+widvar+' .jsamount').val();
 
 	$.ajax({
-		url : cartamounturl+'/'+cidvar+'/'+c_m_IDx+'/'+amountvar,
+		url : wishamounturl+'/'+widvar+'/'+w_mIDx+'/'+amountvar,
 		type : 'POST',
 		dataType: 'json',
 		success : function(result){
 		
-			sumcal(cidvar);
-			cartlist();
+			sumcal(widvar);
+			wishlist();
 		
 		}, error : function(result){
 		
@@ -228,12 +146,12 @@ function cartamountchange(cID){<!--수량 변경시 ajax로 그 수량들을 보냄.!-->
 });
 }
 
-function wishcancle(wID){<!--장바구니에서 해당 상품 삭제!-->
-	var wishcancle = "${conPath}wishlist/wishcancle";
+function wishdelete(wID){<!--장바구니에서 해당 상품 삭제!-->
+	var widelete = "${conPath}wishlist/widelete";
 	var widvar= wID;
 
 	$.ajax({
-		url : wishcancle+'/'+widvar,
+		url : widelete+'/'+widvar,
 		type : 'POST',
 		dataType: 'json',
 		success : function(result){
@@ -254,7 +172,7 @@ function wishcancle(wID){<!--장바구니에서 해당 상품 삭제!-->
 function deletecheck(wID){<!--장바구니에서 해당 상품 삭제시 물어보고 확인 누를 시 ajax delete 실행!-->
 	if(confirm("WISHLIST에서 지우시겠습니까? ")== true){
 		var widvar= wID;
-		wishcancle(widvar);
+		wishdelete(widvar);
 	}else {
 		return;
 	}
@@ -276,19 +194,19 @@ function sumArraycal(array){<!--배열을 받아와서 그것을 다 더함.!-->
 	return sumcal;
 }
 
-function sumcal(cID){<!--수량 변경시 수량*가격을 표시!-->
+function sumcal(wID){<!--수량 변경시 수량*가격을 표시!-->
 
- 	var cidvar = cID;
+ 	var widvar = wID;
  
- 	var amountvar = $('#cID'+cidvar+' .jsamount').val();
+ 	var amountvar = $('#wID'+widvar+' .jsamount').val();
  
-	 var price=	$('#cID'+cidvar+' .jsprice').val();
+	 var price=	$('#wID'+widvar+' .jsprice').val();
  
 	 var sumprice = amountvar*price;
  
  	sumprice = moneyunit(sumprice)+'원';
  
- 	$('#cID'+cidvar+' .jssumprice').text(sumprice);
+ 	$('#wID'+widvar+' .jssumprice').text(sumprice);
  
 }
 
@@ -344,10 +262,10 @@ function value_check(){
 	  
 	  for(var i=0; i<checkcount; i++){
 		    if (document.getElementsByName("checkitem")[i].checked == true) {
-                var cidvar = document.getElementsByName("checkitem")[i].value;
-				var price = $('#cID'+cidvar+' .jsprice').val();
-				var amount = $('#cID'+cidvar+' .jsamount').val();
-				var point = $('#cID'+cidvar+' .jspoint').val();
+                var widvar = document.getElementsByName("checkitem")[i].value;
+				var price = $('#wID'+widvar+' .jsprice').val();
+				var amount = $('#wID'+widvar+' .jsamount').val();
+				var point = $('#wID'+widvar+' .jspoint').val();
 				
 				sumpriceArray.push(price*amount);
 				pointArray.push(point*amount);
@@ -391,69 +309,47 @@ function value_check(){
 }
 
 
-function wishcheck(kind){
+function cartcheck(kind){
 	
 	if($("input:checkbox[name='checkitem']:checked").length < 1){
-		
 		alert("상품을 선택해주세요!");
 		return;
-		
 	}else {
-		var allsumprice =$('#allsumprice').val();
-		var postcost=$('#postcost').val();
-		var allsum=$('#allsum').val();
-		
-		
 		if(kind === 1 ){
-		
-			var wishArray = new Array();
-			console.log(wishArray.length);
+			var cartArray = new Array();
+			console.log(cartArray.length);
 			$("input:checkbox[name='checkitem']").each(function(){
-				wishArray.push($(this).val());
-				console.log(wishArray.length);
+				cartArray.push($(this).val());
+				console.log(cartArray.length);
 			});
 		
-			$('#charray').val(wishArray);
-			$('#suballsumprice').val(allsumprice);
-			$('#subpostcost').val(postcost);
-			$('#suballsum').val(allsum);
+			$('#charray').val(cartArray);
 		
 			console.log($('#charray').val());
 		
 			if(confirm("전체상품을 장바구니에 추가하시겠습니까?")==true){
 			
-				$('#wishform').submit();
-			
+				$('#cartform').submit();
 			}else {
 				return;
 			}
-		
-			for(var i=0;i< wishArray.length;i++){<!--배열 확인 용 !-->
-			console.log(wishArray[i]);
+			for(var i=0;i< cartArray.length;i++){<!--배열 확인 용 !-->
+			console.log(cartArray[i]);
 			};
 		
 		}else if(kind === 2){
-			var wishArray = new Array();
-		
+			var cartArray = new Array();
 			$("input:checkbox[name='checkitem']:checked").each(function(){
-				wishArray.push($(this).val());
+				cartArray.push($(this).val());
 			});
-		
-			$('#charray').val(wishArray);
-			$('#suballsumprice').val(allsumprice);
-			$('#subpostcost').val(postcost);
-			$('#suballsum').val(allsum);
-		
+			$('#charray').val(cartArray);
 			if(confirm("선택상품을 장바구니에 추가하시겠습니까?")==true){
-
-				$('#wishform').submit();
-			
+				$('#cartform').submit();
 			}else {
 				return;
 			}
-		
-			for(var i=0;i< wishArray.length;i++){<!--배열 확인 용 !-->
-				console.log(wishArray[i]);
+			for(var i=0;i< cartArray.length;i++){<!--배열 확인 용 !-->
+				console.log(cartArray[i]);
 			};
 		
 		}
@@ -494,15 +390,16 @@ function wishcheck(kind){
              <ul class="section1">
              <div class="tabArea">
                 <ul class="tabList">
-                    <li ><a href="#" class="tabBtn">국내배송상품 (${cAmount})</a>
+                    <li ><a href="#" class="tabBtn">국내배송상품 (${wAmount})</a>
                     <!--  -->
-                    <div class="tabCon notice">
+                    <div class="tabCon notice"  style="overflow:auto">
                         <table class="table table-striped">
                             <thead>
                                 <tr class="tr2">
                                     <th scope="cols"><input class="th1" type="checkbox" id="allcheck" onclick="check(1);"></th>
                                     <th scope="cols">이미지</th>
                                     <th scope="cols">상품정보</th>
+                                    <th scope="cols">수량</th>
                                     <th scope="cols">판매가</th>
                                     <th scope="cols">적립금</th>
                                     <th scope="cols">배송구분</th>
@@ -510,9 +407,9 @@ function wishcheck(kind){
                                     <th scope="cols">선택</th>
                                 </tr>
                             </thead>
-                        <tbody id="tr13">
+                        <tbody id="wishlistdiv">
 						</tbody>
-                                <tr id="cartlistdiv" >
+                                <tr id="tr13" >
                                     <th colspan="10" scope="row">
                                         <p>[일반배송]</p>                    
                                         <a>상품구매금액 + 배송비 = 합계 : 원</a>
@@ -581,15 +478,10 @@ function wishcheck(kind){
 				
 		</div>
         <div class="section4">
-				<form action="${conPath }cart/cartwrite" method="post" id="wishform" autocomplete="off">
+				<form action="${conPath }cart/cartwrite" method="post" id="cartform" autocomplete="off">
 				<input type="hidden" name="cha[]" id="charray" value="">
-				<input type="hidden" id="suballsumprice" name="allsumprice" value="">
-				<input type="hidden" id="subpostcost" name="postcost" value="">
-				<input type="hidden" id="suballsum" name="allsum" value="">
-				   
-				
-				<input type="button" value="전체상품CART" id="allorder" onclick="wishcheck(1)" >
-				<input type="button" value="선택상품CART" id="onepartorder" onclick="wishcheck(2)" >
+				<input type="button" value="전체상품CART" id="allcart" onclick="cartcheck(1)" >
+				<input type="button" value="선택상품CART" id="onepartcart" onclick="cartcheck(2)" >
 				<input type="button" value="쇼핑계속하기" >
 				</form>
 				<br /> <br />

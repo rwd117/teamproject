@@ -1,6 +1,8 @@
 package kr.co.korea.dao;
 
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,19 +36,22 @@ public class UserDao {
 	}
 	//회원탈퇴
 		public void memberDelete(UserBean userBean) {
-			sqltemp.delete("user.memberDelete", userBean);
+			sqltemp.update("user.memberDelete", userBean);
 		}
 	//중복아이디 체크
 	public String checkUserIdExist(String mID) {
 		return sqltemp.selectOne("user.checkUserIdExist",mID);
 	}
 	//아이디찾기
-	public String find_id(UserBean userBean) {
-		return sqltemp.selectOne("user.find_id",userBean);
+	public List<UserBean> find_id(UserBean userBean) {
+		return sqltemp.selectList("user.find_id", userBean);
 	}
-	
-	public UserBean tempid(String mid) {
-		return sqltemp.selectOne("user.tempid",mid);
+	//비밀번호찾기
+	public UserBean find_pwinfo(UserBean userBean) {
+		return sqltemp.selectOne("user.find_pw", userBean);
 	}
-
+	//임시 비밀번호로 변경
+	public void find_pw_update(UserBean userBean) {
+		sqltemp.update("user.find_pw_update", userBean);
+	}
 }

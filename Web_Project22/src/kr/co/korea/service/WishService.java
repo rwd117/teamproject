@@ -17,16 +17,30 @@ public class WishService {
 	public void wishadd(WishBean wishBean) {
 		wishdao.wishadd(wishBean);
 	}
+	
+	public void wishamountadd(WishBean wishBean) {
+		wishdao.wishamountadd(wishBean);
+	}
+	
 	public int wishcheck(WishBean wishBean) {
 		return wishdao.wishcheck(wishBean);
 	}
-	public void wishcancle(WishBean wishBean) {
-		wishdao.wishcancle(wishBean);
+	public void wishdelete(int wID) {
+		wishdao.wishdelete(wID);
 	}
 	public List<WishBean> wishgetinfo(int midx){
 		return wishdao.wishgetinfo(midx);
 	}
 	public WishBean idxwishgetinfo(int midx){
 		return wishdao.idxwishgetinfo(midx);
-	}//주문에서 쓰일 bean
+	}
+	
+	public void wishamountchange(WishBean wishBean) {
+		wishdao.wishamountchange(wishBean);
+	}
+	public WishBean wishinfobyid(int wid) {
+		return wishdao.wishinfobyid(wid);
+	}
+	
+	
 }

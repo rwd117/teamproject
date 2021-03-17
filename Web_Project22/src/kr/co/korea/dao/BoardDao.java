@@ -1,6 +1,7 @@
 package kr.co.korea.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -52,4 +53,36 @@ public class BoardDao {
 	public void qna_reply_delete(int content_bno) {
 		sqltemp.delete("board.qna_reply_delete", content_bno);
 	}
+	public void qna_reply_up(Map<String, Object> map) {
+
+		sqltemp.update("board.qna_reply_up", map);
+
+		}
+
+		// insert/update/delete 등 DB 변경하는 작업 시 결과값은 정수로 나오므로 int 필요
+
+		// 했던 작업수로 작업을 했으면 >0 안했으면 = 0
+
+		public int insertreply(Map<String, Object> map) {
+
+		return sqltemp.insert("board.insertreply", map);
+
+		}
+
+		public int updatereply(int content_idx) {
+
+		return sqltemp.update("board.updatereply", content_idx);
+
+}
+		public List<Map<String,Object>> selectreply() {
+
+		return sqltemp.selectList("board.selectreply");
+
+		}
+
+		public List<Map<String,Object>> selectById() {
+
+		return sqltemp.selectList("board.selectById");
+
+		}	
 }

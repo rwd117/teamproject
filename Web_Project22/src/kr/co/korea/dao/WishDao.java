@@ -20,13 +20,33 @@ public class WishDao {
 	public int wishcheck(WishBean wishBean) {
 		return sqltemp.selectOne("wish.wishcheck", wishBean);
 	}
-	public void wishcancle(WishBean wishBean) {
-		sqltemp.delete("wish.wishcancle", wishBean);
+	
+	
+	public void wishamountadd(WishBean wishBean) {
+		sqltemp.update("wish.wishamountadd",wishBean);
 	}
+	
 	public List<WishBean> wishgetinfo(int midx){
 		return sqltemp.selectList("wish.wishgetinfo",midx);
 	}
+	
+	
 	public WishBean idxwishgetinfo(int midx){
 		return sqltemp.selectOne("wish.idxwishgetinfo",midx);
-	}//주문에서 쓰일 bean
+	}
+	
+	
+	public void wishamountchange(WishBean wishBean) {
+		sqltemp.update("wish.wishamountchange",wishBean);
+	}
+	
+
+	public void wishdelete(int wID) {
+		sqltemp.delete("wish.wishdelete", wID);
+	}
+	
+	public WishBean wishinfobyid(int wid) {
+		return sqltemp.selectOne("wish.wishinfobyid",wid);
+	}
 }
+

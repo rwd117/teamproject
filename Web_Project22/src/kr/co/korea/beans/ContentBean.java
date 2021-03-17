@@ -15,27 +15,8 @@ public class ContentBean {
 	private int content_board_idx;
 	private String content_date;
 	private String content_write_name;  //濡쒓렇�씤�븳 �궗�엺�쓽 �씠由�
-	private MultipartFile upload_file2;
-	private String pIMAGE1;
-	private String pIMAGE2;
-	public MultipartFile getUpload_file2() {
-		return upload_file2;
-	}
-	public void setUpload_file2(MultipartFile upload_file2) {
-		this.upload_file2 = upload_file2;
-	}
-	public String getpIMAGE1() {
-		return pIMAGE1;
-	}
-	public void setpIMAGE1(String pIMAGE1) {
-		this.pIMAGE1 = pIMAGE1;
-	}
-	public String getpIMAGE2() {
-		return pIMAGE2;
-	}
-	public void setpIMAGE2(String pIMAGE2) {
-		this.pIMAGE2 = pIMAGE2;
-	}
+
+	
 	private String content_pwd;
 	private int content_hit;
 	private int content_bno;

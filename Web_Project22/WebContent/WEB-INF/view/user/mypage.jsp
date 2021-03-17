@@ -21,7 +21,9 @@
 <script src="../js/slidescript.js"></script>
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
-
+<script language="javascript">
+        function showPopup() { window.open("${conPath}popup/memberdelete", "veiwimg", "width=500, height=300, left=300, top=800, toolbar=no,scrollbars=no,status=no,location=no"); }
+</script>
 </head>
 
 <body>
@@ -39,17 +41,19 @@
                    <li><a href="${conpath }modify">정보수정</a></li>
                    <li><a href="${conpath }../wishlist/wish">위시리스트</a></li> 
                    <li>
+                   	<form action="${conPath}orders/orderlist" method="get" >
 						<a href="${conpath }../orders/orderlist">주문내역</a>
+					</form>	</li>
             </ul>  
             </div>
             <div class="mypg">
                 <ul>
                 	<c:if test="${loginUserBean.mlevel == 0 }">
-                    <li> <a href="${conpath }../review/reviewlist">리뷰관리</a></li>
+                    <li> <a href="#">리뷰관리</a></li>
                     <li> <a href="#">문의관리 </a></li>
                     </c:if>
                     
-                    <li> <a href="#">회원탈퇴</a></li>
+                    <li> <a href="#" onclick="showPopup();">회원탈퇴</a></li>
             	</ul> 
             </div>
 

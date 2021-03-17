@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +44,11 @@ public class WishRestController {
 		System.out.println(check);
 		if(check ==0) {
 			wishService.wishadd(wishBean);
-			map.put("result", "wishadd");
+			map.put("result", "insertsuccess");
 			
-		}else if(check > 1) {
-			wishService.wishcancle(wishBean);
-			map.put("result", "wishcancle");
+		}else if(check == 1) {
+			wishService.wishamountadd(wishBean);
+			map.put("result", "updatesuccess");
 			}
 			
 	}
@@ -58,20 +59,44 @@ public class WishRestController {
 		}
 		return map;
 	}
-	@PostMapping("/wishlist/{midx}")//·Îµå ‰çÀ» ½Ã list¸¦ ºÒ·¯³¿.
-	public List<WishBean> wishlist (@PathVariable int midx) {
+	@PostMapping("/wishlist/{midx}")//ë¡œë“œ ë¬ì„ ì‹œ listë¥¼ ë¶ˆëŸ¬ëƒ„.
+	public List<WishBean> wishlist (@PathVariable int midx, Model model) {
 		List<WishBean> wishlist = wishService.wishgetinfo(midx);
 		
 		return wishlist;
 		
 	}
-	
-	@PostMapping("/wishcancle/wID}")//±»ÀÌ hashmapÀ¸·Î ÇØ¾ßÇÒ±î? 
-	public Map<String, Object> wishcancle(@PathVariable int wID) {
+	@PostMapping("/wishchange/{wID}/{w_mIDx}/{wAmount}")//cartï¿½ë¿‰ï¿½ê½Œ ï¿½ë‹”ï¿½ì›¾ è¹‚ï¿½ï¿½ì†•ï¿½ë»½ï¿½ì“£ï¿½ë–†.
+	public Map<String, Object> amountchange(@PathVariable int wID, 
+											@PathVariable int w_mIDx,
+											@PathVariable int wAmount) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		WishBean wishBean = new WishBean();
-		wishBean.setwID(wID);
-		wishService.wishcancle(wishBean);
+
+		try {
+			WishBean wishBean = new WishBean();
+			wishBean.setwID(wID);
+			wishBean.setW_mIDx(w_mIDx);
+			wishBean.setwAmount(wAmount);
+			
+			wishService.wishamountchange(wishBean);
+			
+			map.put("result", "change");
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("result", "fail");
+		}
+
+		return map;
+	}
+	
+	@PostMapping("/widelete/{wID}")//êµ³ì´ hashmapìœ¼ë¡œ í•´ì•¼í• ê¹Œ? 
+	public Map<String, Object> widelete(@PathVariable int wID) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		wishService.wishdelete(wID);
 		
 		
 		map.put("result", "delete");

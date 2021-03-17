@@ -22,7 +22,7 @@
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
 <script src="../ckeditor/ckeditor.js"></script>
-<script>
+<script type="text/javascript">
 window.onload = function(){
    ck = CKEDITOR.replace("editor");
 };
@@ -31,26 +31,23 @@ window.onload = function(){
 
 <c:import url="/WEB-INF/view/include/top_menu.jsp" />
 
+
 <!-- 중간에 컨텐츠부분 -->
 <div id="contents2">
 	<div id="contents3">
 		<input type="button" value="Q & A">
 	</div>
 	<div id="contents4">
-	<% 
-String temp ="\r\n\n----------------------------------------------\r\n\n";
-		temp+="[re]\r\n";%>
-		<form:form action="${conPath }board/reply_pro" method="post" modelAttribute="replyContentBean" enctype=" multipart/form-data">
-			<input type="hidden" name="content_level" value="${replyContentBean.content_level}" />
-				<input type="hidden" name="content_step" value="${replyContentBean.content_step}" />
-				<input type="hidden" name="content_bno" value="${replyContentBean.content_bno}" />
+
+		<form:form action="${conPath }board/reply_pro" method="post"  enctype="multipart/form-data" onsubmit="return check();">
+			
 				<input type="hidden" name="board_info_idx" value="${board_info_idx }" />
 					<input type="hidden" name="page" value="${page }" />
 			<table border="1" class="table">
 				<th>IMAGE</th>
-				<td><c:if test="${replyContentBean.content_file != null }">
-						<img src="${conPath }upload/${replyContentBean.content_file}"
-							width="20%" />
+				<td><c:if test="${content_file != null }">
+						<img src="${conPath }upload/${content_file }" width="100%"/>			
+							width="15%" />
 						<input type="hidden" value="${content_file}" />
 						<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->
 					</c:if>
@@ -65,34 +62,43 @@ String temp ="\r\n\n----------------------------------------------\r\n\n";
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td colspan="1"><input type="text" value="[re]:${replyContentBean.content_subject }" /></td>
+					<td colspan="1">${board.content_subject }</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" value="${replyContentBean.content_write_name}"  /></td>
+					<td>${content_write_name }</td>
 
 				</tr>
 
 				<tr>
 					<th>등록일</th>
-					<td>${replyContentBean.content_date }</td>
+					<td>${content__date }</td>
 				</tr>
 				<tr>
 					<th>조회수</th>
-					<td></td>
+					<td>${content_hit }</td>
 				</tr>
 				<tr class="tr20">
-					<td colspan="2"><form:textarea path="content_text" style="resize:none" id="editor"></form:textarea></td>
+					<td colspan="2"><input type="text" name="content_text" value="${content_text }" id="editor"></td>
 				
 				<tr>
+				<tr>
+					<th>첨부파일</th>
+					<td colspan="1"><input type="file" name="content_file" value="${upload_file }" >
+						
+					</td>
+				</tr>
 					<th>비밀번호</th>
 					<td colspan="1"><input type="password" name="mpw">수정하려면 비밀번호를 입력하세요.</td>
 				</tr>
 
 			</table>
 			<div class="section3">
-				<c:if test="${replyContentBean.content_writer_idx > 0}">
- 					<form:button><a><img src="../img/btn_reply.gif" alt="답변"></a></form:button>
+				<c:if test="${loginUserBean.mlevel >0}">
+				
+					<!-- reply의 그룹번호 안에 값 넘기기 -->
+					
+ 					<a href="return check();"><img src="../img/btn_reply.gif" alt="답변"></a>
 					<a href="${conPath }board/delete?board_info_idx=${board_info_idx}&content_idx=${content_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
 				</c:if>
 				<a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="../img/btn_list.gif" alt="목록"></a>

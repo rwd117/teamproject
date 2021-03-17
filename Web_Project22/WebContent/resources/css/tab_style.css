@@ -268,7 +268,7 @@ header .inner.sticky{
     background-color: #ddd;
     
 }
-.tabList > li > .tabBtn{
+.tabList  li a{
     display: block;
     width: 100%;
     height: 50px;

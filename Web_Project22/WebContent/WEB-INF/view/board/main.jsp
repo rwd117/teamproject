@@ -44,15 +44,14 @@
 
     <div class="tabArea">   
         <ul class="tabList" >           
-            <c:forEach var="obj" items="${qnaTopList}">
-        	 <li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a><li>
+            <c:forEach var="obj" items="${qnaTopList}" >
+        	 <li style="text-align: center;"><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}" style="padding_top:10px; font-size: 1.2em;  font-weight: bold; line-height: 50px; color:rgb(69, 80, 102);"> ${obj.board_info_name }</a><li>
          	</c:forEach>
                 <div class="tabCon notice" >                
                     <table class="table table-striped" >
                         <thead>
                             <tr>
-                                <th scope="cols">번호</th>
-                                
+                                <th scope="cols">번호</th>                               
                                 <th scope="cols">제목</th>
                                 <th scope="cols">이미지</th>
                                 <th scope="cols">작성자</th>
@@ -82,11 +81,11 @@
 					</c:when>
 				</c:choose>                           
                             
-                                 <td><img src="${conPath}upload/${obj.content_file}" width="100px" height="100px" alt="상품사진"></td>
+                                 <td><img src="${conPath }upload/${obj.content_file }" width="15%"/>	</td>
                                                              
                                 <td>${obj.content_write_name}</td>
                                 <td>${obj.content_date}</td>
-						  		<td></td>
+						  		<td>${obj.content_hit}</td>
                             </tr>
                             </c:if>
                             </c:forEach>

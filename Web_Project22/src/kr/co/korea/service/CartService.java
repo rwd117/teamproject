@@ -25,6 +25,9 @@ public class CartService {
 	public int cartCheck(CartBean cartbean) {
 		return cartdao.cartCheck(cartbean);
 	}
+	public void cartdelete(int cID) {
+		cartdao.cartdelete(cID);
+	}
 	
 	public List<CartBean> cartgetinfo(int midx){
 		return cartdao.cartgetinfo(midx);
@@ -38,9 +41,7 @@ public class CartService {
 		cartdao.cartamountchange(cartbean);
 	}
 	
-	public void cartdelete(int cID) {
-		cartdao.cartdelete(cID);
-	}
+	
 	
 	
 }

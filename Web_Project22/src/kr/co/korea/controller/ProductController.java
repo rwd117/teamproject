@@ -42,9 +42,7 @@ public class ProductController {
 	@GetMapping("/productContent")
 	public String productContent(int pID,Model model,@ModelAttribute("scri")SearchCriteria scri) {
 		
-		productService.producthitadd(pID);
-		
-		ProductBean productbean = productService.getproductInfo(pID);
+		ProductBean productbean = productService.productread(pID);
 		
 		ReviewBean reviewbean = new ReviewBean();
 		reviewbean.setR_pID(pID);

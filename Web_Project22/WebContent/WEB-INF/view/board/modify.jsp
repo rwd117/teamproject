@@ -38,18 +38,19 @@ window.onload = function(){
 	</div>
 	<div id="contents4">
 
-		<form:form action="${conPath }board/modify_pro" method="post" modelAttribute="modifyContentBean" enctype=" multipart/form-data">
-<form:hidden path="content_idx"/>
-							<form:hidden path="content_board_idx"/>
-			<input type="hidden" name="page" value="${page }" />
+		<form:form action="${conPath }board/modify_pro" method="post" modelAttribute="modifyContentBean" enctype="multipart/form-data">
+					<form:hidden path="content_idx"/>
+					<form:hidden path="content_board_idx"/>
+					<input type="hidden" name="page" value="${page }" />
 			<table border="1" class="table">
 				<th>IMAGE</th>
 				<td><c:if test="${modifyContentBean.content_file != null }">
-						<img src="${conPath }upload/${modifyContentBean.content_file}"
-							width="20%" />
-						<input type="hidden" value="${content_file}" />
-						<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->
-					</c:if>
+								<img src="${conPath}upload/${modifyContentBean.content_file}" width="100%"/>
+								<form:hidden path="content_file"/>
+								<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->  
+							</c:if>
+								
+							
 					</td>
 			</table>
 			<table border="1" class="table">
@@ -61,28 +62,28 @@ window.onload = function(){
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td colspan="1"><input type="text" value="${modifyContentBean.content_subject }" /></td>
+					<td colspan="1"><form:input path="content_subject"  class="form-control"/></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" value="${ modifyContentBean.content_write_name}"  /></td>
+					<td><form:input path="content_write_name" class="form-control"  readonly="true"/></td>
 
 				</tr>
 
 				<tr>
 					<th>등록일</th>
-					<td>${modifyContentBean.content_date }</td>
+					<td><form:input path="content_date" class="form-control" readonly="true"/></td>
 				</tr>
 				<tr>
 					<th>조회수</th>
-					<td></td>
+					<td><form:input path="content_hit" class="form-control" readonly="true"/></td>
 				</tr>
 				<tr class="tr20">
 					<td colspan="2"><form:textarea path="content_text" style="resize:none" id="editor"></form:textarea></td>
 				<tr>
 					<th>첨부파일</th>
 					<td colspan="1">
-						<input type="file" value="${upload_file}" class="form-control" accept="image/*"/>
+						<form:input type="file" path="upload_file" class="form-control" accept="file/*"/>
 					</td>
 				</tr>
 				<tr>

@@ -317,7 +317,6 @@ function ordercheck(){
     	</form>
     	
     	
-    
     <div class="section5">
             <table border="1" class="table4">
                 <tr>

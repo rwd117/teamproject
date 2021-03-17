@@ -1,27 +1,29 @@
 package kr.co.korea.controller;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Request;
-import org.omg.CORBA.BAD_INV_ORDER;
+import org.apache.ibatis.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.jdbc.core.metadata.DerbyTableMetaDataProvider;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.korea.beans.ContentBean;
 import kr.co.korea.beans.PageBean;
@@ -47,8 +49,10 @@ public class BoardController {
 		//DB�뿉�꽌 寃뚯떆�뙋�쓽�씠由꾩쓣 媛��졇�샂
 		String boardInfoName=boardService.getBoardInfoName(board_info_idx);//寃뚯떆�뙋�쓽 紐낆묶�쓣 媛��졇�삤湲� DB
 		model.addAttribute("boardInfoName",boardInfoName);
+		
 		//DB�뿉�꽌 �빐�떦寃뚯떆�뙋�쓽 �궡�슜媛��졇�삤湲�
 		List<ContentBean> contentList=boardService.getContentList(board_info_idx, page);
+		
 		model.addAttribute("contentList", contentList);
 		if(contentBean.getContent_idx() > 0)
 			//답글 작성일 경우
@@ -88,42 +92,25 @@ public class BoardController {
 		
 		contentBean.setContent_board_idx(board_info_idx);  //寃뚯떆�뙋醫낅쪟�쓽 踰덊샇瑜� �꽭�똿
 		boardService.getContentCnt(board_info_idx, page);
-
-		
-
 		return "board/write";
 	}
 	
 	@PostMapping("/write_pro")
 	public String write_pro(@Valid @ModelAttribute("writeContentBean") ContentBean contentBean,@RequestParam(value = "page", defaultValue = "1") int page, BindingResult result, Model model) {
 		 model.addAttribute("page",page);
-		 
-		
-		if(result.hasErrors()) {
-			return "board/write";
-		}
-		//for(int i=0;i<500;i++) {
-		
-
-		MultipartFile file= MultipartFile("file");
-	
-			
-		//}
-			
-		return "board/write_success";
+		 if(result.hasErrors()) {
+				return "board/write";
+			}
+			//for(int i=0;i<500;i++) {
+				boardService.addContentInfo(contentBean); //DB에 insert됨
+			//}
+			return "board/write_success";
 	}
 	
 	//�긽�꽭蹂닿린�뿉�꽌�뒗 content_idx, content_board_idx
-	@GetMapping("/read")
-	public String read(int board_info_idx, int content_idx, int page, Model model) {
-	    ContentBean readContentBean=boardService.getContentInfo(content_idx);
-	    model.addAttribute("readContentBean", readContentBean);
-	    model.addAttribute("board_info_idx", board_info_idx);
-	    model.addAttribute("content_idx", content_idx);
-	    model.addAttribute("loginUserBean", loginUserBean);  //濡쒓렇�씤�븳 UserBean(session�쁺�뿭議댁옱�븯�뒗)
-	    model.addAttribute("page", page);
-		return "board/read";			
-	}
+		
+ 
+	
 	
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifyContentBean") ContentBean contentBean, int board_info_idx, int content_idx, int page, Model model) {
@@ -141,22 +128,19 @@ public class BoardController {
 		contentBean.setContent_board_idx(board_info_idx); //寃뚯떆�뙋�씤�뜳�꽌
 		return "/board/modify";
 	}
-	@PostMapping("/modify_pro")
-	public String modify_pro(@ModelAttribute("modifyContentBean") ContentBean contentBean, int page, BindingResult result, Model model) {
 	
+
+	@PostMapping("/modify_pro")
+	public String modify_pro(@ModelAttribute("modifyContentBean") ContentBean contentBean, int page,Model model) {
 		model.addAttribute("page", page);
 		
-		if(result.hasErrors()) {
-			System.out.println("�닔�젙�떎�뙣");
-			return "/board/modify";
-		}
 		boardService.modifyContentInfo(contentBean); //DB(update)
-		System.out.println("�닔�젙�꽦怨�");
+		System.out.println("수정성공");
 		return "/board/modify_success";
-	}
-	
+		}
 	@GetMapping("/reply")
-	public String reply(@ModelAttribute("replyContentBean")ContentBean contentBean, int board_info_idx, int content_idx, int page, Model model) {
+	public String reply(ContentBean contentBean, int board_info_idx, int content_idx, int page, Model model) {
+	
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("content_idx", content_idx);
 		model.addAttribute("page", page);
@@ -174,26 +158,6 @@ public class BoardController {
 		return "/board/reply";		
 	}
 	
-	
-	
-	@PostMapping("/reply_pro")
-	public String reply_pro(@ModelAttribute("replyContentBean") ContentBean contentBean,int board_info_idx,Model model) {
-			model.addAttribute("board_info_idx", board_info_idx);
-			
-			boardService.addContentInfo(contentBean);
-			boardService.modifyContentInfo(contentBean);
-		boardService.qna_reply_up(contentBean);
-		//�솕硫댁뿉�꽌 �엯�젰�븳 �젙蹂대�� DB�뿉 ���옣�븳 �썑 紐⑸줉 �솕硫댁쑝濡� �뿰寃�
-		boardService.qna_reply_insert(contentBean);
-		return "/board/reply_success";
-
-		} 
-	
-	
-	private MultipartFile MultipartFile(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@GetMapping("/delete")
 	public String delete(int board_info_idx, int content_idx, Model model) {
@@ -205,5 +169,18 @@ public class BoardController {
 	@GetMapping("/not_writer")
 	public String not_writer() {
 		return "/board/not_writer";
+	}
+	@GetMapping("/read")
+	public String read (int board_info_idx, int page, Model model, ContentBean contentBean,int content_idx) {
+			//@RequestParam(value = "content_idx") 
+			//@RequestParam(value = "content_bno") int content_bno,
+			//@RequestParam(value = "content_step") int content_step,
+			//@RequestParam(value = "content_level") int content_level) {
+	
+			//model.addAttribute("board",boardService.selectById(content_idx));
+			model.addAttribute("board_info_idx", board_info_idx);
+			model.addAttribute("loginUserBean", loginUserBean);  //濡쒓렇�씤�븳 UserBean(session�쁺�뿭議댁옱�븯�뒗)
+			model.addAttribute("page", page);
+		return "/board/read";
 	}
 }

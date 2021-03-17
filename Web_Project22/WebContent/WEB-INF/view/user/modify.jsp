@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
 <c:set var="conPath" value="${pageContext.request.contextPath }/" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +23,12 @@
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
 <script src="../js/7.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <script language="javascript">
-        function showPopup() { window.open("${conPath}popup/popup2", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
+        function showPopup() { window.open("${conPath}popup/pwupdate", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
 </script>
+
 </head>
 <body>
 	<c:import url="/WEB-INF/view/include/top_menu.jsp"/>
@@ -33,16 +36,17 @@
     <div id="memberView_wrap">
         <div id="memberView">
             	
-            <form:form modelAttribute="modifyUserBean" action="modify_pro" method="post">
+           <form:form action="${conPath }user/modify_pro" method='post' modelAttribute="modifyUserBean">
+				
                 <table>
                     <tr>
                         <th>
-                            « ºˆ¡§∫∏
+                            ÌïÑÏàòÏ†ïÎ≥¥
                         </th>
                     </tr>
                     <tr>
                         <td>
-                            æ∆¿Ãµ <form:input path="mid"  required="required" readonly="readonly"/>
+                            ÏïÑÏù¥Îîî <form:input path="mid"  required="required" readonly="true"/>
                         </td>
                     </tr>
                     <tr>
@@ -52,27 +56,31 @@
                     </tr>
                     <tr>
                         <td>
-                            ∫Òπ–π¯»£<form:input path="mpw" required="required" placeholder="øµπÆ¥Îº“πÆ¿⁄+º˝¿⁄+∆ØºˆπÆ¿⁄ 9~12¿⁄" />
+                            ÎπÑÎ∞ÄÎ≤àÌò∏ <button type="button" class="btn" onclick="showPopup();">ÎπÑÎ∞ÄÎ≤àÌò∏ Î≥ÄÍ≤Ω<button>
                         </td>
                     </tr>
+                    <!-- 
+                    
                     <tr>
                         <td class="msg" id="mPwPatternChkMsg">
                             &nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
-                   <!--   <tr>
-                        <td>
-                            ∫Òπ–π¯»£ »Æ¿Œ<input name="mPwChk" id="mPwChk" required="required"/>
-                        </td>
-                    </tr>
+                   <tr>
+						<td>
+							ÎπÑÎ∞ÄÎ≤àÌò∏ ÌôïÏù∏<input type="password" id="mpw2" name="mpw2" required="required">
+						</td>
+					</tr>
+					<tr>
+						<td	class="msg" id="mpwChkMsg">
+							&nbsp;&nbsp;&nbsp;
+						</td>
+					</tr>
+                     -->
+                    
                     <tr>
-                        <td	class="msg" id="mPwChkMsg">
-                            &nbsp;&nbsp;&nbsp;
-                        </td>
-                    </tr>-->
-                    <tr>
                         <td>
-                            ¿Ã∏ß <form:input path="mname" required="required"/>
+                           <!--  --> Ïù¥Î¶Ñ <form:input path="mname" required="required" class='form-control'/>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +90,7 @@
                     </tr>
                     <tr>
                         <td>
-                            ¿Ã∏ﬁ¿œ<form:input path="memail" required="required" placeholder="øπ) abcd@efgh.com"/>
+                            Ïù¥Î©îÏùº<form:input path="memail" required="required" placeholder="Ïòà) abcd@efgh.com" class='form-control'/>
                         </td>
                     </tr>
                     <tr>
@@ -92,7 +100,7 @@
                     </tr>
                     <tr>
                         <td>
-                            «⁄µÂ∆˘<form:input path="mphone" required="required" placeholder="øπ) 010-1234-5678"/>
+                            Ìï∏ÎìúÌè∞<form:input path="mphone" required="required" placeholder="Ïòà) 010-1234-5678" class='form-control'/>
                         </td>
                     </tr>
                     <tr>
@@ -102,12 +110,12 @@
                     </tr>
                     <tr>
                         <td>
-                            ¡÷º“<form:input path="maddress"  required="required" placeholder="øπ) 03011 º≠øÔΩ√ ¡æ∑Œ±∏ ≈Î¿œ∑Œ18≥™±Ê"/>
+                            Ï£ºÏÜå<form:input path="maddress"  required="required" placeholder="Ïòà) 03011 ÏÑúÏö∏Ïãú Ï¢ÖÎ°úÍµ¨ ÌÜµÏùºÎ°ú18ÎÇòÍ∏∏" class='form-control'/>
                         </td>
                     </tr>
                     <tr>
                     	<td>
-                    		ªÛºº ¡÷º“:<form:input path="maddress2"  required="required" />
+                    		ÏÉÅÏÑ∏ Ï£ºÏÜå:<form:input path="maddress2"  required="required" />
                     	</td>
                     </tr>
                     <tr>
@@ -120,12 +128,12 @@
                 <table>
                     <tr>
                         <th>
-                            º±≈√¡§∫∏
+                            ÏÑ†ÌÉùÏ†ïÎ≥¥
                         </th>
                     </tr>
                     <tr>
                         <td>
-                            ª˝¿œ<form:input path="mbirth"  class="date" id="datepicker"/>
+                            ÏÉùÏùº<form:input path="mbirth"  class="date" id="datepicker"/>
                         </td>
                     </tr>
                     <tr>
@@ -134,10 +142,11 @@
                         </td>
                     </tr>
                 </table>
-                <form:button path="" class="btn" >»∏ø¯¡§∫∏ ºˆ¡§</form:button>
-                <form:button path="" class="btn" onclick="showPopup();">∫Òπ–π¯»£ ∫Ø∞Ê</form:button>
-                <form:button path="main" class="btn">main</form:button>
+                <form:button class="btn" >ÌöåÏõêÏ†ïÎ≥¥ ÏàòÏ†ï</form:button>
+               
+                <button class="btn" type="button" onclick="location.href='${conPath }main'">main</button>
             </form:form>
+           
         </div>
     </div>
 <c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>

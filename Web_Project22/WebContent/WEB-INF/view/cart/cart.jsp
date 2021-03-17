@@ -23,7 +23,32 @@
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
 <script src="../js/7.js"></script>
+<script>
+$(document).ready(function(){<!-- 로드되면 기본적으로 list를 불러옴!-->
+	wishvalue();
+});
 
+function wishvalue(){// 카트 번호 hidden에 배열로 넘긴다.
+	var wishnumArray = new Array();
+	
+	<c:forEach items="${Checklist}" var="obj">
+	
+	wishnumArray.push(${obj});
+	
+	</c:forEach>
+		
+	$('#wishwid').val(wishnumArray);
+	
+	
+	for(var i=0; i<wishnumArray.length;i++){
+		console.log(wishnumArray[i]);<!-- 여기-->
+	}
+	
+}
+
+
+
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){<!-- 로드되면 기본적으로 list를 불러옴!-->
@@ -111,7 +136,7 @@ function cartlist(){
 	 }
 	 	$("#cartlistdiv").html(cartitem);
 		$(".section3").html(payinfo);
-		$(".tabBtn").html(numberinfo)
+		
 		
 		
 		
@@ -417,7 +442,7 @@ function ordercheck(kind){
 				<div class="tabArea">
 					<ul class="tabList">
 						<li><a href="#" class="tabBtn">국내배송상품()</a>
-							<div class="tabCon notice">
+							<div class="tabCon notice" style="overflow:auto">
 								<table class="table table-striped">
 
 									<thead>
@@ -434,6 +459,47 @@ function ordercheck(kind){
 										</tr>
 									</thead>
 									<tbody id="cartlistdiv">
+									
+									<c:forEach items="${wishlist }" var="obj">
+                                <tr class="tr12">
+                                    <td><input type="checkbox" name="checkitem" onclick="check(2);"></td>
+                                    <td><img src="${conPath}upload/${obj.w_pIMAGE1}" width="100px" height="100px" alt="상품이미지"></td>
+                                    <td>${obj.w_pNAME }</td>
+                                    <c:choose>
+                                    	<c:when test="${obj.w_pdiscount == 0 }">
+											<td scope="row">
+											<c:set var="discountedPrice" value="${obj.w_pPRICE}" />
+											<fmt:formatNumber value="${discountedPrice }" pattern="#,###,###" />원
+											<input type="hidden" class="" value="${obj.w_pPRICE}">
+											</td>		                                    	
+                                    	</c:when>
+                                    	
+                                    	<c:otherwise>
+                                    		<c:set var="discountedPrice" value="${obj.w_pPRICE*(1-(obj.w_pdiscount/100)) }" />
+											<fmt:formatNumber value="${discountedPrice }" pattern="#,###,###" />원 
+                                    	</c:otherwise>
+                                    </c:choose>
+                                    <td><input type="number" value="${obj.wAmount }" readonly></td>
+                                    <td>2.500원</td>
+                                    <td>기본배송<br/></td>
+                                    
+                                    <td><c:set var="partprice" value="${discountedPrice*obj.wAmount }"/>
+                                    <fmt:formatNumber value="${partprice }" pattern="#,###,###" />원 </td>
+                                    <td><input type="button" value="주문하기"><br/><input type="button" value="삭제하기" onclick="deletecheck('+this.cID+')"></td>
+                                </tr>
+                                </c:forEach>
+                                
+                                <tr class="tr13">
+                                    <th colspan="10" scope="row">
+                                        <p>[기본배송]</p>
+                                        <a>상품구매금액<c:set var="sumprice" value="${pricemap['sumprice'] }"/>
+                                        <fmt:formatNumber value="${sumprice }" pattern="#,###,###" />원 +
+                                         배송비 <c:set var="postcost" value="${pricemap['postcost'] }"/>
+                                         <fmt:formatNumber value="${postcost }" pattern="#,###,###" />원 = 
+                                         합계 :<c:set var="allsum" value="${pricemap['allsum'] }"/> 
+                                         <fmt:formatNumber value="${allsum }" pattern="#,###,###" />원</a>
+                                    </th>
+                                </tr>
 									</tbody>
 								</table>
 							</div></li>
@@ -498,9 +564,12 @@ function ordercheck(kind){
 
 					</tr>
 				</table>
+				 
+   		 	<br/>
+   		</div>
 			</div>
 		</div>
-	</div>
+	
 	<c:import url="/WEB-INF/view/include/bottom_menu.jsp" />
 	
 </body>

@@ -17,6 +17,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 <link href="../css/login.css" rel="stylesheet">
+ <script language="javascript">
+        function showfind_id() { window.open("${conPath}user/find_id", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
+</script>
+ <script language="javascript">
+        function showfind_pw() { window.open("${conPath}user/find_pw", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
+</script>
 </head>
 <body>
 	<div class="content">
@@ -46,13 +52,13 @@
 					<input type="checkbox" class="checklogin"> 자동 로그인
 				</fieldset>
 				<div class="find_info">
-					<a target="_blank" id="idinquiry" href="">아이디 찾기</a> <span
-						class="bar">|</span> <a target="_blank" id="pwdinquiry" href="">비밀번호
+					<a id="idinquiry" onclick="showfind_id();">아이디 찾기</a> <span
+						class="bar">|</span> <a id="pwdinquiry" onclick="showfind_pw();">비밀번호
 						찾기</a> <span class="bar">|</span> <a target="_blank" id="join"
 						href="${conPath }user/join">회원가입</a>
 				</div>
 			</form:form>
-			>
+			
 		</div>
 	</div>
 </body>

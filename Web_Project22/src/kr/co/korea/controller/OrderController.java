@@ -80,37 +80,37 @@ public class OrderController {
 		return "/orders/order";
 	}
 	
-	@PostMapping("/orderresult")//카트 삭제, order,order_product에 추가해야함.
+	@PostMapping("/orderresult")//移댄듃 �궘�젣, order,order_product�뿉 異붽��빐�빞�븿.
 	public String orderresult(OrderBean orderbean,OrderProductBean orderproductbean,
 			@RequestParam(value="cha[]") List<String> Checklist,Model model) {
 		
-		Calendar cal = Calendar.getInstance();//해당 주문의 타이틀
+		Calendar cal = Calendar.getInstance();//�빐�떦 二쇰Ц�쓽 ���씠��
 		int year = cal.get(Calendar.YEAR);
 		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
 		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
 		
-		UUID UUIDs = UUID.randomUUID();//고유 식별자
+		UUID UUIDs = UUID.randomUUID();//怨좎쑀 �떇蹂꾩옄
 		
-		String subname = UUIDs.toString().replaceAll("-", "");//String 으로 변환 후, - 기호 삭제
+		String subname = UUIDs.toString().replaceAll("-", "");//String �쑝濡� 蹂��솚 �썑, - 湲고샇 �궘�젣
 		subname = subname.substring(0,10);
 		
-		String ordertitle = ymd + "_" + subname;//날짜 + uuid로 임의로 설정
+		String ordertitle = ymd + "_" + subname;//�궇吏� + uuid濡� �엫�쓽濡� �꽕�젙
 		
 		orderbean.setO_title(ordertitle);
 		orderbean.setO_mIDx(loginUserBean.getMidx());
 		orderservice.orderinsert(orderbean);
 		
-		int o_id = orderbean.getO_ID();//orders테이블에 들어가는 시퀀스 따로 저장
+		int o_id = orderbean.getO_ID();//orders�뀒�씠釉붿뿉 �뱾�뼱媛��뒗 �떆���뒪 �뵲濡� ���옣
 		
 		int Cartid=0;
 		for(String i : Checklist) {
 			Cartid = Integer.parseInt(i);
-			orderproductbean.setOp_oid(o_id);//order 테이블의 기본키를 외래키로 받아옴
-			orderproductbean.setO_c_id(Cartid);//카트 아이디는 여러개일경우 for문을 통하여 입력
+			orderproductbean.setOp_oid(o_id);//order �뀒�씠釉붿쓽 湲곕낯�궎瑜� �쇅�옒�궎濡� 諛쏆븘�샂
+			orderproductbean.setO_c_id(Cartid);//移댄듃 �븘�씠�뵒�뒗 �뿬�윭媛쒖씪寃쎌슦 for臾몄쓣 �넻�븯�뿬 �엯�젰
 			orderservice.orderproductinsert(orderproductbean);
-			cartservice.cartdelete(Cartid);//주문에 성공하면 카트에서 해당 정보 삭제
+			cartservice.cartdelete(Cartid);//二쇰Ц�뿉 �꽦怨듯븯硫� 移댄듃�뿉�꽌 �빐�떦 �젙蹂� �궘�젣
 		}
-		//여기까지가 insert 이 후는 select
+		//�뿬湲곌퉴吏�媛� insert �씠 �썑�뒗 select
 		
 		OrderBean vieworderbean = orderservice.getmaninfo(o_id);
 		List<OrderProductBean> vieworderproductlist = orderservice.getorderproudct(o_id);

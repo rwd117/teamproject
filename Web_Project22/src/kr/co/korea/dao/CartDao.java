@@ -32,7 +32,7 @@ public class CartDao {
 	
 	public CartBean idxcartgetinfo(int midx){
 		return sqltemp.selectOne("cart.idxcartgetinfo",midx);
-	}//ì£¼ë¬¸ì—ì„œ ì“°ì¼ bean
+	}//ÁÖ¹®¿¡¼­ ¾²ÀÏ bean
 	
 	
 	public void cartamountchange(CartBean cartbean) {

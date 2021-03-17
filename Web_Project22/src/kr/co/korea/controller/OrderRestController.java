@@ -27,7 +27,7 @@ public class OrderRestController {
 		
 		
 		Map<String,Object> map = new HashMap<String, Object>();
-		//먼저 invoice를 읽어옴. 그리고 값이 0이다? 
+		//癒쇱� invoice瑜� �씫�뼱�샂. 洹몃━怨� 媛믪씠 0�씠�떎? 
 		
 		try {
 			
@@ -50,7 +50,7 @@ public class OrderRestController {
 		
 		
 		Map<String,Object> map = new HashMap<String, Object>();
-		//먼저 invoice를 읽어옴. 그리고 값이 0이다? 
+		//癒쇱� invoice瑜� �씫�뼱�샂. 洹몃━怨� 媛믪씠 0�씠�떎? 
 		
 		try {
 			
