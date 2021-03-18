@@ -4,6 +4,17 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       
 	http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
+	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>/WEB-INF/config/root-context.xml
+    				/WEB-INF/config/security-context.xml
+    				</param-value>
+	</context-param>
+	
+    <listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+	
 	<!-- 1) url에 / 이면 기본으로 testServlet 서블릿이 실행 -->
 	<servlet-mapping>
 		<servlet-name>testServlet</servlet-name>
@@ -27,16 +38,6 @@
 		</multipart-config>
 	</servlet>
 	
-	<!-- 3) 프로젝트 수행시 사용할 Bean들을 정의해두는 파일은 root-context.xml로 지정-->
-	<context-param>
-    	<param-name>contextConfigLocation</param-name>
-    	<param-value>/WEB-INF/config/root-context.xml</param-value>
-	</context-param>
-
-	<!-- 4) listener클래스는 2),3) 동작이 자동으로 로딩된다 -->
-    <listener>
-    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
     
      <!-- 5) 파라미터에 한글이 지원 -->
 	<filter>

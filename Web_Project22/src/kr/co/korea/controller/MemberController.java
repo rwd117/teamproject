@@ -1,7 +1,5 @@
 package kr.co.korea.controller;
 
-import java.awt.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;

@@ -26,12 +26,9 @@ public class HomeController {
 	public QnaMenuService qnaMenuService;
 	
 	
-	
 	@GetMapping("/")
 	public String main(HttpServletRequest request) {
-
-	System.out.println(request.getServletContext().getRealPath("/"));
-
+		
 	return "redirect:/main";
 
 }

@@ -1,100 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"   
-			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:mvc="http://www.springframework.org/schema/mvc"  
 			 xmlns:beans="http://www.springframework.org/schema/beans" 
 			 xmlns:context="http://www.springframework.org/schema/context"
-			 xmlns:tx="http://www.springframework.org/schema/tx"
 			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
 			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
 			 					 http://www.springframework.org/schema/beans
 			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
 			 					 http://www.springframework.org/schema/context
 			 					 http://www.springframework.org/schema/context/spring-context.xsd
-			 					 http://www.springframework.org/schema/tx 
-			 					 http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+			 					 http://www.springframework.org/schema/mvc 
+			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
 <annotation-driven/>
  
-<context:component-scan base-package="kr.co.korea.controller"/>
-<context:component-scan base-package="kr.co.korea.beans"/>
-<context:component-scan base-package="kr.co.korea.dao"/>
-<context:component-scan base-package="kr.co.korea.service"/>
-
-
 <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<beans:property name="prefix" value="/WEB-INF/view/"></beans:property>	
-	<beans:property name="suffix" value=".jsp"></beans:property>
+	<beans:property name="prefix" value="/WEB-INF/view/"/>	
+	<beans:property name="suffix" value=".jsp"/>
 </beans:bean>
 
-<resources location="/resources/" mapping="/**"></resources>
+<resources location="/resources/" mapping="/**"/>
 
-<beans:bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" 
-id="messageSource">
-	<beans:property name="basenames">
-		<beans:list>
-			<beans:value>/WEB-INF/properties/db</beans:value>
-		</beans:list>
-	</beans:property>
-</beans:bean>
+<context:component-scan base-package="kr.co.korea.controller"/>
 
-<beans:bean class="org.springframework.context.support.MessageSourceAccessor" 
-id="sourceAccessor">
-	<beans:constructor-arg ref="messageSource"/>
-</beans:bean>
-
-<beans:bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" 
-id="multipartResolver">
-
-</beans:bean>
-
-
-<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	<beans:property  name="locations">
-	<beans:list>
-		<beans:value>/WEB-INF/properties/db.properties</beans:value>
-		<beans:value>/WEB-INF/properties/option.properties</beans:value>
-	</beans:list>
-	</beans:property>
-</beans:bean>
-
-<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-   	<beans:property name="dataSource" ref="dataSource"/>
-</beans:bean>
-
-<tx:annotation-driven transaction-manager="transactionManager" />
-
-<beans:bean class="org.apache.commons.dbcp2.BasicDataSource" id="basic_data_source">
-	<beans:property name="driverClassName" value="${db.classname}" />
-	<beans:property name="url" value="${db.url}" />
-	<beans:property name="username" value="${db.username}" />
-	<beans:property name="password" value="${db.password}" />
-</beans:bean>
-
-<beans:bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
-	<beans:property name="dataSource" ref="basic_data_source"/>
-	<beans:property name="mapperLocations" value="/WEB-INF/mapper/*.xml" />
-</beans:bean>
-
-<!-- SqlSessionTemplate 는 sql과 관련되는 클래스임 -->
-<beans:bean class="org.mybatis.spring.SqlSessionTemplate" >
-	<beans:constructor-arg index="0" ref="sqlSession"></beans:constructor-arg>
-</beans:bean>
-<!-- 회원가입 메일 인증 -->
-	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<beans:property name="host" value="smtp.gmail.com" />
-		<beans:property name="port" value="587" /><!-- 465 or 25 -->
-		<beans:property name="username" value="ssadagu.web@gmail.com" />
-		<beans:property name="password" value="Tkekrn11" />
-		<beans:property name="defaultEncoding" value="utf-8" />
-		<beans:property name="javaMailProperties">
-			<beans:props>
-				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
-				<beans:prop key="mail.smtp.auth">true</beans:prop>
-				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-				<beans:prop key="mail.debug">true</beans:prop>
-			</beans:props>
+	<!-- 다국어 설정 -->
+	<beans:bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource">
+		<beans:property name="basenames">
+				<beans:list>
+					<beans:value>/WEB-INF/properties/db</beans:value>
+				</beans:list>
 		</beans:property>
 	</beans:bean>
-	<!-- 트랜잭션  -->
+
+	<beans:bean class="org.springframework.context.support.MessageSourceAccessor" id="sourceAccessor">
+		<beans:constructor-arg ref="messageSource"/>
+	</beans:bean>
+
+
+
+<beans:bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" id="multipartResolver">
+</beans:bean>
 
 <!-- 인터셉터 -->
 <interceptors>
@@ -121,7 +67,6 @@ id="multipartResolver">
     	<beans:bean class="kr.co.korea.interceptor.CheckLoginInterceptor"/>
     </interceptor>
 </interceptors>
-
  
 
 </beans:beans>

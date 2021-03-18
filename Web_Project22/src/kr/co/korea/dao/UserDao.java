@@ -54,4 +54,8 @@ public class UserDao {
 	public void find_pw_update(UserBean userBean) {
 		sqltemp.update("user.find_pw_update", userBean);
 	}
+	public UserBean tempid(String mid) {
+		return sqltemp.selectOne("user.tempid",mid);
+	}
+
 }
