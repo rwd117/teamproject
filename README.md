@@ -1,4 +1,4 @@
-# teamproject
+# teamproject(쇼핑몰 Ssa da gu)
 
 ## 구현 환경
 
