@@ -7,5 +7,5 @@ mybatis : 3.5.6
 
 topmcat : 9.0
 
-Oracle Database 11g Express Edition : Oracle Database 11g Express Edition  
+Oracle Database 11g Express Edition : 11.2.0.2.0
 
