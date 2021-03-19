@@ -1,12 +1,10 @@
 # teamproject(쇼핑몰 Ssa da gu)
 
-## 구현 환경
+## 사용 툴
 
 Eclipse Version: 4.17.0.v20200902-1800
 
-java : jdk 1.8
-
-mybatis : 3.5.6
+jdk 1.8
 
 topmcat : 9.0
 
