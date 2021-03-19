@@ -4,7 +4,7 @@
 
 Eclipse Version: 4.17.0.v20200902-1800
 
-jdk 1.8
+Java SE 8 = JDK1.8
 
 topmcat : 9.0
 
