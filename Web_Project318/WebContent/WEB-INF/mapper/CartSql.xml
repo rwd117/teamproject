@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cart">
+
+	<insert id="cartinsert" parameterType="kr.co.korea.beans.CartBean">
+	
+		insert into cart(cID,c_m_IDx,c_p_ID,cAmount)
+		values (cart_seq.nextval,#{c_m_IDx},#{c_p_ID},#{cAmount})
+	
+	</insert>
+	
+	<select id="cartCheck" resultType="Integer" parameterType="kr.co.korea.beans.CartBean">
+		
+		select count(*)
+		from cart
+		where c_m_IDx=#{c_m_IDx} and c_p_ID=#{c_p_ID}
+	
+	</select>
+	
+	<update id="cartamountadd" parameterType="kr.co.korea.beans.CartBean">
+		<![CDATA[
+		update cart
+		set cAmount=cAmount+1 
+		where c_m_IDx=#{c_m_IDx} and c_p_ID=#{c_p_ID}
+		]]>
+		
+	</update>
+	
+	<select id="cartgetinfo" resultType="kr.co.korea.beans.CartBean" parameterType="Integer">
+		select car.cID as cID,
+			   car.cAmount as cAmount,
+       		   pro.pimage1 as c_pIMAGE1,
+       		   pro.pname as c_pNAME,
+       		   pro.pprice as c_pPRICE,
+       		   pro.pdiscount as c_pdiscount,
+       		   pro.pSTOCK as c_pSTOCK
+		from cart car, member mem, product pro
+		where car.c_m_idx = mem.midx and car.c_p_id=pro.pid and mem.midx=#{midx}
+		order by car.cID asc
+	</select>
+	
+	
+	<select id="idxcartgetinfo" resultType="kr.co.korea.beans.CartBean" parameterType="Integer">
+		select car.cID as cID,
+			   car.cAmount as cAmount,
+       		   pro.pimage1 as c_pIMAGE1,
+       		   pro.pname as c_pNAME,
+       		   pro.pprice as c_pPRICE,
+       		   pro.pdiscount as c_pdiscount,
+       		   pro.pSTOCK as c_pSTOCK
+		from cart car, product pro
+		where car.c_p_id=pro.pid and car.cID=#{cID}
+		order by car.cID asc
+	</select>
+	
+	
+	
+	<update id="cartamountchange" parameterType="kr.co.korea.beans.CartBean">
+		update cart
+		set cAmount=#{cAmount}
+		where cID=#{cID} and c_m_IDx=#{c_m_IDx}
+	</update>
+	
+	<delete id="cartdelete" parameterType="Integer">
+		delete from cart
+		where cID=#{cID}
+	
+	</delete>
+		
+</mapper>

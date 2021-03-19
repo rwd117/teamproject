@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+<!-- 회원가입시에 정보를 insert -->
+<insert id="addUserInfo" parameterType="kr.co.korea.beans.UserBean">
+<![CDATA[
+	insert into MEMBER(midx,mname,mid,mpw,memail,maddress,maddress2,mbirth,mphone,mpost)
+	 values(user_seq.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddress},#{maddress2}, #{mbirth},#{mphone},#{mpost})
+]]>
+</insert>
+<!--  로그인 정보 가져오기 select -->
+<select id="getLoginInfo" parameterType="kr.co.korea.beans.UserBean" resultType="kr.co.korea.beans.UserBean">
+<![CDATA[
+	select midx, mname,mid,mlevel,mdrop
+	from MEMBER 
+	where mid=#{mid}
+]]>
+</select>
+
+<!-- 정보수정 -->
+<update id="modifyUserInfo" parameterType="kr.co.korea.beans.UserBean" >
+<![CDATA[
+	update MEMBER
+	set mpw=#{mpw}, mname=#{mname}, memail=#{memail}, mphone=#{mphone}, maddress=#{maddress}, maddress2=#{maddress2}, mbirth=#{mbirth}
+	where midx=#{midx}
+]]>
+</update>
+<!-- 임시비밀번호로 변경 -->
+<update id="find_pw_update" parameterType="kr.co.korea.beans.UserBean" >
+<![CDATA[
+	update MEMBER
+	set mpw=#{mpw}
+	where midx=#{midx}
+]]>
+</update>
+<!-- 회원탈퇴 -->
+<update id="memberDelete" parameterType="kr.co.korea.beans.UserBean" >
+<![CDATA[
+	update MEMBER
+	set mdrop=0
+	where midx=#{midx}
+	AND mpw=#{mpw}
+]]>
+</update>
+<!-- 중복아이디 버튼 id조회 -->
+<select id="checkUserIdExist" parameterType="String" resultType="String">
+<![CDATA[
+  select mid
+  from MEMBER
+  where mid=#{mid}
+]]>
+</select>
+
+<select id="getUserInfo" parameterType="Integer" resultType="kr.co.korea.beans.UserBean">
+
+	select mname,mid,mpw,memail,maddress,maddress2,mbirth,mphone,mpost from member where midx=#{midx}
+
+</select>
+<!-- 아이디찾기 -->
+<select id="find_id" parameterType="kr.co.korea.beans.UserBean" resultType="kr.co.korea.beans.UserBean">
+<![CDATA[
+  select *
+  from MEMBER
+  where mname=#{mname}
+  AND memail=#{memail}
+]]>
+</select>
+<!-- 비밀번호찾기 -->
+<select id="find_pw" parameterType="kr.co.korea.beans.UserBean" resultType="kr.co.korea.beans.UserBean">
+<![CDATA[
+  select *
+  from MEMBER
+  where mname=#{mname}
+  AND memail=#{memail}
+  AND mid=#{mid}
+]]>
+</select>
+<!-- 멤버리스트 조회 -->
+<select id="selectMemberList" parameterType="kr.co.korea.beans.UserBean" resultType="kr.co.korea.beans.UserBean">
+<![CDATA[
+  select midx, mid, mname, memail, mphone, maddress, mbirth, mdate, mdrop
+  from MEMBER
+]]>
+</select>
+<!-- 임시 -->
+<select id="tempid" parameterType="String" resultType="kr.co.korea.beans.UserBean">
+select *
+from member
+where mid=#{mid}
+</select>
+</mapper>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reply">
+
+<insert id="replywrite" parameterType="kr.co.korea.beans.ReplyBean">
+insert into review_reply(re_ID,re_rid,re_mIDx,re_content)
+values(REVIEW_reply_SEQ.nextval,#{re_rid},#{re_mIDx},#{re_content})
+</insert>
+
+<select id="replylist" parameterType="Integer" resultType="kr.co.korea.beans.ReplyBean">
+select reply.re_content as re_content,
+       reply.re_ID as re_ID,
+       reply.re_rid as re_rid,
+       reply.re_mIDx as re_mIDx,
+       mem.mname as re_mname,
+       to_char(reply.re_date,'YYYY-MM-DD') as re_date
+from review_reply reply,member mem
+where reply.re_midx = mem.midx  and reply.re_rid = #{re_rid}
+</select>
+
+<update id="replyupdate" parameterType="kr.co.korea.beans.ReplyBean">
+
+update review_reply
+set re_content=#{re_content}
+where re_ID=#{re_ID}
+
+</update>
+
+<delete id="replydelete" parameterType="Integer">
+
+delete from review_reply
+where re_ID=#{re_ID}
+
+</delete>
+
+
+</mapper>

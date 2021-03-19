@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/resources/upload=UTF-8
+encoding//src/kr/co/korea/beans/ContentBean.java=UTF-8
+encoding//src/kr/co/korea/controller/CartController.java=UTF-8
+encoding//src/kr/co/korea/controller/CartRestController.java=UTF-8
+encoding//src/kr/co/korea/controller/HomeController.java=UTF-8
+encoding//src/kr/co/korea/controller/OrderController.java=UTF-8
+encoding//src/kr/co/korea/controller/OrderRestController.java=UTF-8
+encoding//src/kr/co/korea/controller/WishController.java=UTF-8
+encoding//src/kr/co/korea/controller/WishRestController.java=UTF-8
+encoding//src/kr/co/korea/dao/UserDao.java=UTF-8
+encoding//src/kr/co/korea/service/CartService.java=UTF-8

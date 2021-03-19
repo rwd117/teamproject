@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+
+	<insert id="productinsert" parameterType="kr.co.korea.beans.ProductBean">
+		<selectKey keyProperty="pID"  order="BEFORE" resultType="Integer">
+		select product_seq.nextval from dual
+		</selectKey>	
+		<include refid="imagecount"></include>
+	
+	</insert>
+	
+<sql id="imagecount">
+	<if test="imagecount!=null">
+		<if test="imagecount==1">
+			insert into product(pID,p_top_idx,p_sub_idx,pNAME,pPRICE,pSTOCK,pIMAGE1,pCONTENT,pdiscount)
+		values(#{pID},(select top_idx from topmenu where top_name=#{top_name}),(select sub_idx from submenu where sub_name=#{sub_name}),
+		#{pNAME},#{pPRICE},#{pSTOCK},#{pIMAGE1},#{pCONTENT},#{pdiscount})
+		</if>
+		<if test="imagecount==3">
+			insert into product(pID,p_top_idx,p_sub_idx,pNAME,pPRICE,pSTOCK,pIMAGE1,pCONTENT,pdiscount,pIMAGE2)
+		values(#{pID},	(select top_idx from topmenu where top_name=#{top_name}),(select sub_idx from submenu where sub_name=#{sub_name}),
+		#{pNAME},#{pPRICE},#{pSTOCK},#{pIMAGE1},#{pCONTENT},#{pdiscount},#{pIMAGE2})
+		</if>
+	</if>
+</sql>
+	
+	<select id="getproductInfolist" 
+		parameterType="kr.co.korea.beans.ProductBean"
+		resultType="kr.co.korea.beans.ProductBean">
+
+		select pID,pNAME,pPRICE,pIMAGE1,pCONTENT,to_char(pDATE, 'YYYY-MM-DD')as pDATE,phit
+		from (select ROW_NUMBER() over(order by pid desc) as RNUM, tb.*
+		         from product tb ) tb
+		where (RNUM between #{pro_rowStart} and #{pro_rowEnd}) 
+		<include refid="topidx"></include>
+		<include refid="subidx"></include>
+		<include refid="keywordcheck"></include>
+	</select>
+	
+	<select id="productcount" parameterType="kr.co.korea.beans.ProductBean" resultType="Integer">
+		select count(pID)
+		from product
+		where 1=1 <include refid="topidx"></include> <include refid="subidx"></include> <include refid="keywordcheck"></include>
+	</select>
+	
+	<sql id="topidx">
+		<if test="p_top_idx!=0">
+			and (p_top_idx=(select top_idx from topmenu where top_idx=#{p_top_idx}))
+		</if>
+	</sql>
+	
+	
+	<sql id="subidx">
+		<if test="p_sub_idx!=0">
+			and (p_sub_idx=(select sub_idx from submenu where sub_idx=#{p_sub_idx}))
+		</if>
+	</sql>
+	
+ 	<sql id="keywordcheck">
+		<if test="pro_keyword!=null">
+			<if test="(p_top_idx == 0 )and (p_sub_idx == 0)">
+				and (pNAME LIKE '%' || #{pro_keyword} || '%')
+			</if>
+			<if test="(p_top_idx > 0 )and (p_sub_idx ==0)">
+				and (pNAME LIKE '%' || #{pro_keyword} || '%')				
+			</if>
+			<if test="(p_top_idx > 0) and (p_sub_idx > 0)">
+				and (pNAME LIKE '%' || #{pro_keyword} || '%')			
+			</if>
+		</if>
+	</sql>
+	
+	<sql id="check">
+	<if test="pNAME!=null and pPRICE!=null and pSTOCK!=null and pCONTENT!=null ">
+		update product
+		set pNAME=#{pNAME},pPRICE=#{pPRICE},pCONTENT=#{pCONTENT},pSTOCK=#{pSTOCK}
+		where pID=#{pID}
+	</if>
+</sql>	
+
+<delete id="productdelete" parameterType="Integer">
+delete from product
+where pID=#{pID}
+</delete>
+	
+ 
+	<select id="getproductInfo"
+		resultType="kr.co.korea.beans.ProductBean" parameterType="Integer">
+
+		select	pID,
+				pNAME,
+				p_top_idx,
+				p_sub_idx,
+				pPRICE,
+				pIMAGE1,
+				pIMAGE2,
+				pCONTENT,
+				pSTOCK,
+				phit,
+				pdiscount
+				from product
+				where pid = #{pid}
+
+	</select>
+	
+	<update id="productupdate" parameterType="kr.co.korea.beans.ProductBean">
+		
+		<include refid="check"></include>
+	
+	</update>
+	
+	<update id="producthitadd" parameterType="Integer">
+		<![CDATA[
+		update product
+		set phit=phit+1
+		where pID=#{pID}
+		]]>
+	</update>
+
+</mapper>
