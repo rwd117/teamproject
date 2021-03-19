@@ -14,5 +14,5 @@ Oracle Database 11g Express Edition : 11.2.0.2.0
 
 ## 사용 언어
 
-# Java , # JavaScript, # Css, # JQuery,
+# Java , JavaScript, Css, JQuery, 
 
