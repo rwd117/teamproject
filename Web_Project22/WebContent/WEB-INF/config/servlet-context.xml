@@ -62,6 +62,8 @@
     <interceptor>
     	<mapping path="/user/modify"/>
     	<mapping path="/user/logout"/>
+    	<mapping path="/cart/*"/>
+    	<mapping path="/orders/*"/>
     	<mapping path="/board/*"/>
     	<exclude-mapping path="/board/main"/>
     	<beans:bean class="kr.co.korea.interceptor.CheckLoginInterceptor"/>

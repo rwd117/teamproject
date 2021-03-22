@@ -1,18 +1,60 @@
-$(document).ready(function() { 
-	$('#favorite').on('click', function(e) 
-{ var bookmarkURL = window.location.href; 
-var bookmarkTitle = document.title; 
-var triggerDefault = false; 
-if (window.bar && window.bar.addPanel) { 
-	window.bar.addPanel(bookmarkTitle, bookmarkURL, ''); 
-	} else if ((window.bar && (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)) || (window.opera && window.print)) {
-var $this = $(this); 
-$this.attr('href', bookmarkURL); 
-$this.attr('title', bookmarkTitle); 
-$this.attr('rel', 'bar'); 
-$this.off(e); 
-triggerDefault = true; } 
-	else if (window.external && ('AddFavorite' in window.external)) { 
-		window.external.AddFavorite(bookmarkURL, bookmarkTitle); } 
-	else { 
-			alert((navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.'); } return triggerDefault; }); });
+function addCart(a,b){
+	var addCarturl = getContextPath()+"/"+"cart/cart";
+	var c_m_IDx = a;
+	var c_p_ID = b;
+	var cAmount= $('#cAmount').val();
+	console.log(addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount);
+	console.log(isNaN(cAmount));
+	if(isNaN(cAmount)){
+		cAmount = 1;
+	console.log(cAmount);	
+	}
+	
+	//유저 고유번호,게시물 고유번호, 수량
+	$.ajax({
+		url : addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount,
+		type : 'POST',
+		dataType: 'json',
+		success : function(result){
+			
+			check(result.result,a);
+			
+						
+		},error : function(result){
+			
+			console.log("지금 오류나는 거임? 설마?");
+		}
+	});
+}
+
+function check(value,a){
+	var rootpath=getContextPath(),
+		subpath="/cart/cart?",
+		midx="midx="+a;
+		console.log(value);
+	if(value==="insertsuccess"){
+	
+		if(confirm("장바구니로 가시겠습니까?") == true){
+ 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+	}else {
+		
+		if(confirm("이미 장바구니에 있는 상품입니다. 수량이 추가 되었습니다. 장바구니로 가시겠습니까?") == true){
+	 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+		
+	}
+};
+
+function getContextPath() {
+    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+}

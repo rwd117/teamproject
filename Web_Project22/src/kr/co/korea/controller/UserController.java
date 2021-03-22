@@ -246,4 +246,8 @@ public class UserController {
 		return "/user/memberdelete_ok";
 	}
 
+	@GetMapping("/not_login")
+	public String notlogin() {
+		return "/user/not_login";
+	}
 }

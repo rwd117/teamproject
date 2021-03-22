@@ -19,112 +19,11 @@
 <link href='../css/productContent.css' rel='stylesheet'>
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/wish.js"></script>
 </head>
 <body>
-	<script type="text/javascript">
-function addCart(){
-	var addCarturl = "${conPath}cart/cart";
-	var c_m_IDx = ${loginUserBean.midx};
-	var c_p_ID = ${productbean.pID};
-	var cAmount= $('#cAmount').val();
-	console.log(addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount);
-	
-	
-	//유저 고유번호,게시물 고유번호, 수량
-	$.ajax({
-		url : addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount,
-		type : 'POST',
-		dataType: 'json',
-		success : function(result){
-			
-			check(result.result);
-			
-						
-		},error : function(result){
-			
-			console.log("지금 오류나는 거임? 설마?");
-		}
-	});
-}
-
-function check(value){
-	var rootpath=${conPath},
-		subpath="cart/cart?",
-		midx="midx="+${loginUserBean.midx};
-		console.log(value);
-	if(value==="insertsuccess"){
-	
-		if(confirm("장바구니로 가시겠습니까?") == true){
- 	 	
-			location.href=rootpath+subpath+midx;
-	
-		}else{
-			return;
-		}
-	}else {
-		
-		if(confirm("이미 장바구니에 있는 상품입니다. 수량이 추가 되었습니다. 장바구니로 가시겠습니까?") == true){
-	 	 	
-			location.href=rootpath+subpath+midx;
-	
-		}else{
-			return;
-		}
-		
-	}
-};</script>
-	<script type="text/javascript">
-function WISH(){
-	var WISHurl = "${conPath}wishlist/wish";
-	var c_m_IDx = ${loginUserBean.midx};
-	var c_p_ID = ${productbean.pID};
-	var wAmount= $('#cAmount').val();
-	console.log(WISHurl+'/'+c_m_IDx+'/'+c_p_ID+'/'+wAmount);
-	
-	
-	//유저 고유번호,게시물 고유번호, 수량
-	$.ajax({
-		url : WISHurl+'/'+c_m_IDx+'/'+c_p_ID+'/'+wAmount,
-		type : 'POST',
-		dataType: 'json',
-		success : function(result){
-			
-			check1(result.result);
-			
-						
-		},error : function(result){
-			
-			console.log("지금 오류나는 거임? 설마?");
-		}
-	});
-}
-
-function check1(value){
-	var rootpath=${conPath},
-		subpath="wishlist/wish?",
-		midx="midx="+${loginUserBean.midx};
-		console.log(value);
-	if(value==="wishadd"){
-	
-		if(confirm("WISHLIST로 가시겠습니까?") == true){
- 	 	
-			location.href=rootpath+subpath+midx;
-	
-		}else{
-			return;
-		}
-	}else {
-		
-		if(confirm("이미 WISHLIST에 있는 상품입니다.  WISHLIST로 가시겠습니까?") == true){
-	 	 	
-			location.href=rootpath+subpath+midx;
-	
-		}else{
-			return;
-		}
-		
-	}
-};
+<script type="text/javascript">
 function replybutton(a){
 	var re_rid = a;//게시물 번호
 	var re_mIDx = ${loginUserBean.midx} ;
@@ -381,12 +280,12 @@ function replyupdateok(re_ID){
 
 											<c:if test="${loginUserBean.mlevel == 0 }">
 												<input type="button" class="btn" value="addCart"
-													onClick="addCart();">
+													onClick="addCart(${loginUserBean.midx},${productbean.pID});">
 												<input type="button" value="go to Cart" class="btn"
 													onclick="location.href='${conPath }cart/cart?midx=${loginUserBean.midx}'">
 													
 												
-												<input type="button" class="heartbtn"  onclick="WISH();">
+												<input type="button" class="heartbtn"  onclick="WISH(${loginUserBean.midx},${productbean.pID});">
 													
 											</c:if>
 											<c:if test="${loginUserBean.mlevel > 0 }">

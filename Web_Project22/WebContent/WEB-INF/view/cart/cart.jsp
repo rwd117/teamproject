@@ -125,7 +125,6 @@ function cartlist(){
 			cartitem +='<span class="jssumprice">'+viewsumprice+'</span>';
 			cartitem +='</td>';
 			cartitem +='<td>';
-			cartitem +='<input type="button" value="주문하기"><br/>';
 			cartitem +='<input type="button" value="삭제하기" onclick="deletecheck('+this.cID+')">';
 			cartitem +='</td>';
 			cartitem +='</tr>';

@@ -41,15 +41,16 @@ public class WishRestController {
 		wishBean.setwAmount(wAmount);
 		
 		int check= wishService.wishcheck(wishBean);
-		System.out.println(check);
+		
 		if(check ==0) {
 			wishService.wishadd(wishBean);
 			map.put("result", "insertsuccess");
 			
 		}else if(check == 1) {
-			wishService.wishamountadd(wishBean);
+			
 			map.put("result", "updatesuccess");
-			}
+		
+		}
 			
 	}
 	 catch (Exception e) {
