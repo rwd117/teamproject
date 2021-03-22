@@ -22,7 +22,7 @@
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
 <script language="javascript">
-        function showPopup() { window.open("${conPath}popup/memberdelete", "veiwimg", "width=500, height=300, left=300, top=800, toolbar=no,scrollbars=no,status=no,location=no"); }
+        function showPopup() { window.open("${conPath}user/memberdelete", "veiwimg", "width=500, height=300, left=300, top=800, toolbar=no,scrollbars=no,status=no,location=no"); }
 </script>
 </head>
 

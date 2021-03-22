@@ -69,6 +69,13 @@ public class ProductController {
 							  ProductBean productbean,
 							  Model model) {
 		
+		ProductBean best = new ProductBean();
+		best.setPro_all(1);
+		best.setPro_best(1);
+		
+		List<ProductBean> bestlist = productService.getproductInfolist(scri,best);
+		
+		model.addAttribute("bestlist",bestlist);
 		
 		productbean.setP_sub_idx(sub_idx);
 		productbean.setP_top_idx(top_idx);

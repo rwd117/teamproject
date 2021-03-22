@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Product List</title>
-<link href='../css/productList.css' rel='stylesheet'>
+<link href='productList.css' rel='stylesheet'>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="../js/jquery-ui.min.js"></script>
@@ -36,7 +36,16 @@ $(document).ready(function(){
 	<div id="productList_wrap">
 		<div id="productList">
 			<div class="subject">
-				<span>&nbsp; NEW IN &nbsp;</span>
+				
+				<span><c:set value="${top_idx}" var="top"/>
+			<c:forEach items="${topmenulist}" var="obj">
+				<c:if test="${top eq obj.top_idx }">
+					${obj.top_name}
+				</c:if>
+			</c:forEach>&nbsp; NEW IN &nbsp;</span>
+			
+			
+			
 			</div>
 			<c:if test="${not empty admin }">
 				<div class="right">
@@ -56,9 +65,20 @@ $(document).ready(function(){
 							<td>
 								<div class="productImg">
 									<a href="${conPath}product/productContent?pID=${obj.pID}">
-										<img src="${conPath }upload/${obj.pIMAGE1 }" width="100%"/>	
+										<img src="${conPath }upload/${obj.pIMAGE1 }" />	
 									</a>
 								</div>
+								<p id="buttonp">
+								<span class="span1"> 
+								<a href="#"><img id="span_icon"
+										src="../img/z.png"></a> 
+										<a href="#"><img id="span_icon"
+										src="../img/x.png"></a> 
+										<a href="#"><img id="span_icon"
+										src="../img/c.png"></a> 
+										<a href="#"><button class="popup1" onclick="showPopup()"><img id="span_gif" src="../img/v.gif"></button></a>
+								</span>
+							</p>
 								<div class="productName">
 									<a href="${conPath}product/productContent?pID=${obj.pID}">
 									     ${obj.pNAME}

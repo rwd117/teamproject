@@ -17,11 +17,11 @@ $(function(){
         $('#aside').toggleClass('open');
         if($('#aside').hasClass('open')){
             $('#aside').stop().animate({left:0},500);
-            $('.btn1').find('img').attr({'src':'../img/menu11.png'});
+            $('.btn1').find('img').attr({'src':'img/menu11.png'});
         }
         else{
             $('#aside').stop().animate({left:'-400px'},500);
-            $('.btn1').find('img').attr({'src':'../img/menu11.png'});
+            $('.btn1').find('img').attr({'src':'img/menu11.png'});
 }
         
     });

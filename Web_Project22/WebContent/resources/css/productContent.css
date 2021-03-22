@@ -1,215 +1,253 @@
 @charset "UTF-8";
 *{
-	margin:0 auto;
-	padding:0;
-	box-sizing: border-box;
+   margin:0 auto;
+   padding:0;
+   box-sizing: border-box;
 }
-
+ 
 table{
-	border-spacing:0;
+   border-spacing:0;
     border-collapse: collapse;
     margin:0;
+    margin-left:20px;
     padding:0;
 }
-
+tbody{
+	margin-left:20px;
+	padding-left:20px;
+}
 #productContent_wrap{
-	height:1500px;
-	position:relative;
-	left:0px;
-	top:200px;
+   margin: 0 auto;
+   width: 1300px;
 }
-
 #top{
-	position:absolute;
-	width:1200px;
-	height:800px;
-	left:50%;
-	top:0px;
-	transform:translate(-50%, 0px);	
+   margin: 0 auto;
+   
+   
 }
+.productImage{
+   margin: 0 auto;
+   padding: 20px;    
+    position: relative;
+   float: left;
+   margin-top:50px;
+    margin-left:50px;
+    width: 550px;
+   height: 550px;
+    box-sizing: border-box;
+ }
+ #product_info{
+   margin: 0 auto;
+   padding: 20px;    
+    position: relative;
+   float: left;
+    margin-left:50px;
+    width: 600px;
+   height: 600px;
+    box-sizing: border-box;
+ }
+ .pimage{
+    width: 500px;
+    height: 500px;
+    margin-top:50px;
+    padding: 50px;
+    margin-left:50px;
+ }
 
-#productImage{
-	width:700px;
-	position:absolute;
-	left:0;
-	top:0;
-	transform:translate(0px, 0px);
-	text-align:center;
-}
 
-.pImage img{
-	width:500px;
-	margin:100px;
-}
-
-#product_info{
-	position:absolute;
-	width:500px;
-	left:700px;
-	top:150px;
-	transform:translate(0px, -150px);
-	z-index:99999;
-	
-}
 
 #accordion > h3{
-	background-color: white;
-	color: black;
-	font-size: 0.9em;
-	font-weight: bold;
-	border:0;
-	border-bottom : 1px solid lightgrey;
-	border-radius : 0;
-	margin:0px;
-	padding:20px 0;
-	outline:0;
+   background-color: white;
+   color: black;
+   font-size: 1.2em;
+   font-weight: bold;
+   border:0;
+   border-bottom : 1px solid lightgrey;
+   border-radius : 0;
+   margin:0px;
+   padding:20px 0;
+   outline:0;
 }
 
 #accordion > div{
-	border: 0;
-	outline:0;
-	font-size: 0.7em;
-	padding:20px;
-	border-bottom : 1px solid lightgrey;
+   border: 0;
+   outline:0;
+   font-size: 0.9em;
+   padding:20px;
+   border-bottom : 1px solid lightgrey;
 }
 
 #productPrice th, td{
-	font-size: 0.9em;
-	padding:20px 0;
-	text-align:left;
+   font-size: 1em;
+   padding:20px 0;
+   text-align:left;
 }
 
 
 #productPrice span{
-	font-size:0.85em;
-	color:red;
+   font-size:1em;
+   color:red;
 }
 
 .btn{
-	outline:0;
-	background-color:white;
-	font-size:0.9em;
-	border:1px solid lightgrey;
-	height:40px;
-	width:200px;
-	text-align:center;
-	margin:5px;
-	float:left;
+   outline:0;
+   background-color:white;
+   font-size:1em;
+   border:1px solid lightgrey;
+   height:50px;
+   width:300px;
+   text-align:center;
+   margin:5px;
+   float:left;
 }
 
 .heartbtn{
-	height:40px;
-	width:40px;
-	background:url('../img/heart0.jpg');
-	background-size:cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	outline:0;
-	border:0;
-	cursor:pointer;
-	margin:5px;
-	float:left;
+   height:40px;
+   width:40px;
+   background:url('../img/heart0.jpg');
+   background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   outline:0;
+   border:0;
+   cursor:pointer;
+   margin:5px;
+   float:left;
+   color: darkgray;
 }
 
 .heartbtn:hover{
-	height:40px;
-	width:40px;
-	background:url('../img/heart.jpg');
-	background-size:cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	outline:0;
-	border:0;
-	cursor:pointer;
+   height:40px;
+   width:40px;
+   background:url('../img/heart.jpg');
+   background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
+
+   cursor:pointer;
+   color: crimson;
 }
 
 .btn:hover{
-	border:1px solid black;
-	cursor: pointer;
-	color:black;
+   border:1px solid black;
+   cursor: pointer;
+   color:black;
 }
 
-.guestBtn{
-	width:500px;
-	outline:0;
-	background-color:white;
-	font-size:0.8em;
-	border:1px solid lightgrey;
-	padding:15px 0;
-	margin-top:15px;
-	color:lightgrey;
-}
+.guestBtn{width:500px;
+   outline:0;
+   background-color:white;
+   font-size:0.8em;
+   border:1px solid lightgrey;
+   padding:10px 0;
+   margin-top:10px;
+   color:lightgrey;
 
+}
 .guestBtn:hover{
-	border:1px solid black;
-	cursor: pointer;
-	color:black;
+   border:1px solid black;
+   cursor: pointer;
+   color:black;
 }
 
 #bottom{
-	position:absolute;
-	width:1200px;
-	height:500px;
-	lineheight:500px;
-	text-align:center;
-	left:50%;
-	top:700px;
-	transform:translate(-50%, 0px);	
+   margin: 0 auto;   
+   position: relative;
 }
 
-.bottomInfo{
-	height:700px;
-	text-align:center;
+#bottomInfo{
+ margin: 0 auto;
+ width: 1250px;
 }
 
-.bottomInfo img{
-	width:400px;
-	height:400px;
+#bottomInfo #pImage{
+   width: 500px;
+   height: 500px;
+   margin: 0 auto;
+   margin-top: 100px;
+
 }
 
-.pContent{
-	padding-top:50px;
-	text-align:center;
+#pContent{
+   width: 1000px;
+   height: 1500px;
+   margin: 0 auto;
+position: relative;
+
+}
+#reviewList{
+   margin: 0 auto;
+   width: 1250px;
+   position: relative;
+
+}
+#reviewList table{
+   margin: 0 auto;
+   width: 1000px;
+   position: relative;
 }
 
-.reviewList table{
-	width:1200px;
-	border-spacing:0;
-    margin-bottom:100px;
+#reviewList td{
+   font-size: 0.8em;
+   text-align: center;
+   border-bottom: 1px solid lightgrey;
+   margin:0;
+   padding:20px 10px;   
+
 }
 
-.reviewList td{
-	font-size: 0.8em;
-	text-align: center;
-	border-bottom: 1px solid lightgrey;
-	margin:0;
-	padding:20px 10px;	
-}
-
-#writer, #date, #hit {
-	width:150px;
+ #writer, #date, #hit {
+   width:150px;
 }
 
 
 #title{
-	width: 750px;
-	text-align:left;
+   width: 750px;
+   text-align:left;
 }
 
 .paging{
-	text-align:center;
-	font-size:0.9em;
+   margin: 0 auto;
+   width: 1000px;
+   
+}
+.pagination{
+   margin: 0 auto;
+   width: 900px;
+   text-align:center;
+   font-size:0.9em;
+   line-height: 30px;
+   margin-left: 100px;
+}
+.pagination li{
+   margin-left: 150px;
+   border:black;
+   margin-left: 250px;
+}
+.btn btn-outline-primary{
+   width: 200px;
+   margin-left: 250px;
+}
+#replywrite{
+   outline:0;
+   background-color:white;
+   font-size:0.9em;
+   border:1px solid lightgrey;
+   height:40px;
+   width:200px;
+   text-align:center;
+   margin:5px;
+   
 }
 
 #firstrow{
-	border:0;
-	border-bottom:2px solid black;
-	font-size: 1.2em;
-	font-weight:bold;
-	text-align:left;
+   border:0;
+   border-bottom:2px solid black;
+   font-size: 1.2em;
+   font-weight:bold;
+   text-align:left;
 }
 
 .left{
-	text-align:left;
-}
-
+   text-align:left;
+} 

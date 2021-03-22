@@ -41,7 +41,7 @@ ul {
  #contents1 .topArea{
     position: relative;
     top: 0px;
-    width: 1240px;
+    width: 1500px;
     height: 30px;
     line-height: 30px;
     margin: 0px auto;  
@@ -50,6 +50,7 @@ ul {
 
 #contents1 .menu1 ul a{
     margin: 20px;
+    font-size:1em;
     height: 50px;
     float: left;
     
@@ -59,7 +60,8 @@ ul {
     text-decoration: underline;
 }
 #contents1 .menu2 ul a{
-	font-size:0.5em;
+	font-size:0.9em;
+	font-weight:bold;
     margin: 20px;
     height: 50px;
     float: right;    
@@ -152,7 +154,7 @@ header .inner {
     border:1px solid blueviolet;
 }
 header .inner1 {
-    width: 1084px;
+     width: 1400px;
     height: 75px;
     margin: 0 auto;
 }
@@ -163,6 +165,7 @@ header .btn1 {
     height: 75px;
     float: left;
    margin:0;
+   margin-left: 10px;
     border:1px solid white;
 }
 
@@ -171,7 +174,7 @@ header .btn1 {
 
 header .sideMenu3{
     float: left;
-    width: 300px;
+    width: 330px;
     height: 50px;
     margin: 15px 0 0 0;
     margin-left: 30px;
@@ -180,7 +183,7 @@ header .sideMenu3{
 }
 
 header .sideMenu3 input{
-    width: 200px;
+    width: 230px;
     height: 45px;
     border: white;
     font-size: 20px;
@@ -201,15 +204,19 @@ header .btn2 {
 /* 상위메뉴 */
 header .menu3 {
     float: right;
-    width: 650px;
+    width: 910px;
     height: 75px;    
     
 }
 header .menu3 .mainMenu1 {
     float: left;  
-    margin:10px 10px 5px 5px;
-    line-height: 30px;
-    font-size:0.7em;
+    font-size: 1.1em;
+    line-height:30px;
+    font-weight:bold;
+    padding-top:10px;
+    padding-left:5px;
+    margin:8px;
+    
     color: white;   
     
 }

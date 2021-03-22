@@ -23,7 +23,7 @@ $(function(){
     //슬라이드 이동함수
     function goToSlide(index) {
         $slideGroup.animate({
-            left: -100*index + '%' },1000);
+            left: -100*index + '%' },4000);
         curIndex=index;
 
         updateNav();
@@ -82,7 +82,7 @@ $(function(){
         timer=setInterval(function(){
             var nextIndex = (curIndex+1)%slideCount;
             goToSlide(nextIndex);
-        },2000);
+        },3000);
     }
     startTimer();
     

@@ -27,7 +27,22 @@ public class ProductBean {
 	private int pro_rowStart;
 	private int pro_rowEnd;
 	private String pro_keyword;
+	private int pro_best;//전체중에서 hit가 높은 순으로
+	private int pro_all;//상품의 전체 
 	
+	
+	public int getPro_all() {
+		return pro_all;
+	}
+	public void setPro_all(int pro_all) {
+		this.pro_all = pro_all;
+	}
+	public int getPro_best() {
+		return pro_best;
+	}
+	public void setPro_best(int pro_best) {
+		this.pro_best = pro_best;
+	}
 	public String getPro_keyword() {
 		return pro_keyword;
 	}

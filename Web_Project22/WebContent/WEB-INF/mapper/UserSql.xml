@@ -7,7 +7,7 @@
 <insert id="addUserInfo" parameterType="kr.co.korea.beans.UserBean">
 <![CDATA[
 	insert into MEMBER(midx,mname,mid,mpw,memail,maddress,maddress2,mbirth,mphone,mpost)
-	 values(user_seq.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddress},#{maddress2}, #{mbirth},#{mphone},#{mpost})
+	 values(member_seq.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddress},#{maddress2}, #{mbirth},#{mphone},#{mpost})
 ]]>
 </insert>
 <!--  로그인 정보 가져오기 select -->

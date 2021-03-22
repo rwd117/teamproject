@@ -33,12 +33,7 @@
 				<fieldset>
 					<legend>로그인 입력폼</legend>
 					<div class="input">
-						<c:if test="${logcheck == false }">
-							<div class="alert alert-danger">
-								<h3>로그인 실패</h3>
-								<p>아이디 비밀번호를 확인해주세요</p>
-							</div>
-						</c:if>
+						
 						<p>
 							<form:input path="mid" placeholder="아이디" class="textform"></form:input>
 						</p>

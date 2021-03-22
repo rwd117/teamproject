@@ -26,7 +26,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <script language="javascript">
-        function showPopup() { window.open("${conPath}popup/pwupdate", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
+        function showPopup() { window.open("${conPath}user/pwupdate", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
 </script>
 
 </head>

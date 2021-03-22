@@ -134,7 +134,7 @@ header .inner {
     border:1px solid blueviolet;
 }
 header .inner1 {
-    width: 1084px;
+    width: 1560px;
     height: 75px;
     margin: 0 auto;
 }
@@ -143,7 +143,7 @@ header .btn1 {
     width: 75px;
     height: 75px;
     float: left;
-    margin-left: 30px;
+    margin-left: 10px;
     border:1px solid white;
 }
 /* 로고 */
@@ -152,6 +152,7 @@ header h1 {
     height: 70px;
     float: left;
     margin-top: 20px;
+    margin-left:20px;
     overflow: hidden;
     color:white; 
 }
@@ -164,7 +165,7 @@ header h1:hover {
 
 header .sideMenu3{
     float: left;
-    width: 400px;
+    width: 305px;
     height: 50px;
     margin: 15px 0 0 0;
     margin-left: 30px;
@@ -173,7 +174,7 @@ header .sideMenu3{
 }
 
 header .sideMenu3 input{
-    width: 300px;
+    width: 230px;
     height: 45px;
     border: white;
     font-size: 20px;
@@ -181,6 +182,7 @@ header .sideMenu3 input{
 }
 header .sideMenu3 input:focus{
     outline: none;
+    
     
   }
 header .btn2 {  
@@ -194,14 +196,18 @@ header .btn2 {
 /* 로그인 */
 header .menu2 {
     float: right;
-    width: 320px;
-    height: 70px;    
+    width: 890px;
+    height: 70px; 
+    
     
 }
 header .menu2 ul a{
     float: left;
-    font-size: 0.7em;
-    margin:5px;
+    font-size: 0.9em;
+    line-height:30px;
+    font-weight:bold;
+    padding-top:10px;   
+    margin:8px;
     color:white; 
 }
 header .menu2 ul a:hover{
@@ -229,25 +235,27 @@ header .inner.sticky{
     background-color: rgb(0, 0, 0);
 }
 #nav2 {
-    width: 1084px;
+    width: 1350px;
     height: 50px;
     margin-left: auto;
     margin-right: auto;
 }
 
 nav .mainMenu {
-    margin-right:12px;
-    margin-left:12px;
+    margin-right:16px;
+    margin-left:16px;
+    padding-left:5px;
     float: left;
     text-align: center;
     line-height: 80px;
+    font-weight:bold;
 
 }
 nav .mainMenu a {
     width: 100%;
     display: block;
     color:white;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 nav ul > .mainMenu:hover > a {
     color:blueviolet;
@@ -260,7 +268,7 @@ nav .subMenu li a {
     line-height: 36px;
     text-align:center;
     text-indent: 10px;
-    font-size: 15px;
+    font-size: 1em;
     color: white;
 }
 nav .subMenu li a:hover {
@@ -270,19 +278,34 @@ nav .subMenu li a:hover {
 
 /* 중간컨텐츠부분 */
 #contents2{
-    margin: 0 auto;  
+    margin: 0 auto; 
+    position: relative; 
+}
+#contents3{
+    margin: 0 auto; 
+    position: relative;
+   height: 3600px;
 }
 #top{margin: 0 auto;
-}
-
-#top, #section{
-    margin: 0 auto;
-    background:white ;
+ background:white ;
     position: relative;
     margin-top: 80px;
     padding-bottom: 50px;
-    width: 1250px;
-    overflow: hidden;  
+    width: 1350px;
+    height: 750px;
+    box-sizing: border-box;
+    border-bottom: gainsboro solid 1px;
+}
+
+#section{
+    margin:0 auto;
+    background:white ;
+    position: relative;
+    
+    padding-bottom: 50px;
+     position: relative;
+    width: 1350px;
+    height: 1150px;
     box-sizing: border-box;
     border-bottom: gainsboro solid 1px;
 }
@@ -317,7 +340,7 @@ nav .subMenu li a:hover {
     right: calc(100% - 50px)
 }
 #top .nex{
-    left: calc(100% - 400px)
+    left: calc(100% - 510px)
 } 
 
 
@@ -338,14 +361,28 @@ nav .subMenu li a:hover {
 #top .right .img5:hover{
     transform: translate(+10px,+10px);
 }
+#subject_name{
+    width: 1400px;
+    height: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+#span_topmenu_name{
+  font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    width: 1350px;
+    height: 50px;
+}
 #best{
     margin: 0 auto;  
-    width: 1250px;
-    height: 100px;
+    width: 1400px;
+    height: 50px;
 }
 #best  ul{
-    margin:0px 300px 50px 300px;
-    width: 600px;
+	margin:10px 300px 10px 300px;
+    width: 800px;
     height: 50px;
     border-radius: 14px;
     border: black solid 1px;
@@ -354,29 +391,47 @@ nav .subMenu li a:hover {
     padding-top: 10px;
     text-align: center;
     box-sizing: border-box;
+     
 }
 #best  li a{
     font-size: 1.5em;
     font-weight: bold;
     color: ghostwhite;    
 }
-#best ul:hover{
+#best ul a:hover{
     color: blueviolet;
 } 
-#best  ul li:hover{
+#best  ul li :hover{
     transform: matrix(1.1, 0, 0, 1.1, 0, 0);
     color: blueviolet;
 }
+#section1{
+    position: relative;
+    width: 1350px;
+    margin:0 auto;
+    height: 1050px;
+    border: gray 1px;
 
- #section .left{
-    width: 900px;
+}
+#section1 .left .boximage:hover{
+    transform: translate(+10px,+10px);
+}
+
+ #section1 .left{
     float: left;
+    width: 310px;
+    height: 400px;
+    padding: 20px;
+     margin-left:20px;
+    background-color: #fff;
+    margin-top:50px;
     box-sizing: border-box;
 }
-#section #image{
-    background-size: 280px 250px;   
-    width: 280px;
-    height: 250px;
+#section1 #image{
+    background-size: 300px 300px;   
+    width: 300px;
+    height: 300px;
+    box-sizing: border-box;
 }
 #buttonp{
     margin-top: 8px;
@@ -387,72 +442,55 @@ nav .subMenu li a:hover {
     height: 20px;
 }
 #span_icon{
-    background-size: 30px 14px;   
-    width: 30px;
-    height: 14px;
+    background-size: 17px 17px;   
+    width: 17px;
+    height: 17px;
+    line-height:20px;
+    background-color:black;
 }
 
 #span_gif{
-    background-size: 14px 14px;   
-    width: 14px;
-    height: 14px;
+     background-size: 17px 17px;   
+    width: 17px;
+    height: 17px;
+    line-height:20px;
+    background-color:black;
 }
 
 
-#section .left .box{
+#section1 .left .box{
+    background-size: 300px 300px;   
     width: 300px;
-    height: 350px;
-    float: left;
-    padding: 5px;
+    height: 300px;
     box-sizing: border-box;
  
 }
- #section .left .box h3,p{
+ #section1 .left .box h3,p{
     color: rgb(75, 74, 74);
     text-align: center;
+    line-height:20px;
     font-size: 14px;
 }
-#section .left .box h3,p:hover{
+#section1 .left .box h3,p:hover{
     color: blueviolet;
 } 
-#section .left .box:hover{
+#section1 .left .box:hover{
     transform: matrix(1.1, 0, 0, 1.1, 0, 0);
 }
 
- #section .right{
-    width: 300px;
-    height: 600px;
-    padding: 5px;
-    float: left;
-}
-#section .right .img12{
-    background-size: 290px 550px;   
-    width: 290px;
-    height: 550px;
-}
-#section .right h3,p{
-    color: rgb(75, 74, 74);
-    text-align: center;
-    font-size: 14px;
-}
-#section .right h3,p:hover{
-    color: blueviolet;
-} 
-#section .right:hover{
-    transform: matrix(1.1, 0, 0, 1.1, 0, 0);
-}
+ 
 
 /* <!-- 가로로긴박스 --> */
 div .side3{
     margin:0 auto;
     padding: 10px;
-    width: 1250px;
+    width: 1450px;
     height: 100px;
 }
 
 div .side3 h3{
     margin:50px 300px 0px 300px;
-    width: 600px;
+     width: 800px;
     height: 50px;
     border-radius: 14px;
     border: black solid 1px;
@@ -471,50 +509,79 @@ div .side3 h3:hover{
     color: blueviolet;
 } 
 div .side3:hover{
-    transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+   transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+    color: blueviolet;
 }
 
 /* 박스 12개 부분 */
-div .section1 {
+#section2 {
     position: relative;
-    overflow: hidden;
-}
-div .container{
-    width: 1250px;
     margin:0 auto;
+    width:1350px;
+    height:1400px;
+}
+#section2 .container{
+    width: 1350px;
+    margin:0 auto;
+    position: relative;
 }
 
-.section1 .quick{
+#section2 .quick{
     float: left;
     width: 310px;
     height: 400px;
     padding: 10px;
+    margin-left:20px;
     background-color: #fff;
-    margin-top:50px;
+    margin-top:80px;
     box-sizing: border-box;
    
 }
-.section1 .quick #image{
-    background-size: 280px 300px;   
-    width: 280px;
+#section2 .quick .img14{
+     background-size: 300px 300px;   
+    width: 300px;
     height: 300px;
+    box-sizing: border-box;
 }
-.section1 .quick h3,p {
+#section2 .quick h3,p {
     color: rgb(75, 74, 74);
     text-align: center;
     font-size: 14px;
 } 
-.section1 .quick h3,p:hover{ 
+#section2 .quick h3,p:hover{ 
     color: blueviolet;
 } 
-.section1 .quick:hover{
+#section2 .quick:hover{
     transform: matrix(1.1, 0, 0, 1.1, 0, 0);
  }
  /* transform: translate(+10px,+10px); */
  .paging{
-	text-align:center;
-	font-size:0.9em;
-	margin: 20px 0 100px 0;
+   margin: 0 auto;
+   width: 1350px;
+   
+}
+.pagination{
+   margin: 0 auto;
+   margin-left:650px;
+   width: 800px;
+   text-align:center;
+   font-size:1em;
+   line-height: 30px;
+   font-weight: bold;
+  float: left;
+}
+.pagination li{
+  text-align:center;
+	margin-top: 30px;
+   border:black;
+  margin-left: 10px;
+  border:1px solid gray;
+  border-width:15px;
+  float: left;
+}
+.btn btn-outline-primary{
+   width: 600px;
+   float: left;
 }
 
 /* 푸터부분 */

@@ -301,14 +301,14 @@ function replyupdateok(re_ID){
 	<c:import url="/WEB-INF/view/include/top_menu.jsp" />
 	<div id="productContent_wrap">
 		<div id="top">
-			<div id="productImage">
+			<div class="productImage">
 				<div class="pImage">
 
-					<img src="${conPath}upload/${productbean.pIMAGE1}" alt="상품사진1">
+					<img src="${conPath}upload/${productbean.pIMAGE1}" width="500px" height="500px" alt="상품사진1">
 
 				</div>
 			</div>
-			<div id="product_info">
+			<div class="product_info">
 				<div id="accordion">
 
 					<h3>${productbean.pNAME }</h3>
@@ -325,11 +325,15 @@ function replyupdateok(re_ID){
 
 
 						<table>
+						<tr>
+								<th>상품명</th>
+								<td>${productbean.pNAME }</td>
+							</tr>
 							<tr>
 								<th>판매가격</th>
 								<td><fmt:formatNumber value="${productbean.pPRICE}" pattern="#,###,###" />원</td>
 							</tr>
-							<c:if test="${productbean.pdiscount != 0 }">
+							
 								<tr>
 									<th>할인가격</th>
 									<td>
@@ -337,7 +341,7 @@ function replyupdateok(re_ID){
 										<fmt:formatNumber value="${discountedPrice }" pattern="#,###,###" />원 
 										<span>(${productbean.pdiscount }%할인) </span></td>
 								</tr>
-							</c:if>
+							
 							<tr>
 								<th>수량</th>
 								<td><select name="cAmount" id="cAmount">
@@ -350,7 +354,29 @@ function replyupdateok(re_ID){
 								</select> 개</td>
 							</tr>
 							<tr>
-								<td colspan="2"><c:choose>
+								<th>옵션</th>
+								<td><select name="size" id="">
+								<option value='직접입력'>FREE</option>
+										<option value='1'>S</option>
+										<option value='2'>M</option>
+										<option value='3'>L</option>
+								<option value='직접입력'>없음</option>		
+								</select> 개</td>
+							</tr>
+							<tr>
+							<tr>
+								<th>적립금</th>
+								<td><c:set var="discountedPrice" value="${productbean.pPRICE*(1-(productbean.pdiscount*0.01)) }" />
+										<fmt:formatNumber value="${discountedPrice }" pattern="#,###,###" />원 
+										<span>${(productbean.pPRICE*0.01)} (원)</span></td>
+							</tr>
+							<tr>
+								<th>배송비</th>
+								<td>2,500원(50,000원 이상 구매시 무료)</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<c:choose>
 										<c:when test="${loginUserBean.userLogin == true }">
 
 											<c:if test="${loginUserBean.mlevel == 0 }">
@@ -384,22 +410,22 @@ function replyupdateok(re_ID){
 
 
 		<div id="bottom">
-			<div class="bottomInfo">
-				<div class="pImage">
+			<div id="bottomInfo">
+				<div id="pImage">
 					<c:if test="${ not empty dto.pImage2 }">
 						<img src="${conPath}/productImg/${dto.pImage2 }" alt="상품사진2">
 					</c:if>
 					<c:if test="${empty dto.pImage2  }">
 					</c:if>
 				</div>
-				<div class="pContent">${dto.pContent }</div>
+				<div id="pContent">${dto.pContent }</div>
 			</div>
 
 
 
 
 
-			<div class="reviewList">
+			<div id="reviewList">
 
 				<table>
 					<tr>

@@ -90,18 +90,18 @@
 	<right-sidebar>
 	<div class="right">
 		<ul class="subMenu2">
-			<li><a href="${conPath }cart/cart"><img src="../img/ico_cart_b.png"> CART</a></li>
-			<li><a href="${conPath }orders/order"><img src="../img/ico_order_b.png"> ORDER</a></li>
-			<li><a href="${conPath }wishlist/wish"><img src="../img/my_icon2.png"> WISHLIST</a></li>	
-            <li><a href="${conPath }qtable/notice"><img src="../img/rsi_22.png"> EVENT</a></li>
-            <li><a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="../img/lsi_theday_off.png"> Q&A</a></li>
-			<li><a href="${conPath }review/reviewwrite"><img src="../img/lsi_best50_off.png"> REVIEW</a></li>
+			<li><a href="${conPath }cart/cart"><img src="img/ico_cart_b.png"> CART</a></li>
+			<li><a href="${conPath }orders/order"><img src="img/ico_order_b.png"> ORDER</a></li>
+			<li><a href="${conPath }wishlist/wish"><img src="img/my_icon2.png"> WISHLIST</a></li>	
+            <li><a href="${conPath }qtable/notice"><img src="img/rsi_22.png"> EVENT</a></li>
+            <li><a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="img/lsi_theday_off.png"> Q&A</a></li>
+			<li><a href="${conPath }review/reviewwrite"><img src="img/lsi_best50_off.png"> REVIEW</a></li>
 		</ul>
 		<button class="up1">
-			<img src="../img/up1.png">
+			<img src="img/up1.png">
 		</button>
 		<a href="#"><button class="up">
-				<img src="../img/up.png">
+				<img src="img/up.png">
 			</button></a>
 	</div>
 	</right-sidebar>

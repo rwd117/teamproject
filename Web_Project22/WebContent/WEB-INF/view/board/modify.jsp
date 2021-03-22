@@ -45,7 +45,7 @@ window.onload = function(){
 			<table border="1" class="table">
 				<th>IMAGE</th>
 				<td><c:if test="${modifyContentBean.content_file != null }">
-								<img src="${conPath}upload/${modifyContentBean.content_file}" width="100%"/>
+								<img src="${conPath}upload/${modifyContentBean.content_file}" width="15%"/>
 								<form:hidden path="content_file"/>
 								<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->  
 							</c:if>

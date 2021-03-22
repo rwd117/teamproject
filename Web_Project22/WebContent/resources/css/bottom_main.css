@@ -23,18 +23,19 @@ ul {
      margin: 0;
      padding: 0;
      display: block;
+     
  }
  
 /* 푸터부분 */
 #footer{
-    position: relative;
-    margin:0 auto;
-    margin-top: 100px;
-    height: 80px;
+   position: relative;
+	text-align: center;
+	margin-top:50px;
+    height: 80px;   
     background-color: black;
 
 }
- #footer .left{
+ #footer .left{ 
     float: left;
     width: 60%;
     height: 100px;
@@ -60,6 +61,7 @@ ul {
 
 }
 #footer .right{
+	margin:0 auto;
     width: 250px;
     height: 40px;
     float: left;

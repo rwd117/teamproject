@@ -12,6 +12,8 @@
 <title>Insert title here</title>
 <link href="../css/memberList.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="../js/1.js"></script>
+<script src="../js/4.js"></script>
 <script>
 $(document).ready(function(){
 

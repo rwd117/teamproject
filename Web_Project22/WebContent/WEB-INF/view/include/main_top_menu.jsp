@@ -53,7 +53,7 @@
         	 		<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          			</c:forEach>
 					<li><a href="#" id="favorite">★ FAVORITE</a></li>
-					<li><a href="#">▼ DESKTOP ICON</a></li>
+					<li><a href="#">▼ DESKTOP</a></li>
 					</c:when>
 					<c:otherwise>
 					<c:choose>
@@ -66,10 +66,10 @@
         	 		<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>
          			</c:forEach>
 					<li><a href="#" id="favorite">★ FAVORITE</a></li>
-					<li><a href="#">▼ DESKTOP ICON</a></li>
+					<li><a href="#">▼ DESKTOP</a></li>
 					</c:when>
 					<c:when test="${loginUserBean.mlevel > 0}">
-						<li><a>${loginUserBean.mid}님 반갑습니다</a></li>
+						<li><a>${loginUserBean.mid}님</a></li>
 						<li><a href="${conPath }user/logout">LOGOUT</a></li>
 						<li><a href="${conPath }review/edit">REVIEW</a></li>
 						<li><a href="${conPath }qtable/notice">NOTICE</a></li>

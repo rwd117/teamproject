@@ -236,13 +236,13 @@ header .inner.sticky{
 #contents3{
     position: relative;
     margin: 0 auto;
-    width: 1024px;  
+    width: 1050px;  
 }
 #contents3 input{
     background-color:rgba(161, 73, 135, 0.116);
     font-size: 2em;
     font-weight: bold;
-    width: 1000px;
+    width: 1050px;
     height: 50px;
     border:rgba(128, 128, 128, 0.185) 1px;
     color:rgb(121, 113, 113);
@@ -254,12 +254,12 @@ header .inner.sticky{
 #contents4{
     position: relative;
     margin: 0 auto;
-    width: 1024px;  
+    width: 1050px;  
 }
 .table{
     position: relative;
     margin-top:20px;
-    width: 1000px;
+    width: 1050px;
     border:rgba(128, 128, 128, 0.185) 1px;
     border-collapse: collapse;
     border-style: groove ;
@@ -283,7 +283,7 @@ header .inner.sticky{
     color:rgb(66, 64, 64);    
 }
 .tr20 textarea {
-	width:1000px; 
+	width:1050px; 
 	height:300px; 
     resize:none;
 }

@@ -69,7 +69,87 @@ ul {
 #top .nex{
     left: calc(100% - 610px)
 } 
+table{
+   border-spacing:0;
+    border-collapse: collapse;
+    margin:0;
+    margin-left:20px;
+    padding:0;
+}
+tbody{
+	margin-left:20px;
+	padding-left:20px;
+}
+table th, td{
+   font-size: 1em;
+   padding:20px 0;
+   text-align:left;
+}
+.btn{
+   outline:0;
+   background-color:white;
+   font-size:1em;
+   border:1px solid lightgrey;
+   height:50px;
+   width:300px;
+   text-align:center;
+   float:left;
+}
 
+.heartbtn{
+   height:40px;
+   width:40px;
+   background:url('../img/heart0.jpg');
+   background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   outline:0;
+   border:0;
+   cursor:pointer;
+   margin:5px;
+   float:left;
+   color: darkgray;
+}
+
+.heartbtn:hover{
+   height:40px;
+   width:40px;
+   background:url('../img/heart.jpg');
+   background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
+
+   cursor:pointer;
+   color: crimson;
+}
+
+.btn:hover{
+   border:1px solid black;
+   cursor: pointer;
+   color:black;
+}
+
+.guestBtn{width:300px;
+   outline:0;
+   background-color:white;
+   font-size:0.8em;
+   border:1px solid lightgrey;
+   padding:10px 0;
+   margin-top:50px;
+   color:lightgrey;
+
+}
+.guestBtn:hover{
+   border:1px solid black;
+   cursor: pointer;
+   color:black;
+}
+
+
+#productPrice span{
+   font-size:1em;
+   color:red;
+}
 
 .right{
     width: 430px;
@@ -81,16 +161,6 @@ ul {
 }
 .right li{
     line-height: 35px;
-}
-.right input{
-    margin-top:50px;
-    width: 100px;
-    height: 30px;
-    font-size: 14px;
-    border-radius: 13px;
-    border:none;
-    color:white;
-    background-color:rgb(69, 80, 102);
 }
 .right input:hover{
     background-color:rgba(161, 73, 135, 0.116);

@@ -44,11 +44,11 @@
             <c:forEach var="obj" items="${list }">
             <tr>
        
-            <td>${obj.q_idx }</td>
-            <td><a href="${conPath}qtable/view?q_idx=${obj.q_idx}">${obj.q_title }</a></td>
-            <td>${obj.q_name }</td>
-            <td>${obj.q_date }</td>
-            <td>${obj.q_hit } </td>
+            <td style="text-align: center;">${obj.q_idx }</td>
+            <td style="text-align: center;"><a href="${conPath}qtable/view?q_idx=${obj.q_idx}">${obj.q_title }</a></td>
+            <td style="text-align: center;">${obj.q_name }</td>
+            <td style="text-align: center;">${obj.q_date }</td>
+            <td style="text-align: center;">${obj.q_hit } </td>
             </tr>
             </c:forEach> 
             </table>
@@ -66,17 +66,26 @@
 			   </c:when>
 			</c:choose>
         </div>
-        <div class="content3">
-            <ul>
-                <li><a href="#"><img src="../img/btn_page_prev.gif" alt="이전"></a></li>
-                <li class="page"><a href="#" >1</a></li>
-                <li class="page"><a href="#" >2</a></li>
-                <li class="page"><a href="#" >3</a></li>
-                <li class="page"><a href="#" >4</a></li>
-                <li class="page"><a href="#" >5</a></li>
-                <li><a href="#"><img src="../img/btn_page_next.gif" alt="다음"></a></li>
-            </ul>
-        </div>
+        <div class="paging">
+				<ul class="pagination">
+						<c:if test="${pagemaker.prev }">
+							<li>
+								<a class="btn btn-outline-primary"
+								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagemaker.startPage }"
+							end="${pagemaker.endPage }" var="pageNum">
+							<li><a class="btn btn-outline-primary"
+								href="${conPath}product/productContent${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+						</c:forEach>
+						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
+							<li><a class="btn btn-outline-primary"
+								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							</li>
+						</c:if>
+				</ul>
+			</div>
         <div class="content4">
             <ul>
                 검색어 <select>

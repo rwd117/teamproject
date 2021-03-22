@@ -234,7 +234,8 @@ header .inner.sticky{
 
 /* 중간컨텐츠부분 */
 #contents2{
-   margin: 0 auto;  
+   margin: 0 auto;
+   height: 1000px;  
 }
 #contents2 h2{
     margin-top: 50px;
@@ -242,18 +243,19 @@ header .inner.sticky{
 #contents3{
     position: relative;
     margin: 0 auto;
-    width: 1024px;  
+    width: 1050px;
+    height: 1000px;  
 }
 .cart{
     position: relative;
     margin: 0 auto;
-    width: 1024px;  
+    width: 1050px;  
 }
 .cart ul{
     background-color:rgba(161, 73, 135, 0.116);
     font-size: 2em;
     font-weight: bold;
-    width: 1024px;
+    width: 1050px;
     height: 40px;
     border:rgba(128, 128, 128, 0.185) 1px;
     text-align: center;
@@ -269,7 +271,7 @@ header .inner.sticky{
 .table1{
     position: relative;
     margin-top:20px;
-    width: 1024px;
+    width: 1050px;
     border:rgba(128, 128, 128, 0.185) 1px;
     border-collapse: collapse;
     border-style: groove ;
@@ -290,7 +292,7 @@ header .inner.sticky{
 .content2{
     position: relative;
     margin:0 auto;
-    width: 1240px;
+    width: 1050px;
     margin-top:20px;
     
     
@@ -321,10 +323,32 @@ header .inner.sticky{
   .content4{
     position: relative;
     margin:0 auto;
-    width: 1240px;
+    width: 1050px;
     height: 50px;
     float: center;
     margin-top: 30px;
+}
+.paging{
+   margin: 0 auto;
+   width: 1050px;
+   
+}
+.pagination{
+   margin: 0 auto;
+   width: 600px;
+   text-align:center;
+   font-size:0.9em;
+   line-height: 30px;
+   margin-left: 100px;
+}
+.pagination li{
+   margin-left: 150px;
+   border:black;
+   margin-left: 250px;
+}
+.btn btn-outline-primary{
+   width: 200px;
+   margin-left: 250px;
 }
 
 /* 푸터부분 */

@@ -47,8 +47,8 @@
             <c:forEach var="obj" items="${qnaTopList}" >
         	 <li style="text-align: center;"><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}" style="padding_top:10px; font-size: 1.2em;  font-weight: bold; line-height: 50px; color:rgb(69, 80, 102);"> ${obj.board_info_name }</a><li>
          	</c:forEach>
-                <div class="tabCon notice" >                
-                    <table class="table table-striped" >
+                <div class="tabCon_notice" >                
+                    <table class="table_table_striped" >
                         <thead>
                             <tr>
                                 <th scope="cols">번호</th>                               
@@ -102,45 +102,28 @@
 	<div class="content3">
 	
 	<ul>
-		<c:choose>
-			<c:when test="${pageBean.prevPage <= 0 }">
-			<li><a href="#"><img src="../img/btn_page_prev.gif" alt="이전"></a></li>
-			</c:when>
-			<c:otherwise>
-			<li class="page-item">
-			<a href="${conPath }board/main?board_info_idx=${board_info_idx}&page=${pageBean.prevPage}" class="page-link">이전</a>
-			</li>
-			</c:otherwise>
-			</c:choose>
-			<!-- [1][2][3][4][5][6][7][8][9][10] -->	
-					<c:forEach var="idx" begin="${pageBean.min}" end="${pageBean.max}">
-					    <c:choose>
-					    	<c:when test="${idx==pageBean.currentPage }">
-								<li class="page-item active">
-									<a href="${conPath }board/main?board_info_idx=${board_info_idx}&page=${idx}" class="page-link">
-									[ ${idx } ]
-									</a>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item">
-									<a href="${conPath }board/main?board_info_idx=${board_info_idx}&page=${idx}" class="page-link">
-									[ ${idx } ]
-									</a>
-								</li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:choose>
-					<c:when test="${pageBean.max >= pageBean.pageCnt }">
-			<li><a href="#"><img src="../img/btn_page_next.gif" alt="다음"></a></li>
-			</c:when>
-					<c:otherwise>
-						<li class="page-item">
-							<a href="${conPath }board/main?board_info_idx=${board_info_idx}&page=${pageBean.nextPage}" class="page-link"><img src="../img/btn_page_next.gif" alt="다음"></a>
-						</li>
-					</c:otherwise>
-				</c:choose>
+		<div class="paging">
+				<ul class="pagination">
+						<c:if test="${pagemaker.prev }">
+							<li>
+								<a class="btn btn-outline-primary"
+								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagemaker.startPage }"
+							end="${pagemaker.endPage }" var="pageNum">
+							<li><a class="btn btn-outline-primary"
+								href="${conPath}product/productContent${pagemaker.makeQuery(pageNum)}">[${pageNum }]</a></li>
+						</c:forEach>
+						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
+							<li><a class="btn btn-outline-primary"
+								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							</li>
+						</c:if>
+				</ul>
+			</div>
+
+
 		</ul>
 	</div>
 	

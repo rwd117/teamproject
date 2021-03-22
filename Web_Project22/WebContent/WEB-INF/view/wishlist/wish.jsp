@@ -83,11 +83,11 @@ $.ajax({
 		wishitem +='<td><img src="'+rootpath+'upload/'+this.w_pIMAGE1+'"width="100px" height="100px" alt="상품사진1"></td>';
 		wishitem +='<td>'+this.w_pNAME+'</td>';
 		wishitem +='<td scope="row">';
-		wishitem +='<input type="hidden" class="jsprice" value="'+price+'">';		
-		wishitem +='<span>'+viewprice+'</span>';
+		wishitem +='<input type="number" class="jsamount" value="'+this.wAmount+'"min="1" max="'+this.w_pSTOCK+'"step="1" onchange="wishamountchange('+this.wID+')">';					
 		wishitem +='</td>';
 		wishitem +='<td>';
-		wishitem +='<input type="number" class="jsamount" value="'+this.wAmount+'"min="1" max="'+this.w_pSTOCK+'"step="1" onchange="wishamountchange('+this.wID+')">';
+		wishitem +='<input type="hidden" class="jsprice" value="'+price+'">';
+		wishitem +='<span>'+viewprice+'</span>';
 		wishitem +='</td>';	
 		wishitem +='<td>';
 		wishitem +='<input type="hidden" class="jspoint" value="'+point+'">';
@@ -99,7 +99,6 @@ $.ajax({
 		wishitem +='<span class="jssumprice">'+viewsumprice+'</span>';		
 		wishitem +='</td>';			
 		wishitem +='<td>';
-		wishitem +='<input type="button" value="주문하기"><br/>';
 		wishitem +='<input type="button" value="삭제하기" onclick="deletecheck('+this.wID+')">';
 		wishitem +='</td>';
 		wishitem +='</tr>';
@@ -389,39 +388,7 @@ function cartcheck(kind){
              <!-- 탭 -->
              <ul class="section1">
              <div class="tabArea">
-                <ul class="tabList">
-                    <li ><a href="#" class="tabBtn">국내배송상품 (${wAmount})</a>
-                    <!--  -->
-                    <div class="tabCon notice"  style="overflow:auto">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr class="tr2">
-                                    <th scope="cols"><input class="th1" type="checkbox" id="allcheck" onclick="check(1);"></th>
-                                    <th scope="cols">이미지</th>
-                                    <th scope="cols">상품정보</th>
-                                    <th scope="cols">수량</th>
-                                    <th scope="cols">판매가</th>
-                                    <th scope="cols">적립금</th>
-                                    <th scope="cols">배송구분</th>
-                                    <th scope="cols">합계</th>
-                                    <th scope="cols">선택</th>
-                                </tr>
-                            </thead>
-                        <tbody id="wishlistdiv">
-						</tbody>
-                                <tr id="tr13" >
-                                    <th colspan="10" scope="row">
-                                        <p>[일반배송]</p>                    
-                                        <a>상품구매금액 + 배송비 = 합계 : 원</a>
-                                    </th>
-                                </tr>
-                              
-                            </tbody>
-                            </table>    
-                    </div>
-                </li>
-                
-        			             
+                <ul class="tabList">	             
                 <li>
                     <a href="#" class="tabBtn">해외배송상품 (0)</a>
                     <div class="tabCon notice">
@@ -460,7 +427,7 @@ function cartcheck(kind){
                                     <td>해외배송</td>
                                     <td>원<br/>해외배송</td>
                                     <td>원</td>
-                                    <td><a href="" onclick=""><input type="button" value="카트넣기"><br/><input type="button" value="삭제하기"></a></td>
+                                    <td><a href="" onclick=""><input type="button" value="삭제하기"></a></td>
                                 </tr>
                                 <tr class="tr13">
                                     <th colspan="10" scope="row">
@@ -471,6 +438,37 @@ function cartcheck(kind){
                             </table>
                         </div>
                     </li>
+                    <li ><a href="#" class="tabBtn">국내배송상품 (${wAmount})</a>
+                    <!--  -->
+                    <div class="tabCon notice"  style="overflow:auto">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="tr2">
+                                    <th scope="cols"><input class="th1" type="checkbox" id="allcheck" onclick="check(1);"></th>
+                                    <th scope="cols">이미지</th>
+                                    <th scope="cols">상품정보</th>
+                                    <th scope="cols">수량</th>
+                                    <th scope="cols">판매가</th>
+                                    <th scope="cols">적립금</th>
+                                    <th scope="cols">배송구분</th>
+                                    <th scope="cols">합계</th>
+                                    <th scope="cols">선택</th>
+                                </tr>
+                            </thead>
+                        <tbody id="wishlistdiv">
+						</tbody>
+                                <tr id="tr13" >
+                                    <th colspan="10" scope="row">
+                                        <p>[일반배송]</p>                    
+                                        <a>상품구매금액 + 배송비 = 합계 : 원</a>
+                                    </th>
+                                </tr>
+                              
+                            </tbody>
+                            </table>    
+                    </div>
+                </li>
+                
                 </ul>
              </div>
         </ul>

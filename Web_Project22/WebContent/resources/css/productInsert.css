@@ -31,8 +31,9 @@ table{
 td{
 	padding:15px 0px 15px 10px;
 	border-top:1px solid lightgrey;
-	font-size:0.8em;
+	font-size:1em;
 }
+
 
 
 .title{
@@ -45,7 +46,7 @@ td{
 	width:50%;	
 	outline:0;
 	border:0;
-	font-size:0.8em;
+	font-size:1.2em;
 }
 
 #pCONTENT{

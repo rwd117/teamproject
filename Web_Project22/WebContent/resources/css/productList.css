@@ -12,11 +12,20 @@ table{
     margin: 0 auto;
 }
 
+#productList_wrap{
+	margin:0 auto;
+	position: relative;
+}
+#productList{
+	margin:0 auto;
+	width: 1450px;
+}
+
 @media screen and (max-width:768px){
 	#product_wrap{
 		display: block;
 		margin: 0 auto;
-		width:100%;
+		width:80%;
 	}
 	#product_wrap{
 		display:inline-block;
@@ -32,13 +41,13 @@ table{
 		margin: 0 auto;	
 	}
 }
-.subject{
+div .subject{
 	text-align:center;
 	font-weight:bold;
 	margin:200px 0 100px 0;
 }
 
-span{
+div .subject span{
 	padding-bottom:10px;
 	border-bottom:2px solid lightgrey;
 }

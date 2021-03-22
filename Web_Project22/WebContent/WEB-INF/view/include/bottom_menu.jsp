@@ -14,7 +14,7 @@
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/slidescript.js"></script>
 <script src="../js/1.js"></script>
-<script src="../js/4.js"></script>
+<script src="../js/3.js"></script>
 <script src="../js/2.js"></script>
 
 </head>

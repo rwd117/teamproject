@@ -22,7 +22,7 @@
 <body>
 
 	<c:import url="/WEB-INF/view/include/top_menu.jsp" />
-	<div id="productContent_wrap">
+	<div id="productContent_wrap" style="height:1500px">
 		<form name="readform" method="post">
 		<input type="hidden" id="pID" name="pID" value="${pID}">
 		<input type="hidden" id="page" name="page" value="${scri.page}">

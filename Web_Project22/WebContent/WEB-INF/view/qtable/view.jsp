@@ -63,7 +63,7 @@
             </tr>
             <tr class="tr20">
                 
-                <td colspan="4">${readQtableBean.q_content}</td>
+                <td colspan="4" style="height:300px;">${readQtableBean.q_content}</td>
             
 		
             

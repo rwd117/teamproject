@@ -25,18 +25,18 @@
         <!-- 중간에 컨텐츠부분 -->
         <div id="contents2">
             <div id="contents3">
-                <input type="button" value="Q & A">
+                <input class="qna" type="button" value="Q & A">
         </div>
        
             <div id="contents4">
            
-           <form action="${conPath}board/read" method="get" >
+           
             <table border="1" class="table">
              
              
          <c:if test="${board.content_file !=null}">
                 <th>IMAGE</th>
-                <td colspan="3"><img src="${conPath}upload/${board.content_file }" width="15%"/>		</td>	
+                <td colspan="3"><img src="${conPath }upload/${readContentBean.content_file }" width="15%"/></td>	
             </c:if>               
                 </table>
             
@@ -44,29 +44,29 @@
         
             <tr>
                 <th>글번호</th>
-                <td colspan="3"><input type="text" id="content_idx" value="${board.content_idx }" readonly></td>  
+                <td colspan="3"><input type="text" id="content_idx" value="${content_idx}" readonly></td>  
             </tr>
             <tr>
                 <th>제목</th>
-                <td colspan="3">${board.content_subject }</td>  
+                <td colspan="3"><input type="text" id="content_subject" name="board_subject" class="form-control" value="${readContentBean.content_subject }" disabled="disabled"/></td>  
             </tr>
             <tr>
                 <th>작성자</th>
-                <td colspan="3" >${board.content_write_name}</td>
+                <td colspan="3" ><input type="text" id="content_write_name" name="board_writer_name" class="form-control" value="${readContentBean.content_write_name }" disabled="disabled"/></td>
                 
             </tr>
          
              <tr>
                 <th>등록일</th>
-                <td>${content_date }</td>  
+                <td><input type="text" id="content_date" name="board_date" class="form-control" value="${readContentBean.content_date }" disabled="disabled"/></td>  
             </tr>
             <tr>
                 <th>조회수</th>
-                <td>${content_hit}</td> 
+                <td><input type="text" id="content_hit" name="board_hit" class="form-control" value="${content_hit }" disabled="disabled"/></td> 
             </tr>
             <tr class="tr20">
                 
-                <td colspan="4">${content_text }</td>
+                <td colspan="4"><textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none" disabled="disabled">${readContentBean.content_text }</textarea></td>
           
  
 		
@@ -80,8 +80,8 @@
         
 		<c:if test="${readContentBean.content_writer_idx  >= 0}">
 		
-		<input type="hidden" name="page" value="${map.content_idx }" />
-	<input type="hidden" name="content_bno" value="${content_bno }" />
+		<input type="hidden" name="content_idx" value="${content_idx }" />
+	<input type="hidden" name="content_bno" value="${readContentBean.content_bno }" />
 	<input type="hidden" name="page" value="${page }" />
 		
           <a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="../img/btn_list.gif" alt="목록"></a>
@@ -90,7 +90,7 @@
              <c:choose>
 			<c:when test="${loginUserBean.mlevel > 0}">
 			<a href="${conPath }board/delete?board_info_idx=${board_info_idx}&content_idx=${content_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
-			<a href="moveReply();"><img src="../img/btn_reply.gif" alt="답변"></a>
+			<a href="${conPath }board/reply?content_bno=${readContentBean.content_bno}&board_info_idx=${board_info_idx}&content_idx=${content_idx}&page=${page}"><img src="../img/btn_reply.gif" alt="답변"></a>
 			
 			</c:when>
 			
@@ -102,12 +102,40 @@
 			
            </c:when>
            	</c:choose>
+           	
+           	<div id="re_comment">
+                 <fieldset>
+        		<legend>댓글 입력</legend>
+                <p><strong>댓글달기</strong>
+                <span class="comments"> 
+                이름 : <input  id="comment_name" name="comment_name" fw-filter="isFill" fw-label="댓글작성자" fw-msg="" class="inputTypeText" placeholder="" value="" type="text"/></span>
+                비밀번호 : <input id="comment_password" name="comment_password" fw-filter="isFill" fw-label="댓글비밀번호" fw-msg="" value="" type="password"/>
+                <span class="secret displaynone"><label>비밀댓글</label></span><a href="#none" onclick="" class="displaynone">
+                <img src="../img/btn_co.gif" alt="관리자답변보기"></a></p>
+                 <div class="view">
+                 <textarea id="comment_text" name="comment" fw-filter="isFill" fw-label="댓글내용" fw-msg=""></textarea>                    
+                 <a href="#none" onclick="BOARD_COMMENT.comment_insert('/exec/front/Board/CommentWrite/4');" class="co_submit ">
+                 <img src="../img/btn_submit.gif" alt="확인"></a>
+                  </div>
+                 <!--   <p class="grade displaynone"></p>
+                   <p class="displaynone"> /  byte</p>
+                   <p class="captcha displaynone">
+                   <span class="ec-base-help txtInfo">왼쪽의 문자를 공백없이 입력하세요.(대소문자구분)</span>
+                        </p>-->
+                    </fieldset>
+        		</div>
+           	
+           	
+           	
+           	
+           	
+           	
 		
 		<script>
 
 function moveReply(){
 
-location="${conPath }board/reply?content_bno=${board.content_bno}&content_step=${board.content_step}&content_level=${board.content_level}";
+location="${conPath }board/reply?content_bno=${board.content_bno}&board_info_idx=${board_info_idx}&content_idx=${content_idx}&page=${page}";
 
 // board.jsp에서 버튼 누르면 Controller의 String reply 호출
 

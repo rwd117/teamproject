@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -62,7 +63,7 @@ public class BoardService {
 			
 			return file_name;
 		}
-	
+		
 	public String getBoardInfoName(int board_info_idx) {
 		return boardDao.getBoardInfoName(board_info_idx);
 	}
@@ -72,6 +73,7 @@ public class BoardService {
     	
 		return boardDao.getContentList(board_info_idx, rowBounds);
 	}
+    
 	public ContentBean getContentInfo(int content_idx) {
 		return boardDao.getContentInfo(content_idx);
 	}
@@ -105,6 +107,10 @@ public class BoardService {
 	public void qna_reply_delete(int content_bno) {
 		boardDao.qna_reply_delete(content_bno);
 	}
+	public void updatereply(int content_idx) {
+		 boardDao.updatereply(content_idx);
+
+}
 }
 		
 

@@ -23,9 +23,17 @@ create table MEMBER(
     mamount number(10) default 0
 );
 
+ALTER TABLE MEMBER ADD mdrop NUMBER(2) DEFAULT 1 NOT NULL;
+
 insert into member values(MEMBER_seq.nextval,'admin','admin','admin','111@gmail.com','서울','신천동','2021-02-22',sysdate,'111-1111-1111','06035',2,0);
 insert into member values(MEMBER_seq.nextval,'ddd','ddd','ddd','111@gmail.com','대구','신천동','2021-02-22',sysdate,'111-1111-1111','06035',0,0);
 insert into member values(MEMBER_seq.nextval,'aaa','aaa','aaa','111@gmail.com','대구','신천동','2021-02-22',sysdate,'111-1111-1111','06035',1,0);
 
 
 select * from member;
+
+update MEMBER
+	set mlevel=1
+	where midx=2
+
+

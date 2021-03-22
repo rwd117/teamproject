@@ -53,6 +53,7 @@ public class BoardDao {
 	public void qna_reply_delete(int content_bno) {
 		sqltemp.delete("board.qna_reply_delete", content_bno);
 	}
+	
 	public void qna_reply_up(Map<String, Object> map) {
 
 		sqltemp.update("board.qna_reply_up", map);
@@ -69,9 +70,9 @@ public class BoardDao {
 
 		}
 
-		public int updatereply(int content_idx) {
+		public void updatereply(int content_idx) {
 
-		return sqltemp.update("board.updatereply", content_idx);
+	sqltemp.update("board.updatereply", content_idx);
 
 }
 		public List<Map<String,Object>> selectreply() {

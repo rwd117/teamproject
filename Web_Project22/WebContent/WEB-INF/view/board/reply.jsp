@@ -39,16 +39,20 @@ window.onload = function(){
 	</div>
 	<div id="contents4">
 
-		<form:form action="${conPath }board/reply_pro" method="post"  enctype="multipart/form-data" onsubmit="return check();">
-			
+		<form:form action="${conPath }board/reply_pro" method="post"   modelAttribute="replyContentBean" enctype="multipart/form-data" >
+			<form:hidden path="content_idx"/>
+							<form:hidden path="content_board_idx"/>
+							<form:hidden path="content_bno"/>
+							<form:hidden path="content_level"/>
+							<form:hidden path="content_step"/>
 				<input type="hidden" name="board_info_idx" value="${board_info_idx }" />
 					<input type="hidden" name="page" value="${page }" />
 			<table border="1" class="table">
 				<th>IMAGE</th>
-				<td><c:if test="${content_file != null }">
-						<img src="${conPath }upload/${content_file }" width="100%"/>			
-							width="15%" />
-						<input type="hidden" value="${content_file}" />
+				<td><c:if test="${replyContentBean.content_file != null }">
+						<img src="${conPath }upload/${replyContentBean.content_file }" width="15%"/>			
+							
+						<form:hidden path="content_file"/>
 						<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->
 					</c:if>
 					</td>
@@ -62,29 +66,29 @@ window.onload = function(){
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td colspan="1">${board.content_subject }</td>
+					<td colspan="1"><form:input path="content_subject"  class="form-control"/></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${content_write_name }</td>
+					<td><form:input path="content_write_name" class="form-control"  readonly="true"/></td>
 
 				</tr>
 
 				<tr>
 					<th>등록일</th>
-					<td>${content__date }</td>
+					<td><form:input path="content_date" class="form-control" readonly="true"/></td>
 				</tr>
 				<tr>
 					<th>조회수</th>
-					<td>${content_hit }</td>
+					<td><form:input path="content_hit" class="form-control" readonly="true"/></td>
 				</tr>
 				<tr class="tr20">
-					<td colspan="2"><input type="text" name="content_text" value="${content_text }" id="editor"></td>
+					<td colspan="2"><form:textarea path="content_text" style="resize:none" id="editor"></form:textarea></td>
 				
 				<tr>
 				<tr>
 					<th>첨부파일</th>
-					<td colspan="1"><input type="file" name="content_file" value="${upload_file }" >
+					<td colspan="1"><form:input type="file" path="upload_file" class="form-control" accept="file/*"/>
 						
 					</td>
 				</tr>
@@ -98,7 +102,7 @@ window.onload = function(){
 				
 					<!-- reply의 그룹번호 안에 값 넘기기 -->
 					
- 					<a href="return check();"><img src="../img/btn_reply.gif" alt="답변"></a>
+ 					<form:button><img src="../img/btn_reply.gif" alt="답변"></form:button>
 					<a href="${conPath }board/delete?board_info_idx=${board_info_idx}&content_idx=${content_idx}"><img src="../img/btn_delete.gif" alt="삭제"></a>
 				</c:if>
 				<a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="../img/btn_list.gif" alt="목록"></a>

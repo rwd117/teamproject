@@ -14,13 +14,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>프로젝트</title>
-<link href="../css/menu.css" rel="stylesheet">
+<link href="../css/menulist.css" rel="stylesheet">
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/slidescript.js"></script>
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -32,7 +31,7 @@
 				.open(
 						"${conPath}popup/popup1?${conPath}product/productContent?pID=${obj.pID}",
 						"veiwimg",
-						"width=1050, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no");
+						"width=700, height=500, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no");
 	}
 </script>
 </head>
@@ -47,22 +46,23 @@
 	</div>
 	<!-- 중간에 컨텐츠부분 -->
 	<div id="contents2">
-		<h2>
-			<span>
+		<c:if test="${loginUserBean.mlevel > 0}">
+			<div class="right">
+				<a class="register" href="${conPath}/productInsertView.do"> 상품등록 </a>
+			</div>
+		</c:if>
+	<div id="contents3">
+		<h2 id="subject_name">
+			<span id="span_topmenu_name">
 			<c:set value="${top_idx}" var="top"/>
 			<c:forEach items="${topmenulist}" var="obj">
 				<c:if test="${top eq obj.top_idx }">
 					${obj.top_name}
 				</c:if>
 			</c:forEach>
-			
 			</span>
 		</h2>
-		<c:if test="${not empty admin }">
-			<div class="right">
-				<a class="btn" href="${conPath}/productInsertView.do"> 상품등록 </a>
-			</div>
-		</c:if>
+	
 
 					<div id="best">
 						<ul>
@@ -71,112 +71,38 @@
 
 					</div>
 					<!-- 중앙박스  -->
-					<div id="section">
-					<c:choose>
-						<c:when test="${empty productlist }">
+					
+							<div id="section">
+						<c:choose>
+						<c:when test="${empty bestlist }">
 								게시물이 없습니다!.
 						</c:when>
 						<c:otherwise>
-						<c:forEach var="obj" items="${productlist }">
+						<c:forEach var="obj" items="${bestlist }" begin="0" end="7">
+					
 						<div class="left">
 							<div class="box">
-								<div id="boximage">
-									<a href="${conPath }upload/${readContentBean.content_file }"><img src="${conPath }upload/${obj.pIMAGE1 }" class="img6"></a>
-								</div>
+								<a href="${conPath}product/productContent?pID=${obj.pID}">
+								<img src="${conPath }upload/${obj.pIMAGE1 }" class="boximage"></a>
 								<p id="buttonp">
 									<span class="span1"> 
-									<a href="#"><img id="span_icon" src="../img/z.png"></a>
-									 <a href="#"><img id="span_icon" src="../img/x.png"></a> 
-									 <a href="#"><img id="span_icon"	src="../img/c.png"></a> 
-									 <a href="#"><button class="popup1" onclick="showPopup()"><img id="span_gif" src="../img/v.gif"></button></a>
-									</span>
-								</p>
-								<a href="${conPath}product/productContent?pID=${obj.pID}">
-									<h3>${obj.pNAME }</h3>
-									<p>￦${obj.pPRICE }</p>
-								</a>
-							</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-					
-							
-						<div class="right">
-						<c:choose>
-						<c:when test="${empty productlist }">
-								게시물이 없습니다!.
-						</c:when>
-						<c:otherwise>
-						<c:forEach var="obj" items="${productlist }">
-							<div id="boximage">
-								<a href="${conPath}product/productContent?pID=${obj.pID}
-																		&page=${scri.page}
-																		&perPageNum=${scri.perPageNum}
-																		&keyword=${scri.keyword}">
-							<img src="${conPath }upload/${obj.pIMAGE1 }" class="img12"></a>
-							</div>
-							<p id="buttonp">
-								<span class="span1"> 
-								<a href="#"><img id="span_icon"
-										src="../img/z.png"></a> 
-										<a href="#"><img id="span_icon"
-										src="../img/x.png"></a> 
-										<a href="#"><img id="span_icon"
-										src="../img/c.png"></a> 
-										<a href="#"><button class="popup1" onclick="showPopup()"><img id="span_gif" src="../img/v.gif"></button></a>
-								</span>
-							</p>
-							<a href="#">
-								<h3>${obj.pNAME }</h3>
-								<p>￦${obj.pPRICE }</p>
-							</a>
-						
-					
-				</c:forEach>
-						</c:otherwise>
-			</c:choose>
-			</div>
-</div>
-					<!-- 가로로긴박스 -->
-					<div>
-						<article class="side3">
-							<div class="middle">
-								
-								<c:set value="${top_idx}" var="top"/>
-								<c:forEach items="${topmenulist}" var="obj">
-			<c:forEach items="${submenulist}" var="obj2">
-				<c:if test="${top eq obj.top_idx}">
-				<c:if test="${obj.top_idx eq obj2.sub_top_idx }">
-				<ul class="subMenu1">
-										<li>
-				<a href="${conPath}product/productList?top_idx=${obj.top_idx}&sub_idx=${obj2.sub_idx}">${obj2.sub_name }</a></li>
-				</ul>
-				</c:if>
-				</c:if>
-			</c:forEach>
-					</c:forEach>									
-							</div>
-						</article>
-					</div>
-					<!-- /* 박스 4개 부분  -->
-					<div class="section1">
-						<c:choose>
-						<c:when test="${empty productlist }">
-								게시물이 없습니다!.
-						</c:when>
-						<c:otherwise>
-						<c:forEach var="obj" items="${productlist }">
-					
-						<div class="container">
-							<div class="quick">
-								<a href="${conPath}product/productContent?pID=${obj.pID}"><img
-									src="${conPath }upload/${obj.pIMAGE1 }" class="img14"></a>
-								<p id="buttonp">
-									<span class="span1"> <a href="#"><img id="span_icon"
-											src="../img/z.png"></a> <a href="#"><img id="span_icon"
-											src="../img/x.png"></a> <a href="#"><img id="span_icon"
-											src="../img/c.png"></a> <a href="#"><img id="span_gif"
-											src="../img/v.gif"></a>
+									<c:choose>
+										<c:when test="${loginUserBean.userLogin == true }">
+
+											<c:if test="${loginUserBean.mlevel == 0 }"> 
+									<a href="#"><button value="wish" onclick="WISH();"><img id="span_icon"src="../img/icon_1.png"></button></a> 
+									<a href="#"><button class="addCart" onclick="addCart();"><img id="span_icon"src="../img/icon_2.png"></button></a>
+									</c:if> 
+									</c:when>
+									<c:otherwise>
+									<c:if test="${loginUserBean.userLogin == false }">
+									<a href="#"><button value="wish" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_1.png" alt="cart"></button></a> 
+									<a href="#"><button class="addCart" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_2.png" alt="wish"></button></a>
+													
+											</c:if>
+										</c:otherwise>
+									</c:choose>
+									<a href="#"><button class="popup1" onclick="showPopup()"><img id="span_icon"src="../img/icon_3.png" alt="look"></button></a>
 									</span>
 								</p>
 								<a href="${conPath}product/productContent?pID=${obj.pID}">
@@ -189,28 +115,227 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
-	
-	<div class="paging">
-		<c:if test="${startPage > BLOCKSIZE }">
-			<a href="${conPath }/productList.do?pageNum=${startPage-1}"> 〈
-				&nbsp; </a>
-		</c:if>
-		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<c:if test="${i eq pageNum }">
-				<b> &nbsp; ${i }</b>
-			</c:if>
-			<c:if test="${i != pageNum }">
-				<a href="${conPath }/productList.do?pageNum=${i }">&nbsp; ${i }</a>
-			</c:if>
-		</c:forEach>
-		<c:if test="${endPage < pageCnt }">
-			<a href="${conPath }/productList.do?pageNum=${endPage+1}"> &nbsp;
-				〉 </a>
-		</c:if>
-	</div>
+    
 
+			
+					<!-- 가로로긴박스 -->
+					<div>
+						<article class="side3">
+						
+							<div class="middle">
+								<c:set value="${top_idx}" var="top"/>
+								<c:forEach items="${topmenulist}" var="obj">
+			<c:forEach items="${submenulist}" var="obj2">
+								
+				<c:if test="${top eq obj.top_idx}">
+				<c:if test="${obj.top_idx eq obj2.sub_top_idx }">
+				<ul class="subMenu1">
+			<li><a href="${conPath}product/productList?top_idx=${obj.top_idx}&sub_idx=${obj2.sub_idx}" id="middle_name">${obj2.sub_name }</a></li>
+				</ul>
+				</c:if>
+				</c:if>
+						</c:forEach>
+					</c:forEach>						
+							</div>
+							
+						</article>
+					</div>
+					<!-- /* 박스 4개 부분  -->
+					<div class="section1">
+						<c:choose>
+						<c:when test="${empty productlist }">
+								게시물이 없습니다!.
+						</c:when>
+						<c:otherwise>
+						<c:forEach var="obj" items="${productlist }" begin="0" end="11">
+					
+						<div class="container">
+							<div class="quick">
+								<a href="${conPath}product/productContent?pID=${obj.pID}">
+								<img src="${conPath }upload/${obj.pIMAGE1 }" class="img14"></a>
+								<p id="buttonp">
+									<span class="span1">
+									<c:choose>
+										<c:when test="${loginUserBean.userLogin == true }">
+
+											<c:if test="${loginUserBean.mlevel == 0 }"> 
+									<a href="#"><button value="wish" onclick="WISH();"><img id="span_icon"src="../img/icon_1.png"></button></a> 
+									<a href="#"><button class="addCart" onclick="addCart();"><img id="span_icon"src="../img/icon_2.png"></button></a>
+									</c:if> 
+									</c:when>
+									<c:otherwise>
+									<c:if test="${loginUserBean.userLogin == false }">
+									<a href="#"><button value="wish" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_1.png"></button></a> 
+									<a href="#"><button class="addCart" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_2.png"></button></a>
+													
+											</c:if>
+										</c:otherwise>
+									</c:choose>
+									<a href="#"><button class="popup1" onclick="showPopup()"><img id="span_icon"src="../img/icon_3.png"></button></a>
+									</span>
+								</p>
+								<a href="${conPath}product/productContent?pID=${obj.pID}">
+									<h3>${obj.pNAME }</h3>
+									<p>￦${obj.pPRICE }</p>
+								</a>
+							</div>
+						</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
+			
 	</div>
+	<div class="paging">
+				<ul class="pagination">
+						<c:if test="${pagemaker.prev }">
+							<li>
+								<a class="btn btn-outline-primary"
+								href='${conPath}product/productList${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagemaker.startPage }"
+							end="${pagemaker.endPage }" var="pageNum">
+							<li><a class="btn btn-outline-primary"
+								href="${conPath}product/productList${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+						</c:forEach>
+						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
+							<li><a class="btn btn-outline-primary"
+								href='${conPath}product/productList${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							</li>
+						</c:if>
+						<form name="readform" method="post">
+						<input type="hidden" id="page" name="page" value="${scri.page}">
+						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+						</form>
+				</ul>
+			</div>
+	</div>
+	</div>
+	<script type="text/javascript">
+function addCart(){
+	var addCarturl = "${conPath}cart/cart";
+	var c_m_IDx = ${loginUserBean.midx};
+	var c_p_ID = ${productbean.pID};
+	var cAmount= $('#cAmount').val();
+	console.log(addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount);
+	
+	
+	//유저 고유번호,게시물 고유번호, 수량
+	$.ajax({
+		url : addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount,
+		type : 'POST',
+		dataType: 'json',
+		success : function(result){
+			
+			check(result.result);
+			
+						
+		},error : function(result){
+			
+			console.log("지금 오류나는 거임? 설마?");
+		}
+	});
+}
+
+function check(value){
+	var rootpath=${conPath},
+		subpath="cart/cart?",
+		midx="midx="+${loginUserBean.midx};
+		console.log(value);
+	if(value==="insertsuccess"){
+	
+		if(confirm("장바구니로 가시겠습니까?") == true){
+ 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+	}else {
+		
+		if(confirm("이미 장바구니에 있는 상품입니다. 수량이 추가 되었습니다. 장바구니로 가시겠습니까?") == true){
+	 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+		
+	}
+};</script>
+	<script type="text/javascript">
+function WISH(){
+	var WISHurl = "${conPath}wishlist/wish";
+	var c_m_IDx = ${loginUserBean.midx};
+	var c_p_ID = ${productbean.pID};
+	var wAmount= $('#cAmount').val();
+	console.log(WISHurl+'/'+c_m_IDx+'/'+c_p_ID+'/'+wAmount);
+	
+	
+	//유저 고유번호,게시물 고유번호, 수량
+	$.ajax({
+		url : WISHurl+'/'+c_m_IDx+'/'+c_p_ID+'/'+wAmount,
+		type : 'POST',
+		dataType: 'json',
+		success : function(result){
+			
+			check1(result.result);
+			
+						
+		},error : function(result){
+			
+			console.log("지금 오류나는 거임? 설마?");
+		}
+	});
+}
+
+function check1(value){
+	var rootpath=${conPath},
+		subpath="wishlist/wish?",
+		midx="midx="+${loginUserBean.midx};
+		console.log(value);
+	if(value==="wishadd"){
+	
+		if(confirm("WISHLIST로 가시겠습니까?") == true){
+ 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+	}else {
+		
+		if(confirm("이미 WISHLIST에 있는 상품입니다.  WISHLIST로 가시겠습니까?") == true){
+	 	 	
+			location.href=rootpath+subpath+midx;
+	
+		}else{
+			return;
+		}
+		
+	}
+};
+</script>
+
+
+
+
+
+<c:if test="${not empty CartMsg }">
+	<script>
+	alert('${CartMsg }');
+</script>
+</c:if>
+<c:if test="${not empty WISHMsg }">
+	<script>
+	alert('${WISHMsg }');
+</script>
+
+
+</c:if>
+	
 	<c:import url="/WEB-INF/view/include/bottom_menu.jsp" />
 
 

@@ -34,10 +34,12 @@ public class BoardController {
 	private UserBean loginUserBean;
 	
 	@GetMapping("/main")
-	public String main(int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page, Model model,ContentBean contentBean) {
+	public String main(int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page,
+			 Model model,ContentBean contentBean) {
 		
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("page", page);
+		
 		//DB�뿉�꽌 寃뚯떆�뙋�쓽�씠由꾩쓣 媛��졇�샂
 		String boardInfoName=boardService.getBoardInfoName(board_info_idx);//寃뚯떆�뙋�쓽 紐낆묶�쓣 媛��졇�삤湲� DB
 		model.addAttribute("boardInfoName",boardInfoName);
@@ -111,6 +113,7 @@ public class BoardController {
 		model.addAttribute("page", page);
 		
 		ContentBean tempContentBean=boardService.getContentInfo(content_idx);
+		contentBean.setContent_bno(tempContentBean.getContent_bno());
 		contentBean.setContent_write_name(tempContentBean.getContent_write_name()); //�옉�꽦�옄(異쒕젰)
 		contentBean.setContent_date(tempContentBean.getContent_date()); //�궇吏�(異쒕젰)
 		contentBean.setContent_subject(tempContentBean.getContent_subject()); //湲��젣紐�(異쒕젰)
@@ -130,15 +133,67 @@ public class BoardController {
 		System.out.println("수정성공");
 		return "/board/modify_success";
 		}
-	@GetMapping("/reply")
-	public String reply(ContentBean contentBean, int board_info_idx, int content_idx, int page, Model model) {
 	
+	@GetMapping("/read")
+	public String read(int board_info_idx, int content_idx, int page, Model model,@RequestParam(value = "content_hit", defaultValue = "0") int content_hit) {
+	    boardService.updatereply(content_idx);
+	    model.addAttribute("content_hit", content_hit);
+	    
+	    
+		ContentBean readContentBean=boardService.getContentInfo(content_idx);
+	    model.addAttribute("readContentBean", readContentBean);
+	    model.addAttribute("board_info_idx", board_info_idx);
+	    model.addAttribute("content_idx", content_idx);
+	    model.addAttribute("loginUserBean", loginUserBean);  //濡쒓렇�씤�븳 UserBean(session�쁺�뿭議댁옱�븯�뒗)
+	    model.addAttribute("page", page);
+		return "board/read";
+	
+	
+	}
+	
+	
+	
+	@GetMapping("/reply")
+	public String reply(@ModelAttribute("replyContentBean")ContentBean contentBean, int board_info_idx, int content_idx, int page, Model model) {
+		if(contentBean.getContent_idx() > 0)
+			//답글 작성일 경우
+			{	
+				//답글의 답글
+				if(contentBean.getContent_step() != 0)
+				{
+					//기존 글들 순서값 1 증가
+					boardService.qna_reply_up(contentBean);
+					//본인의 값을 부모글순서 + 1 로 설정 
+					contentBean.setContent_step(contentBean.getContent_step()+1);
+					//부모글의 답글이기 때문에 층수 + 1
+					contentBean.setContent_level(contentBean.getContent_level()+1);
+					System.out.println("답글의 답글" + contentBean.toString());					
+				}
+				//원글의 답글
+				if(contentBean.getContent_level() == 0)
+				{
+					//현재 작성된 마지막 글의 순서값을 가져온다.
+					ContentBean qnareplymax = boardService.qnareplymax(contentBean);
+					//새로 작성되는 글의 순서값을 마지막글의 순서값에 + 1 값으로 설정
+					contentBean.setContent_step(qnareplymax.getContent_step()+1);
+					//원글의 답글이기 때문에 층수 1로 설정
+					contentBean.setContent_level(1);
+					System.out.println("원글의 답글" + contentBean.toString());
+		
+				}
+		
+			}	
+		
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("content_idx", content_idx);
 		model.addAttribute("page", page);
 		
 					
 		ContentBean tempContentBean=boardService.getContentInfo(content_idx);
+		contentBean.setContent_bno(tempContentBean.getContent_bno());
+		contentBean.setContent_hit(tempContentBean.getContent_hit());
+		contentBean.setContent_level(tempContentBean.getContent_level());		
+		contentBean.setContent_step(tempContentBean.getContent_step());
 		contentBean.setContent_write_name(tempContentBean.getContent_write_name()); //
 		contentBean.setContent_date(tempContentBean.getContent_date()); //
 		contentBean.setContent_subject(tempContentBean.getContent_subject()); //
@@ -150,7 +205,11 @@ public class BoardController {
 		return "/board/reply";		
 	}
 	
-
+	@PostMapping("/reply_pro")
+	public String reply_pro(@ModelAttribute("replyContentBean")int board_info_idx, int content_idx, int page, Model model) {
+		return "/board/reply_success";
+	}
+	
 	@GetMapping("/delete")
 	public String delete(int board_info_idx, int content_idx, Model model) {
 		boardService.deleteContentInfo(content_idx); //DB(delete)
@@ -162,17 +221,5 @@ public class BoardController {
 	public String not_writer() {
 		return "/board/not_writer";
 	}
-	@GetMapping("/read")
-	public String read (int board_info_idx, int page, Model model, ContentBean contentBean,int content_idx) {
-			//@RequestParam(value = "content_idx") 
-			//@RequestParam(value = "content_bno") int content_bno,
-			//@RequestParam(value = "content_step") int content_step,
-			//@RequestParam(value = "content_level") int content_level) {
 	
-			//model.addAttribute("board",boardService.selectById(content_idx));
-			model.addAttribute("board_info_idx", board_info_idx);
-			model.addAttribute("loginUserBean", loginUserBean);  //濡쒓렇�씤�븳 UserBean(session�쁺�뿭議댁옱�븯�뒗)
-			model.addAttribute("page", page);
-		return "/board/read";
-	}
 }
