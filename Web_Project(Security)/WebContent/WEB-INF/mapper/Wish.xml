@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wish">
+
+<insert id="wishadd" parameterType="kr.co.korea.beans.WishBean">
+   <![CDATA[
+   insert into WISH(wID,w_mIDx,w_pID,wAmount)
+   values (WISH_seq.nextval,#{w_mIDx},#{w_pID},#{wAmount})
+   ]]>
+</insert>
+
+<select id="wishcheck" parameterType="kr.co.korea.beans.WishBean" resultType="Integer">
+<![CDATA[
+   select count(*) 
+   from WISH 
+   where w_pID=#{w_pID} and w_mIDx=#{w_mIDx}
+]]>
+</select>
+<update id="wishamountchange" parameterType="kr.co.korea.beans.CartBean">
+		update WISH
+		set wAmount=#{wAmount}
+		where w_pID=#{w_pID} and w_mIDx=#{w_mIDx} 
+	</update>
+<delete id="wishdelete" parameterType="Integer">
+   <![CDATA[
+   delete from WISH
+   where  wID=#{wID}
+]]>
+</delete>
+<update id="wishamountadd" parameterType="kr.co.korea.beans.WishBean">
+		<![CDATA[
+		update WISH
+		set wAmount=wAmount+1 
+		where w_mIDx=#{w_mIDx} and w_pID=#{w_pID}
+		]]>
+		
+	</update>
+
+
+
+<select id="wishgetinfo" resultType="kr.co.korea.beans.WishBean" parameterType="Integer">
+      <![CDATA[
+      select wis.wID as wID,
+            wis.wAmount as wAmount,
+                pro.pimage1 as w_pIMAGE1,
+                pro.pname as w_pNAME,
+                pro.pprice as w_pPRICE,
+                pro.pdiscount as w_pdiscount,
+                pro.pSTOCK as w_pSTOCK
+      from wish wis, member mem, product pro
+      where wis.w_mIDx = mem.midx and wis.w_pID=pro.pid and mem.midx=#{midx}
+      order by wis.wID asc
+      ]]>
+   </select>
+<select id="idxwishgetinfo" resultType="kr.co.korea.beans.WishBean" parameterType="Integer">
+		<![CDATA[
+		select wis.wID as wID,
+			   wis.wAmount as wAmount,
+       		   pro.pimage1 as w_pIMAGE1,
+       		   pro.pname as w_pNAME,
+       		   pro.pprice as w_pPRICE,
+       		   pro.pdiscount as w_pdiscount,
+       		   pro.pSTOCK as w_pSTOCK
+		from wish wis, product pro
+		where wis.w_pID=pro.pid and wis.wID=#{wID}
+		order by wis.wID asc
+		]]>
+	</select>
+
+<select id="wishinfobyid" parameterType="Integer" resultType="kr.co.korea.beans.WishBean">
+select w_midx,w_pid
+from wish
+where wid=#{wid}
+</select>
+
+</mapper>

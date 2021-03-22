@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+<insert id="addContentInfo" parameterType="kr.co.korea.beans.ContentBean">
+<selectKey keyProperty="content_idx" order="BEFORE" resultType="java.lang.Integer">
+	select content_seq.nextval from dual
+</selectKey>
+	<![CDATA[
+	insert into CONTENT_TABLE(content_idx,content_bno, content_subject, content_text,content_hit,
+	content_file, content_writer_idx, content_board_idx, content_date,content_level,content_step)
+	values(#{content_idx},#{content_idx}, #{content_subject}, #{content_text},#{content_hit},
+	#{content_file , jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx},sysdate,#{content_level},#{content_step})
+	]]>
+</insert>
+
+
+<select id="getBoardInfoName" parameterType="java.lang.Integer" resultType="java.lang.String">
+	<![CDATA[
+		select board_info_name 
+		from BOARD_INFO_TABLE
+		where board_info_idx=#{board_info_idx}
+	]]>
+</select>
+<select id="getContentList" parameterType="java.lang.Integer" resultType="kr.co.korea.beans.ContentBean">
+	<![CDATA[
+	select con.content_idx, 
+       con.content_subject, 
+       con.content_level,
+       con.content_bno,
+       con.content_hit,
+       con.content_step, 
+       use.mname as content_write_name, 
+       to_char(con.content_date, 'YYYY-MM-DD')as content_date
+	from content_table con, member use
+	where con.content_writer_idx=use.midx
+	and con.content_board_idx=#{board_info_idx}
+	order by con.content_idx desc , con.content_step ASC
+    ]]>
+</select>
+<select id="getContentInfo" parameterType="Integer" resultType="kr.co.korea.beans.ContentBean">
+	<![CDATA[
+		select use.mname as content_write_name, 
+		       to_char(con.content_date, 'YYYY-MM-DD') as content_date,
+		       con.content_subject,
+		        con.content_bno,
+		        con.content_level,
+		        con.content_hit,
+		        con.content_step,
+		       con.content_text, 
+		       con.content_file,
+		       con.content_writer_idx
+		from content_table con, member use
+		where con.content_writer_idx=use.midx
+		and content_idx=#{content_idx}
+    ]]>
+</select>
+<update id="modifyContentInfo" parameterType="kr.co.korea.beans.ContentBean">
+	<![CDATA[
+update content_table 
+set content_subject =#{content_subject}, 
+    content_text=#{content_text}, 
+    content_file=#{content_file, jdbcType=VARCHAR}
+where content_idx=#{content_idx}
+    ]]>
+</update>
+
+<delete id="deleteContentInfo" parameterType="java.lang.Integer">
+	<![CDATA[
+	delete from content_table 
+	where content_idx=#{content_idx}
+	 ]]>
+</delete>
+
+<update id="qna_reply_up" parameterType="kr.co.korea.beans.ContentBean">
+
+	<![CDATA[
+update content_table 
+set content_step =content_step+1
+where content_bno=#{content_bno} and content_step >= #{content_step}
+    ]]>
+</update>
+
+<update id="updatereply" parameterType="java.lang.Integer">
+<![CDATA[
+UPDATE content_table SET 
+
+content_hit = content_hit + 1
+
+WHERE content_idx = #{content_seq.nextval}
+]]>
+</update>
+<select id="getContentCnt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) 
+	from content_table 
+	where content_board_idx=#{content_board_idx}
+	 ]]>
+</select>
+
+<select id="qnareplymax" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	<![CDATA[
+select from content_table where content_bno=#{content_bno} order by content_step desc
+		limit 1
+	 ]]>
+</select>
+
+
+<select id="selectBoardIdxMax" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<![CDATA[
+		select max(content_idx) as max from
+		${value}
+	]]>
+</select>
+
+
+<update id="qna_reply_insert" parameterType="kr.co.korea.beans.ContentBean">
+
+	<![CDATA[
+update content_table 
+set content_bno =#{content_idx}
+where content_idx=#{content_idx}
+    ]]>
+</update>
+
+
+<delete id="qna_reply_delete" parameterType="java.lang.Integer">
+	
+	<![CDATA[	delete from content_table
+		where content_bno = #{content_idx}
+		  ]]>
+</delete>
+
+
+<insert id="insertreply" parameterType="kr.co.korea.beans.ContentBean"> 
+
+<!--requesetparam으로 controller 에서 넘김 map을 받을 준비-->
+<![CDATA[
+INSERT INTO content_table
+
+(content_idx, content_subject, content_text, content_hit, content_writer_idx,content_board_idx, content_date, content_bno, content_level, content_step)
+
+VALUES
+
+(NULL, #{content_subject}, #{content_text}, 0, 
+
+#{content_writer_idx}, NOW(),#{content_board_idx}, #{content_bno}, #{content_level}, #{content_step})
+]]>
+</insert>
+
+
+
+<select id="selectreply" resultType="kr.co.korea.beans.ContentBean" parameterType="java.lang.Integer">
+<![CDATA[
+SELECT con.content_idx, con.content_subject, con.content_text, con.content_hit
+
+, use.user_name as content_write_name , to_char(con.content_date, 'YYYY-MM-DD')as content_date
+
+, con.content_bno, con.content_step, con.content_level
+
+FROM content_table con, user_table use
+
+where con.content_writer_idx=use.user_idx
+	and con.content_board_idx=#{board_info_idx}
+	order by
+ con.content_bno DESC, con.content_step ASC
+]]>
+</select>
+
+<select id="selectById" resultType="kr.co.korea.beans.ContentBean" parameterType="java.lang.Integer">
+<![CDATA[
+SELECT con.content_idx, con.content_subject, con.content_text, con.content_hit
+
+, use.user_name as content_write_name , to_char(con.content_date, 'YYYY-MM-DD')as content_date
+
+, con.content_bno, con.content_step, con.content_level
+
+FROM content_table con, user_table use
+
+WHERE con.content_idx = #{value}
+]]>
+</select>
+
+
+
+
+</mapper>
+
+
+
