@@ -22,7 +22,7 @@ window.onload = function(){
 </script>
 <script type="text/javascript">
 
- var firstList = new Array("TOP","BOTTOM","OUTER","SHOES & BAG","ACC","SET","HOME/EASY");
+ var firstList = new Array("TOP","BOTTOM","OUTER","SHOES/BAG","ACC","SET","HOME/EASY");
         
         // 중분류
         

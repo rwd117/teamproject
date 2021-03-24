@@ -28,8 +28,15 @@ public class ReviewBean{
 	
 	private String pro_image1;
 	private String pro_name;
+	private int r_mlevel;
 	
 
+	public int getR_mlevel() {
+		return r_mlevel;
+	}
+	public void setR_mlevel(int r_mlevel) {
+		this.r_mlevel = r_mlevel;
+	}
 	public String getPro_image1() {
 		return pro_image1;
 	}

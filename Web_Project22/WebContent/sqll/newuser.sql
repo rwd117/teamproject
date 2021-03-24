@@ -25,15 +25,15 @@ create table MEMBER(
 
 ALTER TABLE MEMBER ADD mdrop NUMBER(2) DEFAULT 1 NOT NULL;
 
-insert into member values(MEMBER_seq.nextval,'admin','admin','admin','111@gmail.com','¼­¿ï','½ÅÃµµ¿','2021-02-22',sysdate,'111-1111-1111','06035',2,0);
-insert into member values(MEMBER_seq.nextval,'ddd','ddd','ddd','111@gmail.com','´ë±¸','½ÅÃµµ¿','2021-02-22',sysdate,'111-1111-1111','06035',0,0);
-insert into member values(MEMBER_seq.nextval,'aaa','aaa','aaa','111@gmail.com','´ë±¸','½ÅÃµµ¿','2021-02-22',sysdate,'111-1111-1111','06035',1,0);
+insert into member values(MEMBER_seq.nextval,'admin','admin','admin','111@gmail.com','ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½Ãµï¿½ï¿½','2021-02-22',sysdate,'111-1111-1111','06035',2,0);
+insert into member values(MEMBER_seq.nextval,'ddd','ddd','ddd','111@gmail.com','ï¿½ë±¸','ï¿½ï¿½Ãµï¿½ï¿½','2021-02-22',sysdate,'111-1111-1111','06035',0,0);
+insert into member values(MEMBER_seq.nextval,'aaa','aaa','aaa','111@gmail.com','ï¿½ë±¸','ï¿½ï¿½Ãµï¿½ï¿½','2021-02-22',sysdate,'111-1111-1111','06035',1,0);
 
 
 select * from member;
 
 update MEMBER
-	set mlevel=1
-	where midx=2
+	set mlevel=2
+	where midx=0
 
-
+   ALTER TABLE member MODIFY mbirth NULL;

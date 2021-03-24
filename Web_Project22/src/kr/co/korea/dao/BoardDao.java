@@ -47,16 +47,14 @@ public class BoardDao {
 	public void qna_reply_up(ContentBean contentBean) {
 		  sqltemp.update("board.qna_reply_up", contentBean);
 		}
-	public ContentBean qnareplymax(ContentBean contentBean) {
-		return sqltemp.selectOne("board.qnareplymax", contentBean);
-	}
+	
 	public void qna_reply_delete(int content_bno) {
 		sqltemp.delete("board.qna_reply_delete", content_bno);
 	}
 	
-	public void qna_reply_up(Map<String, Object> map) {
+	public int qna_reply_up(int content_idx) {
 
-		sqltemp.update("board.qna_reply_up", map);
+		return sqltemp.update("board.qna_reply_up",content_idx);
 
 		}
 
@@ -64,11 +62,19 @@ public class BoardDao {
 
 		// 했던 작업수로 작업을 했으면 >0 안했으면 = 0
 
-		public int insertreply(Map<String, Object> map) {
-
-		return sqltemp.insert("board.insertreply", map);
-
+//	public int insertreply(Map<String, Object> map) {
+//
+//		return sqltemp.insert("board.insertreply", map);
+//
+//	}
+	public int selectBoardIdxMax() {
+	 return sqltemp.selectOne("board.selectBoardIdxMax");
+		
 		}
+	
+	public void insertreply(ContentBean contentBean) {
+	 sqltemp.insert("board.insertreply", contentBean);
+	}
 
 		public void updatereply(int content_idx) {
 

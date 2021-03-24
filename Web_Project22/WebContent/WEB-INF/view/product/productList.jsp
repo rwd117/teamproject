@@ -28,12 +28,12 @@
 	});
 </script>
 <script>
-	function showPopup() {
+	function showPopup(a) {
 		window
 				.open(
-						"${conPath}popup/popup1?${conPath}product/productContent?pID=${obj.pID}",
+						"${conPath}popup/popup1?pID="+a,
 						"veiwimg",
-						"width=700, height=500, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no");
+						"width=1050, height=800, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no");
 	}
 </script>
 </head>
@@ -64,7 +64,7 @@
 			</c:forEach>
 			</span>
 		</h2>
-	
+			
 
 					<div id="best">
 						<ul>
@@ -104,7 +104,7 @@
 											</c:if>
 										</c:otherwise>
 									</c:choose>
-									<a href="#"><button class="popup1" onclick="showPopup()"><img id="span_icon"src="../img/icon_3.png" alt="look"></button></a>
+									<a href="#"><button class="popup1" onclick="showPopup(${obj.pID})"><img id="span_icon"src="../img/icon_3.png" alt="look"></button></a>
 									</span>
 								</p>
 								<a href="${conPath}product/productContent?pID=${obj.pID}">
@@ -173,7 +173,7 @@
 											</c:if>
 										</c:otherwise>
 									</c:choose>
-									<a href="#"><button class="popup1" onclick="showPopup()"><img id="span_icon"src="../img/icon_3.png"></button></a>
+									<a href="#"><button class="popup1" onclick="showPopup(${obj.pID})"><img id="span_icon"src="../img/icon_3.png"></button></a>
 									</span>
 								</p>
 								<a href="${conPath}product/productContent?pID=${obj.pID}">

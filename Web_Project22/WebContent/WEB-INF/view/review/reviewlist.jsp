@@ -1,87 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var='conPath' value="${pageContext.request.contextPath }/"/>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="conPath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/orderlist.css">
-<script src="../js/jquery-3.5.1.min.js"></script>
-<script src="../js/jquery-ui.min.js"></script>
-<script src="../js/slidescript.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link href='../css/memberList.css' rel='stylesheet'>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
-<script src="../js/7.js"></script>
 </head>
-	<c:import url="/WEB-INF/view/include/top_menu.jsp"/>
 <body>
-    <div id="ordersList_wrap">
-		<div id="ordersList">
+<c:import url="/WEB-INF/view/include/top_menu.jsp"/>
+	<div id="memberList_wrap">
+		<div id="memberList">
 			<div class="subject">
-				<span>&nbsp; 리뷰  &nbsp;</span>
+				<span>&nbsp; REVIEW &nbsp;</span>
 			</div>
-			<table>
 			
-					
-			
-			<c:forEach var="obj" items="${reviewlist}">
-			<tr>
-				<td id="oDate">
-					${obj.r_DATE }
-				</td>
-				<td id="oId">
-					${obj.r_ID } <br>
-					<a href="${conPath}product/productContent?pID=${obj.r_pID}">				
-						상세보기 >
-					</a>
-				</td>
-				<td id="img">
-					<a href="${conPath}product/productContent?pID=${obj.r_pID}">										
-						<img src="${conPath }upload/${obj.pro_image1}" width="100px" height="100px" alt="상품사진">
-						<br/>
-						${obj.pro_name}							
-					</a>
-				</td>
-				<td id="pName" class="left">
-					<a href="${conPath}product/productContent?pID=${obj.r_pID}">		
-						${obj.r_TITLE }	
-					</a>
-				</td>
-				<td	id="reviewWrite">
-					<button class="btn" onclick="location.href='${conPath}product/productContent?pID=${obj.r_pID}'">상품 상세보기</button>
-					<br>
-				</td>
-			</tr>
-			</c:forEach>
-			<tr>
-				<td colspan="8"></td>
-			</tr>
-			
-			
-		</table>
-			<div class="paging">
-				<c:if test="${startPage > BLOCKSIZE }">
-					<a href="${conPath }/ordersList.do?pageNum=${startPage-1}"> 〈  &nbsp; </a>
+			<div class="reviewList">
+				<table>
+				<tr>
+					<td class="title">제목</td>
+					<td class="title">내용</td>
+					<td class="title">사진</td>
+					<td class="title">상품</td>
+					<td class="title">작성날짜</td>
+					<td class="title">작성자</td>
+					<td class="title">작성자 이메일</td>
+				</tr>
+				<c:if test="${reviewlist.size() eq 0 }">
+					<tr>
+						<td colspan="8">등록한 리뷰가 없습니다.</td>
+					</tr>
 				</c:if>
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<c:if test="${i eq pageNum }">
-						<b> &nbsp; ${i }</b>
-					</c:if>
-					<c:if test="${i != pageNum }">
-						<a href="${conPath }/ordersList.do?pageNum=${i }">&nbsp; ${i }</a>
-					</c:if>
-				</c:forEach>
-				<c:if test="${endPage < pageCnt }">
-					<a href="${conPath }/ordersList.do?pageNum=${endPage+1}">  &nbsp; 〉 </a>
+				<c:if test="${reviewlist.size() != 0 }">
+					<c:forEach items="${reviewlist}" var="list">
+						<tr>
+							<td>${list.r_TITLE }</td>
+							<td>${list.r_CONTENT}</td>
+							<td><img src="${conPath}upload/${list.r_FILE1}">
+							<c:if test="${not empty list.r_FILE2 }">
+								<img src="${conPath}upload/${list.r_FILE2}">
+							</c:if>	
+							</td>
+							
+							<td><a href="${conPath}/product/productContent?pID=${list.r_pID}">상품 바로가기</a></td>
+							<td>${list.r_DATE }</td>
+							<td>${list.r_mname}</td>
+							<td>${list.r_memail}</td>
+						</tr>
+					</c:forEach>
 				</c:if>
+			</table>
+				
+				
+				<div class="paging">
+				<ul class="pagination">
+						<c:if test="${pagemaker.prev }">
+							<li>
+								<a class="btn btn-outline-primary"
+								href='${conPath}/review/reviewlist${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagemaker.startPage }"
+							end="${pagemaker.endPage }" var="pageNum">
+							<li><a class="btn btn-outline-primary"
+								href="${conPath}/review/reviewlist${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+						</c:forEach>
+						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
+							<li><a class="btn btn-outline-primary"
+								href='${conPath}/review/reviewlist${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							</li>
+						</c:if>
+				</ul>
+				</div>
+				
+				
+				
+				
 			</div>
 		</div>
 	</div>
-    <c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>
+  <c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>    
 </body>
 </html>

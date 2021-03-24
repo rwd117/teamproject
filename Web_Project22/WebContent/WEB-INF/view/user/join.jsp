@@ -14,18 +14,54 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+$(document).ready(function(){
+
+	  //한글입력 안되게 처리
+
+	  $("input[name=mid]").keyup(function(event){ 
+
+	   if (!(event.keyCode >=37 && event.keyCode<=40)) {
+
+	    var inputVal = $(this).val();
+
+	    $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+
+	   }
+
+	  });
+
+	});
+
+
+</script>
+
+<script>
 	function checkUserIdExist(){
-		var mid=$('#mid').val()
-		if(mid.length == 0) {
+		
+		var mid= $('#mid').val();
+		if(mid.length <4){
+			alert("아이디는 영문/숫자포함 4자 이상이어야 합니다.");
+			return false;
+			
+		}
+		if(mid.length >12){
+			alert("아이디는 영문/숫자포함 12자까지 입력 할 수 있습니다.");
+			return false;
+			
+		}
+		if(mid.length == 0 ||mid == null || mid.trim() == "" ) {
 			alert("아이디를 입력해주세요");
 			return false;
+			
 		}
+		
+		
 		$.ajax({
-			url:'${conPath}user/checkUserIdExist/'+mid,
-			type:'get',
-			dataType: 'text',
+			url:'${conPath}/user/checkUserIdExist/'+mid,
+			type:'post',
+			dataType: 'json',
 			success: function(result){
-				if(result.trim()=='true') {
+				if(result.result==='success') {
 					alert('사용할수 있는 아이디');
 					$('#userIdExist').val('true');
 				
@@ -33,29 +69,86 @@
 				else {
 					alert('사용할수 없는 아이디');
 					$('#userIdExist').val('false');
+					
 				}
 				
 			}
 		});
 		return false;
 	}
+	
 	function keyUserIdExist() {
-		$('userIdExist').val('false')
+		$('userIdExist').val('false');
+	}
 	
-	
-	function joinbtn() {
+	function check(){
 		var userIdExist=$('#userIdExist').val();
 		if(userIdExist=='false'){
 			alert("중복버튼을 클릭해주세요");
 			return false;
 		}
-		return true;
-	}
+	      var mpw= $('#mpw').val();
+	      var mname= $('#mname').val();
+	      var memail= $('#memail').val();
+	      var mphone= $('#mphone').val();
+	      var mpost= $('#mpost').val();
+	      var maddress= $('#maddress').val();
+	      var maddress2= $('#maddress2').val();
+	      
+	      if(mpw.length <6){
+				alert("비밀번호는 6자 이상이어야 합니다.");
+				return false;
+				
+			}
+			if(mpw.length >12){
+				alert("비밀번호는 12글자까지 입력 할 수 있습니다.");
+				return false;
+				
+			}
+			
+	      if(mpw == null  || mpw.trim() == ""
+	    	  || mname == null  || mname.trim() == ""
+	    		  || mphone == null  || mphone.trim() == ""|| mpost == null  || mpost.trim() == ""
+	    			  || maddress == null  || maddress.trim() == ""|| maddress2 == null  || maddress2.trim() == ""){
+	    	 
+	    	 if(mpw == null  || mpw.trim() == ""){
+	    		 alert("비밀번호가 공백입니다.");
+	    	     return false;		 
+	    	 }
+	    	 if(mname == null  || mname.trim() == ""){
+	    		 alert("이름이 공백입니다.");
+	    	     return false;		 
+	    	 }
+	    	 if(mphone == null  || mphone.trim() == ""){
+	    		 alert("휴대폰 번호가 공백입니다.");
+	    	     return false;		 
+	    	 }
+	    	 if(mpost == null  || mpost.trim() == ""){
+	    		 alert("우편번호가 공백입니다.");
+	    	     return false;		 
+	    	 }
+	    	 if(maddress == null  || maddress.trim() == ""){
+	    		 alert("주소가 공백입니다.");
+	    	     return false;		 
+	    	 }
+	    	 if(maddress2 == null  || maddress2.trim() == ""){
+	    		 alert("상세주소가 공백입니다.");
+	    	     return false;		 
+	    	 }
+	      }
+	      
+	      if($("#ck").is(":checked")){
+              
+          } else { // 첫번째 체크박스가 체크 되어있지 않은 있는경우
+              alert("약관에 동의해주세요.")
+              return false;
+          }
 
-		
-	}
+}
+	
 	
 </script>
+
 <script>
  $(document).ready(function(){	 	 
 	 $( function() {
@@ -142,7 +235,7 @@
 
 	<div id="join_wrap">
 		<div id="join">
-			<form:form action="${conPath }/user/join_pro" method="post" modelAttribute="joinUserBean">
+			<form:form action="${conPath }/user/join_pro" method="post" modelAttribute="joinUserBean" onsubmit="return check();">
 				<form:hidden path="userIdExist" />
 				
 				<table>
@@ -158,7 +251,8 @@
 					</tr>
 					<tr>
 						<td>
-							아이디 <input type="text" id="mid" name="mid" required="required" placeholder="영문소문자/숫자 4~12자"><form:button class="btn btn-primary" onclick="return checkUserIdExist()">중복확인</form:button>
+							아이디 <input type="text" id="mid" name="mid" required="required" placeholder="영문소문자/숫자 4~12자"  >
+							<form:button class="btn btn-primary" onclick="return checkUserIdExist()">중복확인</form:button>
 					<form:errors path="mid"></form:errors>
 						</td>
 					</tr>
@@ -480,7 +574,8 @@
 						</th>
 					</tr>
 				</table>
-				<form:button id="submit" class="btn">약관동의 및 회원가입</form:button>
+				<input type="checkbox" name="ck" id="ck">약관에 동의합니다.
+				<form:button id="submit" class="btn" >회원가입</form:button>
 			</form:form>
 		</div>
 	</div>

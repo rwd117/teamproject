@@ -59,14 +59,26 @@
     	<beans:bean class="kr.co.korea.interceptor.CheckWriterInterceptor"/>
     </interceptor>
     
+       <interceptor>
+       <mapping path="/user/logout"/>
+       <mapping path="/user/mypage"/>
+       <mapping path="/user/modify"/>
+       <mapping path="/user/mailSend"/>
+       <mapping path="/user/pwupdate"/>
+       <mapping path="/user/memberdelete"/>
+       <mapping path="/cart/*"/>
+       <mapping path="/orders/*"/>
+       <mapping path="/board/*"/>
+       <exclude-mapping path="/board/main"/>
+       <beans:bean class="kr.co.korea.interceptor.CheckLoginInterceptor"/>
+    </interceptor>
+    
     <interceptor>
-    	<mapping path="/user/modify"/>
-    	<mapping path="/user/logout"/>
-    	<mapping path="/cart/*"/>
-    	<mapping path="/orders/*"/>
-    	<mapping path="/board/*"/>
-    	<exclude-mapping path="/board/main"/>
-    	<beans:bean class="kr.co.korea.interceptor.CheckLoginInterceptor"/>
+       <mapping path="/product/productInsert"/>
+       <mapping path="/product/productModify"/>
+       <mapping path="/product/productDelete"/>
+       <mapping path="/members/**"/>
+       <beans:bean class="kr.co.korea.interceptor.CheckAdminInterceptor"/>
     </interceptor>
 </interceptors>
  

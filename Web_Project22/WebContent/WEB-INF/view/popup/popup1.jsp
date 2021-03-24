@@ -15,19 +15,27 @@
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/slidescript.js"></script>
 <script src="../js/6.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/wish.js"></script>
 <script language="javascript">
     function moveClose() {
-      opener.location.href="${conPath}product/productContent?pID=${productbean.pID}";
+      opener.location.href="${conPath}product/productContent?pID="+${pID};
+      self.close();
+    }
+    
+    function moveCart() {
+      opener.location.href="${conPath}cart/cart?midx="+${loginUserBean.midx};
       self.close();
     }
     </script>
+    
 </head>
 <body>
     <div id="contents2">
         <div id="contents3">
         <div id="top">
             <div class="left">
-                <ul>
+                <ul>ㄴ
                     <li><img src="${conPath}upload/${productbean.pIMAGE1}" class="img1"></li>
                     <li><img src="${conPath}upload/${productbean.pIMAGE2}" class="img1"></li>
                     <li><img src="${conPath}upload/${productbean.pIMAGE1}" class="img1"></li>
@@ -98,12 +106,11 @@
 
 											<c:if test="${loginUserBean.mlevel == 0 }">
 												<input type="button" class="btn" value="addCart"
-													onClick="addCart();">
+													onClick="addCart(${loginUserBean.midx},${pID});">
 												<input type="button" value="go to Cart" class="btn"
-													onclick="location.href='${conPath }cart/cart?midx=${loginUserBean.midx}'">
-													
-												<input type="button" class="btn" value="BUY IT NOW">
-												<input type="button" class="heartbtn"  onclick="WISH();">
+													onclick="moveCart()">
+												<input type="button" class="heartbtn"  onclick="WISH(${loginUserBean.midx},${pID});">
+												<input type="button" class="btn" value="상세보기" onclick="moveClose(${pID});" >
 													
 											</c:if>
 											<c:if test="${loginUserBean.mlevel > 0 }">
@@ -116,7 +123,7 @@
 												<input type="button" value="상품 구매는 로그인 후 가능합니다."
 													class="guestBtn"
 													onclick="location.href='${conPath}user/login'">
-													<input type="button" class="btn" value="상세보기" onclick="moveClose();'" >
+													<input type="button" class="btn" value="상세보기" onclick="moveClose(${pID});" >
 											</c:if>
 										</c:otherwise>
 									</c:choose></td>

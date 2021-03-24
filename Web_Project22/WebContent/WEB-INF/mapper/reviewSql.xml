@@ -64,7 +64,6 @@ from (select ROW_NUMBER() over(order by rev.r_ID desc) as RNUM, rev.*
       from member mem )mem
 where (RNUM between #{re_rowStart} and #{re_rowEnd}) and (mNUM between #{re_rowStart} and #{re_rowEnd}) and (rev.r_mIDx=mem.midx)
 	  <include refid="idvarcheck"></include>
-
 </select>
 
 <sql id="idvarcheck">
@@ -73,7 +72,12 @@ where (RNUM between #{re_rowStart} and #{re_rowEnd}) and (mNUM between #{re_rowS
 		and (r_pID=#{r_pID}) order by r_id desc
 	</if>
 	<if test="r_pID==0">
+		<if test="r_mlevel == 0">
 		and (r_mIDx=#{r_mIDx})
+		</if>
+		<if test="r_mlevel > 0">
+		
+		</if>
 	</if>
 </sql>
 

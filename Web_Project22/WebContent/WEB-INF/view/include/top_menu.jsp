@@ -61,7 +61,7 @@
 									</c:when>
 									<c:when test="${loginUserBean.mlevel > 0}">
 										<li><a href="${conPath }user/logout">LOGOUT</a></li>
-										<li><a href="${conPath }review/edit">REVIEW</a></li>
+										<li><a href="${conPath }review/reviewlist">REVIEW</a></li>
 										<li><a href="${conPath }qtable/notice">NOTICE</a></li>
 									<c:forEach var="obj" items="${qnaTopList}">
         	 							<li><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}"> ${obj.board_info_name }</a> </li>

@@ -8,12 +8,21 @@
 <selectKey keyProperty="q_idx" order="BEFORE" resultType="java.lang.Integer">
 	select q_table_seq.nextval from dual
 </selectKey>
-<![CDATA[
-	insert into q_table(q_idx, q_title, q_content,q_pwd,
-q_file, q_name, q_date)
-values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_file}, #{q_name}, sysdate)
-]]>
+	
+<include refid="filecheck"></include>
 </insert>
+
+<sql id="filecheck">
+	<if test="q_file != null">
+		insert into q_table(q_idx, q_title, q_content,q_pwd,q_file, q_name, q_date)
+values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_file}, #{q_name}, sysdate)
+	</if>
+	<if test="q_file == null">
+	insert into q_table(q_idx, q_title, q_content,q_pwd, q_name, q_date)
+values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_name}, sysdate)
+	</if>
+</sql>
+
 <select id="getNoticeList" resultType="kr.co.korea.beans.QtableBean">
 <![CDATA[
 	select q_idx,q_title,q_name,

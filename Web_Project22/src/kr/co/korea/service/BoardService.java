@@ -3,6 +3,7 @@ package kr.co.korea.service;
 import java.io.File;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -101,9 +102,11 @@ public class BoardService {
 	public void qna_reply_up(ContentBean contentBean) {
 		boardDao.qna_reply_up(contentBean);
 		}
-	public ContentBean qnareplymax(ContentBean contentBean) {
-		return boardDao.qnareplymax(contentBean);
-	}
+	public int selectBoardIdxMax() {
+		return boardDao.selectBoardIdxMax();
+		
+		}
+	
 	public void qna_reply_delete(int content_bno) {
 		boardDao.qna_reply_delete(content_bno);
 	}
@@ -111,6 +114,11 @@ public class BoardService {
 		 boardDao.updatereply(content_idx);
 
 }
+	public void insertreply(ContentBean contentBean) {
+		boardDao.insertreply(contentBean);
+		}
+
+			
 }
 		
 

@@ -90,6 +90,7 @@ public class ProductController {
 		pagemaker.setTotalCount(productService.productcount(productbean));
 		
 		model.addAttribute("scri",scri);
+		model.addAttribute("top_idx",top_idx);
 		model.addAttribute("pagemaker",pagemaker);
 		return "/product/productList";
 	}

@@ -4,5 +4,5 @@
 <c:set var='conPath' value='${pageContext.request.contextPath }/'/>
 <script>
 	alert('저장되었습니다')
-	location.href = '${conPath}board/main?board_info_idx=${writeContentBean.content_board_idx}&content_idx=${writeContentBean.content_idx}&page=${page}'
+	location.href = '${conPath}board/main?content_bno=${replyContentBean.content_bno}&content_step=${replyContentBean.content_step}&content_level=${replyContentBean.content_level}&board_info_idx=${replyContentBean.content_board_idx}&content_idx=${replyContentBean.content_idx}&page=${page}'
 </script>

@@ -51,8 +51,24 @@ public class UserBean {
 	private boolean userIdExist;
 	private int mdrop;
 	
+	private int mem_rowStart;
+	private int mem_rowEnd;
+	
+
+	public int getMem_rowEnd() {
+		return mem_rowEnd;
+	}
+	public void setMem_rowEnd(int mem_rowEnd) {
+		this.mem_rowEnd = mem_rowEnd;
+	}
 	public int getMdrop() {
 		return mdrop;
+	}
+	public int getMem_rowStart() {
+		return mem_rowStart;
+	}
+	public void setMem_rowStart(int mem_rowStart) {
+		this.mem_rowStart = mem_rowStart;
 	}
 	public void setMdrop(int mdrop) {
 		this.mdrop = mdrop;

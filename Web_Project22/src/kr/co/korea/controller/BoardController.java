@@ -48,34 +48,8 @@ public class BoardController {
 		List<ContentBean> contentList=boardService.getContentList(board_info_idx, page);
 		
 		model.addAttribute("contentList", contentList);
-		if(contentBean.getContent_idx() > 0)
-			//답글 작성일 경우
-			{	
-				//답글의 답글
-				if(contentBean.getContent_step() != 0)
-				{
-					//기존 글들 순서값 1 증가
-					boardService.qna_reply_up(contentBean);
-					//본인의 값을 부모글순서 + 1 로 설정 
-					contentBean.setContent_step(contentBean.getContent_step()+1);
-					//부모글의 답글이기 때문에 층수 + 1
-					contentBean.setContent_level(contentBean.getContent_level()+1);
-					System.out.println("답글의 답글" + contentBean.toString());					
-				}
-				//원글의 답글
-				if(contentBean.getContent_level() == 0)
-				{
-					//현재 작성된 마지막 글의 순서값을 가져온다.
-					ContentBean qnareplymax = boardService.qnareplymax(contentBean);
-					//새로 작성되는 글의 순서값을 마지막글의 순서값에 + 1 값으로 설정
-					contentBean.setContent_step(qnareplymax.getContent_step()+1);
-					//원글의 답글이기 때문에 층수 1로 설정
-					contentBean.setContent_level(1);
-					System.out.println("원글의 답글" + contentBean.toString());
 		
-				}
-		
-			}	
+	
 		PageBean pageBean=boardService.getContentCnt(board_info_idx, page);
 		model.addAttribute("pageBean", pageBean);
 		return "board/main";
@@ -155,6 +129,20 @@ public class BoardController {
 	
 	@GetMapping("/reply")
 	public String reply(@ModelAttribute("replyContentBean")ContentBean contentBean, int board_info_idx, int content_idx, int page, Model model) {
+		model.addAttribute("board_info_idx", board_info_idx);
+		model.addAttribute("content_idx", content_idx);
+		model.addAttribute("page", page);			
+		ContentBean tempContentBean=boardService.getContentInfo(content_idx);
+		contentBean.setContent_bno(tempContentBean.getContent_bno());
+		contentBean.setContent_hit(tempContentBean.getContent_hit());
+		contentBean.setContent_level(tempContentBean.getContent_level());		
+		contentBean.setContent_step(tempContentBean.getContent_step());
+		contentBean.setContent_write_name(tempContentBean.getContent_write_name()); //
+		contentBean.setContent_date(tempContentBean.getContent_date()); //
+		contentBean.setContent_subject(tempContentBean.getContent_subject()); //
+		contentBean.setContent_text(tempContentBean.getContent_text());//
+		contentBean.setContent_writer_idx(tempContentBean.getContent_writer_idx()); //
+		contentBean.setContent_board_idx(board_info_idx); //
 		if(contentBean.getContent_idx() > 0)
 			//답글 작성일 경우
 			{	
@@ -173,9 +161,9 @@ public class BoardController {
 				if(contentBean.getContent_level() == 0)
 				{
 					//현재 작성된 마지막 글의 순서값을 가져온다.
-					ContentBean qnareplymax = boardService.qnareplymax(contentBean);
+					//ContentBean selectBoardIdxMax = boardService.selectBoardIdxMax(content_idx);
 					//새로 작성되는 글의 순서값을 마지막글의 순서값에 + 1 값으로 설정
-					contentBean.setContent_step(qnareplymax.getContent_step()+1);
+					//contentBean.setContent_step(selectBoardIdxMax.getContent_step()+1);
 					//원글의 답글이기 때문에 층수 1로 설정
 					contentBean.setContent_level(1);
 					System.out.println("원글의 답글" + contentBean.toString());
@@ -184,29 +172,44 @@ public class BoardController {
 		
 			}	
 		
-		model.addAttribute("board_info_idx", board_info_idx);
-		model.addAttribute("content_idx", content_idx);
-		model.addAttribute("page", page);
-		
-					
-		ContentBean tempContentBean=boardService.getContentInfo(content_idx);
-		contentBean.setContent_bno(tempContentBean.getContent_bno());
-		contentBean.setContent_hit(tempContentBean.getContent_hit());
-		contentBean.setContent_level(tempContentBean.getContent_level());		
-		contentBean.setContent_step(tempContentBean.getContent_step());
-		contentBean.setContent_write_name(tempContentBean.getContent_write_name()); //
-		contentBean.setContent_date(tempContentBean.getContent_date()); //
-		contentBean.setContent_subject(tempContentBean.getContent_subject()); //
-		contentBean.setContent_text(tempContentBean.getContent_text());//
-		contentBean.setContent_writer_idx(tempContentBean.getContent_writer_idx()); //
-		contentBean.setContent_board_idx(board_info_idx); //
-		
-		
 		return "/board/reply";		
 	}
 	
 	@PostMapping("/reply_pro")
-	public String reply_pro(@ModelAttribute("replyContentBean")int board_info_idx, int content_idx, int page, Model model) {
+	public String reply_pro(@ModelAttribute("replyContentBean") ContentBean contentBean,int board_info_idx, int content_idx, int page, Model model) {
+		model.addAttribute("board_info_idx", board_info_idx);
+		model.addAttribute("content_idx", content_idx);
+		model.addAttribute("page", page);
+		if(contentBean.getContent_idx() > 0)
+			//답글 작성일 경우
+			{	
+				//답글의 답글
+				if(contentBean.getContent_step() != 0)
+				{
+					//기존 글들 순서값 1 증가
+					boardService.qna_reply_up(contentBean);
+					//본인의 값을 부모글순서 + 1 로 설정 
+					contentBean.setContent_step(contentBean.getContent_step()+1);
+					//부모글의 답글이기 때문에 층수 + 1
+					contentBean.setContent_level(contentBean.getContent_level()+1);
+					System.out.println("답글의 답글" + contentBean.toString());					
+				}
+				//원글의 답글
+				if(contentBean.getContent_level() == 0)
+				{
+					//현재 작성된 마지막 글의 순서값을 가져온다.
+					boardService.selectBoardIdxMax();
+					ContentBean selectBoardIdxMax = null;
+					//새로 작성되는 글의 순서값을 마지막글의 순서값에 + 1 값으로 설정
+					contentBean.setContent_step(selectBoardIdxMax.getContent_step()+1);
+					//원글의 답글이기 때문에 층수 1로 설정
+					contentBean.setContent_level(1);					
+					boardService.qna_reply_up(contentBean); //DB(update)
+					System.out.println("원글의 답글" + contentBean.toString());
+				}
+				boardService.insertreply(contentBean); //DB에 insert됨
+			}	
+		
 		return "/board/reply_success";
 	}
 	

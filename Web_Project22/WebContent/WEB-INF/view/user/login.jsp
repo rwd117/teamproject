@@ -18,10 +18,10 @@
 <title>Login</title>
 <link href="../css/login.css" rel="stylesheet">
  <script language="javascript">
-        function showfind_id() { window.open("${conPath}user/find_id", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
+        function showfind_id() { window.open("${conPath}user/find_id", "veiwimg", "width=600, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
 </script>
  <script language="javascript">
-        function showfind_pw() { window.open("${conPath}user/find_pw", "veiwimg", "width=500, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
+        function showfind_pw() { window.open("${conPath}user/find_pw", "veiwimg", "width=600, height=600, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); }
 </script>
 </head>
 <body>
@@ -44,7 +44,6 @@
 								<form:button class="btnlogin">LOGIN</form:button>
 							</p>
 					</div>
-					<input type="checkbox" class="checklogin"> 자동 로그인
 				</fieldset>
 				<div class="find_info">
 					<a id="idinquiry" onclick="showfind_id();">아이디 찾기</a> <span

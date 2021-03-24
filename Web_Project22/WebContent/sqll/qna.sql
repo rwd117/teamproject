@@ -125,6 +125,12 @@ set content_subject =8,
     content_file=8
 where content_idx=9;
 
+
+
+
+select max(content_idx) as max from
+		content_table 
+
 update content_table 
 set content_subject =#{content_subject}, 
     content_text=#{content_text}, 

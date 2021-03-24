@@ -64,6 +64,8 @@ public class HomeController {
 		model.addAttribute("scri",scri);
 		model.addAttribute("pagemaker",pagemaker);
 		
+		
+		
 		ArrayList<List<ContentBean>> list=new ArrayList<List<ContentBean>>();
 		for(int i=1;i<=4;i++) {
 			List<ContentBean> temp=mainService.getMainList(i);  //1,2,3,4寃뚯떆�뙋

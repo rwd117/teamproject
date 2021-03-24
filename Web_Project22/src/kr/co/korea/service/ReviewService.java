@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -13,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import kr.co.korea.beans.ProductBean;
 import kr.co.korea.beans.ReviewBean;
 import kr.co.korea.beans.SearchCriteria;
+import kr.co.korea.beans.UserBean;
 import kr.co.korea.dao.ProductDao;
 import kr.co.korea.dao.ReviewDao;
 
@@ -24,6 +28,10 @@ public class ReviewService {
 	
 	@Autowired
 	private ProductDao productdao;
+	
+	@Resource(name="loginUserBean")
+	@Lazy
+	private UserBean loginUserBean;
 
 	public ReviewBean reviewmeminfo(int o_mIDx) {
 		return reviewdao.reviewmeminfo(o_mIDx);
@@ -128,7 +136,7 @@ public class ReviewService {
 		reviewbean.setRe_rowEnd(scri.getRowEnd());
 		
 		if(reviewbean.getR_mIDx() != 0) {
-			
+			reviewbean.setR_mlevel(loginUserBean.getMlevel());
 			List<ReviewBean> reviewlist = reviewdao.reviewList(reviewbean);
 			for(ReviewBean i : reviewlist) {
 				int pID = i.getR_pID();

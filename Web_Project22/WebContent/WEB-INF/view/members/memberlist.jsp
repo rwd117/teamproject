@@ -39,13 +39,13 @@ $(document).ready(function(){
 					<td class="title">탈퇴여부</td>
 					<td class="title">*</td>
 				</tr>
-				<c:if test="${list.size() eq 0 }">
+				<c:if test="${memberlist.size() eq 0 }">
 					<tr>
 						<td colspan="8">가입한 회원이 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:if test="${list.size() != 0 }">
-					<c:forEach items="${list}" var="list">
+				<c:if test="${memberlist.size() != 0 }">
+					<c:forEach items="${memberlist}" var="list">
 						<tr>
 							<td>${list.mid }</td>
 							<td>${list.mname }</td>
@@ -64,29 +64,31 @@ $(document).ready(function(){
 									<c:otherwise> ? </c:otherwise>
 
 								</c:choose></td>
-							<td>버튼??</td>
+							<td> <button class="btn" type="button" onclick="location.href='${conPath }members/admindelete?mid=${list.mid }'">탈퇴하기</button></td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</table>
-			<div class="paging">
-				<c:if test="${startPage > BLOCKSIZE }">
-					<a href="${conPath }/memberList.do?pageNum=${startPage-1}"> 〈
-						&nbsp; </a>
-				</c:if>
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<c:if test="${i eq pageNum }">
-						<b> &nbsp; ${i }</b>
-					</c:if>
-					<c:if test="${i != pageNum }">
-						<a href="${conPath }/memberList.do?pageNum=${i }">&nbsp; ${i }</a>
-					</c:if>
-				</c:forEach>
-				<c:if test="${endPage < pageCnt }">
-					<a href="${conPath }/memberList.do?pageNum=${endPage+1}">
-						&nbsp; 〉 </a>
-				</c:if>
-			</div>
+				<div class="paging">
+				<ul class="pagination">
+						<c:if test="${pagemaker.prev }">
+							<li>
+								<a class="btn btn-outline-primary"
+								href='${conPath}/members/memberlist${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagemaker.startPage }"
+							end="${pagemaker.endPage }" var="pageNum">
+							<li><a class="btn btn-outline-primary"
+								href="${conPath}/members/memberlist${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+						</c:forEach>
+						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
+							<li><a class="btn btn-outline-primary"
+								href='${conPath}/members/memberlist${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							</li>
+						</c:if>
+				</ul>
+				</div>
 		</div>
 	</div>
 	<c:import url="/WEB-INF/view/include/bottom_menu.jsp" />

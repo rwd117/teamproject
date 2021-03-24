@@ -55,9 +55,6 @@ public class ReviewController {
 	}
 	
 	
-	
-	
-	
 	@GetMapping("/reviewwrite")//
 	public String reviewwrite(int o_ID,int o_mIDx,int pID,Model model) {
 		

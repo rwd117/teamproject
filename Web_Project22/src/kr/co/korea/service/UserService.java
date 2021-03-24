@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -25,6 +26,8 @@ public class UserService {
 	@Lazy
 	private UserBean loginUserBean;
 	
+	@Autowired
+	private SqlSessionTemplate sqltemp;
 	
 	
 	public void addUserInfo(UserBean userBean) {
@@ -170,5 +173,10 @@ public class UserService {
 		
 		public UserBean tempid(String mid) {
 			return userDao.tempid(mid);
+		}
+		
+		//중복아이디 체크
+		public String checkUserIdExist(String mID) {
+			return sqltemp.selectOne("user.checkUserIdExist",mID);
 		}
 }

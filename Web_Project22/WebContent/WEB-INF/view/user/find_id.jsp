@@ -26,43 +26,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	/*function dispList(selectList) {
-		var obj1 = document.getElementById("sc1_list"); //  리스트1
-		var obj2 = document.getElementById("sc2_list"); //  리스트2
 
-		if (selectList == "0") { // 리스트1
-			obj1.style.display = "block";
-			obj2.style.display = "none";
-			alert(obj.style.display);
-		} else { // 리스트2
-			obj1.style.display = "none";
-			obj2.style.display = "block";
-		}
-	} //체크하면 보이기 */
-</script>
-<script language="javascript">
-	/*function dataSend() {
-		var mname = $("#mname").val();
-		var memail = $("#memail").val();
-		var param = {"mname":mname, "memail":memail}
-
-		$.ajax({
-			anyne:true,
-			type:'POST',
-			data: JSON.stringify(param),
-			url:"/find_id_check",
-			dataType: "text",
-			success : function(data) {
-			alert("비밀번호 변경이 완료되었습니다.");
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-			alert("ERROR : " + textStatus + " : " + errorThrown);
-			}
-
-		});*/
-	}
-</script>
 <script>
 	function Send(){
 		var mname = $("#mname").val();
@@ -112,19 +76,7 @@
 					</tr>
 					<tr>
 						<td>
-							<!-- 
-						<input type="radio" name="choose" id="sc1"
-						onclick="dispList('0');"> 휴대전화로 인증 <input type="radio"
-						name="choose" id="sc2" onclick="dispList('1');">이메일로 인증 <br />
-						<br />
-						
-						<div id="sc1_list" style="display: none">
-							이름 <form:input path="mname" required="required" class='form-control'/><br><br>
-							휴대전화 <form:input path="mphone" required="required" class='form-control'/><br><br>
-							<form:button class="btn">인증하기</form:button>
-						</div>
-						
-						 --> 이름 <form:input path="mname" name="mname" id="mname"
+							 이름 <form:input path="mname" name="mname" id="mname"
 								class='form-control' required="required"/><br> <br> 이메일 <form:input
 								path="memail" name="memail" id="memail" class='form-control' required="required" />
 								<button type="button"  onclick="Send();" >인증번호 발송<button><br><br>
@@ -139,22 +91,10 @@
 					</tr>
 					<tr>
 						<td><input type="button" class="btn" value="닫기"
-							onclick="self.close();"> <!-- <button class="btn" type="button" onclick="location.href='${conPath }/main'">main</button> -->
-
+							onclick="self.close();"> 
 						</td>
 					</tr>
-					<!--
-				<tr>
-					<td>
-						<button class="btn">휴대전화로 인증</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<button class="btn">이메일로 인증</button>
-					</td>
-				</tr>  
-				-->
+				
 					</form:form>
 
 				</table>

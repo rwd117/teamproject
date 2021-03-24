@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.korea.beans.QtableBean;
 import kr.co.korea.beans.UserBean;
 import kr.co.korea.service.UserService;
 
@@ -67,6 +68,7 @@ public class UserController {
 	}
 
 	private static boolean pwdMatch = false;
+
 	@PostMapping("/login_pro")
 	public String login_pro(UserBean userBean) {
 
@@ -74,7 +76,6 @@ public class UserController {
 
 		String id = userBean.getMid();
 		UserBean login = userService.tempid(id);
-		
 
 		if (userBean != null) {
 			pwdMatch = pwdEncoder.matches(userBean.getMpw(), login.getMpw());
@@ -174,15 +175,15 @@ public class UserController {
 			return "/user/find_pw_fail";
 		} else {
 			key = userService.mailSendWithUserKey(userBean);
-			String newpw=pwdEncoder.encode(key);
+			String newpw = pwdEncoder.encode(key);
 			userBean.setMpw(newpw);
 			userService.find_pw_update(userBean);
 			System.out.println("임시비밀번호 : " + key);
 		}
 		return "/user/find_pw_success";
 	}
-	
-	//비밀번호 변경
+
+	// 비밀번호 변경
 	@GetMapping("/pwupdate")
 	public String pwupdate(@ModelAttribute("pwupdateUserBean") UserBean userBean) {
 
@@ -193,8 +194,8 @@ public class UserController {
 	public String pwupdate_ok(@ModelAttribute("pwupdateUserBean") UserBean userBean) {
 		String inputpw = userBean.getMpw(); // 현재 비밀번호
 		String inputpw2 = userBean.getMpw2(); // 새 비밀번호
-		String inputpw3 = userBean.getMpw3();	//새 비밀번호 확인
-		
+		String inputpw3 = userBean.getMpw3(); // 새 비밀번호 확인
+
 //			System.out.println("입력한 현재 비밀번호 : "+inputpw);
 //			System.out.println("입력한 새 비밀번호 : "+inputpw2);
 		userService.getUserInfo(userBean);
@@ -202,14 +203,14 @@ public class UserController {
 		System.out.println(userBean.getMidx());
 		String loginpw = userBean.getMpw(); // 로그인되어있는 비밀번호
 //			System.out.println("로그인되어있는 비밀번호 : "+loginpw);
-		
+
 		pwdMatch = pwdEncoder.matches(inputpw, loginpw);
-		
+
 		if (!(inputpw3.equals(inputpw2))) {
 			System.out.println("비밀번호 확인");
 			return "/user/pwupdate_fail";
 		}
-		if (!(pwdMatch==true)) {
+		if (!(pwdMatch == true)) {
 			System.out.println("비밀번호매치");
 			return "/user/pwupdate_fail";
 		}
@@ -219,8 +220,8 @@ public class UserController {
 
 		return "/user/pwupdate_ok";
 	}
-	
-	//회원탈퇴
+
+	// 회원탈퇴
 	@GetMapping("/memberdelete")
 	public String memberdelete(@ModelAttribute("deleteUserBean") UserBean userBean) {
 		return "/user/memberdelete";
@@ -232,10 +233,10 @@ public class UserController {
 		userService.getUserInfo(userBean);
 		userBean.setMidx(loginUserBean.getMidx());
 		String loginpw = userBean.getMpw();
-		
+
 		pwdMatch = pwdEncoder.matches(inputpw, loginpw);
-		
-		if (!(pwdMatch==true)) {
+
+		if (!(pwdMatch == true)) {
 			return "/user/memberdelete_fail";
 		} else {
 
@@ -250,4 +251,10 @@ public class UserController {
 	public String notlogin() {
 		return "/user/not_login";
 	}
+
+	@GetMapping("/notadmin")
+	public String notadmin() {
+		return "/user/notadmin";
+	}
+
 }

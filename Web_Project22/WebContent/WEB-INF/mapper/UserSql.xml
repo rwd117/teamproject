@@ -5,11 +5,20 @@
 <mapper namespace="user">
 <!-- 회원가입시에 정보를 insert -->
 <insert id="addUserInfo" parameterType="kr.co.korea.beans.UserBean">
-<![CDATA[
+<include refid="birthcheck"></include>
+</insert>
+
+<sql id="birthcheck">
+	<if test="mbirth != null">
 	insert into MEMBER(midx,mname,mid,mpw,memail,maddress,maddress2,mbirth,mphone,mpost)
 	 values(member_seq.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddress},#{maddress2}, #{mbirth},#{mphone},#{mpost})
-]]>
-</insert>
+	</if>
+	<if test="mbirth == null">
+	insert into MEMBER(midx,mname,mid,mpw,memail,maddress,maddress2,mphone,mpost)
+	 values(member_seq.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddress},#{maddress2}, #{mphone},#{mpost})
+	</if>
+</sql>
+
 <!--  로그인 정보 가져오기 select -->
 <select id="getLoginInfo" parameterType="kr.co.korea.beans.UserBean" resultType="kr.co.korea.beans.UserBean">
 <![CDATA[
@@ -42,6 +51,14 @@
 	set mdrop=0
 	where midx=#{midx}
 	AND mpw=#{mpw}
+]]>
+</update>
+<!-- 관리자회원탈퇴 -->
+<update id="admindelete" parameterType="kr.co.korea.beans.UserBean" >
+<![CDATA[
+	update MEMBER
+	set mdrop=0
+	where mid=#{mid}
 ]]>
 </update>
 <!-- 중복아이디 버튼 id조회 -->
@@ -79,16 +96,22 @@
 </select>
 <!-- 멤버리스트 조회 -->
 <select id="selectMemberList" parameterType="kr.co.korea.beans.UserBean" resultType="kr.co.korea.beans.UserBean">
-<![CDATA[
   select midx, mid, mname, memail, mphone, maddress, mbirth, mdate, mdrop
-  from MEMBER
-]]>
+  from (select ROW_NUMBER() over(order by midx desc) as mNUM, mem.*
+      from member mem)mem
+  where mNUM between #{mem_rowStart} and #{mem_rowEnd}
 </select>
 <!-- 임시 -->
 <select id="tempid" parameterType="String" resultType="kr.co.korea.beans.UserBean">
 select *
 from member
 where mid=#{mid}
+</select>
+
+<select id="membercount" parameterType="kr.co.korea.beans.UserBean" resultType="Integer">
+select count(mid)
+from member
+where 1=1 
 </select>
 
 </mapper>

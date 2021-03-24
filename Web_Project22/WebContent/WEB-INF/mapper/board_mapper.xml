@@ -37,7 +37,7 @@
 	from content_table con, member use
 	where con.content_writer_idx=use.midx
 	and con.content_board_idx=#{board_info_idx}
-	order by con.content_idx desc , con.content_step ASC
+	order by con.content_bno desc , con.content_step ASC
     ]]>
 </select>
 <select id="getContentInfo" parameterType="Integer" resultType="kr.co.korea.beans.ContentBean">
@@ -74,7 +74,7 @@ where content_idx=#{content_idx}
 	 ]]>
 </delete>
 
-<update id="qna_reply_up" parameterType="kr.co.korea.beans.ContentBean">
+<update id="qna_reply_up" parameterType="java.lang.Integer">
 
 	<![CDATA[
 update content_table 
@@ -102,7 +102,7 @@ WHERE content_idx = #{content_seq.nextval}
 
 <select id="qnareplymax" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 	<![CDATA[
-select from content_table where content_bno=#{content_bno} order by content_step desc
+select from content_bno=#{content_bno}  where  content_table order by content_step desc
 		limit 1
 	 ]]>
 </select>
@@ -111,7 +111,7 @@ select from content_table where content_bno=#{content_bno} order by content_step
 <select id="selectBoardIdxMax" parameterType="java.lang.String" resultType="java.lang.Integer">
 	<![CDATA[
 		select max(content_idx) as max from
-		${value}
+		content_table 
 	]]>
 </select>
 
@@ -140,13 +140,9 @@ where content_idx=#{content_idx}
 <![CDATA[
 INSERT INTO content_table
 
-(content_idx, content_subject, content_text, content_hit, content_writer_idx,content_board_idx, content_date, content_bno, content_level, content_step)
+(content_idx, content_subject, content_text, content_hit, content_writer_idx,content_board_idx, content_date, content_bno, content_level, content_step,content_file,)
 
-VALUES
-
-(NULL, #{content_subject}, #{content_text}, 0, 
-
-#{content_writer_idx}, NOW(),#{content_board_idx}, #{content_bno}, #{content_level}, #{content_step})
+VALUES (#{content_idx}, #{content_subject}, #{content_text}, #{content_hit}, #{content_writer_idx}, #{content_board_idx},sysdate, #{content_bno}, #{content_level}, #{content_step},#{content_file , jdbcType=VARCHAR})
 ]]>
 </insert>
 
