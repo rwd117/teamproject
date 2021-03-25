@@ -1,4 +1,4 @@
-## teamproject(쇼핑몰 Ssa da gu)
+## TeamProject(쇼핑몰 Ssa da gu)
 
 + SpringMVC패턴을 이용한 쇼핑몰
 
