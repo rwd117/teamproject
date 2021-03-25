@@ -1,16 +1,12 @@
-# teamproject(쇼핑몰 Ssa da gu)
+## teamproject(쇼핑몰 Ssa da gu)
 
-## 사용 툴
++ SpringMVC패턴을 이용한 쇼핑몰
 
-Eclipse Version: 4.17.0.v20200902-1800
+## 기술스택
 
-Java SE 8 = JDK1.8
++ Backend: Spring boot | Java | Oracle| Mybatis | Ajax 
 
-topmcat : 9.0
-
-Oracle Database 11g Express Edition : 11.2.0.2.0
-
-Spring
++ Frontend: JavaScript(jQuery),css
 
 ## 설명
 
