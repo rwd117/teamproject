@@ -35,14 +35,15 @@
 		from (select ROW_NUMBER() over(order by pid desc) as RNUM, tb.*
 		         from product tb ) tb
 		where (RNUM between #{pro_rowStart} and #{pro_rowEnd}) 
-		<include refid="all"></include>
 		<include refid="keywordcheck"></include>
+		<include refid="all"></include>
+		
 	</select>
 	
 	<select id="productcount" parameterType="kr.co.korea.beans.ProductBean" resultType="Integer">
 		select count(pID)
 		from product
-		where 1=1 <include refid="all"></include><include refid="keywordcheck"></include>
+		where 1=1 <include refid="keywordcheck"></include><include refid="all"></include>
 	</select>
 	
 	<sql id="all">

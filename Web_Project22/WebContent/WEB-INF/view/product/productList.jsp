@@ -50,7 +50,7 @@
 	<div id="contents2">
 		<c:if test="${loginUserBean.mlevel > 0}">
 			<div class="right">
-				<a class="register" href="${conPath}/productInsertView.do"> 상품등록 </a>
+				<a class="register" href="${conPath}/product/productInsert"> 상품등록 </a>
 			</div>
 		</c:if>
 	<div id="contents3">

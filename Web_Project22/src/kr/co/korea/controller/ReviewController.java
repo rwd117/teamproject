@@ -128,5 +128,22 @@ public class ReviewController {
 		rttr.addAttribute("pID",pID);
 		return "redirect:/product/productContent";
 	}
-	
+	@GetMapping("/reviewListMember")
+	public String reviewListMember(Model model,@ModelAttribute("scri")SearchCriteria scri) {
+		int midx = loginUserBean.getMidx();
+		
+		ReviewBean reviewbean = new ReviewBean();
+		reviewbean.setR_mIDx(midx);
+		List<ReviewBean> reviewlist = reviewservice.reviewList(reviewbean,scri);
+		
+		ReviewPageMaker pagemaker = new ReviewPageMaker();
+		pagemaker.setCri(scri);
+		pagemaker.setReview(reviewbean);
+		pagemaker.setTotalCount(reviewservice.reviewcount(reviewbean));
+		
+		model.addAttribute("reviewlist",reviewlist);
+		model.addAttribute("pagemaker",pagemaker);
+		model.addAttribute("scri",scri);
+		return "/review/reviewListMember";
+	}
 }

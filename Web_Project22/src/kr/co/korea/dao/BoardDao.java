@@ -27,6 +27,10 @@ public class BoardDao {
 		return sqltemp.selectList("board.getContentList", board_info_idx, rowBounds);
 	}
 	
+	public List<ContentBean> getBoardsList(int midx, RowBounds rowBounds){
+		return sqltemp.selectList("board.getContentList", midx, rowBounds);
+	}
+	
 	public ContentBean getContentInfo(int content_idx) {
 		return sqltemp.selectOne("board.getContentInfo", content_idx);
 	}

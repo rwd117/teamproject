@@ -15,13 +15,19 @@
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/slidescript.js"></script>
 <script src="js/2.js"></script>
-<script src="js/4.js"></script>
-<script src="js/8.js"></script>
+    <script src="js/4.js"></script>
+    <script src="js/8.js"></script>
+    <script src="js/wish.js"></script>
+<script src="js/cart.js"></script>
 <script>
-        function showPopup() { 
-        	window.open("${conPath}popup/popup1", "veiwimg", "width=800, height=500, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no"); 
-        	}
-	</script>
+	function showPopup(a) {
+		window
+				.open(
+						"${conPath}popup/popup1?pID="+a,
+						"veiwimg",
+						"width=1050, height=800, left=300, top=500, toolbar=no,scrollbars=no,status=no,location=no");
+	}
+</script>
 
 </head>
 
@@ -134,33 +140,28 @@
 											<span class="span1"> <c:choose>
 													<c:when test="${loginUserBean.userLogin == true }">
 
-														<c:if test="${loginUserBean.mlevel == 0 }">
-															<a href="#"><button value="wish" onclick="WISH();">
-																	<img id="span_icon" src="img/icon_1.png">
-																</button></a>
-															<a href="#"><button class="addCart"
-																	onclick="addCart();">
-																	<img id="span_icon" src="img/icon_2.png">
-																</button></a>
-														</c:if>
+																<c:if test="${loginUserBean.mlevel == 0 }"> 
+									<button value="WISH" onclick="WISH(${loginUserBean.midx}, ${obj.pID});"><img id="span_icon"src="img/icon_2.png"></button>
+									<button class="addCart" onclick="addCart( ${loginUserBean.midx}, ${obj.pID});"><img id="span_icon"src="img/icon_1.png"></button>
+									</c:if> 
 													</c:when>
 													<c:otherwise>
 														<c:if test="${loginUserBean.userLogin == false }">
-															<a href="#"><button value="wish"
+															<button value="wish"
 																	onclick="location.href='${conPath}user/login">
 																	<img id="span_icon" src="img/icon_1.png">
-																</button></a>
-															<a href="#"><button class="addCart"
+																</button>
+															<button class="addCart"
 																	onclick="location.href='${conPath}user/login">
 																	<img id="span_icon" src="img/icon_2.png">
-																</button></a>
+																</button>
 
 														</c:if>
 													</c:otherwise>
-												</c:choose> <a href="#"><button class="popup1"
+												</c:choose> <button class="popup1"
 														onclick="showPopup()">
 														<img id="span_icon" src="img/icon_3.png">
-													</button></a>
+													</button>
 											</span>
 										</p>
 										<a href="${conPath}product/productContent?pID=${obj.pID}">
@@ -197,7 +198,7 @@
 								게시물이 없습니다!.
 						</c:when>
 					<c:otherwise>
-						<c:forEach var="obj" items="${desclist }" begin="0" end="11">
+						<c:forEach var="obj" items="${desclist }" begin="0" >
 
 							<div class="container">
 								<div class="quick">
@@ -208,15 +209,10 @@
 										<span class="span1"> <c:choose>
 												<c:when test="${loginUserBean.userLogin == true }">
 
-													<c:if test="${loginUserBean.mlevel == 0 }">
-														<a href="#"><button value="wish" onclick="WISH();">
-																<img id="span_icon" src="img/icon_1.png">
-															</button></a>
-														<a href="#"><button class="addCart"
-																onclick="addCart();">
-																<img id="span_icon" src="img/icon_2.png">
-															</button></a>
-													</c:if>
+															<c:if test="${loginUserBean.mlevel == 0 }"> 
+									<button value="WISH" onclick="WISH(${loginUserBean.midx}, ${obj.pID});"><img id="span_icon"src="img/icon_2.png"></button>
+									<button class="addCart" onclick="addCart( ${loginUserBean.midx}, ${obj.pID});"><img id="span_icon"src="img/icon_1.png"></button>
+									</c:if> 
 												</c:when>
 												<c:otherwise>
 													<c:if test="${loginUserBean.userLogin == false }">

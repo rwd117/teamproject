@@ -339,49 +339,53 @@ function replyupdateok(re_ID){
 					<c:if test="${reviewlist.size() != 0 }">
 						<c:forEach var="obj" items="${reviewlist }">
 							<tr>
-								<td class="left" id="title">
-										${obj.r_TITLE }</td>
-										
-							<td id="writer">
-								<c:choose>
-									<c:when test="${(obj.r_mIDx) eq (loginUserBean.midx) }">
-											<a href="${conPath}review/reviewmodify?r_ID=${obj.r_ID}&pID=${pID}">수정하기</a>
-											<a href="${conPath}review/reviewdelete?r_ID=${obj.r_ID}&pID=${pID}">삭제하기</a>
-										<br/>
-									</c:when>
-									<c:when test="${loginUserBean.mlevel >0}">
-											<a href="${conPath}review/reviewdelete?r_ID=${obj.r_ID}&pID=${pID}">삭제하기</a>
-											<br/>
-									</c:when>
-									<c:otherwise>
-										???
-									</c:otherwise>
-								</c:choose>
-									작성자 :${obj.r_mname}
-								<td id="date">
-									작성 날짜 :${obj.r_DATE }
-								</tr>
-								<td id="content">
+								<td colspan="6" class="left" id="title">
+										제목:[${obj.r_TITLE }]</td>
+										</tr>
+												<tr>
+								<td colspan="6"  id="content">
 									<div class="left">
 								  <c:choose>
 										<c:when test="${obj.r_FILE1 !=null and obj.r_FILE2 !=null }">
 										<img src="${conPath}upload/${obj.r_FILE1}" width="50px" height="50px">
 										<img src="${conPath}upload/${obj.r_FILE2}" width="50px" height="50px">
+										${obj.r_CONTENT}
 										</c:when>
 										<c:when test="${obj.r_FILE1 !=null and obj.r_FILE2 eq null }">
 										<img src="${conPath}upload/${obj.r_FILE1}" width="50px" height="50px">
+										${obj.r_CONTENT}
 										</c:when>
 										<c:when test="${obj.r_FILE1 eq null and obj.r_FILE2 != null }">
 										<img src="${conPath}upload/${obj.r_FILE2}" width="50px" height="50px">
+										${obj.r_CONTENT}
 										</c:when>
 										<c:otherwise>
 										
 										</c:otherwise>
 								</c:choose>
-								 </div>
-									 내용 :	${obj.r_CONTENT}
-									
-								</td>
+								 </div>				
+						
+							
+								<c:choose>
+									<c:when test="${(obj.r_mIDx) eq (loginUserBean.midx) }">
+											<input type="button" value="수정하기" onclick="location.href='${conPath}review/reviewmodify?r_ID=${obj.r_ID}&pID=${pID}'">
+											<input type="button" value="삭제하기" onclick="location.href='${conPath}review/reviewdelete?r_ID=${obj.r_ID}&pID=${pID}'">
+										<br/>
+									</c:when>
+									<c:when test="${loginUserBean.mlevel >0}">
+											<input type="button" value="수정하기" onclick="location.href='${conPath}review/reviewmodify?r_ID=${obj.r_ID}&pID=${pID}'">
+											<input type="button" value="삭제하기" onclick="location.href='${conPath}review/reviewdelete?r_ID=${obj.r_ID}&pID=${pID}'">
+											<br/>
+									</c:when>
+									<c:otherwise>
+										
+									</c:otherwise>
+								</c:choose>
+									작성자 :${obj.r_mname}
+							
+									작성 날짜 :${obj.r_DATE }
+								</tr>
+						
 								<tr>
 									<td>
 									<textarea style="resize:none"rows="7" cols="150" name="re_content" class="content${obj.r_ID}"></textarea>
@@ -389,7 +393,7 @@ function replyupdateok(re_ID){
 									</td>
 								</tr>
 								<tr class="reply${obj.r_ID}" id="noreply">
-								
+								<td></td>
 								</tr>
 						</c:forEach>
 					</c:if>

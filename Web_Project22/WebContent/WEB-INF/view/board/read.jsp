@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <th>조회수</th>
-                <td><input type="text" id="content_hit" name="board_hit" class="form-control" value="${content_hit }" disabled="disabled"/></td> 
+                <td><input type="text" id="content_hit" name="board_hit" class="form-control" value="${readContentBean.content_hit }" disabled="disabled"/></td> 
             </tr>
             <tr class="tr20">
                 

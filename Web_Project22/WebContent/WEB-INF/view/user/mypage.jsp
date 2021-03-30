@@ -49,8 +49,8 @@
             <div class="mypg">
                 <ul>
                 	<c:if test="${loginUserBean.mlevel == 0 }">
-                    <li> <a href="#">府轰包府</a></li>
-                    <li> <a href="#">巩狼包府 </a></li>
+                    <li> <a href="${conpath }../review/reviewListMember">府轰包府</a></li>
+                    <li> <a href="${conpath }../board/boardListMember">巩狼包府 </a></li>
                     </c:if>
                     
                     <li> <a href="#" onclick="showPopup();">雀盔呕硼</a></li>

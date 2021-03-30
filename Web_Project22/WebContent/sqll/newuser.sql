@@ -3,9 +3,9 @@ drop sequence member_seq;
 
 
 create sequence MEMBER_seq
-start with 0
+start with 1
 increment by 1
-minvalue 0;
+minvalue 1;
 
 create table MEMBER(
 	midx number constraint MEMBER_PK primary key,
@@ -31,6 +31,8 @@ insert into member values(MEMBER_seq.nextval,'aaa','aaa','aaa','111@gmail.com','
 
 
 select * from member;
+
+update member set mlevel=2 where mid='ddd';
 
 update MEMBER
 	set mlevel=2

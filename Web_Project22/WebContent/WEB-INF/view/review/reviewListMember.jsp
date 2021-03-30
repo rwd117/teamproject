@@ -12,6 +12,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="../js/1.js"></script>
 <script src="../js/4.js"></script>
+<script>
+$(document).ready(function(){
+	
+});
+</script>
 </head>
 <body>
 <c:import url="/WEB-INF/view/include/top_menu.jsp"/>
@@ -30,7 +35,7 @@
 					<td class="title">상품</td>
 					<td class="title">작성날짜</td>
 					<td class="title">작성자</td>
-					<td class="title">작성자 이메일</td>
+					<td class="title">조회수</td>
 				</tr>
 				<c:if test="${reviewlist.size() eq 0 }">
 					<tr>
@@ -38,13 +43,15 @@
 					</tr>
 				</c:if>
 				<c:if test="${reviewlist.size() != 0 }">
-					<c:forEach items="${reviewlist}" var="list">
+				<c:forEach items="${reviewlist}" var="list">
+				
+					
 						<tr>
 							<td>${list.r_TITLE }</td>
 							<td>${list.r_CONTENT}</td>
-							<td><img src="${conPath}/upload/${list.r_FILE1}" width="20%">
+							<td><img src="${conPath}upload/${list.r_FILE1}">
 							<c:if test="${not empty list.r_FILE2 }">
-								<img src="${conPath}/upload/${list.r_FILE2}">
+								<img src="${conPath}upload/${list.r_FILE2}">
 							</c:if>	
 							</td>
 							
@@ -53,11 +60,10 @@
 							<td>${list.r_mname}</td>
 							<td>${list.r_memail}</td>
 						</tr>
+						
 					</c:forEach>
-				</c:if>
+			</c:if>
 			</table>
-				
-				
 				<div class="paging">
 				<ul class="pagination">
 						<c:if test="${pagemaker.prev }">
@@ -85,6 +91,6 @@
 			</div>
 		</div>
 	</div>
-  <c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>    
+<c:import url="/WEB-INF/view/include/bottom_menu.jsp"/>    
 </body>
 </html>

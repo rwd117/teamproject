@@ -73,7 +73,9 @@
 				<td	id="reviewWrite">
 					<button class="btn" onclick="location.href='${conPath }orders/orderread?o_ID=${obj.op_oid}'">상세보기</button>
 					<br>
+					<c:if test="${(obj.op_pID) eq (loginUserBean.midx) }">
 					<button class="btn" onclick="location.href='${conPath }product/productContent?pID=${obj.op_pID}'">재구매</button>
+					</c:if>
 				</td>
 			</tr>
 			</c:forEach>

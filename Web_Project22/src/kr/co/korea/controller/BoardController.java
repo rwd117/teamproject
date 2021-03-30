@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.korea.beans.ContentBean;
 import kr.co.korea.beans.PageBean;
+
+import kr.co.korea.beans.ReviewPageMaker;
+import kr.co.korea.beans.SearchCriteria;
 import kr.co.korea.beans.UserBean;
 import kr.co.korea.service.BoardService;
+
 
 @Controller
 @RequestMapping("/board")
@@ -35,17 +39,22 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page,
-			 Model model,ContentBean contentBean) {
+			 Model model,ContentBean contentBean,@ModelAttribute("scri")SearchCriteria scri) {
 		
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("page", page);
+		model.addAttribute("scri", scri);
 		
 		//DB�뿉�꽌 寃뚯떆�뙋�쓽�씠由꾩쓣 媛��졇�샂
 		String boardInfoName=boardService.getBoardInfoName(board_info_idx);//寃뚯떆�뙋�쓽 紐낆묶�쓣 媛��졇�삤湲� DB
 		model.addAttribute("boardInfoName",boardInfoName);
 		
+		ReviewPageMaker pagemaker = new ReviewPageMaker();
+		pagemaker.setCri(scri);
+		
 		//DB�뿉�꽌 �빐�떦寃뚯떆�뙋�쓽 �궡�슜媛��졇�삤湲�
 		List<ContentBean> contentList=boardService.getContentList(board_info_idx, page);
+		
 		
 		model.addAttribute("contentList", contentList);
 		
@@ -109,14 +118,12 @@ public class BoardController {
 		}
 	
 	@GetMapping("/read")
-	public String read(int board_info_idx, int content_idx, int page, Model model,@RequestParam(value = "content_hit", defaultValue = "0") int content_hit) {
+	public String read(int content_idx, int page, Model model) {
 	    boardService.updatereply(content_idx);
-	    model.addAttribute("content_hit", content_hit);
-	    
 	    
 		ContentBean readContentBean=boardService.getContentInfo(content_idx);
 	    model.addAttribute("readContentBean", readContentBean);
-	    model.addAttribute("board_info_idx", board_info_idx);
+//	    model.addAttribute("board_info_idx", board_info_idx);
 	    model.addAttribute("content_idx", content_idx);
 	    model.addAttribute("loginUserBean", loginUserBean);  //濡쒓렇�씤�븳 UserBean(session�쁺�뿭議댁옱�븯�뒗)
 	    model.addAttribute("page", page);
@@ -224,5 +231,42 @@ public class BoardController {
 	public String not_writer() {
 		return "/board/not_writer";
 	}
+	@GetMapping("/boardListMember")
+	public String boardListMember( @RequestParam(value = "page", defaultValue = "1") int page,
+			Model model,ContentBean contentBean,@ModelAttribute("scri")SearchCriteria scri) {
+		int midx = loginUserBean.getMidx();
+		
+		contentBean.setContent_writer_idx(midx);
+		    
+			ContentBean readContentBean=boardService.getContentInfo(midx);
+		    model.addAttribute("readContentBean", readContentBean);
+		    model.addAttribute("content_idx", midx);
+		model.addAttribute("midx", midx);
+		model.addAttribute("page", page);
+		model.addAttribute("scri", scri);
+		
+		//DB�뿉�꽌 寃뚯떆�뙋�쓽�씠由꾩쓣 媛��졇�샂
+		//String boardInfoName=boardService.getBoardInfoName(board_info_idx);//寃뚯떆�뙋�쓽 紐낆묶�쓣 媛��졇�삤湲� DB
+		//model.addAttribute("boardInfoName",boardInfoName);
+		
+		ReviewPageMaker pagemaker = new ReviewPageMaker();
+		pagemaker.setCri(scri);
+		
+		//DB�뿉�꽌 �빐�떦寃뚯떆�뙋�쓽 �궡�슜媛��졇�삤湲�
+		List<ContentBean> boardsList=boardService.getBoardsList(midx, page);
+		
+		 model.addAttribute("loginUserBean", loginUserBean);
+		model.addAttribute("boardsList", boardsList);
+		
 	
+		
+		
+		
+
+		
+	
+		
+
+		return "board/boardListMember";
+	}
 }
