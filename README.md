@@ -6,7 +6,7 @@
 
 ## 기술스택
 
-+ Backend: Spring boot | Java | Oracle | Mybatis 
++ Backend: Spring boot | Java 8 | Oracle | Mybatis | Tomcat 9.0
 
 + Frontend: JavaScript(jQuery), css
 
