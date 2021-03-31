@@ -44,23 +44,25 @@ ul {
     height: 50px;
     font-size: 1.2em;
     font-weight: bold;
-    text-align: center;
+   margin: 0 auto;  
+      position: relative;
 }
 #span_topmenu_name{
   font-size: 1.2em;
+   position: relative;
     font-weight: bold;
-    text-align: center;
-    width: 1350px;
-    height: 50px;
+   margin: 0 auto;  
+     width: 200px;
+     text-align: center;
 }
 #best{
     margin: 0 auto;  
-    width: 1400px;
+    width: 1350px;
     height: 50px;
 }
 #best ul{
-    margin:10px 300px 10px 300px;
-    width: 800px;
+     margin: 0 auto;  
+    width: 1350px;
     height: 50px;
     border-radius: 14px;
     border: black solid 1px;
@@ -181,12 +183,12 @@ ul {
 div .side3{
 	margin:0 auto;
     padding: 10px;
-    width: 1400px;
+    width: 1350px;
     height: 100px;
 }
 .middle{
-   margin:10px 300px 10px 300px;
-    width: 800px;
+
+    width: 1350px;
     height: 50px;
     border-radius: 14px;
     border: black solid 1px;
@@ -209,13 +211,12 @@ div .side3{
     color: blueviolet;
 }
 #middle_name{
-    color: rgb(100, 98, 98);
+	margin:0 auto;
+    color: ghostwhite;
     text-align: center;
     font-size: 14px;
-    float: left;
     padding-left: 20px;
     font-size: 1.2em;
-    text-align: center;
     font-weight: bold;
 }
 #middle_name:hover{
@@ -272,22 +273,23 @@ div .container{
 }
 .pagination{
    margin: 0 auto;
-   margin-left:280px;
-   width: 500px;
-   text-align:center;
+   width: 670px;
+ 
+  float:left;
    font-size:1em;
    line-height: 30px;
    font-weight: bold;
-  float: left;
+  
 }
 .pagination li{
 	text-align:center;
-	margin-top: 30px;
+	width: 25px;
+	margin-top: 60px;
    border:black;
-  margin-left: 10px;
+float:left;
   border:1px solid gray;
-  border-width:15px;
-  float: left;
+  border-width:5px;
+ 
 }
 .btn btn-outline-primary{
    width: 600px;

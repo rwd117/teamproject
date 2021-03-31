@@ -25,8 +25,10 @@ public List<QtableBean> getNoticeList() {
 public QtableBean getNoticeInfo(int q_idx) {
 	return sqltemp.selectOne("qtable.getNoticeInfo", q_idx);
 }
+public void updatehitNotice(int q_idx) {
 
-
+	sqltemp.update("qtable.updatehitNotice", q_idx);
+}
 public QtableBean getEditNoticeInfo(int q_idx) {
 	return sqltemp.selectOne("qtable.getEditNoticeInfo", q_idx);
 	

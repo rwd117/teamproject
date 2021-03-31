@@ -9,12 +9,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ProductPageMaker {
 	private SearchCriteria cri;
 	private ProductBean product;
-	private int totalCount; // 총 게시글 수
-	private int startPage; // 화면에 보이는 첫번째 번호
-	private int endPage; // 화면에 보이는 마지막 번호
-	private boolean prev; // 이전 버튼 만들어야 하는가?
-	private boolean next; // 다음 버튼 만들어야 하는가?
-	private int displayPageNum = 5; // 페이지 번호 총 개수
+	private int totalCount; // 珥� 寃뚯떆湲� �닔
+	private int startPage; // �솕硫댁뿉 蹂댁씠�뒗 泥ル쾲吏� 踰덊샇
+	private int endPage; // �솕硫댁뿉 蹂댁씠�뒗 留덉�留� 踰덊샇
+	private boolean prev; // �씠�쟾 踰꾪듉 留뚮뱾�뼱�빞 �븯�뒗媛�?
+	private boolean next; // �떎�쓬 踰꾪듉 留뚮뱾�뼱�빞 �븯�뒗媛�?
+	private int displayPageNum = 5; // �럹�씠吏� 踰덊샇 珥� 媛쒖닔
 	
 	
 	
@@ -46,29 +46,29 @@ public class ProductPageMaker {
 	private void calcData() {
 
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
-		// getpage => 현재 페이지
-		// 현재 페이지에서 보이는 페이지 수를 나눈 후 올림 그 후 보이는 페이지 수를 곱한다.
+		// getpage => �쁽�옱 �럹�씠吏�
+		// �쁽�옱 �럹�씠吏��뿉�꽌 蹂댁씠�뒗 �럹�씠吏� �닔瑜� �굹�늿 �썑 �삱由� 洹� �썑 蹂댁씠�뒗 �럹�씠吏� �닔瑜� 怨깊븳�떎.
 
 		startPage = (endPage - displayPageNum) + 1;
 		if (startPage <= 0)
 			startPage = 1;
 
-		// 마지막 번호에서 총 개수를 뺌 그 후 +1 하지만 0혹은 음수일 경우는 1로 지정
+		// 留덉�留� 踰덊샇�뿉�꽌 珥� 媛쒖닔瑜� 類� 洹� �썑 +1 �븯吏�留� 0�샊�� �쓬�닔�씪 寃쎌슦�뒗 1濡� 吏��젙
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
-		// 마지막 페이지 번호
-		// 총 게시글수/ 게시물 개수(10)
-		// 만약 화면에 보이는 페이지 숫자가 마지막 페이지 번호보다 크다? 그러면 그 페이지가 마지막 페이지로 지정.
+		// 留덉�留� �럹�씠吏� 踰덊샇
+		// 珥� 寃뚯떆湲��닔/ 寃뚯떆臾� 媛쒖닔(10)
+		// 留뚯빟 �솕硫댁뿉 蹂댁씠�뒗 �럹�씠吏� �닽�옄媛� 留덉�留� �럹�씠吏� 踰덊샇蹂대떎 �겕�떎? 洹몃윭硫� 洹� �럹�씠吏�媛� 留덉�留� �럹�씠吏�濡� 吏��젙.
 
 		prev = startPage == 1 ? false : true;
-		// 1일경우 이전 버튼을 만들지 않는다
+		// 1�씪寃쎌슦 �씠�쟾 踰꾪듉�쓣 留뚮뱾吏� �븡�뒗�떎
 
 		next = endPage * cri.getPerPageNum() < totalCount ? true : false;
-		// 화면에 보이는 마지막 숫자 * 게시물 개수(10) < 총 게시물
-		// 마지막 페이지 일경우 next버튼을 만들지 않는다.
+		// �솕硫댁뿉 蹂댁씠�뒗 留덉�留� �닽�옄 * 寃뚯떆臾� 媛쒖닔(10) < 珥� 寃뚯떆臾�
+		// 留덉�留� �럹�씠吏� �씪寃쎌슦 next踰꾪듉�쓣 留뚮뱾吏� �븡�뒗�떎.
 	}
 
 	public int getStartPage() {

@@ -151,7 +151,7 @@ function ordercheck(){
                 <ul><a href="#"><li>ORDER</li></a></ul>
                 
             </div>
-            <table border="1" class="table1">
+            <table border="1" class="table4">
             <tr>
                 <th rowspan="2"><h4>혜택정보</h4></th>
                 <td><p>${loginUserBean.mname}님은,[일반회원] 회원이십니다.</p></td>
@@ -170,7 +170,56 @@ function ordercheck(){
              <ul class="section1">
              <div class="tabArea">
                 <ul class="tabList">
-                    <li ><a href="#" class="tabBtn">국내배송상품 (1)</a>
+                 <li>
+                    <a href="#" class="tabBtn">해외배송상품</a>
+                    <div class="tabCon notice">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="tr2">
+                                    <th scope="cols"><input class="th1" type="checkbox" onclick=""></th>
+                                    <th scope="cols">이미지</th>
+                                    <th scope="cols">상품정보</th>
+                                    <th scope="cols">판매가</th>
+                                    <th scope="cols">수량</th>
+                                    <th scope="cols">적립금</th>
+                                    <th scope="cols">배송구분</th>
+                                    <th scope="cols">배송비</th>
+                                    <th scope="cols">합계</th>
+                                    <th scope="cols">선택</th>
+                                </tr>
+                            </thead>
+                            <tbody>    
+                                <tr class="tr12">
+                                    <td scope="row"><a href=""><input type="checkbox" onclick=""></a></td>
+                                    <td><img src="" alt=""></td>
+                                    <td><a href=""><img src="" alt="">상품옵션
+                                        <select size="" id="">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select></a><br/>
+                                        <input type="submit" value="추가">
+                                        <input type="submit" value="변경">
+                                        <input type="reset" value="삭제">
+                                    </td>
+                                    <td scope="row">원</td>
+                                    <td><input type="number" value="" min="0" max="100" step="1"></td>
+                                    <td>원</td>
+                                    <td>해외배송</td>
+                                    <td>원<br/>해외배송</td>
+                                    <td>원</td>
+                                    <td><a href="" onclick=""><input type="button" value="삭제하기"></a></td>
+                                </tr>
+                                <tr class="tr13">
+                                    <th colspan="10" scope="row">
+                                        <p>[해외배송]</p>                    
+                                        <a>상품구매금액 + 배송비 = 합계 : 원</a>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                    <li ><a href="#" class="tabBtn">국내배송상품</a>
                     <!--  -->
                     <div class="tabCon notice">
                         <table class="table table-striped">
@@ -244,7 +293,7 @@ function ordercheck(){
         </ul>
      
      	<form action="${conPath}orders/orderresult" id="orderresult" method="post" >
-       	 <table border="1" class="table1">
+       	 <table border="1" class="table4">
             <h2>주문정보</h2>
             <tr>
                 <th><h5>주문하시는분</h5></th>
@@ -266,11 +315,11 @@ function ordercheck(){
 				<td>상세주소 : <input type="text" id="useraddress2" value="${userbean.maddress2 }" readonly ></td>
 			</tr>            
             </table>
-            <table border="1" class="table1">
+            <table border="1" class="table4">
                 <h2>배송지정보</h2> 
                 <br/>
-             <input id="same" type="checkbox" onclick="contentcheck()"> 
-             	위 주문자와 주소 동일
+             
+             	<h4> <input id="same" type="checkbox" onclick="contentcheck()">&nbsp;&nbsp; 위 주문자와 주소 동일&nbsp; </h4>
                 <tr>
                     <th><h5>배송받는분</h5></th>
                 <td><input type="text" id="o_NAME" name="o_NAME"></td>

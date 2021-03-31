@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/resources/upload=UTF-8
 encoding//src/kr/co/korea/beans/ContentBean.java=UTF-8
+encoding//src/kr/co/korea/beans/Criteria.java=UTF-8
+encoding//src/kr/co/korea/beans/ProductPageMaker.java=UTF-8
 encoding//src/kr/co/korea/controller/BoardController.java=UTF-8
 encoding//src/kr/co/korea/controller/CartController.java=UTF-8
 encoding//src/kr/co/korea/controller/CartRestController.java=UTF-8
@@ -12,3 +14,4 @@ encoding//src/kr/co/korea/controller/WishRestController.java=UTF-8
 encoding//src/kr/co/korea/dao/UserDao.java=UTF-8
 encoding//src/kr/co/korea/service/BoardService.java=UTF-8
 encoding//src/kr/co/korea/service/CartService.java=UTF-8
+encoding//src/kr/co/korea/service/ReviewService.java=UTF-8

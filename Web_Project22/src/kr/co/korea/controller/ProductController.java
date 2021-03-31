@@ -73,8 +73,9 @@ public class ProductController {
 		best.setPro_all(1);
 		best.setPro_best(1);
 		
-		List<ProductBean> bestlist = productService.getproductInfolist(scri,best);
-		
+		//List<ProductBean> bestlist = productService.getproductInfolist(scri,best);
+	    List<ProductBean> bestlist = productService.productbestlist();
+	    
 		model.addAttribute("bestlist",bestlist);
 		
 		productbean.setP_sub_idx(sub_idx);

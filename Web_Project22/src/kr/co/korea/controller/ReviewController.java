@@ -53,6 +53,25 @@ public class ReviewController {
 		
 		return "/review/reviewlist";
 	}
+	@GetMapping("/allreviewlist")
+	public String allreviewlist(Model model,@ModelAttribute("scri")SearchCriteria scri) {
+		int midx = loginUserBean.getMidx();
+		
+		ReviewBean reviewbean = new ReviewBean();
+		reviewbean.setR_mIDx(midx);
+		List<ReviewBean> allreviewlist = reviewservice.allreviewlist(reviewbean,scri);
+		
+		ReviewPageMaker pagemaker = new ReviewPageMaker();
+		pagemaker.setCri(scri);
+		pagemaker.setReview(reviewbean);
+		pagemaker.setTotalCount(reviewservice.reviewcount(reviewbean));
+		
+		model.addAttribute("allreviewlist",allreviewlist);
+		model.addAttribute("pagemaker",pagemaker);
+		model.addAttribute("scri",scri);
+		
+		return "/review/allreviewlist";
+	}
 	
 	
 	@GetMapping("/reviewwrite")//

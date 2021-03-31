@@ -35,10 +35,10 @@
         <div id="contents3">
         <div id="top">
             <div class="left">
-                <ul>ㄴ
+                <ul>
                     <li><img src="${conPath}upload/${productbean.pIMAGE1}" class="img1"></li>
-                    <li><img src="${conPath}upload/${productbean.pIMAGE2}" class="img1"></li>
-                    <li><img src="${conPath}upload/${productbean.pIMAGE1}" class="img1"></li>
+                    <li><img src="${conPath}upload/${productbean.pIMAGE1}" class="img2"></li>
+                    <li><img src="${conPath}upload/${productbean.pIMAGE1}" class="img3"></li>
                 </ul>
 
                 <p class="nex"><img src="../img/btn_next.png" alt="이전으로"></p>

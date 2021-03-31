@@ -43,5 +43,7 @@ public class ProductDao {
 	public void producthitadd(int pID) {
 		sqltemp.update("product.producthitadd",pID);
 	}
-	
+	public List<ProductBean> productbestlist() {
+	      return sqltemp.selectList("product.getBestproductlist");
+	   }
 }

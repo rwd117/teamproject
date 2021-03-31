@@ -186,33 +186,23 @@ position: relative;
    width: 1000px;
    position: relative;
 }
-#reviewList th{
-	width:150px;
+
+#reviewList td{
+   font-size: 0.8em;
+   text-align: center;
+   border-bottom: 1px solid lightgrey;
+   margin:0;
+   padding:20px 10px;   
+
 }
-
-
 
  #writer, #date, #hit {
-   width:300px;
-   height:50px;
-    float:left;
-    text-align:center;
-    font-size:0.8em;
-   border:1px solid lightgrey;
-      box-sizing: border-box;
-}
-#reviewList input{
-	width:70px;
-	height:30px;
-	 
-    text-align:center;
-    font-size:0.8em;
-   border:1px solid lightgrey;
+   width:150px;
 }
 
 
 #title{
-   width: 1021px;
+   width: 750px;
    text-align:left;
 }
 

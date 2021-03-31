@@ -45,43 +45,70 @@
     <div class="tabArea">   
         <ul class="tabList" >           
             <c:forEach var="obj" items="${qnaTopList}" >
-        	 <li style="text-align: center;"><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}" style="padding_top:10px; font-size: 1.2em;  font-weight: bold; line-height: 50px; color:rgb(69, 80, 102);"> ${obj.board_info_name }</a><li>
+        	 <li style="text-align: center;"><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}" style="padding_top:10px; font-size: 17px;  font-weight: bold; line-height: 50px; color:rgb(69, 80, 102);"> ${obj.board_info_name }</a><li>
          	</c:forEach>
                 <div class="tabCon_notice" >                
                     <table class="table_table_striped" >
+                    <colgroup>
+                    <col width="10%">
+                    <col width="40%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    </colgroup>
                         <thead>
                             <tr>
-                                <th scope="cols">번호</th>                               
-                                <th scope="cols">제목</th>
-                                <th scope="cols">이미지</th>
-                                <th scope="cols">작성자</th>
-                                <th scope="cols">등록일</th>
-                                <th scope="cols">조회수</th>
+                                <th scope="col">번호</th>                               
+                                <th scope="col">제목</th>
+                                <th scope="col">이미지</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">등록일</th>
+                                <th scope="col">조회수</th>
                             </tr>
                             
                         </thead>
                         <tbody>
-                        <c:forEach var="obj"  items="${contentList}" begin="0">
+                         <c:forEach var="obj"  items="${contentList}" begin="0">
                             <c:if test="${obj.content_level < 4}">
 			<tr>
 				<th  scope="row">${obj.content_idx }</th>
 				<c:choose>
 					<c:when test="${obj.content_level eq 0}">
-						<td><a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+						<td> 
+						<c:if test="${obj.content_secret eq 'N'}" >
+           
+            <c:choose>
+                <c:when test="${obj.content_writer_idx eq loginUserBean.midx || loginUserBean.mlevel eq '1'}">
+                    <c:out value="${obj.content_subject}"/>
+                </c:when>
+                <c:otherwise>비밀글은 작성자와 관리자만 볼 수 있습니다. <img src="../img/ico_lock.gif" alt="비밀글" /></c:otherwise>
+            </c:choose>
+        </c:if>
+        <c:if test="${obj.content_secret eq 'Y'}" >
+            <c:out value="${obj.content_subject}"/>
+        </c:if>
+        <a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
 					</c:when>
-					<c:when test="${list.content_level eq 1}">
-						<td>&nbsp;&nbsp;ㄴ<a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+					<c:when test="${obj.content_level eq 1}">
+						<td>&nbsp;&nbsp;<img alt="" src="../img/icon_re.gif"><a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
 					</c:when>
 					<c:when test="${obj.content_level eq 2}">
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ<a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="" src="../img/icon_re.gif"><a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
 					</c:when>
 					<c:when test="${obj.content_level eq 3}">
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						ㄴ<a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
+						<img alt="" src="../img/icon_re.gif"><a href='${conPath }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject}</a></td>
 					</c:when>
 				</c:choose>                           
                             
-                                 <td><img src="${conPath }upload/${obj.content_file }" width="15%"/>	</td>
+                                
+         
+            
+               
+                <td><img src="${conPath }upload/${obj.content_file }" width="20%"/></td>	
+          
+ 				
                                                              
                                 <td>${obj.content_write_name}</td>
                                 <td>${obj.content_date}</td>
@@ -90,12 +117,14 @@
                             </c:if>
                             </c:forEach>
                         </tbody>
+                        
                     </table>
                     <a href="${conPath}board/main?board_info_idx=${board_list[idx.index].board_info_idx}">더보기</a>
-                </div>
-           </ul>
+                
   		</div>
 	 
+           </ul>
+           </div>
 	<div class="content2">
 		<a href="${conPath }board/write?board_info_idx=${board_info_idx}"><img src="../img/btn_write.gif" alt="글쓰기"></a>
 	</div>
@@ -113,7 +142,7 @@
 						<c:forEach begin="${pagemaker.startPage }"
 							end="${pagemaker.endPage }" var="pageNum">
 							<li><a class="btn btn-outline-primary"
-								href="${conPath}product/productContent${pagemaker.makeQuery(pageNum)}">[${pageNum }]</a></li>
+								href="${conPath}product/productContent${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
 						</c:forEach>
 						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
 							<li><a class="btn btn-outline-primary"

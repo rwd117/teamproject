@@ -440,7 +440,56 @@ function ordercheck(kind){
 			<ul class="section1">
 				<div class="tabArea">
 					<ul class="tabList">
-						<li><a href="#" class="tabBtn">국내배송상품()</a>
+					 <li>
+                    <a href="#" class="tabBtn">해외배송상품</a>
+                    <div class="tabCon notice">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="tr2">
+                                    <th scope="cols"><input class="th1" type="checkbox" onclick=""></th>
+                                    <th scope="cols">이미지</th>
+                                    <th scope="cols">상품정보</th>
+                                    <th scope="cols">판매가</th>
+                                    <th scope="cols">수량</th>
+                                    <th scope="cols">적립금</th>
+                                    <th scope="cols">배송구분</th>
+                                    <th scope="cols">배송비</th>
+                                    <th scope="cols">합계</th>
+                                    <th scope="cols">선택</th>
+                                </tr>
+                            </thead>
+                            <tbody>    
+                                <tr class="tr12">
+                                    <td scope="row"><a href=""><input type="checkbox" onclick=""></a></td>
+                                    <td><img src="" alt=""></td>
+                                    <td><a href=""><img src="" alt="">상품옵션
+                                        <select size="" id="">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select></a><br/>
+                                        <input type="submit" value="추가">
+                                        <input type="submit" value="변경">
+                                        <input type="reset" value="삭제">
+                                    </td>
+                                    <td scope="row">원</td>
+                                    <td><input type="number" value="" min="0" max="100" step="1"></td>
+                                    <td>원</td>
+                                    <td>해외배송</td>
+                                    <td>원<br/>해외배송</td>
+                                    <td>원</td>
+                                    <td><a href="" onclick=""><input type="button" value="삭제하기"></a></td>
+                                </tr>
+                                <tr class="tr13">
+                                    <th colspan="10" scope="row">
+                                        <p>[해외배송]</p>                    
+                                        <a>상품구매금액 + 배송비 = 합계 : 원</a>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+						<li><a href="#" class="tabBtn">국내배송상품</a>
 							<div class="tabCon notice" style="overflow:auto">
 								<table class="table table-striped">
 

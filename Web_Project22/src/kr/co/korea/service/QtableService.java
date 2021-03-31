@@ -38,14 +38,14 @@ public class QtableService {
 			String file_name=saveUploadFile(upload_file);
 			qtableBean.setQ_file(file_name);
 		}
-		qtableBean.setQ_idx(loginUserBean.getMidx()); //로그인한 idx를 저장
-		qtableDao.addNoticeInfo(qtableBean);//DB에 insert동작
+		qtableBean.setQ_idx(loginUserBean.getMidx()); //濡쒓렇�씤�븳 idx瑜� ���옣
+		qtableDao.addNoticeInfo(qtableBean);//DB�뿉 insert�룞�옉
 	}
-	// 멀티파트파일을 서버에 저장하고, 파일명을 문자열로 리턴 //
+	// 硫��떚�뙆�듃�뙆�씪�쓣 �꽌踰꾩뿉 ���옣�븯怨�, �뙆�씪紐낆쓣 臾몄옄�뿴濡� 由ы꽩 //
 	private String saveUploadFile(MultipartFile upload_file) {
-		String file_name=System.currentTimeMillis()+upload_file.getOriginalFilename();  //실제파일을 가져와서 문자열로 저장
+		String file_name=System.currentTimeMillis()+upload_file.getOriginalFilename();  //�떎�젣�뙆�씪�쓣 媛��졇���꽌 臾몄옄�뿴濡� ���옣
 		try {
-			upload_file.transferTo(new File(path_upload+"/"+file_name));  //파일객체생성후 저장
+			upload_file.transferTo(new File(path_upload+"/"+file_name));  //�뙆�씪媛앹껜�깮�꽦�썑 ���옣
 			System.out.println(path_upload);
 			
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class QtableService {
 		
 		return file_name;
 	}
-	//리스트 통째로
+	//由ъ뒪�듃 �넻吏몃줈
 	public List<QtableBean> getNoticeList(){
 		return qtableDao.getNoticeList();
 	}
@@ -66,7 +66,7 @@ public class QtableService {
 	
 	public QtableBean getEditNoticeInfo(int q_idx) {
 		
-		return qtableDao.getEditNoticeInfo(q_idx);//DB에 insert동작
+		return qtableDao.getEditNoticeInfo(q_idx);//DB�뿉 insert�룞�옉
 		
 	}
 	
@@ -80,7 +80,10 @@ public class QtableService {
 		
 	}
 	
-	
+	public void updatehitNotice(int q_idx) {
+
+		qtableDao.updatehitNotice(q_idx);
+	}
 	
 	
 	public void deleteNoticeInfo(int q_idx) {

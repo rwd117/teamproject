@@ -51,7 +51,6 @@ window.onload = function(){
 				<th>IMAGE</th>
 				<td><c:if test="${replyContentBean.content_file != null }">
 						<img src="${conPath }upload/${replyContentBean.content_file }" width="15%"/>			
-							
 						<form:hidden path="content_file"/>
 						<!--유효성검사시 전달이 안되는 현상때문에 파일명을 숨겨서 전달하도록함-->
 					</c:if>
@@ -92,6 +91,15 @@ window.onload = function(){
 						
 					</td>
 				</tr>
+				 <tr>
+                <th>비밀글설정</th>
+                <td colspan="1">
+    <input type="checkbox" name="content_secret" id="content_secret" value="Y" class="checkbox" /><span class="ml_10">공개</span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="content_secret" id="content_secret" value="N" class="checkbox" /><span class="ml_10">비공개</span>&nbsp;
+</td>
+	
+            </tr>
+            <tr>
 					<th>비밀번호</th>
 					<td colspan="1"><input type="password" name="mpw">수정하려면 비밀번호를 입력하세요.</td>
 				</tr>

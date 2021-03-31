@@ -22,8 +22,14 @@ public class ContentBean {
 	private int content_bno;
 	private int content_step;
 	private int content_level;
-	
+	private String content_secret;
 
+	public String getContent_secret() {
+		return content_secret;
+	}
+	public void setContent_secret(String content_secret) {
+		this.content_secret = content_secret;
+	}
 	public int getContent_level() {
 		return content_level;
 	}

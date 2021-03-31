@@ -8,21 +8,21 @@
 <selectKey keyProperty="q_idx" order="BEFORE" resultType="java.lang.Integer">
 	select q_table_seq.nextval from dual
 </selectKey>
-	
-<include refid="filecheck"></include>
+<![CDATA[
+	insert into q_table(q_idx, q_title, q_content,q_pwd,
+q_file, q_name, q_date,q_hit)
+values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_file}, #{q_name}, sysdate,#{q_hit})
+]]>
 </insert>
+<update id="updatehitNotice" parameterType="java.lang.Integer">
+<![CDATA[
+UPDATE q_table SET 
 
-<sql id="filecheck">
-	<if test="q_file != null">
-		insert into q_table(q_idx, q_title, q_content,q_pwd,q_file, q_name, q_date)
-values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_file}, #{q_name}, sysdate)
-	</if>
-	<if test="q_file == null">
-	insert into q_table(q_idx, q_title, q_content,q_pwd, q_name, q_date)
-values(#{q_idx}, #{q_title}, #{q_content},#{q_pwd}, #{q_name}, sysdate)
-	</if>
-</sql>
+q_hit = q_hit + 1
 
+WHERE q_idx = #{q_table_seq.nextval}
+]]>
+</update>
 <select id="getNoticeList" resultType="kr.co.korea.beans.QtableBean">
 <![CDATA[
 	select q_idx,q_title,q_name,

@@ -81,6 +81,27 @@ where (RNUM between #{re_rowStart} and #{re_rowEnd}) and (mNUM between #{re_rowS
 	</if>
 </sql>
 
+<select id="allreviewlist" parameterType="kr.co.korea.beans.ReviewBean" resultType="kr.co.korea.beans.ReviewBean">
+
+select rev.r_ID as r_ID,
+	   rev.r_TITLE as r_TITLE,
+	   rev.r_CONTENT as r_CONTENT,
+	   rev.r_FILE1 as r_FILE1,
+	   rev.r_FILE2 as r_FILE2,
+	   rev.r_pID as r_pID,
+	   to_char(rev.r_DATE,'YYYY-MM-DD') as r_DATE,
+	   rev.r_mIDx as r_mIDx,
+	   mem.mname as r_mname,
+	   mem.memail as r_memail
+from (select ROW_NUMBER() over(order by rev.r_ID desc) as RNUM, rev.*
+      from review rev )rev, 
+      (select ROW_NUMBER() over(order by mem.midx desc) as mNUM, mem.*
+      from member mem )mem
+where (RNUM between #{re_rowStart} and #{re_rowEnd}) and (mNUM between #{re_rowStart} and #{re_rowEnd}) and (rev.r_mIDx=mem.midx)
+	  
+</select>
+
+
 
 
 

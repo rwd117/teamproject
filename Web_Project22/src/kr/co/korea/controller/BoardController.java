@@ -39,7 +39,7 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page,
-			 Model model,ContentBean contentBean,@ModelAttribute("scri")SearchCriteria scri) {
+			 Model model,ContentBean contentBean,@ModelAttribute("scri")SearchCriteria scri,ContentBean selectBoardIdxMax) {
 		
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("page", page);
@@ -118,12 +118,12 @@ public class BoardController {
 		}
 	
 	@GetMapping("/read")
-	public String read(int content_idx, int page, Model model) {
+	public String read(int content_idx, int page, Model model, int board_info_idx) {
 	    boardService.updatereply(content_idx);
 	    
 		ContentBean readContentBean=boardService.getContentInfo(content_idx);
 	    model.addAttribute("readContentBean", readContentBean);
-//	    model.addAttribute("board_info_idx", board_info_idx);
+   model.addAttribute("board_info_idx", board_info_idx);
 	    model.addAttribute("content_idx", content_idx);
 	    model.addAttribute("loginUserBean", loginUserBean);  //濡쒓렇�씤�븳 UserBean(session�쁺�뿭議댁옱�븯�뒗)
 	    model.addAttribute("page", page);
@@ -183,7 +183,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/reply_pro")
-	public String reply_pro(@ModelAttribute("replyContentBean") ContentBean contentBean,int board_info_idx, int content_idx, int page, Model model) {
+	public String reply_pro(@ModelAttribute("replyContentBean") ContentBean contentBean,int board_info_idx, int content_idx, int page, Model model, ContentBean selectBoardIdxMax) {
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("content_idx", content_idx);
 		model.addAttribute("page", page);
@@ -206,7 +206,7 @@ public class BoardController {
 				{
 					//현재 작성된 마지막 글의 순서값을 가져온다.
 					boardService.selectBoardIdxMax();
-					ContentBean selectBoardIdxMax = null;
+					
 					//새로 작성되는 글의 순서값을 마지막글의 순서값에 + 1 값으로 설정
 					contentBean.setContent_step(selectBoardIdxMax.getContent_step()+1);
 					//원글의 답글이기 때문에 층수 1로 설정
@@ -235,15 +235,20 @@ public class BoardController {
 	public String boardListMember( @RequestParam(value = "page", defaultValue = "1") int page,
 			Model model,ContentBean contentBean,@ModelAttribute("scri")SearchCriteria scri) {
 		int midx = loginUserBean.getMidx();
-		
+		//model.addAttribute("board_info_idx", board_info_idx);
 		contentBean.setContent_writer_idx(midx);
-		    
+		contentBean.setContent_board_idx(midx);
+		List<ContentBean> boardsList=boardService.getBoardsList(midx, page);
 			ContentBean readContentBean=boardService.getContentInfo(midx);
+			
 		    model.addAttribute("readContentBean", readContentBean);
 		    model.addAttribute("content_idx", midx);
+		    model.addAttribute("content_board_idx", midx);
 		model.addAttribute("midx", midx);
 		model.addAttribute("page", page);
 		model.addAttribute("scri", scri);
+		model.addAttribute("loginUserBean", loginUserBean);
+		model.addAttribute("boardsList", boardsList);
 		
 		//DB�뿉�꽌 寃뚯떆�뙋�쓽�씠由꾩쓣 媛��졇�샂
 		//String boardInfoName=boardService.getBoardInfoName(board_info_idx);//寃뚯떆�뙋�쓽 紐낆묶�쓣 媛��졇�삤湲� DB
@@ -253,18 +258,7 @@ public class BoardController {
 		pagemaker.setCri(scri);
 		
 		//DB�뿉�꽌 �빐�떦寃뚯떆�뙋�쓽 �궡�슜媛��졇�삤湲�
-		List<ContentBean> boardsList=boardService.getBoardsList(midx, page);
 		
-		 model.addAttribute("loginUserBean", loginUserBean);
-		model.addAttribute("boardsList", boardsList);
-		
-	
-		
-		
-		
-
-		
-	
 		
 
 		return "board/boardListMember";

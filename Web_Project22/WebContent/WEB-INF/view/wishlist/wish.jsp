@@ -80,7 +80,7 @@ $.ajax({
 		wishitem +='<tr class="tr12" id="wID'+this.wID+'">';
 		wishitem +='<td scope="row">';
 		wishitem +='<input type="checkbox" name="checkitem" value="'+this.wID+'" onclick="check(2);"></td>';
-		wishitem +='<td><img src="'+rootpath+'upload/'+this.w_pIMAGE1+'"width="100px" height="100px" alt="상품사진1"></td>';
+		wishitem +='<td><img src="'+rootpath+'upload/'+this.w_pIMAGE1+'"width="80px" height="80px" alt="상품사진1"></td>';
 		wishitem +='<td>'+this.w_pNAME+'</td>';
 		wishitem +='<td scope="row">';
 		wishitem +='<input type="number" class="jsamount" value="'+this.wAmount+'"min="1" max="'+this.w_pSTOCK+'"step="1" onchange="wishamountchange('+this.wID+')">';					
@@ -390,7 +390,7 @@ function cartcheck(kind){
              <div class="tabArea">
                 <ul class="tabList">	             
                 <li>
-                    <a href="#" class="tabBtn">해외배송상품 (0)</a>
+                    <a href="#" class="tabBtn">해외배송상품</a>
                     <div class="tabCon notice">
                         <table class="table table-striped">
                             <thead>
@@ -438,7 +438,7 @@ function cartcheck(kind){
                             </table>
                         </div>
                     </li>
-                    <li ><a href="#" class="tabBtn">국내배송상품 (${wAmount})</a>
+                    <li ><a href="#" class="tabBtn">국내배송상품</a>
                     <!--  -->
                     <div class="tabCon notice"  style="overflow:auto">
                         <table class="table table-striped">
@@ -459,8 +459,8 @@ function cartcheck(kind){
 						</tbody>
                                 <tr id="tr13" >
                                     <th colspan="10" scope="row">
-                                        <p>[일반배송]</p>                    
-                                        <a>상품구매금액 + 배송비 = 합계 : 원</a>
+                                        <p>[일반배송]상품구매금액 + 배송비 = 합계 : 원</p>                    
+                                        
                                     </th>
                                 </tr>
                               

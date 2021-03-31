@@ -32,13 +32,13 @@
 					<td class="title">작성자</td>
 					<td class="title">작성자 이메일</td>
 				</tr>
-				<c:if test="${reviewlist.size() eq 0 }">
+				<c:if test="${allreviewlist.size() eq 0 }">
 					<tr>
 						<td colspan="8">등록한 리뷰가 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:if test="${reviewlist.size() != 0 }">
-					<c:forEach items="${reviewlist}" var="list">
+				<c:if test="${allreviewlist.size() != 0 }">
+					<c:forEach items="${allreviewlist}" var="list">
 						<tr>
 							<td>${list.r_TITLE }</td>
 							<td>${list.r_CONTENT}</td>
@@ -63,17 +63,17 @@
 						<c:if test="${pagemaker.prev }">
 							<li>
 								<a class="btn btn-outline-primary"
-								href='${conPath}/review/reviewlist${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+								href='${conPath}/review/allreviewlist${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
 							</li>
 						</c:if>
 						<c:forEach begin="${pagemaker.startPage }"
 							end="${pagemaker.endPage }" var="pageNum">
 							<li><a class="btn btn-outline-primary"
-								href="${conPath}/review/reviewlist${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+								href="${conPath}/review/allreviewlist${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
 						</c:forEach>
 						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
 							<li><a class="btn btn-outline-primary"
-								href='${conPath}/review/reviewlist${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+								href='${conPath}/review/allreviewlist${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
 							</li>
 						</c:if>
 				</ul>

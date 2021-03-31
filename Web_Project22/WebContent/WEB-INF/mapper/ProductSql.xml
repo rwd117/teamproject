@@ -39,7 +39,13 @@
 		<include refid="all"></include>
 		
 	</select>
-	
+	<select id="getBestproductlist" parameterType="kr.co.korea.beans.ProductBean" resultType="kr.co.korea.beans.ProductBean">
+            select pID,pNAME,pPRICE,pIMAGE1,pCONTENT,to_char(pDATE, 'YYYY-MM-DD')as pDATE,phit
+            from (select ROW_NUMBER() over(order by pid desc) as RNUM, tb.*
+              from product tb ) tb   
+              where (RNUM between 1 and 8)
+            order by phit desc   
+   </select>
 	<select id="productcount" parameterType="kr.co.korea.beans.ProductBean" resultType="Integer">
 		select count(pID)
 		from product

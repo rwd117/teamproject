@@ -9,15 +9,21 @@
 #memberList_wrap{
 	height:1700px;
 	position:relative;
-	
 }
 
 #memberList{
-	position:absolute;
-	width:1200px;
-	left:50%;
-	top:0px;
-	transform:translate(-50%, 0px);	
+
+	position:relative;
+width:1400px;
+margin: 0 auto;
+	
+}
+#reviewList{
+position:relative;
+width:1400px;
+margin: 0 auto;
+
+	
 }
 
 .subject{
@@ -44,7 +50,7 @@ td{
 	border-bottom: 1px solid lightgrey;
 	margin:0;
 	padding:50px 10px;
-	width:150px;
+	width:200px;
 }
 
 .paging{

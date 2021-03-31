@@ -22,6 +22,9 @@ public class ReviewDao {
 		sqltemp.insert("review.reviewinsert",reviewbean);
 	}
 	
+	public List<ReviewBean> allreviewlist(ReviewBean reviewbean){
+		return sqltemp.selectList("review.allreviewlist",reviewbean);
+	}
 	public List<ReviewBean> reviewList(ReviewBean reviewbean){
 		return sqltemp.selectList("review.reviewlist",reviewbean);
 	}

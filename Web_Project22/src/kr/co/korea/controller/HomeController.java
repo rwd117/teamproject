@@ -45,7 +45,9 @@ public class HomeController {
 		best.setPro_all(1);
 		best.setPro_best(1);
 		
-		List<ProductBean> bestlist = productService.getproductInfolist(scri,best);
+//		List<ProductBean> bestlist = productService.getproductInfolist(scri,best);
+		
+		 List<ProductBean> bestlist = productService.productbestlist();
 		
 		model.addAttribute("bestlist",bestlist);//베스트에 들어가는 리스트
 		

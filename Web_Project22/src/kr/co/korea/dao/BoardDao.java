@@ -28,7 +28,7 @@ public class BoardDao {
 	}
 	
 	public List<ContentBean> getBoardsList(int midx, RowBounds rowBounds){
-		return sqltemp.selectList("board.getContentList", midx, rowBounds);
+		return sqltemp.selectList("board.getBoardsList", midx, rowBounds);
 	}
 	
 	public ContentBean getContentInfo(int content_idx) {
@@ -66,11 +66,11 @@ public class BoardDao {
 
 		// 했던 작업수로 작업을 했으면 >0 안했으면 = 0
 
-//	public int insertreply(Map<String, Object> map) {
-//
-//		return sqltemp.insert("board.insertreply", map);
-//
-//	}
+	public int insertreply(Map<String, Object> map) {
+
+	return sqltemp.insert("board.insertreply", map);
+
+	}
 	public int selectBoardIdxMax() {
 	 return sqltemp.selectOne("board.selectBoardIdxMax");
 		

@@ -94,8 +94,8 @@
 			<li><a href="${conPath }orders/orderlist"><img src="img/ico_order_b.png"> ORDER</a></li>
 			<li><a href="${conPath }wishlist/wish?midx=${loginUserBean.midx}"><img src="img/my_icon2.png"> WISHLIST</a></li>	
             <li><a href="${conPath }qtable/notice"><img src="img/rsi_22.png"> EVENT</a></li>
-            <li><a href="${conPath }board/main?board_info_idx=${board_info_idx}"><img src="img/lsi_theday_off.png"> Q&A</a></li>
-			<li><a href="${conPath }review/reviewwrite"><img src="img/lsi_best50_off.png"> REVIEW</a></li>
+            <li><a href="${conPath }board/main?board_info_idx=1"><img src="img/lsi_theday_off.png"> Q&A</a></li>
+			<li><a href="${conPath }review/allreviewlist"><img src="img/lsi_best50_off.png"> REVIEW</a></li>
 		</ul>
 		<button class="up1">
 			<img src="img/up1.png">

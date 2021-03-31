@@ -34,7 +34,7 @@
             <table border="1" class="table">
              
              
-         <c:if test="${board.content_file !=null}">
+         <c:if test="${readContentBean.content_file !=null}">
                 <th>IMAGE</th>
                 <td colspan="3"><img src="${conPath }upload/${readContentBean.content_file }" width="15%"/></td>	
             </c:if>               
@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <th>조회수</th>
-                <td><input type="text" id="content_hit" name="board_hit" class="form-control" value="${readContentBean.content_hit }" disabled="disabled"/></td> 
+                <td><input type="text" id="content_hit" name="board_hit" class="form-control" value="${content_hit }" disabled="disabled"/></td> 
             </tr>
             <tr class="tr20">
                 
@@ -110,7 +110,11 @@
                 <span class="comments"> 
                 이름 : <input  id="comment_name" name="comment_name" fw-filter="isFill" fw-label="댓글작성자" fw-msg="" class="inputTypeText" placeholder="" value="" type="text"/></span>
                 비밀번호 : <input id="comment_password" name="comment_password" fw-filter="isFill" fw-label="댓글비밀번호" fw-msg="" value="" type="password"/>
-                <span class="secret displaynone"><label>비밀댓글</label></span><a href="#none" onclick="" class="displaynone">
+                <span class="secret displaynone">
+               
+    <input type="checkbox" name="content_secret" id="content_secret" value="Y" class="checkbox" /><span class="ml_10">공개</span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="content_secret" id="content_secret" value="N" class="checkbox" /><span class="ml_10">비공개</span>&nbsp;
+</span><a href="#none" onclick="" class="displaynone">
                 <img src="../img/btn_co.gif" alt="관리자답변보기"></a></p>
                  <div class="view">
                  <textarea id="comment_text" name="comment" fw-filter="isFill" fw-label="댓글내용" fw-msg=""></textarea>                    

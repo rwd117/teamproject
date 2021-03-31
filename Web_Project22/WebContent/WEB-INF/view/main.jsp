@@ -14,7 +14,7 @@
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/slidescript.js"></script>
-<script src="js/2.js"></script>
+<script src="js/1.js"></script>
     <script src="js/4.js"></script>
     <script src="js/8.js"></script>
     <script src="js/wish.js"></script>
@@ -159,7 +159,7 @@
 														</c:if>
 													</c:otherwise>
 												</c:choose> <button class="popup1"
-														onclick="showPopup()">
+														onclick="showPopup(${obj.pID})">
 														<img id="span_icon" src="img/icon_3.png">
 													</button>
 											</span>
@@ -198,7 +198,7 @@
 								게시물이 없습니다!.
 						</c:when>
 					<c:otherwise>
-						<c:forEach var="obj" items="${desclist }" begin="0" >
+						<c:forEach var="obj" items="${desclist }" >
 
 							<div class="container">
 								<div class="quick">
@@ -247,17 +247,17 @@
 				<ul class="pagination">
 					<c:if test="${pagemaker.prev }">
 						<li><a class="btn btn-outline-primary"
-							href='${conPath}${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+							href='${conPath}main${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
 						</li>
 					</c:if>
 					<c:forEach begin="${pagemaker.startPage }"
 						end="${pagemaker.endPage }" var="pageNum">
 						<li><a class="btn btn-outline-primary"
-							href="${conPath}${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+							href="${conPath}main${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
 					</c:forEach>
 					<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
 						<li><a class="btn btn-outline-primary"
-							href='${conPath}${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+							href='${conPath}main${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
 						</li>
 					</c:if>
 					<form name="readform" method="post">

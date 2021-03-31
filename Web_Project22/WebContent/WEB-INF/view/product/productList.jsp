@@ -54,17 +54,17 @@
 			</div>
 		</c:if>
 	<div id="contents3">
-		<h2 id="subject_name">
-			<span id="span_topmenu_name">
+		<div id="subject_name">
+			<h2 id="span_topmenu_name">
 			<c:set value="${top_idx}" var="top"/>
 			<c:forEach items="${topmenulist}" var="obj">
 				<c:if test="${top eq obj.top_idx }">
 					${obj.top_name}
 				</c:if>
 			</c:forEach>
-			</span>
-		</h2>
 			
+		</h2>
+			</div>
 
 					<div id="best">
 						<ul>
@@ -80,7 +80,7 @@
 								게시물이 없습니다!.
 						</c:when>
 						<c:otherwise>
-						<c:forEach var="obj" items="${bestlist }" begin="0" end="7">
+						<c:forEach var="obj" items="${bestlist }" >
 					
 						<div class="left">
 							<div class="box">
@@ -98,13 +98,13 @@
 									</c:when>
 									<c:otherwise>
 									<c:if test="${loginUserBean.userLogin == false }">
-									<a href="#"><button value="wish" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_1.png" alt="cart"></button></a> 
-									<a href="#"><button class="addCart" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_2.png" alt="wish"></button></a>
+									<button value="wish" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_1.png" alt="cart"></button>
+									<button class="addCart" onclick="location.href='${conPath}user/login"><img id="span_icon"src="../img/icon_2.png" alt="wish"></button>
 													
 											</c:if>
 										</c:otherwise>
 									</c:choose>
-									<a href="#"><button class="popup1" onclick="showPopup(${obj.pID})"><img id="span_icon"src="../img/icon_3.png" alt="look"></button></a>
+									<button class="popup1" onclick="showPopup(${obj.pID})"><img id="span_icon"src="../img/icon_3.png" alt="look"></button>
 									</span>
 								</p>
 								<a href="${conPath}product/productContent?pID=${obj.pID}">
@@ -125,19 +125,29 @@
 						<article class="side3">
 						
 							<div class="middle">
+							
 								<c:set value="${top_idx}" var="top"/>
 								<c:forEach items="${topmenulist}" var="obj">
 			<c:forEach items="${submenulist}" var="obj2">
-								
-				<c:if test="${top eq obj.top_idx}">
-				<c:if test="${obj.top_idx eq obj2.sub_top_idx }">
+				<c:choose>		
+				<c:when test="${top eq obj.top_idx}">
+				
+				<c:if  test="${obj.top_idx eq obj2.sub_top_idx }">
 				<ul class="subMenu1">
 			<li><a href="${conPath}product/productList?top_idx=${obj.top_idx}&sub_idx=${obj2.sub_idx}" id="middle_name">${obj2.sub_name }</a></li>
 				</ul>
-				</c:if>
-				</c:if>
+		</c:if>	
+				<c:if  test="${obj2.sub_top_idx == null }">
+			<ul class="subMenu1">
+			<li><a href="${conPath}product/productList?top_idx=${obj.top_idx}&sub_idx=${obj2.sub_idx}" id="middle_name">${obj.top_name }</a></li>
+				</ul>				
+		</c:if>
+				
+					</c:when>				
+			</c:choose>
 						</c:forEach>
-					</c:forEach>						
+					</c:forEach>		
+										
 							</div>
 							
 						</article>

@@ -44,15 +44,15 @@ public class ReviewService {
 
 		int filecheck = 0;
 
-		if ((!reviewbean.getUpload1().isEmpty()) && (reviewbean.getUpload2().isEmpty())) {//1만 사진 입력
+		if ((!reviewbean.getUpload1().isEmpty()) && (reviewbean.getUpload2().isEmpty())) {//1留� �궗吏� �엯�젰
 			MultipartFile upload1 = reviewbean.getUpload1();
 			multifilelist.add(upload1);
 			filecheck =1;
-		} else if ((reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//2만 사진 입력
+		} else if ((reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//2留� �궗吏� �엯�젰
 			MultipartFile upload2 = reviewbean.getUpload2();
 			multifilelist.add(upload2);
 			filecheck=2;
-		} else 	if ((!reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//1,2 사진 입력
+		} else 	if ((!reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//1,2 �궗吏� �엯�젰
 			MultipartFile upload1 = reviewbean.getUpload1();
 			MultipartFile upload2 = reviewbean.getUpload2();
 			multifilelist.add(upload1);
@@ -86,7 +86,7 @@ public class ReviewService {
 
 	private List<String> fileupload(MultipartHttpServletRequest multirequest, List<MultipartFile> multifilelist) {
 		String root_path = multirequest.getSession().getServletContext().getRealPath("/");
-		String upload_path = "resources/upload/"; // upload파일 찾기,상대경로로 저장을 해야 문제가 없음.
+		String upload_path = "resources/upload/"; // upload�뙆�씪 李얘린,�긽��寃쎈줈濡� ���옣�쓣 �빐�빞 臾몄젣媛� �뾾�쓬.
 		String filename = "";
 		String Originalfilename = "";
 
@@ -98,9 +98,9 @@ public class ReviewService {
 
 			File file = new File(root_path + upload_path + filename);
 
-			if (mfile.getSize() != 0) {// 파일 존재 체크
-				if (!file.exists()) { // 경로에 파일이 존재안 할 경우
-					if (file.getParentFile().mkdirs()) { // 경로에 해당하는 디렉토리 생성
+			if (mfile.getSize() != 0) {// �뙆�씪 議댁옱 泥댄겕
+				if (!file.exists()) { // 寃쎈줈�뿉 �뙆�씪�씠 議댁옱�븞 �븷 寃쎌슦
+					if (file.getParentFile().mkdirs()) { // 寃쎈줈�뿉 �빐�떦�븯�뒗 �뵒�젆�넗由� �깮�꽦
 
 						try {
 							file.createNewFile();
@@ -150,6 +150,26 @@ public class ReviewService {
 		
 		return reviewdao.reviewList(reviewbean);
 	}
+	public List<ReviewBean> allreviewlist(ReviewBean reviewbean,SearchCriteria scri) {
+		reviewbean.setRe_rowStart(scri.getRowStart());
+		reviewbean.setRe_rowEnd(scri.getRowEnd());
+		
+		if(reviewbean.getR_mIDx() >= 0) {
+			reviewbean.setR_mlevel(loginUserBean.getMlevel());
+			List<ReviewBean> allreviewlist = reviewdao.allreviewlist(reviewbean);
+			for(ReviewBean i : allreviewlist) {
+				int pID = i.getR_pID();
+				ProductBean productbean = productdao.getproductInfo(pID);
+				i.setPro_image1(productbean.getpIMAGE1());
+				i.setPro_name(productbean.getpNAME());
+				
+			}
+			return allreviewlist;
+		}
+		
+		return reviewdao.allreviewlist(reviewbean);
+	}
+
 
 	public ReviewBean reviewgetinfo(int r_ID) {
 		return reviewdao.reviewgetinfo(r_ID);
@@ -162,15 +182,15 @@ public class ReviewService {
 		
 		int filecheck = 0;
 		
-		if ((!reviewbean.getUpload1().isEmpty()) && (reviewbean.getUpload2().isEmpty())) {//1만 사진 입력
+		if ((!reviewbean.getUpload1().isEmpty()) && (reviewbean.getUpload2().isEmpty())) {//1留� �궗吏� �엯�젰
 			MultipartFile upload1 = reviewbean.getUpload1();
 			multifilelist.add(upload1);
 			filecheck =1;
-		} else if ((reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//2만 사진 입력
+		} else if ((reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//2留� �궗吏� �엯�젰
 			MultipartFile upload2 = reviewbean.getUpload2();
 			multifilelist.add(upload2);
 			filecheck=2;
-		} else 	if ((!reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//1,2 사진 입력
+		} else 	if ((!reviewbean.getUpload1().isEmpty()) && (!reviewbean.getUpload2().isEmpty())) {//1,2 �궗吏� �엯�젰
 			MultipartFile upload1 = reviewbean.getUpload1();
 			MultipartFile upload2 = reviewbean.getUpload2();
 			multifilelist.add(upload1);

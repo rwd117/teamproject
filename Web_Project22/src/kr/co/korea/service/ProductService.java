@@ -148,4 +148,8 @@ public class ProductService {
 		return productdao.productcount(productbean);
 	}
 	
+	public List<ProductBean> productbestlist() {
+	      return productdao.productbestlist();
+	   }
+	
 }

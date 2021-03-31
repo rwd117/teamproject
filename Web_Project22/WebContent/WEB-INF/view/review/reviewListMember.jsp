@@ -35,7 +35,7 @@ $(document).ready(function(){
 					<td class="title">상품</td>
 					<td class="title">작성날짜</td>
 					<td class="title">작성자</td>
-					<td class="title">조회수</td>
+					<td class="title">작성자 이메일</td>
 				</tr>
 				<c:if test="${reviewlist.size() eq 0 }">
 					<tr>
@@ -49,9 +49,9 @@ $(document).ready(function(){
 						<tr>
 							<td>${list.r_TITLE }</td>
 							<td>${list.r_CONTENT}</td>
-							<td><img src="${conPath}upload/${list.r_FILE1}">
+							<td><img src="${conPath}/upload/${list.r_FILE1}" width="20%">
 							<c:if test="${not empty list.r_FILE2 }">
-								<img src="${conPath}upload/${list.r_FILE2}">
+								<img src="${conPath}/upload/${list.r_FILE2}">
 							</c:if>	
 							</td>
 							

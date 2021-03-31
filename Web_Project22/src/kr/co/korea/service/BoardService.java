@@ -77,7 +77,7 @@ public class BoardService {
     public List<ContentBean> getBoardsList(int midx,  int page){
     	int start=(page-1)*page_listCnt;
     	RowBounds rowBounds=new RowBounds(start, page_listCnt);
-		return boardDao.getContentList(midx, rowBounds);
+		return boardDao.getBoardsList(midx, rowBounds);
 	}
     
 	public ContentBean getContentInfo(int content_idx) {

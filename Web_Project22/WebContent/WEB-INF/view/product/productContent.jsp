@@ -311,13 +311,17 @@ function replyupdateok(re_ID){
 		<div id="bottom">
 			<div id="bottomInfo">
 				<div id="pImage">
-					<c:if test="${ not empty dto.pImage2 }">
-						<img src="${conPath}/productImg/${dto.pImage2 }" alt="상품사진2">
-					</c:if>
-					<c:if test="${empty dto.pImage2  }">
-					</c:if>
+				
+				
+				<c:choose>
+					<c:when test="${empty productbean.pIMAGE2 }">
+					</c:when>
+					<c:otherwise>
+						<img src="${conPath}upload/${productbean.pIMAGE2 }" alt="상품사진2">
+					</c:otherwise>
+				</c:choose>
 				</div>
-				<div id="pContent">${dto.pContent }</div>
+				<div id="pContent">${productbean.pCONTENT }</div>
 			</div>
 
 

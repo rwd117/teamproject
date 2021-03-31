@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.korea.beans.QtableBean;
 import kr.co.korea.beans.UserBean;
@@ -57,8 +56,10 @@ public class QtableController {
 		return "/qtable/notice";
 	}
 	@GetMapping("/view")
-	public String view(Model model, int q_idx) {
-	QtableBean readQtableBean= qtableService.getNoticeInfo(q_idx);
+	public String view(Model model, int q_idx,@RequestParam(value = "q_hit", defaultValue = "1")int q_hit) {
+	qtableService.updatehitNotice(q_idx);
+	model.addAttribute("q_hit", q_hit);
+		QtableBean readQtableBean= qtableService.getNoticeInfo(q_idx);
 	model.addAttribute("readQtableBean", readQtableBean)	;
 		return "/qtable/view";
 	}

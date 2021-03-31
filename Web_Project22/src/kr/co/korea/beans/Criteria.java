@@ -2,14 +2,14 @@ package kr.co.korea.beans;
 
 public class Criteria {
 	
-	private int page; //페이지 번호
-	private int perPageNum; //게시물 갯수
+	private int page; //�럹�씠吏� 踰덊샇
+	private int perPageNum; //寃뚯떆臾� 媛��닔
 	private int rowStart;
 	private int rowEnd;
 		
 	public  Criteria(){
 		this.page=1;
-		this.perPageNum=10;
+		this.perPageNum=12;
 	}
 	
 	public int getPageStart() {
