@@ -67,6 +67,8 @@
        <mapping path="/user/pwupdate"/>
        <mapping path="/user/memberdelete"/>
        <mapping path="/cart/*"/>
+       <mapping path="/wishlist/*"/>
+       <mapping path="/review/*"/>
        <mapping path="/orders/*"/>
        <mapping path="/board/*"/>
        <exclude-mapping path="/board/main"/>

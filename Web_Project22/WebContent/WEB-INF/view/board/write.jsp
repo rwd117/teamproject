@@ -70,11 +70,7 @@ window.onload = function(){
             </tr>
             <tr>
                 <th>비밀글설정</th>
-                <td colspan="1">
-    <input type="checkbox" name="content_secret" id="content_secret" value="Y" class="checkbox" /><span class="ml_10">공개</span>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="content_secret" id="content_secret" value="N" class="checkbox" /><span class="ml_10">비공개</span>&nbsp;
-</td>
-	
+                <td colspan="1"><input type="checkbox">공개글<input type="checkbox">비밀글 </td>	
             </tr>
             <tr class="tr21">
                 <th class="tha">개인정보 수집 및 이용동의</th>

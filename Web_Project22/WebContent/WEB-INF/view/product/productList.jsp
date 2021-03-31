@@ -80,7 +80,7 @@
 								게시물이 없습니다!.
 						</c:when>
 						<c:otherwise>
-						<c:forEach var="obj" items="${bestlist }" >
+						<c:forEach var="obj" items="${bestlist }">
 					
 						<div class="left">
 							<div class="box">
@@ -159,7 +159,7 @@
 								게시물이 없습니다!.
 						</c:when>
 						<c:otherwise>
-						<c:forEach var="obj" items="${productlist }" begin="0" end="11">
+						<c:forEach var="obj" items="${productlist }">
 					
 						<div class="container">
 							<div class="quick">

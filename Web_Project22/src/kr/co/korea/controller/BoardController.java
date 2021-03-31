@@ -249,7 +249,7 @@ public class BoardController {
 		model.addAttribute("scri", scri);
 		model.addAttribute("loginUserBean", loginUserBean);
 		model.addAttribute("boardsList", boardsList);
-		
+		System.out.println(boardsList.size());
 		//DB�뿉�꽌 寃뚯떆�뙋�쓽�씠由꾩쓣 媛��졇�샂
 		//String boardInfoName=boardService.getBoardInfoName(board_info_idx);//寃뚯떆�뙋�쓽 紐낆묶�쓣 媛��졇�삤湲� DB
 		//model.addAttribute("boardInfoName",boardInfoName);
@@ -259,6 +259,15 @@ public class BoardController {
 		
 		//DB�뿉�꽌 �빐�떦寃뚯떆�뙋�쓽 �궡�슜媛��졇�삤湲�
 		
+		
+		 
+	
+		
+		
+		
+
+		
+	
 		
 
 		return "board/boardListMember";

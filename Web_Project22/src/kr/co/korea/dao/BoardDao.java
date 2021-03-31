@@ -24,11 +24,11 @@ public class BoardDao {
 		return sqltemp.selectOne("board.getBoardInfoName", board_info_idx);
 	}
 	public List<ContentBean> getContentList(int board_info_idx, RowBounds rowBounds){
-		return sqltemp.selectList("board.getContentList", board_info_idx, rowBounds);
+		return sqltemp.selectList("board.getBoardsList", board_info_idx, rowBounds);
 	}
 	
 	public List<ContentBean> getBoardsList(int midx, RowBounds rowBounds){
-		return sqltemp.selectList("board.getBoardsList", midx, rowBounds);
+		return sqltemp.selectList("board.getContentList", midx, rowBounds);
 	}
 	
 	public ContentBean getContentInfo(int content_idx) {
@@ -62,15 +62,15 @@ public class BoardDao {
 
 		}
 
-		// insert/update/delete µî DB º¯°æÇÏ´Â ÀÛ¾÷ ½Ã °á°ú°ªÀº Á¤¼ö·Î ³ª¿À¹Ç·Î int ÇÊ¿ä
+		// insert/update/delete ï¿½ï¿½ DB ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Û¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ int ï¿½Ê¿ï¿½
 
-		// Çß´ø ÀÛ¾÷¼ö·Î ÀÛ¾÷À» ÇßÀ¸¸é >0 ¾ÈÇßÀ¸¸é = 0
+		// ï¿½ß´ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ >0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ = 0
 
-	public int insertreply(Map<String, Object> map) {
-
-	return sqltemp.insert("board.insertreply", map);
-
-	}
+//	public int insertreply(Map<String, Object> map) {
+//
+//		return sqltemp.insert("board.insertreply", map);
+//
+//	}
 	public int selectBoardIdxMax() {
 	 return sqltemp.selectOne("board.selectBoardIdxMax");
 		

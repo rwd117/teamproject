@@ -42,7 +42,7 @@
 	<!-- 중간에 컨텐츠부분 -->
 	<div id="contents2">
 
-    <div class="tabArea">   
+   <div class="tabArea">   
         <ul class="tabList" >           
             <c:forEach var="obj" items="${qnaTopList}" >
         	 <li style="text-align: center;"><a href="${conPath }board/main?board_info_idx=${obj.board_info_idx}" style="padding_top:10px; font-size: 17px;  font-weight: bold; line-height: 50px; color:rgb(69, 80, 102);"> ${obj.board_info_name }</a><li>
@@ -51,8 +51,8 @@
                     <table class="table_table_striped" >
                     <colgroup>
                     <col width="10%">
-                    <col width="40%">
-                    <col width="20%">
+                    <col width="30%">
+                    <col width="30%">
                     <col width="10%">
                     <col width="10%">
                     <col width="10%">
@@ -106,7 +106,7 @@
          
             
                
-                <td><img src="${conPath }upload/${obj.content_file }" width="20%"/></td>	
+                <td><img src="${conPath }upload/${obj.content_file }" width="15%"/></td>	
           
  				
                                                              
@@ -119,7 +119,7 @@
                         </tbody>
                         
                     </table>
-                    <a href="${conPath}board/main?board_info_idx=${board_list[idx.index].board_info_idx}">더보기</a>
+                    <a href="${conPath}board/main?board_info_idx=${board_list[idx.index].board_info_idx}"  style="padding_top:10px; font-size: 15px; border:solid 1px gray;  font-weight: bold; line-height: 50px; color:rgb(69, 80, 102);">MORE</a>
                 
   		</div>
 	 
@@ -136,17 +136,17 @@
 						<c:if test="${pagemaker.prev }">
 							<li>
 								<a class="btn btn-outline-primary"
-								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
+								href='${conPath}/board/main${pagemaker.makeQuery(pagemaker.startPage - 1)}'>이전</a>
 							</li>
 						</c:if>
 						<c:forEach begin="${pagemaker.startPage }"
 							end="${pagemaker.endPage }" var="pageNum">
 							<li><a class="btn btn-outline-primary"
-								href="${conPath}product/productContent${pagemaker.makeQuery(pageNum)}">${pageNum }</a></li>
+								href="${conPath}/board/main${pagemaker.makeQuery(pageNum)}">[${pageNum }]</a></li>
 						</c:forEach>
 						<c:if test="${pagemaker.next && pagemaker.endPage >0 }">
 							<li><a class="btn btn-outline-primary"
-								href='${conPath}product/productContent${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
+								href='${conPath}/board/main${pagemaker.makeQuery(pagemaker.endPage + 1)}'>다음</a>
 							</li>
 						</c:if>
 				</ul>

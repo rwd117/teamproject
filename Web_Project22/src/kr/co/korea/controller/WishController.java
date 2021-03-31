@@ -34,6 +34,8 @@ public class WishController {
 	
 	@GetMapping("/wish")
 	public String wish1(Model model) {
+		
+	
 		return "/wishlist/wish";
 	}
 

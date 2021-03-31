@@ -32,10 +32,10 @@ create table board_info_table( /*  */
 	board_info_name varchar2(500) not null
 );
 
-insert into board_info_table(board_info_idx, board_info_name) values (1, '»óÇ°¹®ÀÇ');
-insert into board_info_table(board_info_idx, board_info_name) values (2, '¹è¼Û¹®ÀÇ');
-insert into board_info_table(board_info_idx, board_info_name) values (3, '¹ÝÇ°¹®ÀÇ');
-insert into board_info_table(board_info_idx, board_info_name) values (4, '±³È¯¹®ÀÇ');
+insert into board_info_table(board_info_idx, board_info_name) values (1, 'ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½');
+insert into board_info_table(board_info_idx, board_info_name) values (2, 'ï¿½ï¿½Û¹ï¿½ï¿½ï¿½');
+insert into board_info_table(board_info_idx, board_info_name) values (3, 'ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½');
+insert into board_info_table(board_info_idx, board_info_name) values (4, 'ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½');
 
 commit;
 

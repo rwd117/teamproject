@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="board">
 
 <insert id="addContentInfo" parameterType="kr.co.korea.beans.ContentBean">
@@ -9,9 +10,9 @@
 	select content_seq.nextval from dual
 </selectKey>
 	<![CDATA[
-	insert into CONTENT_TABLE(content_idx,content_bno, content_subject, content_text,content_hit,content_secret,
+	insert into CONTENT_TABLE(content_idx,content_bno, content_subject, content_text,content_hit,
 	content_file, content_writer_idx, content_board_idx, content_date,content_level,content_step)
-	values(#{content_idx},#{content_idx}, #{content_subject}, #{content_text},#{content_hit},#{content_secret},
+	values(#{content_idx},#{content_idx}, #{content_subject}, #{content_text},#{content_hit},
 	#{content_file , jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx},sysdate,#{content_level},#{content_step})
 	]]>
 </insert>
@@ -29,7 +30,6 @@
 	select con.content_idx, 
        con.content_subject, 
        con.content_level,
-       con.content_secret,
        con.content_bno,
        con.content_hit,
         con.content_file,
@@ -39,6 +39,24 @@
 	from content_table con, member use
 	where con.content_writer_idx=use.midx
 	and con.content_board_idx=#{board_info_idx}
+	order by con.content_bno desc , con.content_step ASC
+    ]]>
+</select>
+<select id="getBoardsList" parameterType="java.lang.Integer" resultType="kr.co.korea.beans.ContentBean">
+	<![CDATA[
+	select con.content_idx, 
+       con.content_subject, 
+       con.content_level,
+       con.content_bno,
+       con.content_hit,
+        con.content_file,
+       con.content_step, 
+       use.mname as content_write_name,
+       con.content_writer_idx,
+       to_char(con.content_date, 'YYYY-MM-DD')as content_date
+	from content_table con, member use
+	where con.content_writer_idx=use.midx
+	and use.midx=#{midx}
 	order by con.content_bno desc , con.content_step ASC
     ]]>
 </select>
@@ -139,51 +157,49 @@ where content_idx=#{content_idx}
 <insert id="insertreply" parameterType="kr.co.korea.beans.ContentBean"> 
 
 <!--requesetparam으로 controller 에서 넘김 map을 받을 준비-->
-<selectKey keyProperty="content_idx" order="BEFORE" resultType="java.lang.Integer">
-	select content_seq.nextval from dual
-</selectKey>
-	<![CDATA[
-	insert into CONTENT_TABLE(content_idx,content_bno, content_subject, content_text,content_hit,content_secret,
-	content_file, content_writer_idx, content_board_idx, content_date,content_level,content_step)
-	values(#{content_idx},#{content_bno}, #{content_subject}, #{content_text},0,#{content_secret},
-	#{content_file , jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx},sysdate,#{content_level},#{content_step})
-	]]>
+<![CDATA[
+INSERT INTO content_table
+
+(content_idx, content_subject, content_text, content_hit, content_writer_idx,content_board_idx, content_date, content_bno, content_level, content_step,content_file)
+
+VALUES (#{content_idx}, #{content_subject}, #{content_text}, #{content_hit}, #{content_writer_idx}, #{content_board_idx},sysdate, #{content_bno}, #{content_level}, #{content_step},#{content_file , jdbcType=VARCHAR})
+]]>
 </insert>
 
 
+
+<select id="selectreply" resultType="kr.co.korea.beans.ContentBean" parameterType="java.lang.Integer">
+<![CDATA[
+SELECT con.content_idx, con.content_subject, con.content_text, con.content_hit
+
+, use.user_name as content_write_name , to_char(con.content_date, 'YYYY-MM-DD')as content_date
+
+, con.content_bno, con.content_step, con.content_level, con.content_file
+
+FROM content_table con, user_table use
+
+where con.content_writer_idx=use.user_idx
+	and con.content_board_idx=#{board_info_idx}
+	order by
+ con.content_bno DESC, con.content_step ASC
+]]>
+</select>
 
 <select id="selectById" resultType="kr.co.korea.beans.ContentBean" parameterType="java.lang.Integer">
 <![CDATA[
 SELECT con.content_idx, con.content_subject, con.content_text, con.content_hit
 
-, use.mname as content_write_name , to_char(con.content_date, 'YYYY-MM-DD')as content_date
+, use.user_name as content_write_name , to_char(con.content_date, 'YYYY-MM-DD')as content_date
 
 , con.content_bno, con.content_step, con.content_level
 
-FROM content_table con, member use
+FROM content_table con, user_table use
 
 WHERE con.content_idx = #{value}
 ]]>
 </select>
 
-<select id="getBoardsList" parameterType="java.lang.Integer" resultType="kr.co.korea.beans.ContentBean">
-   <![CDATA[
-   select con.content_idx, 
-       con.content_subject, 
-       con.content_level,
-       con.content_bno,
-       con.content_hit,
-        con.content_file,
-       con.content_step, 
-       use.mname as content_write_name,
-       con.content_writer_idx,
-       to_char(con.content_date, 'YYYY-MM-DD')as content_date
-   from content_table con, member use
-   where con.content_writer_idx=use.midx
-   and use.midx=#{midx}
-   order by con.content_bno desc , con.content_step ASC
-    ]]>
-</select>
+
 
 
 </mapper>
