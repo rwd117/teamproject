@@ -80,8 +80,7 @@ public class UserController {
 		if (userBean != null) {
 			pwdMatch = pwdEncoder.matches(userBean.getMpw(), login.getMpw());
 		}
-		System.out.println(pwdMatch);
-		System.out.println(loginUserBean.isUserLogin());
+	
 		if (loginUserBean.isUserLogin() == true && pwdMatch == true) {
 			if (loginUserBean.getMdrop() == 0) {
 				return "/user/login_fail";
