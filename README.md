@@ -44,6 +44,22 @@
 
 - 로그인 Session을 이용
 - 회원 비밀번호 암호화 이용
+~~~
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
+	
+	@PostMapping("/join_pro")
+	public String join_pro(@ModelAttribute("joinUserBean") UserBean userBean) {
+		String pwd = userBean.getMpw();
+		String enpwd = pwdEncoder.encode(pwd);
+
+		userBean.setMpw(enpwd);//비밀번호 암호화 한후 set
+
+		userService.addUserInfo(userBean);
+		return "/user/join_success";
+	}
+	
+~~~
 
 # Admin기능
 
