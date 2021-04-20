@@ -49,6 +49,14 @@
 ## 기본정보
 
 
+<details>
+<summary>DB설계</summary>
+
+![image](https://user-images.githubusercontent.com/69449157/115374460-d364c700-a207-11eb-8b82-048a5d230435.png)
+
+</details>
+
+
 
                                            Admin : 관리자가 사용 가능한 기능(회원 관리, 상품 관리, 문의 관리 등)
 					   
@@ -82,14 +90,7 @@
 	
 ~~~
 
-<details>
-<summary>DB설계</summary>
-
-![image](https://user-images.githubusercontent.com/69449157/115374460-d364c700-a207-11eb-8b82-048a5d230435.png)
-
-</details>
-
-
+----------------------------
 
 <details>
 <summary><h3>Admin기능</h3></summary>
