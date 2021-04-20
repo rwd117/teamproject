@@ -3,16 +3,22 @@
 + SpringMVC패턴을 이용한 쇼핑몰
 
 ------------
-
-## 기술스택
+<details>
+	<summary>  <h3> 기술스택 </h3>  </summary>
+<div markdown="1">
 
 + Backend: Spring | Java 8 | Oracle | Mybatis | Tomcat 9.0
 
 + Frontend: JavaScript(jQuery), css
+</div>
+</details>
 
 ------------
-## 참여 인원
-  A, B, C(본인) 총 3명
+
+<details>
+<summary><h3>참여 인원</h3></summary>
+<div markdown="1">
+ A, B, C(본인) 총 3명
   
   A -> 전체적인 Frontend, 문의사항(계층형) 및 공지사항, Wish리스트
   
@@ -22,6 +28,10 @@
   
   총 소요 기간 : 2/22 ~ 3/22 
   
+</div>
+</details>
+
+------------
 
 ## TeamProject 기능 설명
 
@@ -61,7 +71,10 @@
 	
 ~~~
 
-# Admin기능
+<details>
+<summary><h3>Admin기능</h3></summary>
+
+<div markdown="1">
 
 1. Create
    - 상품 등록(상품의 사진 및 내용 등록)
@@ -81,10 +94,20 @@
    - Memberlist, 주문 리스트, 공지사항 리스트, Qna리스트, 메뉴 리스트
 
 5. Read
-   - 문의사항 비밀글 
+   - 문의사항 비밀글   
+</div>
+
+</details>
+
+
 ------------
 
-# Member기능
+
+
+<details>
+<summary><h3>Member기능</h3></summary>
+
+<div markdown="1">
 
 1. Read
    - menulist, 상품, 주문리스트, 리뷰리스트
@@ -108,7 +131,12 @@
    - 상품에 한하여 검색 가능
 
 6. authority
-   - 인터셉터를 이용한 페이지 접근 금지 
+   - 인터셉터를 이용한 페이지 접근 금지  
+   - 
+</div>
+
+</details>
+
 ----------
 
 # 기능요약
