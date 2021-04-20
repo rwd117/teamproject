@@ -170,11 +170,9 @@
 	var c_m_IDx = a;
 	var c_p_ID = b;
 	var cAmount= $('#cAmount').val();
-	console.log(addCarturl+'/'+c_m_IDx+'/'+c_p_ID+'/'+cAmount);
-	console.log(isNaN(cAmount));
+	
 	if(isNaN(cAmount)){
 		cAmount = 1;
-	console.log(cAmount);	
 	}
 	
 	//유저 고유번호,게시물 고유번호, 수량
@@ -198,7 +196,7 @@ function check(value,a){
 	var rootpath=getContextPath(),
 		subpath="/cart/cart?",
 		midx="midx="+a;
-		console.log(value);
+		
 	if(value==="insertsuccess"){
 	
 		if(confirm("장바구니로 가시겠습니까?") == true){
