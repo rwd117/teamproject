@@ -39,12 +39,14 @@
 
 2. [사용자 기능](#Member기능)
 
-3. [기본 기능](#기능요약)
-
-
+3. [기능 요약](#기능요약)
 
 
 ------------
+## 기본 정보
+
+
+
                                            Admin : 관리자가 사용 가능한 기능(회원 관리, 상품 관리, 문의 관리 등)
 					   
  ![image](https://user-images.githubusercontent.com/69449157/115358317-80374800-a1f8-11eb-9eb6-971c7ce6b146.png)
@@ -53,15 +55,11 @@
 					  
  ![image](https://user-images.githubusercontent.com/69449157/115358220-6564d380-a1f8-11eb-995b-cb75cf05e12b.png)
 
-## 기본 정보
-<details>
-<summary>DB설계</summary>
 
-![image](https://user-images.githubusercontent.com/69449157/115374460-d364c700-a207-11eb-8b82-048a5d230435.png)
-
-</details>
 
 - 로그인 Session을 이용
+
+
 - 회원 비밀번호 암호화 이용
 
 ~~~
@@ -80,6 +78,15 @@
 	}
 	
 ~~~
+
+<details>
+<summary>DB설계</summary>
+
+![image](https://user-images.githubusercontent.com/69449157/115374460-d364c700-a207-11eb-8b82-048a5d230435.png)
+
+</details>
+
+
 
 <details>
 <summary><h3>Admin기능</h3></summary>
