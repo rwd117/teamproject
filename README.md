@@ -26,11 +26,11 @@
 ## TeamProject 기능 설명
 
 ------------
-- Admin : 관리자가 사용 가능한 기능(회원 관리, 상품 관리, 문의 관리 등)
-- ![image](https://user-images.githubusercontent.com/69449157/115358317-80374800-a1f8-11eb-9eb6-971c7ce6b146.png)
+                                           Admin : 관리자가 사용 가능한 기능(회원 관리, 상품 관리, 문의 관리 등)
+ ![image](https://user-images.githubusercontent.com/69449157/115358317-80374800-a1f8-11eb-9eb6-971c7ce6b146.png)
 
-- Member : 사용자가 사용 가능한 기능(메뉴확인, 주문 등)
-- ![image](https://user-images.githubusercontent.com/69449157/115358220-6564d380-a1f8-11eb-995b-cb75cf05e12b.png)
+                                          Member : 사용자가 사용 가능한 기능(메뉴확인, 주문 등)
+ ![image](https://user-images.githubusercontent.com/69449157/115358220-6564d380-a1f8-11eb-995b-cb75cf05e12b.png)
 
 ## 공통
 
