@@ -238,6 +238,42 @@ function getContextPath() {
   ![image](https://user-images.githubusercontent.com/69449157/115363622-9562a580-a1fd-11eb-91cb-11a61e03daa0.png)
   
   ![image](https://user-images.githubusercontent.com/69449157/115367520-3d2da280-a201-11eb-883c-0c17e6a9dcb8.png)
+  
+  ~~~
+  @PostMapping("/orderwrite")
+	public String order(OrderBean orderbean,
+						@RequestParam(value="cha[]") List<String> Checklist,
+						@RequestParam(value="allsumprice") int sumprice,
+						@RequestParam(value="postcost") int postcost,
+						@RequestParam(value="allsum") int allsum,
+						Model model) {
+		
+		List<CartBean> cartlist = new ArrayList<CartBean>();
+		
+		int Cartid=0;
+		for(String i : Checklist) {
+			Cartid = Integer.parseInt(i);
+			cartlist.add(cartservice.idxcartgetinfo(Cartid));
+		}//카트 정보
+		
+		
+		Map<String,Object> pricemap = new LinkedHashMap<String,Object>();
+		pricemap.put("sumprice",sumprice);
+		pricemap.put("postcost",postcost);
+		pricemap.put("allsum",allsum);
+		//결제 금액 전부 가져와서 map에 담기
+		
+		UserBean userbean = new UserBean();
+		userservice.getUserInfo(userbean);
+		
+		model.addAttribute("Checklist",Checklist);
+		model.addAttribute("userbean",userbean);
+		model.addAttribute("cartlist",cartlist);
+		model.addAttribute("pricemap",pricemap);
+		
+		return "/orders/order";
+	}
+  ~~~
 
 + 선택 상품 주문 혹은 전체 상품 주문을 클릭할 시, 주문하기 화면으로 이동
 
