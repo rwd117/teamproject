@@ -41,6 +41,9 @@
 
 3. [기본 기능](#기능요약)
 
+
+
+
 ------------
                                            Admin : 관리자가 사용 가능한 기능(회원 관리, 상품 관리, 문의 관리 등)
 					   
@@ -51,7 +54,12 @@
  ![image](https://user-images.githubusercontent.com/69449157/115358220-6564d380-a1f8-11eb-995b-cb75cf05e12b.png)
 
 ## 공통
-
+<details>
+<summary>- DB설계</summary>
+<div markdown="1">
+ ![image](https://user-images.githubusercontent.com/69449157/115374222-96003980-a207-11eb-96f0-e3591a686af0.png)
+</div>
+</details>
 - 로그인 Session을 이용
 - 회원 비밀번호 암호화 이용
 ~~~
