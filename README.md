@@ -18,6 +18,7 @@
 <details>
 <summary><h3>참여 인원</h3></summary>
 <div markdown="1">
+	
  A, B, C(본인) 총 3명
   
   A -> 전체적인 Frontend, 문의사항(계층형) 및 공지사항, Wish리스트
