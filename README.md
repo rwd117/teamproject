@@ -141,7 +141,7 @@
 
 # 기능요약
 
-1. <h3> 회원가입 </h3>
+ <h3>1. 회원가입 </h3>
 
   ![image](https://user-images.githubusercontent.com/69449157/115359915-191a9300-a1fa-11eb-99f7-8260645470cb.png)
   
@@ -194,7 +194,7 @@
 
 + 주소 등록의 경우 다음 주소찾기 api를 이용.
 
-2. 상품 주문
+<h3> 2. 상품 주문 </h3>
   
   ![image](https://user-images.githubusercontent.com/69449157/115361287-677c6180-a1fb-11eb-9582-9f85f144fd70.png)
   
@@ -275,7 +275,7 @@ function getContextPath() {
   
   + 없을 경우 장바구니에 추가, 기존에 있던 상품일 경우 수량 1증가
 
-3. 주문하기
+<h3> 3. 주문하기 </h3>
 
   ![image](https://user-images.githubusercontent.com/69449157/115363622-9562a580-a1fd-11eb-91cb-11a61e03daa0.png)
   
@@ -321,7 +321,7 @@ function getContextPath() {
 
 + 상품은 장바구니 테이블, 고객정보는 세션을 통하여 읽어 옵니다.
 
-4. 주문 확인
+<h3> 4. 주문 확인 </h3>
   
   ![image](https://user-images.githubusercontent.com/69449157/115368032-a9a8a180-a201-11eb-9771-52d98273acec.png)
   ![image](https://user-images.githubusercontent.com/69449157/115368182-ce047e00-a201-11eb-975a-8c88a877fb54.png)
