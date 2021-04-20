@@ -200,9 +200,17 @@
   
   ![image](https://user-images.githubusercontent.com/69449157/115361610-b32f0b00-a1fb-11eb-94d8-7a2832542b17.png)
   
+  
+  
   + 임의의 상품을 클릭 후, 그 상품에 대한 정보를 확인.
   
-  + 하트 모양은 wishlist go to cart는 장바구니로 이동, add to cart 는 장바구니에 추가
+  + 하트 모양은 wishlist 
+  
+  + go to cart는 장바구니로 이동
+  
+  + add to cart 는 장바구니에 추가
+
+
   
   ![image](https://user-images.githubusercontent.com/69449157/115362336-639d0f00-a1fc-11eb-8276-586ed194a668.png)
   
@@ -269,11 +277,14 @@ function getContextPath() {
 }
   ~~~
 
+
   + cart와 wish는 ajax로 구현
   
   + 버튼 클릭 시, ajax로 cart,wish테이블에서 체크 
   
   + 없을 경우 장바구니에 추가, 기존에 있던 상품일 경우 수량 1증가
+
+
 
 <h3> 3. 주문하기 </h3>
 
@@ -316,10 +327,14 @@ function getContextPath() {
 		return "/orders/order";
 	}
   ~~~
+  
+  
 
 + 선택 상품 주문 혹은 전체 상품 주문을 클릭할 시, 주문하기 화면으로 이동
 
 + 상품은 장바구니 테이블, 고객정보는 세션을 통하여 읽어 옵니다.
+
+
 
 <h3> 4. 주문 확인 </h3>
   
