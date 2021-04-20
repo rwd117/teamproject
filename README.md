@@ -208,7 +208,7 @@
   
   + go to cart는 장바구니로 이동
   
-  + add to cart 는 장바구니에 추가
+  + add cart 는 장바구니에 추가
 
 
   
