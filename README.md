@@ -53,15 +53,17 @@
 					  
  ![image](https://user-images.githubusercontent.com/69449157/115358220-6564d380-a1f8-11eb-995b-cb75cf05e12b.png)
 
-## 공통
+## 기본 정보
 <details>
-<summary>- DB설계</summary>
-<div markdown="1">
- ![image](https://user-images.githubusercontent.com/69449157/115374222-96003980-a207-11eb-96f0-e3591a686af0.png)
-</div>
+<summary>DB설계</summary>
+
+![image](https://user-images.githubusercontent.com/69449157/115374460-d364c700-a207-11eb-8b82-048a5d230435.png)
+
 </details>
+
 - 로그인 Session을 이용
 - 회원 비밀번호 암호화 이용
+
 ~~~
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
