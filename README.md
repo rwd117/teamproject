@@ -141,7 +141,7 @@
 
 # 기능요약
 
-1. 회원가입
+1. <h3> 회원가입 </h3>
 
   ![image](https://user-images.githubusercontent.com/69449157/115359915-191a9300-a1fa-11eb-99f7-8260645470cb.png)
   
