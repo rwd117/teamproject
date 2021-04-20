@@ -49,12 +49,10 @@
 ## 기본정보
 
 
-<details>
-<summary>DB설계</summary>
+								DB설계
 
 ![image](https://user-images.githubusercontent.com/69449157/115374460-d364c700-a207-11eb-8b82-048a5d230435.png)
 
-</details>
 
 
 
