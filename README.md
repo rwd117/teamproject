@@ -164,7 +164,49 @@
  
  ![image](https://user-images.githubusercontent.com/69449157/117528240-21e9d200-b00c-11eb-8d2a-55fa22eb8ed5.png)
 
-+  검색 기능 
++  검색 기능 및 DB에서 메뉴 호출 후, mapper에서 각 경우에 대하여 설정
+~~~
+<select id="getproductInfolist" 
+		parameterType="kr.co.korea.beans.ProductBean"
+		resultType="kr.co.korea.beans.ProductBean">
+
+		select pID,pNAME,pPRICE,pIMAGE1,pCONTENT,to_char(pDATE, 'YYYY-MM-DD')as pDATE,phit
+		from (select ROW_NUMBER() over(order by pid desc) as RNUM, tb.*
+		         from product tb ) tb
+		where (RNUM between #{pro_rowStart} and #{pro_rowEnd}) 
+		<include refid="keywordcheck"></include>
+		<include refid="all"></include>
+		
+</select>
+
+<sql id="all">
+		<if test="pro_all!=0 ">
+			<if test="pro_best!=0">
+				order by phit desc
+			</if>
+		</if>
+		<if test="pro_all ==0 ">
+			<if test="p_top_idx == 1">
+			
+			</if>
+			<if test="p_top_idx == 2">
+				order by phit desc
+			</if>
+			<if test="p_top_idx > 2">
+				and (p_top_idx=(select top_idx from topmenu where top_idx=#{p_top_idx}))
+				<if test="p_sub_idx!=0">
+				and (p_sub_idx=(select sub_idx from submenu where sub_idx=#{p_sub_idx}))
+				</if>
+			</if>
+		</if>
+</sql>
+
+<sql id="keywordcheck">
+		<if test="pro_keyword != null and pro_keyword != ''">
+				and (pNAME LIKE '%' || #{pro_keyword} || '%')
+		</if>
+</sql>
+~~~
 
 + jstl을 이용하여 로그인 전, 로그인 후에 맞는 메뉴를 보여 줌.
 	1. 로그인 전
@@ -179,8 +221,6 @@
 	 
 		![image](https://user-images.githubusercontent.com/69449157/117528635-1697a600-b00e-11eb-900d-6fcd256c3e20.png)
 
-
-+ 각 상품의 대분류 및 소분류 의 경우 DB에서 호출, interceptor를 이용하여 모든 페이지에서 확인 가능
 
 + 슬라이드의 경우 Best에서 상위 3개의 상품을 확인 가능
 
