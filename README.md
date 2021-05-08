@@ -160,6 +160,11 @@
 
 ## 기능요약
 
+ <h3>0. 홈 화면</h3>
+ 
+ ![image](https://user-images.githubusercontent.com/69449157/117528240-21e9d200-b00c-11eb-8d2a-55fa22eb8ed5.png)
+
+
  <h3>1. 회원가입 </h3>
 
   ![image](https://user-images.githubusercontent.com/69449157/115359915-191a9300-a1fa-11eb-99f7-8260645470cb.png)
