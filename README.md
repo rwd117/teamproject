@@ -168,11 +168,15 @@
 
 + jstl을 이용하여 로그인 전, 로그인 후에 맞는 메뉴를 보여 줌.
 	1. 로그인 전
+	 
 		![image](https://user-images.githubusercontent.com/69449157/117528539-c02a6780-b00d-11eb-9b23-a518b5d4f730.png)
+		
 	2. 로그인 후(회원)
+	
 		![image](https://user-images.githubusercontent.com/69449157/117528593-ecde7f00-b00d-11eb-85d2-292b5055620c.png)
 
-	3. 2. 로그인 후(관리자)
+	3. 로그인 후(관리자)
+	 
 		![image](https://user-images.githubusercontent.com/69449157/117528635-1697a600-b00e-11eb-900d-6fcd256c3e20.png)
 
 
