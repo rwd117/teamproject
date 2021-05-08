@@ -164,6 +164,13 @@
  
  ![image](https://user-images.githubusercontent.com/69449157/117528240-21e9d200-b00c-11eb-8d2a-55fa22eb8ed5.png)
 
++  검색 기능 
+
++ jstl을 이용하여 로그인 전, 로그인 후에 맞는 메뉴를 보여 줌.
+
++ 각 상품의 대분류 및 소분류 의 경우 DB에서 호출, interceptor를 이용하여 모든 페이지에서 확인 가능
+
++ 슬라이드의 경우 Best에서 상위 3개의 상품을 확인 가능
 
  <h3>1. 회원가입 </h3>
 
