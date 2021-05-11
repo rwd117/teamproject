@@ -390,8 +390,7 @@ function getContextPath() {
 		pricemap.put("allsum",allsum);
 		//결제 금액 전부 가져와서 map에 담기
 		
-		UserBean userbean = new UserBean();
-		userservice.getUserInfo(userbean);
+		UserBean userbean = userservice.getUserInfo(loginUserBean);//session으로 기본키를 가져온 후, 해당 유저의 정보 조회
 		
 		model.addAttribute("Checklist",Checklist);
 		model.addAttribute("userbean",userbean);
