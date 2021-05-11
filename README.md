@@ -178,6 +178,8 @@
 
   ![image](https://user-images.githubusercontent.com/69449157/115359915-191a9300-a1fa-11eb-99f7-8260645470cb.png)
   
+  
+  + 주소 등록의 경우 다음 주소찾기 api를 이용.
   ~~~
   <script>
  $("#addressBtn").click(function(){
@@ -224,8 +226,6 @@
  </script>
   ~~~
 + 유효성 검사 및 아이디 중복체크는 ajax를 이용.
-
-+ 주소 등록의 경우 다음 주소찾기 api를 이용.
 
 + 회원 아이디 찾기 및 비밀번호 찾기는 가입시 사용된 이메일 주소로 보내짐.
 ~~~
