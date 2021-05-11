@@ -422,6 +422,12 @@ function getContextPath() {
 
   + 관리자가 배송 후에는 상세보기 -> 리뷰 작성버튼으로 활성화
 
+<h3> 5. 리뷰 작성</h3>
 
+	![image](https://user-images.githubusercontent.com/69449157/117852350-32c36d80-b2c2-11eb-8c92-13f28dae6789.png)
 
++ 관리자가 배송을 보낸 후에는 리뷰 작성이 가능.
 
++ 댓글 형식으로 해당 상품의 하단에 생성.
+
++ 관리자도 해당 댓글 삭제 가능
