@@ -57,6 +57,9 @@
 
 - 로그인 Session을 이용
 
+- 상품 검색 가능
+
+- 인터셉터를 이용하여 권한이 없는 경우 접근 불가.
 
 - 회원 비밀번호 암호화 이용
 
@@ -90,10 +93,7 @@
 
 </details>
 
-
 ------------
-
-
 
 <details>
 <summary><h3>Member기능</h3></summary>
@@ -102,12 +102,6 @@
 
  ![image](https://user-images.githubusercontent.com/69449157/115358220-6564d380-a1f8-11eb-995b-cb75cf05e12b.png)
 
-5. Search
-   - 상품에 한하여 검색 가능
-
-6. authority
-   - 인터셉터를 이용한 페이지 접근 금지  
-   - 
 </div>
 
 </details>
