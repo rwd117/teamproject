@@ -278,6 +278,45 @@
 + 주소 등록의 경우 다음 주소찾기 api를 이용.
 
 + 회원 아이디 찾기 및 비밀번호 찾기는 가입시 사용된 이메일 주소로 보내짐.
+~~~
+		// 회원가입 발송 이메일(인증키 발송)
+		public String mailSendWithUserKey(UserBean userBean) {
+			
+			String key = getKey(false, 6);
+			userBean.setMpw3(key);
+			
+			// 메일 제목, 내용
+			String subject = "[SSA DA GU]";
+			String content = "인증번호: "+key;
+			
+			// 보내는 사람
+			String from = "ssadagu.web@gmail.com";
+			
+			// 받는 사람
+			String to = userBean.getMemail();
+			
+			try {
+				// 메일 내용 넣을 객체와, 이를 도와주는 Helper 객체 생성
+				MimeMessage mail = mailSender.createMimeMessage();
+				MimeMessageHelper mailHelper = new MimeMessageHelper(mail, "UTF-8");
+
+				// 메일 내용을 채워줌
+				mailHelper.setFrom(from);	// 보내는 사람 셋팅
+				mailHelper.setTo(to);		// 받는 사람 셋팅
+				mailHelper.setSubject(subject);	// 제목 셋팅
+				mailHelper.setText(content);	// 내용 셋팅
+
+				// 메일 전송
+				mailSender.send(mail);
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+
+			
+			return key;	
+		}
+~~~
 
 <h3> 2. 상품 주문 </h3>
   
